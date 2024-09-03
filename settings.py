@@ -2,6 +2,7 @@ import pygame
 from pygame.math import Vector2 as vector 
 
 WINDOW_WIDTH, WINDOW_HEIGHT = 800, 600
+ANIMATION_SPEED = 6
 TILE_SIZE = 16 
 
 COLORS = {

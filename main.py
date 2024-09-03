@@ -4,6 +4,7 @@ from os.path import join
 from sprites import Sprite
 from entities import Player
 from groups import AllSprites
+from support import *
 
 class Game:
     def __init__(self):
@@ -21,6 +22,10 @@ class Game:
         self.tmx_maps = {
             'house': load_pygame(join('data', 'maps', 'house.tmx'))
             }
+        self.overworl_frames = {
+            'characters': all_characters_import('.', 'graphics', 'characters'),
+        }
+        # print(self.overworl_frames['characters'])
 
     # carrega o mapa a ordem é importante pois vai sobrepor os objetos
     def setup(self,tmx_map,player_start_pos):
@@ -36,7 +41,11 @@ class Game:
         for obj in tmx_map.get_layer_by_name('Entities'):
             if obj.name == 'Player':
                 # print(obj.x, obj.y) pos do player
-                self.player = Player((obj.x, obj.y), self.all_sprites)
+                self.player = Player(
+                    pos = (obj.x, obj.y),
+                    groups = self.all_sprites,
+                    frames = self.overworl_frames['characters']['player'],
+                )
 
     def run(self):
         # event loop
