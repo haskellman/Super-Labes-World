@@ -52,28 +52,32 @@ class Player(Entity):
         self.image.fill(COLORS['red'])
         self.rect = self.image.get_rect(center = pos)
 
+        # self.count = 0
         self.direction = vector()
 
     # direção do player
     def input(self):
         keys = pygame.key.get_pressed()
         input_vector = vector()
-        if keys[pygame.K_UP]:
+        if keys[pygame.K_UP] or keys[pygame.K_w]:
             input_vector.y -= 1
-        if keys[pygame.K_DOWN]:
+        if keys[pygame.K_DOWN] or keys[pygame.K_s]:
             input_vector.y += 1
-        if keys[pygame.K_LEFT]:
+        if keys[pygame.K_LEFT] or keys[pygame.K_a]:
             input_vector.x -= 1
-        if keys[pygame.K_RIGHT]:
+        if keys[pygame.K_RIGHT] or keys[pygame.K_d]:
             input_vector.x += 1
         self.direction = input_vector
         # print(self.direction)
 
     def move(self, dt):
-        self.rect.centerx += (self.direction.x * self.speed * 0.001) 
-        print ((self.direction.x * self.speed * 0.001))
-        self.rect.centery += (self.direction.y * self.speed * 0.001)
-        print((self.direction.y * self.speed * 0.001))
+        velocity = self.direction * self.speed * dt
+        # self.count += 1
+        # print ("dt", dt)
+        self.rect.centerx += (self.direction.x * self.speed *dt) 
+        # print (velocity, self.count)
+        self.rect.centery += (self.direction.y * self.speed * dt)
+        # print(velocity)
 
     def update(self,dt):
         # posição do player

@@ -7,9 +7,9 @@ class AllSprites(pygame.sprite.Group):
         self.offset = vector()
 
     # camera
-    def draw(self, player_center):
-        self.offset.x = -(player_center[0] - WINDOW_WIDTH / 2)
-        self.offset.y = -(player_center[1] - WINDOW_HEIGHT / 2)
+    def draw(self, player):
+        self.offset.x = -(player.rect.centerx - WINDOW_WIDTH / 2)
+        self.offset.y = -(player.rect.centery - WINDOW_HEIGHT / 2)
 
         for sprite in self:
             self.display_surface.blit(sprite.image, sprite.rect.topleft + self.offset)

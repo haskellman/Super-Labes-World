@@ -20,10 +20,11 @@ class Game:
 
     def import_assets(self):
         self.tmx_maps = {
-            'house': load_pygame(join('data', 'maps', 'house.tmx'))
+            'house': load_pygame(join('data', 'maps', 'ufes.tmx'))
             }
         self.overworl_frames = {
             'characters': all_characters_import('.', 'graphics', 'characters'),
+            # 'lake': lake_importer('.', 'graphics', 'lake'),
         }
         # print(self.overworl_frames['characters'])
 
@@ -44,13 +45,14 @@ class Game:
                 self.player = Player(
                     pos = (obj.x, obj.y),
                     groups = self.all_sprites,
-                    frames = self.overworl_frames['characters']['player'],
+                    frames = self.overworl_frames['characters']['player1'],
                 )
 
     def run(self):
         # event loop
         while True:
-            dt = self.clock.tick() / 1000 # correção de movimento para todos os pcs
+            dt = self.clock.tick() / 3000 # correção de movimento para todos os pcs
+            print(dt)
             for event in pygame.event.get():
                 if event.type == pygame.QUIT:
                     pygame.quit()
@@ -59,10 +61,11 @@ class Game:
             # game logic
             self.screen.fill(COLORS['black'])
             self.all_sprites.update(dt)
-            self.all_sprites.draw(self.player.rect.center)
-            # print(self.clock.get_fps())D
+
+            # drawing
+            self.all_sprites.draw(self.player)
+
             pygame.display.update()
-            # pygame.time.Clock().tick(60)
 
 if __name__ == '__main__':
 	game = Game()
