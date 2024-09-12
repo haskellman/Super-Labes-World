@@ -37,3 +37,25 @@ def all_characters_import(*path):
             image_name = image.split('.')[0]
             frames[image_name] = import_character(4, 4, *path, image_name)
     return frames
+
+def lake_importer(cols, rows, *path):
+	frame_dict = import_tilemap(cols, rows, *path)
+	new_dict = {}
+	sides = {
+		'topleft': (0,0), 'top': (1,0), 'topright': (2,0), 
+		'left': (0,1), 'right': (2,1), 'bottomleft': (0,2), 
+		'bottom': (1,2), 'bottomright': (2,2)}
+
+	for key, pos in sides.items():
+			new_dict[key] = [frame_dict[(pos[0], pos[1] + row)] for row in range(0,rows, 3)] # todos os frames de cada lado
+	# print(new_dict)
+	return new_dict
+
+def import_folder(*path):
+	frames = []
+	for folder_path, sub_folders, image_names in walk(join(*path)):
+		for image_name in sorted(image_names, key = lambda name: int(name.split('.')[0])):
+			full_path = join(folder_path, image_name)
+			surf = pygame.image.load(full_path).convert_alpha()
+			frames.append(surf)
+	return frames

@@ -1,7 +1,7 @@
 from settings import *
 from pytmx.util_pygame import load_pygame #carrega os mapas
 from os.path import join
-from sprites import Sprite
+from sprites import Sprite, AnimatedSprite
 from entities import Player
 from groups import AllSprites
 from support import *
@@ -22,8 +22,11 @@ class Game:
         self.tmx_maps = {
             'house': load_pygame(join('data', 'maps', 'ufes.tmx'))
             }
-        self.overworl_frames = {
+        self.overworld_frames = {
             'characters': all_characters_import('.', 'graphics', 'characters'),
+            'water': import_folder('.', 'graphics', 'tilesets', 'water'),
+            'lake': lake_importer(3, 12, '.', 'graphics', 'tilesets', 'lake'),
+
             # 'lake': lake_importer('.', 'graphics', 'lake'),
         }
         # print(self.overworl_frames['characters'])
@@ -33,6 +36,16 @@ class Game:
         # terrain 
         for x, y, surf in tmx_map.get_layer_by_name('Terrain').tiles():
             Sprite((x * TILE_SIZE, y * TILE_SIZE), surf, self.all_sprites)
+
+		# water 
+        for obj in tmx_map.get_layer_by_name('Lake'):
+            for x in range(int(obj.x), int(obj.x + obj.width), TILE_SIZE):
+                for y in range(int(obj.y), int(obj.y + obj.height), TILE_SIZE):
+                    AnimatedSprite((x,y), self.overworld_frames['water'], self.all_sprites)
+        # lake edges
+        for obj in tmx_map.get_layer_by_name('Lake Edges'):
+            side = obj.properties['side']
+            AnimatedSprite((obj.x, obj.y), self.overworld_frames['lake'][side], self.all_sprites, WORLD_LAYERS['bg'])
 
         # objects
         for obj in tmx_map.get_layer_by_name('Objects'):
@@ -45,14 +58,14 @@ class Game:
                 self.player = Player(
                     pos = (obj.x, obj.y),
                     groups = self.all_sprites,
-                    frames = self.overworl_frames['characters']['player1'],
+                    frames = self.overworld_frames['characters']['player1'],
                 )
 
     def run(self):
         # event loop
         while True:
             dt = self.clock.tick() / 3000 # correção de movimento para todos os pcs
-            print(dt)
+            # print(dt)
             for event in pygame.event.get():
                 if event.type == pygame.QUIT:
                     pygame.quit()

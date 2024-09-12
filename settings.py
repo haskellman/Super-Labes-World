@@ -22,4 +22,7 @@ COLORS = {
 }
 
 WORLD_LAYERS = {
+    'water': 0,
+    'bg': 1,
+	'main': 2,
 }
