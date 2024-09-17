@@ -15,6 +15,6 @@ class AllSprites(pygame.sprite.Group):
         self.offset.y = -(player.rect.centery - WINDOW_HEIGHT / 2)
 
         for sprite in self:
-            if isinstance(sprite, Entity):
+            if isinstance(sprite, Entity): # sombra
                 self.display_surface.blit(self.shadow, sprite.rect.topleft + self.offset + vector(40, 110))
             self.display_surface.blit(sprite.image, sprite.rect.topleft + self.offset)
