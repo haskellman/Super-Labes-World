@@ -1,12 +1,12 @@
 from settings import *
 
 class Entity(pygame.sprite.Sprite):
-    def __init__(self, pos, frames, groups):
+    def __init__(self, pos, frames, groups, facing_direction):
         super().__init__(groups)
 
 # graphics 
         self.frame_index, self.frames = 0, frames
-        self.facing_direction = 'down'
+        self.facing_direction = facing_direction
 
 # movement 
         self.direction = vector()
@@ -16,7 +16,7 @@ class Entity(pygame.sprite.Sprite):
 # sprite setup
         self.image = self.frames[self.get_state()][self.frame_index]
         self.rect = self.image.get_frect(center = pos)
-# self.hitbox = self.rect.inflate(-self.rect.width / 2, -60)
+        self.hitbox = self.rect.inflate(-self.rect.width / 2, -60)
 
     def animate(self, dt):
         self.frame_index += ANIMATION_SPEED * dt
@@ -46,8 +46,10 @@ class Entity(pygame.sprite.Sprite):
         self.blocked = False
 
 class Player(Entity):
-    def __init__(self, pos, groups, frames):
-        super().__init__(pos, frames, groups)
+    def __init__(self, pos, groups, frames, facing_direction, collision_sprites):
+        super().__init__(pos, frames, groups, facing_direction)
+        self.collision_sprites = collision_sprites
+
         self.image = pygame.Surface((16, 16))
         self.image.fill(COLORS['red'])
         self.rect = self.image.get_rect(center = pos)
@@ -71,19 +73,34 @@ class Player(Entity):
         # print(self.direction)
 
     def move(self, dt):
-        velocity = self.direction * self.speed * dt
-        # self.count += 1
-        # print ("dt", dt)
-        self.rect.centerx += (self.direction.x * self.speed *dt) 
-        # print (velocity, self.count)
-        self.rect.centery += (self.direction.y * self.speed * dt)
-        # print(velocity)
+        self.rect.centerx += self.direction.x * self.speed *dt
+        self.hitbox.centerx = self.rect.centerx
+        self.collisions('horizontal')
+
+        self.rect.centery += self.direction.y * self.speed *dt
+        self.hitbox.centery = self.rect.centery
+        self.collisions('horizontal')
 
     def update(self,dt):
         # posição do player
         # print (self.rect.centerx, self.rect.centery, self.direction.x, self.direction.y, self.speed, dt)
         self.y_sort = self.rect.centery
-        if not self.blocked:
-            self.input()
-            self.move(dt)
+        self.input()
+        self.move(dt)
         self.animate(dt)
+
+    def collisions(self, axis):
+        for sprite in self.collision_sprites:
+            if sprite.hitbox.colliderect(self.hitbox):
+                if axis == 'horizontal':
+                    if self.direction.x > 0:
+                        self.hitbox.right = sprite.hitbox.left
+                    if self.direction.x < 0:
+                        self.hitbox.left = sprite.hitbox.right
+                    self.rect.centerx = self.hitbox.centerx
+                if axis == 'vertical':
+                    if self.direction.y > 0:
+                        self.hitbox.bottom = sprite.hitbox.top
+                    if self.direction.y < 0:
+                        self.hitbox.top = sprite.hitbox.bottom
+                    self.rect.centery = self.hitbox.centery

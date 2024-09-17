@@ -20,3 +20,13 @@ class AnimatedSprite(Sprite):
 
 	def update(self, dt):
 		self.animate(dt)
+
+class CollisionSprite(Sprite):
+	def __init__(self, pos, surf, groups):
+		super().__init__(pos, surf, groups)
+		self.hitbox = self.rect.copy()
+
+class CollidableSprite(Sprite):
+	def __init__(self, pos, surf, groups):
+		super().__init__(pos, surf, groups)
+		self.hitbox = self.rect.inflate(0, -self.rect.height * 0.6)

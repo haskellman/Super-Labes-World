@@ -1,7 +1,7 @@
 from settings import *
 from pytmx.util_pygame import load_pygame #carrega os mapas
 from os.path import join
-from sprites import Sprite, AnimatedSprite
+from sprites import Sprite, AnimatedSprite, CollisionSprite, CollidableSprite
 from entities import Player
 from groups import AllSprites
 from support import *
@@ -15,6 +15,7 @@ class Game:
         
         # groups
         self.all_sprites = AllSprites()
+        self.collision_sprites = pygame.sprite.Group()
         self.import_assets()
         self.setup(self.tmx_maps['house'], 'house')
 
@@ -26,8 +27,6 @@ class Game:
             'characters': all_characters_import('.', 'graphics', 'characters'),
             'water': import_folder('.', 'graphics', 'tilesets', 'water'),
             'lake': lake_importer(3, 12, '.', 'graphics', 'tilesets', 'lake'),
-
-            # 'lake': lake_importer('.', 'graphics', 'lake'),
         }
         # print(self.overworl_frames['characters'])
 
@@ -49,7 +48,13 @@ class Game:
 
         # objects
         for obj in tmx_map.get_layer_by_name('Objects'):
-            Sprite((obj.x, obj.y), obj.image, self.all_sprites)
+            Sprite((obj.x, obj.y), obj.image, (self.all_sprites, self.collision_sprites))
+
+        # collision
+        for obj in tmx_map.get_layer_by_name('Collisions'):
+            print(obj)
+            CollidableSprite((obj.x, obj.y), pygame.Surface((obj.width, obj.height)), (self.all_sprites, self.collision_sprites))
+            # print (type((obj.width, obj.height)))
             
         # entities
         for obj in tmx_map.get_layer_by_name('Entities'):
@@ -59,6 +64,8 @@ class Game:
                     pos = (obj.x, obj.y),
                     groups = self.all_sprites,
                     frames = self.overworld_frames['characters']['player1'],
+                    facing_direction = 'down' ,# colocar propriedade no tiled depois
+                    collision_sprites = self.collision_sprites,
                 )
 
     def run(self):
@@ -77,6 +84,9 @@ class Game:
 
             # drawing
             self.all_sprites.draw(self.player)
+            print (self.player.rect.center)
+            # pygame.draw.rect(self.screen, self.player.rect.center, 40)
+
 
             pygame.display.update()
 
