@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.10" tiledversion="1.11.0" orientation="orthogonal" renderorder="right-down" width="86" height="86" tilewidth="64" tileheight="64" infinite="0" nextlayerid="7" nextobjectid="140">
+<map version="1.10" tiledversion="1.11.0" orientation="orthogonal" renderorder="right-down" width="86" height="86" tilewidth="64" tileheight="64" infinite="0" nextlayerid="9" nextobjectid="162">
  <tileset firstgid="1" name="asphalt" tilewidth="64" tileheight="64" tilecount="90" columns="10">
   <image source="../tilesets/israel-collection/asphalt.png" width="640" height="576"/>
  </tileset>
@@ -371,7 +371,7 @@
   <object id="58" gid="439" x="3586" y="3418.67" width="320" height="192"/>
   <object id="59" gid="439" x="3585.67" y="3301.33" width="320" height="192"/>
   <object id="61" gid="439" x="3583.33" y="3067.33" width="320" height="192"/>
-  <object id="64" gid="439" x="3583.5" y="2955.5" width="320" height="192"/>
+  <object id="64" name="passarela_ufes" gid="439" x="3583.5" y="2955.5" width="320" height="192"/>
   <object id="68" gid="439" x="3583" y="2849" width="320" height="192"/>
   <object id="69" gid="439" x="3582" y="2912" width="320" height="192"/>
   <object id="71" gid="412" x="3026" y="3265" width="448" height="448"/>
@@ -382,12 +382,27 @@
   <object id="76" gid="412" x="2607.76" y="1337.06" width="448" height="448"/>
   <object id="82" gid="413" x="2092.42" y="3232.36" width="448" height="448"/>
   <object id="83" gid="413" x="2585.09" y="2942.18" width="448" height="448"/>
+  <object id="145" gid="422" x="2438" y="5109" width="128" height="192"/>
+ </objectgroup>
+ <objectgroup id="7" name="Collisions">
+  <object id="140" x="1913.33" y="4502.67" width="70.6667" height="725.333"/>
+  <object id="159" x="0" y="5312" width="5502" height="64"/>
  </objectgroup>
  <objectgroup id="3" name="Entities">
-  <object id="1" name="Player" x="3369.33" y="5210.19">
+  <object id="1" name="Player" x="2154.66" y="5114.19">
    <properties>
     <property name="direction" value="down"/>
     <property name="pos" value="house"/>
+   </properties>
+   <point/>
+  </object>
+  <object id="144" name="Character" x="2306" y="4891">
+   <properties>
+    <property name="change_direction" type="bool" value="true"/>
+    <property name="character_id" value="char_1"/>
+    <property name="direction" value="down"/>
+    <property name="graphic" value="hat_girl"/>
+    <property name="radius" value="400"/>
    </properties>
    <point/>
   </object>

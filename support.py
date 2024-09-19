@@ -3,6 +3,7 @@ from os.path import join
 from os import walk
 from pytmx.util_pygame import load_pygame
 
+# imports
 def import_image(*path, alpha = True, format = 'png'):
 	full_path = join(*path) + f'.{format}'
 	surf = pygame.image.load(full_path).convert_alpha() if alpha else pygame.image.load(full_path).convert()
@@ -59,3 +60,14 @@ def import_folder(*path):
 			surf = pygame.image.load(full_path).convert_alpha()
 			frames.append(surf)
 	return frames
+
+# game functions
+def check_connections(radius, entity, target, tolerance = 30):
+	relation = vector(target.rect.center) - vector(entity.rect.center)
+	if relation.length() < radius:
+		if entity.facing_direction == 'left' and relation.x < 0 and abs(relation.y) < tolerance or\
+			entity.facing_direction == 'right' and relation.x > 0 and abs(relation.y) < tolerance or\
+			entity.facing_direction == 'up' and relation.y < 0 and abs(relation.x) < tolerance or\
+			entity.facing_direction == 'down' and relation.y > 0 and abs(relation.x) < tolerance:
+			return True
+
