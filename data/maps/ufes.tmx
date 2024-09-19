@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.10" tiledversion="1.11.0" orientation="orthogonal" renderorder="right-down" width="86" height="86" tilewidth="64" tileheight="64" infinite="0" nextlayerid="9" nextobjectid="162">
+<map version="1.10" tiledversion="1.11.0" orientation="orthogonal" renderorder="right-down" width="86" height="86" tilewidth="64" tileheight="64" infinite="0" nextlayerid="10" nextobjectid="165">
  <tileset firstgid="1" name="asphalt" tilewidth="64" tileheight="64" tilecount="90" columns="10">
   <image source="../tilesets/israel-collection/asphalt.png" width="640" height="576"/>
  </tileset>
@@ -380,35 +380,9 @@
   <object id="74" gid="412" x="2587.15" y="2161.52" width="448" height="448"/>
   <object id="75" gid="412" x="2595.97" y="1753.91" width="448" height="448"/>
   <object id="76" gid="412" x="2607.76" y="1337.06" width="448" height="448"/>
-  <object id="82" gid="413" x="2092.42" y="3232.36" width="448" height="448"/>
+  <object id="82" gid="413" x="2077.27" y="4608.12" width="448" height="448"/>
   <object id="83" gid="413" x="2585.09" y="2942.18" width="448" height="448"/>
   <object id="145" gid="422" x="2438" y="5109" width="128" height="192"/>
- </objectgroup>
- <objectgroup id="7" name="Collisions">
-  <object id="140" x="1913.33" y="4502.67" width="70.6667" height="725.333"/>
-  <object id="159" x="0" y="5312" width="5502" height="64"/>
- </objectgroup>
- <objectgroup id="3" name="Entities">
-  <object id="1" name="Player" x="2154.66" y="5114.19">
-   <properties>
-    <property name="direction" value="down"/>
-    <property name="pos" value="house"/>
-   </properties>
-   <point/>
-  </object>
-  <object id="144" name="Character" x="2306" y="4891">
-   <properties>
-    <property name="change_direction" type="bool" value="true"/>
-    <property name="character_id" value="char_1"/>
-    <property name="direction" value="down"/>
-    <property name="graphic" value="hat_girl"/>
-    <property name="radius" value="400"/>
-   </properties>
-   <point/>
-  </object>
- </objectgroup>
- <objectgroup id="5" name="Lake">
-  <object id="89" name="lake" x="192.667" y="1982.63" width="830.667" height="448.407"/>
  </objectgroup>
  <objectgroup id="6" name="Lake Edges">
   <object id="93" name="coast" x="128.396" y="1920.42" width="64" height="64">
@@ -631,5 +605,39 @@
     <property name="side" value="top"/>
    </properties>
   </object>
+ </objectgroup>
+ <objectgroup id="7" name="Collisions">
+  <object id="140" x="1913.33" y="4502.67" width="70.6667" height="725.333"/>
+  <object id="159" x="0" y="5312" width="5502" height="64"/>
+ </objectgroup>
+ <objectgroup id="3" name="Entities">
+  <object id="1" name="Player" x="2154.66" y="5114.19">
+   <properties>
+    <property name="direction" value="down"/>
+    <property name="pos" value="house"/>
+   </properties>
+   <point/>
+  </object>
+  <object id="144" name="Character" x="2306" y="4891">
+   <properties>
+    <property name="change_direction" type="bool" value="true"/>
+    <property name="character_id" value="char_1"/>
+    <property name="direction" value="down"/>
+    <property name="graphic" value="hat_girl"/>
+    <property name="radius" value="400"/>
+   </properties>
+   <point/>
+  </object>
+ </objectgroup>
+ <objectgroup id="9" name="Transitions">
+  <object id="162" x="2270.67" y="4601.33" width="57.3333" height="19.3333">
+   <properties>
+    <property name="dest" value="house"/>
+    <property name="src" value="ufes"/>
+   </properties>
+  </object>
+ </objectgroup>
+ <objectgroup id="5" name="Lake">
+  <object id="89" name="lake" x="192.667" y="1982.63" width="830.667" height="448.407"/>
  </objectgroup>
 </map>

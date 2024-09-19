@@ -6,7 +6,7 @@ class AllSprites(pygame.sprite.Group):
     def __init__(self):
         super().__init__()
         self.display_surface = pygame.display.get_surface()
-        self.offset = vector(200,40)
+        self.offset = vector(0,0)
         self.shadow = import_image('.', 'graphics', 'shadow', 'shadow')
 
 
