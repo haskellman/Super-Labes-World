@@ -1,0 +1,120 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.10" tiledversion="1.11.0" orientation="orthogonal" renderorder="right-down" width="35" height="24" tilewidth="64" tileheight="64" infinite="0" nextlayerid="6" nextobjectid="53">
+ <tileset firstgid="1" name="chao_ct" tilewidth="64" tileheight="64" tilecount="80" columns="10">
+  <image source="../tilesets/israel-collection/chao_ct.png" width="640" height="512"/>
+ </tileset>
+ <tileset firstgid="81" name="objects" tilewidth="128" tileheight="192" tilecount="10" columns="0">
+  <grid orientation="orthogonal" width="1" height="1"/>
+  <tile id="0">
+   <image source="../tilesets/israel-collection/porta.png" width="87" height="104"/>
+  </tile>
+  <tile id="4">
+   <image source="../tilesets/israel-collection/porta2.png" width="87" height="104"/>
+  </tile>
+  <tile id="7">
+   <image source="../tilesets/israel-collection/placa_vitor.png" width="80" height="12"/>
+  </tile>
+  <tile id="8">
+   <image source="../tilesets/israel-collection/placa_patricia.png" width="100" height="12"/>
+  </tile>
+  <tile id="9">
+   <image source="../tilesets/israel-collection/placa_monalessa.png" width="100" height="12"/>
+  </tile>
+  <tile id="10">
+   <image source="../tilesets/objects/grass.png" width="64" height="64"/>
+  </tile>
+  <tile id="11">
+   <image source="../tilesets/objects/palm_small.png" width="64" height="128"/>
+  </tile>
+  <tile id="12">
+   <image source="../tilesets/objects/grassrock1.png" width="60" height="60"/>
+  </tile>
+  <tile id="13">
+   <image source="../tilesets/objects/grassrock2.png" width="56" height="60"/>
+  </tile>
+  <tile id="14">
+   <image source="../tilesets/objects/green_tree_bushy.png" width="128" height="192"/>
+  </tile>
+ </tileset>
+ <tileset firstgid="96" name="world" tilewidth="64" tileheight="64" tilecount="210" columns="10">
+  <image source="../../graphics/tilesets/world.png" width="640" height="1344"/>
+ </tileset>
+ <layer id="1" name="Terrain" width="35" height="24">
+  <data encoding="csv">
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,14,15,15,15,15,15,15,15,15,15,15,15,15,15,15,15,15,15,15,15,15,15,15,15,15,15,15,15,15,16,0,
+0,0,0,0,24,25,25,25,25,25,25,25,25,25,25,25,25,25,25,25,25,25,25,25,25,25,25,25,25,25,25,25,25,36,0,
+0,0,0,0,24,35,35,35,35,35,35,35,35,35,35,35,35,35,35,35,35,35,35,35,35,35,35,35,35,35,35,35,35,36,0,
+0,0,0,0,24,45,45,45,45,45,45,45,45,45,45,45,45,45,45,45,45,45,45,45,45,45,45,45,45,45,45,45,45,1610612798,0,
+0,0,0,0,44,55,55,55,55,55,55,55,55,55,55,55,55,55,55,55,55,55,55,55,55,55,55,55,55,55,55,55,55,1610612797,0,
+0,0,0,0,44,55,55,55,55,55,55,55,55,55,55,55,55,55,55,55,55,55,55,55,55,55,55,55,55,55,55,55,42,66,0,
+0,0,0,0,44,55,55,55,55,55,55,55,55,55,55,55,55,55,55,55,55,55,55,55,55,55,55,55,55,55,55,55,46,0,0,
+0,0,0,0,44,55,55,55,42,65,65,65,65,65,43,69,69,69,71,72,69,69,42,65,65,65,65,65,43,55,55,55,46,0,0,
+0,0,0,0,44,55,55,55,36,0,0,0,0,0,44,137,137,137,137,137,106,108,36,0,0,0,0,0,44,55,55,55,46,0,0,
+0,0,0,0,44,55,55,55,36,0,0,0,0,0,44,137,137,137,137,137,106,108,36,0,0,0,0,0,44,55,55,55,46,0,0,
+0,0,0,0,44,55,55,55,36,0,0,0,0,0,44,137,137,137,137,137,137,137,36,0,0,0,0,0,44,55,55,55,46,0,0,
+0,0,0,0,44,55,55,55,36,0,0,0,0,0,44,137,137,137,137,167,137,137,36,0,0,0,0,0,44,55,55,55,46,0,0,
+0,0,0,0,44,55,55,55,36,0,0,0,0,0,44,137,137,137,96,98,137,137,36,0,0,0,0,0,44,55,55,55,46,0,0,
+0,0,0,0,44,55,55,55,36,0,0,0,0,0,44,137,137,137,116,118,137,137,36,0,0,0,0,0,44,55,55,55,46,0,0,
+0,0,0,0,44,55,55,55,36,13,13,13,13,13,44,137,137,137,137,137,137,137,36,13,13,13,13,13,44,55,55,55,46,0,0,
+0,0,0,0,44,55,55,55,52,15,15,15,15,15,53,137,137,137,137,137,137,137,52,15,15,15,15,15,53,55,55,55,46,0,0,
+0,0,0,0,44,55,55,55,2147483695,29,29,29,29,29,29,29,29,47,3221225544,3221225543,2147483695,29,29,29,29,29,29,29,47,55,55,55,46,0,0,
+0,0,0,0,44,55,55,55,45,45,45,45,45,45,45,45,45,45,55,55,45,45,45,45,45,45,45,45,45,55,55,55,46,0,0,
+0,0,0,0,44,55,55,55,55,55,55,55,55,55,55,55,55,55,55,55,55,55,55,55,55,55,55,55,55,55,55,55,46,0,0,
+0,0,0,0,44,55,55,55,55,55,55,55,55,55,55,55,55,55,55,55,55,55,55,55,55,55,55,55,55,55,55,55,46,0,0,
+0,0,0,0,64,65,65,65,65,65,65,65,65,65,65,65,65,65,65,65,65,65,65,65,65,65,65,65,65,65,65,65,66,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+</data>
+ </layer>
+ <objectgroup id="3" name="Objects">
+  <object id="6" gid="85" x="1063.38" y="288.875" width="87" height="104"/>
+  <object id="7" gid="85" x="1727.75" y="288.875" width="87" height="104"/>
+  <object id="10" gid="88" x="1731.63" y="184.75" width="80" height="12"/>
+  <object id="11" gid="89" x="1056.88" y="184.625" width="100" height="12"/>
+  <object id="12" gid="85" x="1401.33" y="288.917" width="87" height="104"/>
+  <object id="13" gid="90" x="1395.09" y="184.909" width="100" height="12"/>
+  <object id="14" gid="91" x="1025" y="766" width="64" height="64"/>
+  <object id="15" gid="91" x="1279" y="888" width="64" height="64"/>
+  <object id="16" gid="92" x="968" y="705" width="64" height="128"/>
+  <object id="17" gid="92" x="1347" y="948" width="64" height="128"/>
+  <object id="18" gid="95" x="1127" y="827" width="128" height="192"/>
+  <object id="19" gid="94" x="1080.67" y="868.667" width="56" height="60"/>
+  <object id="20" gid="94" x="1156.67" y="921.333" width="56" height="60"/>
+  <object id="21" gid="93" x="1278.67" y="782.667" width="60" height="60"/>
+  <object id="22" gid="93" x="1218.67" y="720" width="60" height="60"/>
+ </objectgroup>
+ <objectgroup id="4" name="Collisions">
+  <object id="25" x="301.25" y="216.75" width="1812" height="15.5"/>
+  <object id="28" x="299.5" y="232.5" width="19.5" height="1131"/>
+  <object id="30" x="321.75" y="1312.75" width="1734.5" height="15.5"/>
+  <object id="31" x="2116" y="217.5" width="18.5" height="55.5"/>
+  <object id="32" x="2139.5" y="273" width="10" height="95"/>
+  <object id="33" x="2114" y="349.5" width="13.5" height="37"/>
+  <object id="34" x="2050.5" y="353" width="67" height="17.5"/>
+  <object id="35" x="2047.5" y="384.5" width="25" height="963"/>
+  <object id="36" x="1263" y="480.5" width="594" height="38"/>
+  <object id="37" x="515.5" y="478.5" width="651" height="38"/>
+  <object id="40" x="942.333" y="516.667" width="16.3333" height="570"/>
+  <object id="42" x="961" y="1050.76" width="190.333" height="40.9091"/>
+  <object id="44" x="513.667" y="1093" width="636" height="38.3333"/>
+  <object id="45" x="1284.33" y="1099.67" width="571.333" height="33"/>
+  <object id="46" x="1280.83" y="1050.37" width="146.833" height="42.1288"/>
+  <object id="48" x="1837.33" y="513" width="19" height="606.667"/>
+  <object id="49" x="513.75" y="511.75" width="24.5" height="580.75"/>
+  <object id="50" x="1152.18" y="1116.36" width="31.0909" height="19.2727"/>
+  <object id="51" x="1250.55" y="1116" width="29.4545" height="16"/>
+  <object id="52" x="1409.33" y="516" width="16.3333" height="570"/>
+ </objectgroup>
+ <objectgroup id="2" name="Entities">
+  <object id="1" name="Player" x="2077.5" y="305.5">
+   <properties>
+    <property name="character_id" value="player"/>
+    <property name="direction" value="down"/>
+    <property name="pos" value="house"/>
+   </properties>
+   <point/>
+  </object>
+ </objectgroup>
+ <objectgroup id="5" name="Transitions"/>
+</map>
