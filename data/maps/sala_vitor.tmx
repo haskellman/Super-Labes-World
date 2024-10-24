@@ -42,7 +42,7 @@
   <object id="14" name="Character" x="385" y="326">
    <properties>
     <property name="change_direction" type="bool" value="true"/>
-    <property name="character_id" value="char_1"/>
+    <property name="character_id" value="vitor"/>
     <property name="direction" value="down"/>
     <property name="graphic" value="vitor"/>
     <property name="radius" value="400"/>

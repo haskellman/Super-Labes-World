@@ -32,7 +32,7 @@ class Game:
         self.tint_speed = 600
         
         self.import_assets()
-        self.setup(self.tmx_maps['ct7'], 'ufes')
+        self.setup(self.tmx_maps['house'], 'house')
 
         self.dialog_tree = None
 
@@ -100,12 +100,15 @@ class Game:
             print(ve)
 
         # dialogs
-        try:
-            for obj in tmx_map.get_layer_by_name('Dialogs'):
-                DialogSprite((obj.x, obj.y), pygame.Surface((obj.width, obj.height)), (self.dialogs_sprites), obj.properties['message'])
-                # print (type((obj.width, obj.height)))
-        except ValueError as ve:
-            print(ve)
+        
+        if (not tmx_map in VISITED_MAPS):
+            VISITED_MAPS.append(tmx_map)
+            try:
+                for obj in tmx_map.get_layer_by_name('Dialogs'):
+                    DialogSprite((obj.x, obj.y), pygame.Surface((obj.width, obj.height)), (self.dialogs_sprites), obj.properties['message'])
+                    # print (type((obj.width, obj.height)))
+            except ValueError as ve:
+                print(ve)
 
         # transitions
         try:
@@ -163,6 +166,7 @@ class Game:
         if True:
             self.dialog_tree = None
             self.player.unblock()
+            character.character_data['visited'] = True
 
     def check_transitions(self):
         transition_rect = [sprite for sprite in self.transition_sprites if sprite.rect.colliderect(self.player.hitbox)]

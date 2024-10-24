@@ -44,7 +44,7 @@
   <object id="14" name="Character" x="386.981" y="341.862">
    <properties>
     <property name="change_direction" type="bool" value="false"/>
-    <property name="character_id" value="char_1"/>
+    <property name="character_id" value="patricia"/>
     <property name="direction" value="down"/>
     <property name="graphic" value="patricia"/>
     <property name="radius" value="400"/>
