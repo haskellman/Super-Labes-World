@@ -2,7 +2,7 @@ from settings import *
 from timer import Timer
 
 class Dialog:
-    def __init__(self, character, player, all_sprites, font, end_dialog):
+    def __init__(self, character, player, all_sprites, font, end_dialog, message = None):
         self.player = player
         self.character = character
         self.font = font 
@@ -14,7 +14,14 @@ class Dialog:
         self.dialog_index = 0
         self.dialog_timer = Timer(500, autostart = True)
 
-        self.current_dialog = DialogSprite(self.dialog[self.dialog_index], self.character, self.all_sprites, self.font)
+        if (message):
+            self.dialog = message.split('\n')
+            self.dialog_num = len(self.dialog)
+            self.current_dialog = DialogSprite(message[self.dialog_index], self.character, self.all_sprites, self.font)
+        else:
+            self.dialog = character.get_dialog()
+            self.dialog_num = len(self.dialog)
+            self.current_dialog = DialogSprite(self.dialog[self.dialog_index], self.character, self.all_sprites, self.font)
 
     def input(self):
         keys = pygame.key.get_just_pressed()

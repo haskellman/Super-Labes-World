@@ -37,3 +37,9 @@ class TransitionSprite(Sprite):
 		super().__init__(pos, pygame.Surface((size)), groups)
 		self.src = src
 		self.dest = dest
+
+class DialogSprite(Sprite):
+	def __init__(self, pos, surf, groups, message):
+		super().__init__(pos, surf, groups)
+		self.hitbox = self.rect.copy()
+		self.message = message

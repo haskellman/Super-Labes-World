@@ -1,7 +1,7 @@
 from settings import *
 
 class Entity(pygame.sprite.Sprite):
-    def __init__(self, pos, frames, groups, facing_direction):
+    def __init__(self, pos, frames, groups, facing_direction, character_data):
         super().__init__(groups)
 
 # graphics 
@@ -20,6 +20,9 @@ class Entity(pygame.sprite.Sprite):
 
         self.z = GAME_LAYERS['main']
         self.y_sort = self.rect.centery
+
+# data
+        self.character_data = character_data
 
     def block(self):
         self.blocked = True
@@ -56,15 +59,13 @@ class Entity(pygame.sprite.Sprite):
         self.blocked = False
 
 class Player(Entity):
-    def __init__(self, pos, groups, frames, facing_direction, collision_sprites):
-        super().__init__(pos, frames, groups, facing_direction)
+    def __init__(self, pos, groups, frames, facing_direction, collision_sprites, character_data):
+        super().__init__(pos, frames, groups, facing_direction, character_data)
         self.collision_sprites = collision_sprites
 
         self.image = pygame.Surface((16, 16))
         self.image.fill(COLORS['red'])
-        self.rect = self.image.get_rect(center = pos)
 
-        # self.count = 0
         self.direction = vector()
 
     # direção do player
@@ -106,8 +107,6 @@ class Player(Entity):
                 if axis == 'horizontal':
                     if self.direction.x > 0:
                         self.hitbox.right = sprite.hitbox.left
-                        # print(self.hitbox.right)
-                        # print(sprite.hitbox.left)
                     if self.direction.x < 0:
                         self.hitbox.left = sprite.hitbox.right
                     self.rect.centerx = self.hitbox.centerx
@@ -118,11 +117,13 @@ class Player(Entity):
                         self.hitbox.top = sprite.hitbox.bottom
                     self.rect.centery = self.hitbox.centery
 
+    def get_dialog(self):
+        return self.character_data['dialog']['default']
+
 class Character(Entity):
     def __init__(self, pos, groups, frames, facing_direction, collision_sprites, character_data):
-        super().__init__(pos, frames, groups, facing_direction)
+        super().__init__(pos, frames, groups, facing_direction, character_data)
         # print(character_data)
-        self.character_data = character_data
     def update(self, dt):
         self.animate(dt)
 
