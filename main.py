@@ -24,7 +24,7 @@ class Game:
         self.dialogs_sprites    = pygame.sprite.Group()
 
         # transition
-        self.transition_dest = None
+        self.transition_area = None
         self.tint_surf = pygame.Surface((WINDOW_WIDTH, WINDOW_HEIGHT))
         self.tint_mode = 'untint'
         self.tint_progress = 0
@@ -32,7 +32,7 @@ class Game:
         self.tint_speed = 600
         
         self.import_assets()
-        self.setup(self.tmx_maps['house'])
+        self.setup(self.tmx_maps['ct7'], 'ufes')
 
         self.dialog_tree = None
 
@@ -102,7 +102,6 @@ class Game:
         # dialogs
         try:
             for obj in tmx_map.get_layer_by_name('Dialogs'):
-                print(obj)
                 DialogSprite((obj.x, obj.y), pygame.Surface((obj.width, obj.height)), (self.dialogs_sprites), obj.properties['message'])
                 # print (type((obj.width, obj.height)))
         except ValueError as ve:
@@ -126,7 +125,7 @@ class Game:
                             pos = (obj.x, obj.y),
                             groups = self.all_sprites,
                             frames = self.overworld_frames['characters']['player1'],
-                            facing_direction = 'down' ,# colocar propriedade no tiled depois
+                            facing_direction = obj.properties['direction'],
                             collision_sprites = self.collision_sprites,
                             character_data = CHARACTERS_DATA[obj.properties['character_id']],
                         )
@@ -166,10 +165,11 @@ class Game:
             self.player.unblock()
 
     def check_transitions(self):
-        transition_area = [sprite for sprite in self.transition_sprites if sprite.rect.colliderect(self.player.hitbox)]
-        if transition_area:
+        transition_rect = [sprite for sprite in self.transition_sprites if sprite.rect.colliderect(self.player.hitbox)]
+        if transition_rect:
+            print(transition_rect)
             self.player.block()
-            self.transition_dest = transition_area[0].dest
+            self.transition_area = transition_rect
             self.tint_mode = 'tint'
 
     def check_dialog(self):
@@ -185,10 +185,9 @@ class Game:
             self.tint_progress += self.tint_speed * dt    
             if self.tint_progress >= 255: 
             # falta pegar o nome do mapa
-                print(self.transition_dest)
-                self.setup(self.tmx_maps[self.transition_dest])
+                self.setup(self.tmx_maps[self.transition_area[0].dest], self.transition_area[0].src)
                 self.tint_mode = 'untint'
-                self.transition_dest = None
+                self.transition_area = None
 
         self.tint_progress = max(0, min(self.tint_progress, 255))
         self.tint_surf.set_alpha(self.tint_progress)

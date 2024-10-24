@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.10" tiledversion="1.11.0" orientation="orthogonal" renderorder="right-down" width="12" height="14" tilewidth="64" tileheight="64" infinite="0" nextlayerid="7" nextobjectid="17">
+<map version="1.10" tiledversion="1.11.0" orientation="orthogonal" renderorder="right-down" width="12" height="14" tilewidth="64" tileheight="64" infinite="0" nextlayerid="7" nextobjectid="19">
  <tileset firstgid="1" name="chao_ct" tilewidth="64" tileheight="64" tilecount="80" columns="10">
   <image source="../tilesets/israel-collection/chao_ct.png" width="640" height="512"/>
  </tileset>
@@ -29,20 +29,13 @@
   <object id="12" x="66" y="46.5" width="653" height="114.5"/>
   <object id="16" x="417.834" y="799.333" width="286.333" height="17.3333"/>
  </objectgroup>
- <objectgroup id="6" name="Dialogs">
-  <object id="15" x="354.667" y="842.833" width="63.6667" height="8.3333">
-   <properties>
-    <property name="dest" value="ct7"/>
-    <property name="src" value="vitor"/>
-   </properties>
-  </object>
- </objectgroup>
+ <objectgroup id="6" name="Dialogs"/>
  <objectgroup id="4" name="Entities">
-  <object id="2" name="Player" x="385.25" y="748.75">
+  <object id="2" name="Player" x="385.795" y="780.977">
    <properties>
     <property name="character_id" value="player"/>
-    <property name="direction" value="down"/>
-    <property name="pos" value="house"/>
+    <property name="direction" value="up"/>
+    <property name="pos" value="ct7"/>
    </properties>
    <point/>
   </object>
@@ -57,5 +50,12 @@
    <point/>
   </object>
  </objectgroup>
- <objectgroup id="5" name="Transictions"/>
+ <objectgroup id="5" name="Transitions">
+  <object id="18" x="342.667" y="833.833" width="86.6667" height="28.3333">
+   <properties>
+    <property name="dest" value="ct7"/>
+    <property name="src" value="sala_vitor"/>
+   </properties>
+  </object>
+ </objectgroup>
 </map>
