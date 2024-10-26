@@ -6,7 +6,6 @@ CHARACTERS_DATA = {
 		'directions': ['down'],
 		'look_around': True,
 		'visited': False,
-		'biome': 'forest'
 		},
     'player': {
 		'dialog': {
@@ -20,7 +19,6 @@ CHARACTERS_DATA = {
 		'directions': ['down'],
 		'look_around': True,
 		'visited': False,
-		'biome': 'forest'
 		},
     'monalessa': {
 		'dialog': {
@@ -29,7 +27,6 @@ CHARACTERS_DATA = {
 		'directions': ['down'],
 		'look_around': True,
 		'visited': False,
-		'biome': 'forest'
 		},
     'patricia': {
 		'dialog': {
@@ -38,7 +35,29 @@ CHARACTERS_DATA = {
 		'directions': ['down'],
 		'look_around': True,
 		'visited': False,
-		'biome': 'forest'
 		},
-
+    'mae': {
+		'dialog': {
+            'default': ['to cansada de lavar louça nessa casa!'],
+			'visited': ['']},
+		'directions': ['down'],
+		'look_around': True,
+		'visited': False,
+		},
+    'pai': {
+		'dialog': {
+            'default': ['o que será que eu leio hoje??'],
+			'visited': ['to cansada de lavar louça nessa casa!']},
+		'directions': ['down'],
+		'look_around': True,
+		'visited': False,
+		},
+    'luaninha': {
+		'dialog': {
+            'default': ['eu te amoooooooo!!!!!!!'],
+			'visited': ['']},
+		'directions': ['down'],
+		'look_around': True,
+		'visited': False,
+		},
     }

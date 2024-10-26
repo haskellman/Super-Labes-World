@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.10" tiledversion="1.11.0" orientation="orthogonal" renderorder="right-down" width="34" height="27" tilewidth="64" tileheight="64" infinite="0" nextlayerid="8" nextobjectid="113">
+<map version="1.10" tiledversion="1.11.0" orientation="orthogonal" renderorder="right-down" width="34" height="27" tilewidth="64" tileheight="64" infinite="0" nextlayerid="8" nextobjectid="116">
  <tileset firstgid="1" source="../tilesets/indoor.tsx"/>
  <tileset firstgid="91" name="indoor" tilewidth="64" tileheight="64" tilecount="90" columns="10">
   <image source="../tilesets/israel-collection/indoor.png" width="640" height="576"/>
@@ -202,7 +202,7 @@
   <object id="46" x="1858.67" y="176.667" width="18.6667" height="604.667"/>
  </objectgroup>
  <objectgroup id="7" name="Dialogs">
-  <object id="112" name="house_dialog1" x="1458.73" y="541.212" width="402.539" height="123.577" rotation="359.656">
+  <object id="115" name="house_dialog1" x="1439.4" y="531.545" width="402.539" height="123.577" rotation="359.656">
    <properties>
     <property name="message">!!
  nossa já são 8:00 
@@ -212,10 +212,10 @@
   </object>
  </objectgroup>
  <objectgroup id="3" name="Entities">
-  <object id="2" name="Character" x="1163" y="405.667">
+  <object id="2" name="Character" x="1579.67" y="559.667">
    <properties>
     <property name="change_direction" type="bool" value="true"/>
-    <property name="character_id" value="char_1"/>
+    <property name="character_id" value="luaninha"/>
     <property name="direction" value="down"/>
     <property name="graphic" value="luaninha"/>
     <property name="radius" value="400"/>
@@ -235,6 +235,26 @@
     <property name="character_id" value="player"/>
     <property name="direction" value="up"/>
     <property name="pos" value="ponto_onibus"/>
+   </properties>
+   <point/>
+  </object>
+  <object id="113" name="Character" x="334" y="1195.33">
+   <properties>
+    <property name="change_direction" type="bool" value="true"/>
+    <property name="character_id" value="mae"/>
+    <property name="direction" value="up"/>
+    <property name="graphic" value="mae"/>
+    <property name="radius" value="400"/>
+   </properties>
+   <point/>
+  </object>
+  <object id="114" name="Character" x="501" y="533.333">
+   <properties>
+    <property name="change_direction" type="bool" value="true"/>
+    <property name="character_id" value="pai"/>
+    <property name="direction" value="up"/>
+    <property name="graphic" value="pai"/>
+    <property name="radius" value="400"/>
    </properties>
    <point/>
   </object>
