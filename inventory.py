@@ -2,7 +2,7 @@ from settings import *
 from game_data import CHARACTERS_DATA
 
 class Inventory:
-    def __init__(self, player_items, fonts, inventory_frames, player):
+    def __init__(self, player_items, fonts, interface_frames, player):
         self.fonts = fonts
         self.display_surface = pygame.display.get_surface()
         self.rows = 3
@@ -16,9 +16,9 @@ class Inventory:
         self.selected_index = 0
 
 
-        self.inventory_frames = inventory_frames['items'] 
+        self.interface_frames = interface_frames['items'] 
         self.player_items = player_items
-        self.inventory_bg = inventory_frames['bg']['inventory_bg']
+        self.inventory_bg = interface_frames['interface']['inventory_interface']
         self.player = player
 
         self.offset_bgx = (WINDOW_WIDTH - self.inventory_bg.width) / 2
@@ -72,13 +72,13 @@ class Inventory:
 
     def input(self):
         keys = pygame.key.get_just_pressed()
-        if keys[pygame.K_UP]:
+        if keys[pygame.K_UP] or keys[pygame.K_w]:
             self.index -= 10
-        if keys[pygame.K_DOWN]:
+        if keys[pygame.K_DOWN] or keys[pygame.K_s]:
             self.index += 10
-        if keys[pygame.K_RIGHT]:
+        if keys[pygame.K_RIGHT] or keys[pygame.K_d]:
             self.index += 1
-        if keys[pygame.K_LEFT]:
+        if keys[pygame.K_LEFT] or keys[pygame.K_a]:
             self.index -= 1
         self.index = self.index % 30 # [LEN] voltar para o inicio
         if keys[pygame.K_SPACE]:

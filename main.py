@@ -59,7 +59,7 @@ class Game:
 
         # overlays
         self.dialog_tree = None
-        self.inventory = Inventory(self.player_items , self.fonts, self.inventory_frames, self.player)
+        self.inventory = Inventory(self.player_items , self.fonts, self.interface_frames, self.player)
         self.inventory_open = False
 
 
@@ -77,8 +77,8 @@ class Game:
             'bold': pygame.font.Font(join('.', 'graphics', 'fonts', 'dogicapixelbold.otf'), 20),
             'regular': pygame.font.Font(join('.', 'graphics', 'fonts', 'PixeloidSans.ttf'), 18),
         }
-        self.inventory_frames = {
-            'bg': import_folder_dict('.', 'graphics', 'inventory'),
+        self.interface_frames = {
+            'interface': import_folder_dict('.', 'graphics', 'interface'),
             'items': import_folder_dict('.', 'graphics', 'items'),
         }
 
@@ -189,6 +189,9 @@ class Game:
             if keys[pygame.K_i]:
                 self.inventory_open = not self.inventory_open
                 self.player.blocked = not self.player.blocked
+            if keys[pygame.K_ESCAPE]:
+                self.inventory_open = False
+                self.player.blocked = False
 
     def create_dialog(self, character, message = None):
         if not self.dialog_tree:
