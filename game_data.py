@@ -61,3 +61,19 @@ CHARACTERS_DATA = {
 		'visited': False,
 		},
     }
+
+ITEMS_DATA = {
+    '0': {
+        'description':'chave do vitor, é a prova de que voce conseguiu a aprovação do javaboy para entrar no sigamaes',
+        'name': 'chave do vitor'},
+    '1': {
+        'description':'chave da mona, é a prova de que voce conseguiu a \naprovação da monalessa para entrar no sigamaes',
+		'name': 'chave da monalessa'},
+    '2': {
+        'description':'chave da patrícia, é a prova de que voce conseguiu a aprovação da patricia para entrar no sigamaes',
+		'name': 'chave da patrícia'},
+    '4': {
+        'description':'Uma xícara de café forte e revigorante, feito com grãos de alta qualidade.' \
+        'Possui um aroma intenso chocolate amargo.  \n + 100 speed',
+		'name': 'cafe'},
+}

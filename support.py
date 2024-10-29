@@ -78,14 +78,14 @@ def check_connections(radius, entity, target, tolerance = 30):
 			entity.facing_direction == 'down' and relation.y > 0 and abs(relation.x) < tolerance:
 			return True
 
-# def import_folder_dict(*path):
-# 	frames = {}
-# 	for folder_path, sub_folders, image_names in walk(join(*path)):
-# 		for image_name in image_names:
-# 			full_path = join(folder_path, image_name)
-# 			surf = pygame.image.load(full_path).convert_alpha()
-# 			frames[image_name.split('.')[0]] = surf
-# 	return frames
+def import_folder_dict(*path):
+	frames = {}
+	for folder_path, sub_folders, image_names in walk(join(*path)):
+		for image_name in image_names:
+			full_path = join(folder_path, image_name)
+			surf = pygame.image.load(full_path).convert_alpha()
+			frames[image_name.split('.')[0]] = surf
+	return frames
 
 # def import_sub_folders(*path):
 # 	frames = {}

@@ -19,7 +19,10 @@ COLORS = {
 	'plant': '#64a990', 
 	'black': '#000000', 
 	'red': '#f03131',
-	'blue': '#66d7ee'
+	'blue': '#66d7ee',
+    'brown': '#fdc175',
+    'dark-brown': '#d68f54',
+    'mid-brown': '#a87042',
 }
 
 GAME_LAYERS = {

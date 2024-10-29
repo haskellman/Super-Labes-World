@@ -3,6 +3,8 @@ from pytmx.util_pygame import load_pygame #carrega os mapas
 from os.path import join
 from sprites import Sprite, AnimatedSprite, CollisionSprite, CollidableSprite, TransitionSprite, DialogSprite
 from entities import Player, Character
+from inventory import Inventory
+from item import Item
 from groups import AllSprites
 from support import *
 from game_data import *
@@ -32,9 +34,34 @@ class Game:
         self.tint_speed = 600
         
         self.import_assets()
-        self.setup(self.tmx_maps['house'], 'house')
+        self.setup(self.tmx_maps['ufes'], 'ponto_onibus')
+        
+        self.player_items = []
+        def create_inventory(self, inventory_size = 30):
+            for _ in range(inventory_size):
+                print(1)
+                self.player_items.append({})
 
+        create_inventory(self)
+
+        def add_item(self, item):
+            for index, item_ in enumerate(self.player_items):
+                if (item_ == {}):
+                    self.player_items[index] = item
+                    break
+                else:
+                    print('inventory is full')
+
+        add_item(self,  Item('0'))
+        add_item(self,  Item('1'))
+        add_item(self,  Item('2'))
+        add_item(self,  Item('4'))
+
+        # overlays
         self.dialog_tree = None
+        self.inventory = Inventory(self.player_items , self.fonts, self.inventory_frames, self.player)
+        self.inventory_open = False
+
 
     # carrega todos os assets do jogo
     def import_assets(self):
@@ -47,6 +74,12 @@ class Game:
         }
         self.fonts = {
             'dialog': pygame.font.Font(join('.', 'graphics', 'fonts', 'PixeloidSans.ttf'), 30),
+            'bold': pygame.font.Font(join('.', 'graphics', 'fonts', 'dogicapixelbold.otf'), 20),
+            'regular': pygame.font.Font(join('.', 'graphics', 'fonts', 'PixeloidSans.ttf'), 18),
+        }
+        self.inventory_frames = {
+            'bg': import_folder_dict('.', 'graphics', 'inventory'),
+            'items': import_folder_dict('.', 'graphics', 'items'),
         }
 
     # carrega o mapa a ordem é importante pois vai sobrepor os objetos
@@ -153,6 +186,9 @@ class Game:
                     if check_connections(100, self.player, character):
                         character.change_facing_direction(self.player.rect.center)
                         self.create_dialog(character)
+            if keys[pygame.K_i]:
+                self.inventory_open = not self.inventory_open
+                self.player.blocked = not self.player.blocked
 
     def create_dialog(self, character, message = None):
         if not self.dialog_tree:
@@ -218,6 +254,7 @@ class Game:
 
             # overlays
             if self.dialog_tree: self.dialog_tree.update()
+            if self.inventory_open: self.inventory.update(dt)
             
             self.tint(dt)
             pygame.display.update()

@@ -629,7 +629,7 @@
   <object id="159" x="1.33333" y="6720" width="6390" height="64"/>
  </objectgroup>
  <objectgroup id="10" name="Dialogs">
-  <object id="191" name="onibus_dialog" x="3328.83" y="6630.67" width="214.167" height="68.5003">
+  <object id="191" name="onibus_dialog" x="3752.83" y="6615.67" width="214.167" height="68.5003">
    <properties>
     <property name="message">!!! 
 que rápido 
