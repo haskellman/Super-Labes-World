@@ -4,7 +4,9 @@ from os.path import join
 from sprites import Sprite, AnimatedSprite, CollisionSprite, CollidableSprite, TransitionSprite, DialogSprite
 from entities import Player, Character
 from inventory import Inventory
+from computer import Computer
 from item import Item
+from link import Link
 from groups import AllSprites
 from support import *
 from game_data import *
@@ -20,10 +22,11 @@ class Game:
         
         # groups
         self.all_sprites = AllSprites()
-        self.collision_sprites  = pygame.sprite.Group()
-        self.character_sprites  = pygame.sprite.Group()
-        self.transition_sprites = pygame.sprite.Group()
-        self.dialogs_sprites    = pygame.sprite.Group()
+        self.collision_sprites   = pygame.sprite.Group()
+        self.character_sprites   = pygame.sprite.Group()
+        self.transition_sprites  = pygame.sprite.Group()
+        self.dialogs_sprites     = pygame.sprite.Group()
+        self.interaction_sprites = pygame.sprite.Group()
 
         # transition
         self.transition_area = None
@@ -34,12 +37,12 @@ class Game:
         self.tint_speed = 600
         
         self.import_assets()
-        self.setup(self.tmx_maps['ufes'], 'ponto_onibus')
+        self.setup(self.tmx_maps['ct9'], 'ufes')
         
+        # Inventory
         self.player_items = []
         def create_inventory(self, inventory_size = 30):
             for _ in range(inventory_size):
-                print(1)
                 self.player_items.append({})
 
         create_inventory(self)
@@ -50,17 +53,35 @@ class Game:
                     self.player_items[index] = item
                     break
                 else:
-                    print('inventory is full')
+                    pass
 
         add_item(self,  Item('0'))
         add_item(self,  Item('1'))
         add_item(self,  Item('2'))
         add_item(self,  Item('4'))
 
+        # Computer
+        self.computer_links = []
+
+        def add_link(self, item):
+            self.computer_links.append(item)
+
+        def create_computer(self):
+            for i in COMPUTER_DATA:
+                add_link(self,Link(i))
+
+        create_computer(self)
+        print(len(COMPUTER_DATA))
+
+
+
+
         # overlays
         self.dialog_tree = None
         self.inventory = Inventory(self.player_items , self.fonts, self.interface_frames, self.player)
         self.inventory_open = False
+        self.computer = Computer(self.computer_links,self.fonts, self.interface_frames)
+        self.computer_open = False
 
 
     # carrega todos os assets do jogo
@@ -120,6 +141,12 @@ class Game:
                 else:
                     # print(obj)
                     CollidableSprite((obj.x, obj.y), obj.image, (self.all_sprites, self.collision_sprites))
+        except ValueError as ve:
+            print(ve)
+        # objects
+        try:
+            for obj in tmx_map.get_layer_by_name('Iterative Objects'):
+                Sprite((obj.x, obj.y), obj.image, (self.all_sprites, self.interaction_sprites), GAME_LAYERS['top'])
         except ValueError as ve:
             print(ve)
 
@@ -186,11 +213,16 @@ class Game:
                     if check_connections(100, self.player, character):
                         character.change_facing_direction(self.player.rect.center)
                         self.create_dialog(character)
+                for sprite in self.interaction_sprites:
+                    if check_interaction(150, self.player, sprite):
+                        self.computer_open = not self.computer_open
+                        self.player.blocked = not self.player.blocked
             if keys[pygame.K_i]:
                 self.inventory_open = not self.inventory_open
                 self.player.blocked = not self.player.blocked
             if keys[pygame.K_ESCAPE]:
                 self.inventory_open = False
+                self.computer_open = False
                 self.player.blocked = False
 
     def create_dialog(self, character, message = None):
@@ -210,7 +242,6 @@ class Game:
     def check_transitions(self):
         transition_rect = [sprite for sprite in self.transition_sprites if sprite.rect.colliderect(self.player.hitbox)]
         if transition_rect:
-            print(transition_rect)
             self.player.block()
             self.transition_area = transition_rect
             self.tint_mode = 'tint'
@@ -227,7 +258,6 @@ class Game:
         if self.tint_mode == 'tint':
             self.tint_progress += self.tint_speed * dt    
             if self.tint_progress >= 255: 
-            # falta pegar o nome do mapa
                 self.setup(self.tmx_maps[self.transition_area[0].dest], self.transition_area[0].src)
                 self.tint_mode = 'untint'
                 self.transition_area = None
@@ -258,6 +288,7 @@ class Game:
             # overlays
             if self.dialog_tree: self.dialog_tree.update()
             if self.inventory_open: self.inventory.update(dt)
+            if self.computer_open: self.computer.update(dt)
             
             self.tint(dt)
             pygame.display.update()

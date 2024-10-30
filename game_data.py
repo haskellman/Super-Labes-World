@@ -54,8 +54,8 @@ CHARACTERS_DATA = {
 		},
     'luaninha': {
 		'dialog': {
-            'default': ['eu te amoooooooo!!!!!!!'],
-			'visited': ['']},
+            'default': ['seja bem vindo ao labgrad', 'aqui voce pode usar os computadores a vontade para estudar', 'mas tem uma regra muito importante rs','faça silencio!'],
+			'visited': ['seja bem vindo ao labgrad', 'aqui voce pode usar os computadores a vontade para estudar', 'mas tem uma regra muito importante rs','faça silencio!']},
 		'directions': ['down'],
 		'look_around': True,
 		'visited': False,
@@ -64,16 +64,36 @@ CHARACTERS_DATA = {
 
 ITEMS_DATA = {
     '0': {
+        'name': 'chave do vitor',
         'description':'chave do vitor, é a prova de que voce conseguiu a aprovação do javaboy para entrar no sigamaes',
-        'name': 'chave do vitor'},
+    },
     '1': {
+		'name': 'chave da monalessa',
         'description':'chave da mona, é a prova de que voce conseguiu a \naprovação da monalessa para entrar no sigamaes',
-		'name': 'chave da monalessa'},
+    },
     '2': {
+		'name': 'chave da patrícia',
         'description':'chave da patrícia, é a prova de que voce conseguiu a aprovação da patricia para entrar no sigamaes',
-		'name': 'chave da patrícia'},
+    },
     '4': {
+		'name': 'cafe',
         'description':'Uma xícara de café forte e revigorante, feito com grãos de alta qualidade.' \
         'Possui um aroma intenso chocolate amargo.  \n + 100 speed',
-		'name': 'cafe'},
+    },
+}
+
+COMPUTER_DATA = {
+    '0': {
+        'title': 'Java',
+        'description':'Aqui você pode aprender e testar seus conhecimentos em Java',
+        'url': 'https://www.google.com',
+        'color': 'gray',
+	},
+    '1': {
+        'title': 'Github',
+        'description':'O melhor site para aprender git e versionamento de código',
+        'url': 'https://www.google.com',
+        'color': 'white',
+	},
+        
 }

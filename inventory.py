@@ -1,13 +1,12 @@
 from settings import * 
-from game_data import CHARACTERS_DATA
 
 class Inventory:
     def __init__(self, player_items, fonts, interface_frames, player):
         self.fonts = fonts
         self.display_surface = pygame.display.get_surface()
         self.rows = 3
-        self.col = 10
-        self.items = [[None for _ in range(self.rows)] for _ in range(self.col)]
+        self.cols = 10
+        self.items = [[None for _ in range(self.rows)] for _ in range(self.cols)]
         self.box_size = 93
         self.x = (WINDOW_WIDTH - 968) / 2 
         self.y = (WINDOW_HEIGHT - 500) / 2
@@ -23,6 +22,7 @@ class Inventory:
 
         self.offset_bgx = (WINDOW_WIDTH - self.inventory_bg.width) / 2
         self.offset_bgy = (WINDOW_HEIGHT- self.inventory_bg.height) / 2
+
         # tint
         self.tint_surface = pygame.Surface((WINDOW_WIDTH, WINDOW_HEIGHT))
         self.tint_surface.set_alpha(180)
@@ -32,18 +32,18 @@ class Inventory:
     def draw_items(self):
         #draw background
         pygame.draw.rect(self.display_surface,COLORS['brown'],
-                         (self.x,self.y,(self.box_size + self.border)*self.col + self.border,(self.box_size + self.border)*self.rows + self.border))
-        for x in range(self.col):
+                         (self.x,self.y,(self.box_size + self.border)*self.cols + self.border,(self.box_size + self.border)*self.rows + self.border))
+        for x in range(self.cols):
             for y in range(self.rows): # celula
-                index = x + y * self.col
+                index = x + y * self.cols
                 bg_color = COLORS['dark-brown']  if self.index != index else COLORS['mid-brown']
                 self.rect = (self.x + (self.box_size + self.border)*x ,self.y + (self.box_size + self.border)*y,self.box_size, self.box_size)
                 pygame.draw.rect(self.display_surface, bg_color ,self.rect)
                 if self.player_items[index]:
                     if index == self.index:
-                        self.display_surface.blit(self.player_items[index].item_icon, self.rect, special_flags = pygame.BLEND_RGB_MULT)
+                        self.display_surface.blit(self.player_items[index].icon, self.rect, special_flags = pygame.BLEND_RGB_MULT)
                     else:
-                        self.display_surface.blit(self.player_items[index].item_icon, self.rect)
+                        self.display_surface.blit(self.player_items[index].icon, self.rect)
 
     def text_format(self,text):
         new_text = []
@@ -65,7 +65,7 @@ class Inventory:
         pygame.draw.rect(self.display_surface,COLORS['white'],image_rect)
         pygame.draw.rect(self.display_surface,COLORS['dark-brown'],text_rect)
         if self.player_items[self.index]:
-            self.display_surface.blit(pygame.transform.scale(self.player_items[self.index].item_icon,(image_rect.width,image_rect.height)), image_rect)
+            self.display_surface.blit(pygame.transform.scale(self.player_items[self.index].icon,(image_rect.width,image_rect.height)), image_rect)
             text_surf = self.fonts['regular'].render(self.text_format(self.player_items[self.index].description), False, COLORS['black'])
             self.display_surface.blit(text_surf, text_rect)
         
@@ -89,6 +89,6 @@ class Inventory:
     def update(self, dt):
         self.input()
         self.display_surface.blit(self.tint_surface, (0,0))
-        self.display_surface.blit(self.inventory_bg, (self.offset_bgx,self.offset_bgy))
+        self.display_surface.blit(self.inventory_bg)
         self.draw_items()
         self.draw_item_info()

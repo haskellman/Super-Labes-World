@@ -1,0 +1,149 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.10" tiledversion="1.11.0" orientation="orthogonal" renderorder="right-down" width="33" height="24" tilewidth="64" tileheight="64" infinite="0" nextlayerid="8" nextobjectid="135">
+ <tileset firstgid="1" name="chao_ct" tilewidth="64" tileheight="64" tilecount="80" columns="10">
+  <image source="../tilesets/israel-collection/chao_ct.png" width="640" height="512"/>
+ </tileset>
+ <tileset firstgid="81" name="objects" tilewidth="139" tileheight="192" tilecount="15" columns="0">
+  <grid orientation="orthogonal" width="1" height="1"/>
+  <tile id="0">
+   <image source="../tilesets/israel-collection/porta.png" width="87" height="104"/>
+  </tile>
+  <tile id="4">
+   <image source="../tilesets/israel-collection/porta2.png" width="87" height="104"/>
+  </tile>
+  <tile id="7">
+   <image source="../tilesets/israel-collection/placa_vitor.png" width="80" height="12"/>
+  </tile>
+  <tile id="8">
+   <image source="../tilesets/israel-collection/placa_patricia.png" width="100" height="12"/>
+  </tile>
+  <tile id="9">
+   <image source="../tilesets/israel-collection/placa_monalessa.png" width="100" height="12"/>
+  </tile>
+  <tile id="10">
+   <image source="../tilesets/objects/grass.png" width="64" height="64"/>
+  </tile>
+  <tile id="11">
+   <image source="../tilesets/objects/palm_small.png" width="64" height="128"/>
+  </tile>
+  <tile id="12">
+   <image source="../tilesets/objects/grassrock1.png" width="60" height="60"/>
+  </tile>
+  <tile id="13">
+   <image source="../tilesets/objects/grassrock2.png" width="56" height="60"/>
+  </tile>
+  <tile id="14">
+   <image source="../tilesets/objects/green_tree_bushy.png" width="128" height="192"/>
+  </tile>
+  <tile id="20">
+   <image source="../tilesets/israel-collection/porta_grande.png" width="126" height="159"/>
+  </tile>
+  <tile id="21">
+   <image source="../tilesets/israel-collection/amaes_heart.png" width="100" height="80"/>
+  </tile>
+  <tile id="26">
+   <image source="../tilesets/israel-collection/mesa_lab.png" width="120" height="184"/>
+  </tile>
+  <tile id="28">
+   <image source="../tilesets/israel-collection/computer2.png" width="139" height="113"/>
+  </tile>
+  <tile id="29">
+   <image source="../tilesets/israel-collection/computer1.png" width="139" height="113"/>
+  </tile>
+ </tileset>
+ <tileset firstgid="111" name="world" tilewidth="64" tileheight="64" tilecount="210" columns="10">
+  <image source="../../graphics/tilesets/world.png" width="640" height="1344"/>
+ </tileset>
+ <layer id="1" name="Terrain" width="33" height="24">
+  <data encoding="csv">
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,31,31,31,31,31,31,31,31,31,31,31,31,31,31,31,31,31,31,31,31,31,31,31,31,31,31,31,31,31,0,0,
+0,0,31,31,31,31,31,31,31,31,31,31,31,31,31,31,31,31,31,31,31,31,31,31,31,31,31,31,31,31,31,0,0,
+0,0,31,31,31,31,31,31,31,31,31,31,31,31,31,31,31,31,31,31,31,31,31,31,31,31,31,31,31,31,31,0,0,
+0,0,31,31,31,31,31,31,31,31,31,31,31,31,31,31,31,31,31,31,31,31,31,31,31,31,31,31,31,31,31,0,0,
+0,0,31,31,31,31,31,31,31,31,31,31,31,31,31,31,31,31,31,31,31,31,31,31,31,31,31,31,31,31,31,0,0,
+0,0,31,31,31,31,31,31,31,31,31,31,31,31,31,31,31,31,31,31,31,31,31,31,31,31,31,31,31,31,31,0,0,
+0,0,31,31,31,31,31,31,31,31,31,31,31,31,31,31,31,31,31,31,31,31,31,31,31,31,31,31,31,31,31,0,0,
+0,0,31,31,31,31,31,31,31,31,31,31,31,31,31,31,31,31,31,31,31,31,31,31,31,31,31,31,31,31,31,0,0,
+0,0,31,31,31,31,31,31,31,31,31,31,31,31,31,31,31,31,31,31,31,31,31,31,31,31,31,31,31,31,31,0,0,
+0,0,31,31,31,31,31,31,31,31,31,31,31,31,31,31,31,31,31,31,31,31,31,31,31,31,31,0,31,31,31,0,0,
+0,14,15,15,15,15,15,15,15,15,15,15,15,15,15,15,15,15,15,15,15,16,31,31,31,31,31,31,31,31,31,0,0,
+0,24,25,2,3,25,25,2,3,25,25,2,3,25,25,2,3,25,25,2,3,26,31,31,31,31,31,31,31,31,31,0,0,
+0,34,35,12,13,35,35,12,13,35,35,12,13,35,35,12,13,35,35,12,13,36,31,31,31,31,31,31,31,31,31,0,0,
+0,44,45,45,45,45,45,45,45,45,45,45,45,45,45,45,45,45,45,45,45,56,31,31,31,31,31,31,31,31,31,0,0,
+0,44,55,55,55,55,55,55,55,55,55,55,55,55,55,55,55,55,55,55,55,56,31,31,31,31,31,31,31,31,31,0,0,
+0,44,55,55,55,55,55,55,55,55,55,55,55,55,55,55,55,55,55,55,55,56,31,31,31,31,31,31,31,31,31,0,0,
+0,44,55,55,55,55,55,55,55,55,55,55,55,55,55,55,55,55,55,55,55,56,31,31,31,31,31,31,31,31,31,0,0,
+0,44,55,55,55,55,55,55,55,55,55,55,55,55,55,55,55,55,55,55,55,56,31,31,31,31,31,31,31,31,31,0,0,
+0,44,55,55,55,55,55,55,55,55,55,55,55,55,55,55,55,55,55,55,55,56,31,31,31,31,31,31,31,31,31,0,0,
+0,44,55,55,55,55,55,55,55,55,55,55,55,55,55,55,55,55,55,55,55,56,31,31,31,31,31,31,31,31,31,0,0,
+0,44,55,55,55,55,55,55,55,55,55,55,55,55,55,55,55,55,55,55,55,56,31,31,31,31,31,31,31,31,31,0,0,
+0,44,55,55,55,55,55,55,55,55,55,55,55,55,55,55,55,55,55,55,55,56,0,0,0,0,0,0,0,0,0,0,0,
+0,64,65,61,62,65,65,65,65,65,65,65,65,65,65,65,65,65,65,65,65,66,0,0,0,0,0,0,0,0,0,0,0
+</data>
+ </layer>
+ <objectgroup id="3" name="Objects">
+  <object id="89" gid="107" x="320" y="1088" width="120" height="184"/>
+  <object id="90" gid="107" x="320" y="1216" width="120" height="184"/>
+  <object id="91" gid="107" x="320" y="1344" width="120" height="184"/>
+  <object id="92" gid="107" x="576" y="1088" width="120" height="184"/>
+  <object id="93" gid="107" x="576" y="1216" width="120" height="184"/>
+  <object id="94" gid="107" x="576" y="1344" width="120" height="184"/>
+  <object id="95" gid="107" x="832" y="1088" width="120" height="184"/>
+  <object id="96" gid="107" x="832" y="1216" width="120" height="184"/>
+  <object id="97" gid="107" x="832" y="1344" width="120" height="184"/>
+  <object id="98" gid="107" x="1088" y="1088" width="120" height="184"/>
+  <object id="99" gid="107" x="1088" y="1216" width="120" height="184"/>
+  <object id="100" gid="107" x="1088" y="1344" width="120" height="184"/>
+ </objectgroup>
+ <objectgroup id="7" name="Iterative Objects">
+  <object id="110" gid="109" x="320" y="1024" width="139" height="113"/>
+  <object id="111" gid="109" x="320" y="1152" width="139" height="113"/>
+  <object id="112" gid="109" x="320" y="1280" width="139" height="113"/>
+  <object id="119" gid="109" x="832" y="1024" width="139" height="113"/>
+  <object id="120" gid="109" x="837.5" y="1150.5" width="139" height="113"/>
+  <object id="121" gid="109" x="838.5" y="1289.25" width="139" height="113"/>
+  <object id="129" gid="110" x="552.5" y="1018.5" width="139" height="113"/>
+  <object id="130" gid="110" x="552.5" y="1147" width="139" height="113"/>
+  <object id="131" gid="110" x="549.5" y="1287" width="139" height="113"/>
+  <object id="132" gid="110" x="1065.25" y="998.5" width="139" height="113"/>
+  <object id="133" gid="110" x="1064" y="1153.25" width="139" height="113"/>
+  <object id="134" gid="110" x="1064" y="1274.75" width="139" height="113"/>
+ </objectgroup>
+ <objectgroup id="4" name="Collisions">
+  <object id="122" x="302.834" y="1439.83" width="1041.5" height="17.3333"/>
+  <object id="123" x="112.833" y="1440.67" width="97.5" height="17.3333"/>
+  <object id="124" x="111.833" y="878" width="17" height="559.333"/>
+  <object id="125" x="121.167" y="847.333" width="1243" height="17.3333"/>
+  <object id="126" x="1342.5" y="870.833" width="17" height="574.833"/>
+ </objectgroup>
+ <objectgroup id="6" name="Dialogs"/>
+ <objectgroup id="2" name="Entities">
+  <object id="78" name="Player" x="261.358" y="1399.4">
+   <properties>
+    <property name="character_id" value="player"/>
+    <property name="direction" value="up"/>
+    <property name="pos" value="ct9"/>
+   </properties>
+   <point/>
+  </object>
+  <object id="128" name="Character" x="172.667" y="1386">
+   <properties>
+    <property name="change_direction" type="bool" value="true"/>
+    <property name="character_id" value="luaninha"/>
+    <property name="direction" value="down"/>
+    <property name="graphic" value="luaninha"/>
+    <property name="radius" value="400"/>
+   </properties>
+   <point/>
+  </object>
+ </objectgroup>
+ <objectgroup id="5" name="Transitions">
+  <object id="80" x="225.07" y="1484.08" width="63.6667" height="8.3333">
+   <properties>
+    <property name="dest" value="ct9"/>
+    <property name="src" value="labgrad"/>
+   </properties>
+  </object>
+ </objectgroup>
+</map>

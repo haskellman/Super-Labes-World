@@ -8,7 +8,7 @@ VISITED_MAPS = []
 
 COLORS = {
 	'white': '#f4fefa', 
-	'pure white': '#ffffff',
+	'pure-white': '#ffffff',
 	'dark': '#2b292c',
 	'light': '#c8c8c8',
 	'gray': '#3a373b',

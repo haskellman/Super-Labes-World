@@ -1,0 +1,132 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.10" tiledversion="1.11.0" orientation="orthogonal" renderorder="right-down" width="30" height="19" tilewidth="64" tileheight="64" infinite="0" nextlayerid="7" nextobjectid="108">
+ <tileset firstgid="1" name="chao_ct" tilewidth="64" tileheight="64" tilecount="80" columns="10">
+  <image source="../tilesets/israel-collection/chao_ct.png" width="640" height="512"/>
+ </tileset>
+ <tileset firstgid="81" name="objects" tilewidth="128" tileheight="320" tilecount="14" columns="0">
+  <grid orientation="orthogonal" width="1" height="1"/>
+  <tile id="0">
+   <image source="../tilesets/israel-collection/porta.png" width="87" height="104"/>
+  </tile>
+  <tile id="4">
+   <image source="../tilesets/israel-collection/porta2.png" width="87" height="104"/>
+  </tile>
+  <tile id="7">
+   <image source="../tilesets/israel-collection/placa_vitor.png" width="80" height="12"/>
+  </tile>
+  <tile id="8">
+   <image source="../tilesets/israel-collection/placa_patricia.png" width="100" height="12"/>
+  </tile>
+  <tile id="9">
+   <image source="../tilesets/israel-collection/placa_monalessa.png" width="100" height="12"/>
+  </tile>
+  <tile id="10">
+   <image source="../tilesets/objects/grass.png" width="64" height="64"/>
+  </tile>
+  <tile id="11">
+   <image source="../tilesets/objects/palm_small.png" width="64" height="128"/>
+  </tile>
+  <tile id="12">
+   <image source="../tilesets/objects/grassrock1.png" width="60" height="60"/>
+  </tile>
+  <tile id="13">
+   <image source="../tilesets/objects/grassrock2.png" width="56" height="60"/>
+  </tile>
+  <tile id="14">
+   <image source="../tilesets/objects/green_tree_bushy.png" width="128" height="192"/>
+  </tile>
+  <tile id="20">
+   <image source="../tilesets/israel-collection/porta_grande.png" width="126" height="159"/>
+  </tile>
+  <tile id="21">
+   <image source="../tilesets/israel-collection/amaes_heart.png" width="100" height="80"/>
+  </tile>
+  <tile id="24">
+   <image source="../tilesets/israel-collection/escada_left.png" width="120" height="320"/>
+  </tile>
+  <tile id="25">
+   <image source="../tilesets/israel-collection/escada_right.png" width="120" height="320"/>
+  </tile>
+ </tileset>
+ <tileset firstgid="107" name="world" tilewidth="64" tileheight="64" tilecount="210" columns="10">
+  <image source="../../graphics/tilesets/world.png" width="640" height="1344"/>
+ </tileset>
+ <layer id="1" name="Terrain" width="30" height="19">
+  <data encoding="csv">
+0,0,0,0,0,0,0,0,0,0,0,0,14,32,0,0,15,16,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,24,32,0,0,25,26,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,34,32,0,0,35,36,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,44,45,1073741879,1073741879,45,46,0,0,0,0,0,0,0,0,0,0,0,0,
+0,14,15,15,15,15,15,15,15,15,15,16,1073741878,1073741879,1073741879,1073741879,1073741879,1073741850,14,15,15,15,15,15,15,15,15,15,16,0,
+0,24,25,25,25,25,25,25,25,25,25,46,1073741878,1073741879,1073741879,1073741879,1073741879,1073741850,34,25,25,25,25,25,25,25,25,25,46,0,
+0,24,35,35,35,35,35,35,35,35,35,52,1073741867,1073741879,1073741879,1073741879,1073741879,1073741866,53,35,35,35,35,35,35,35,35,35,46,0,
+0,24,45,45,45,45,45,45,45,45,45,45,45,55,55,55,55,45,45,45,45,45,45,45,45,45,45,45,46,0,
+0,44,55,55,55,55,55,55,55,55,55,55,55,55,55,55,55,55,55,55,55,55,55,55,55,55,55,55,46,0,
+0,44,55,55,55,55,55,55,55,55,55,55,55,55,55,55,55,55,55,55,55,55,55,55,55,55,55,55,46,0,
+0,44,55,55,55,55,55,55,55,55,55,55,55,55,55,55,55,55,55,55,55,55,55,55,55,55,55,55,46,0,
+0,44,55,55,55,55,55,55,55,55,55,55,55,55,55,55,55,55,55,55,55,55,55,55,55,55,55,55,46,0,
+0,64,65,65,65,65,65,65,65,65,65,65,43,55,55,55,55,42,65,65,65,65,65,65,65,65,65,65,66,0,
+0,0,0,0,0,0,0,0,0,0,0,0,54,55,55,55,55,26,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,54,55,55,55,55,26,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,54,55,55,55,55,26,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,54,55,7,8,55,26,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,64,65,61,62,65,66,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+</data>
+ </layer>
+ <objectgroup id="3" name="Objects">
+  <object id="73" gid="85" x="1280.45" y="480" width="87" height="104"/>
+  <object id="74" gid="85" x="553" y="481" width="87" height="104"/>
+  <object id="75" gid="85" x="193" y="482.5" width="87" height="104"/>
+  <object id="76" gid="85" x="1645" y="480.667" width="87" height="104"/>
+  <object id="89" gid="106" x="829.333" y="415.333" width="120" height="320"/>
+  <object id="90" gid="105" x="905.333" y="415.333" width="120" height="320"/>
+ </objectgroup>
+ <objectgroup id="4" name="Collisions">
+  <object id="93" x="131.25" y="736.833" width="679.5" height="17.3333"/>
+  <object id="94" x="1117.92" y="735.333" width="677.833" height="17.3333"/>
+  <object id="95" x="808" y="753" width="25" height="354.5"/>
+  <object id="97" x="832.5" y="1086" width="64" height="22"/>
+  <object id="98" x="1023.5" y="1088.5" width="83.5" height="18"/>
+  <object id="100" x="1094" y="751.75" width="25" height="354.5"/>
+  <object id="101" x="1797.5" y="306.083" width="25" height="447.833"/>
+  <object id="102" x="103.5" y="310.084" width="25" height="447.833"/>
+  <object id="103" x="101" y="412.583" width="716.667" height="15.5"/>
+  <object id="104" x="1104.33" y="412.583" width="716.667" height="15.5"/>
+  <object id="105" x="821.333" y="72.6667" width="268" height="64"/>
+  <object id="107" x="1094" y="76.6667" width="31.3333" height="354.667"/>
+ </objectgroup>
+ <objectgroup id="6" name="Dialogs"/>
+ <objectgroup id="2" name="Entities">
+  <object id="78" name="Player" x="959.667" y="1023.33">
+   <properties>
+    <property name="character_id" value="player"/>
+    <property name="direction" value="up"/>
+    <property name="pos" value="ufes"/>
+   </properties>
+   <point/>
+  </object>
+  <object id="82" name="Player" x="1325" y="515">
+   <properties>
+    <property name="character_id" value="player"/>
+    <property name="direction" value="down"/>
+    <property name="pos" value="labgrad"/>
+   </properties>
+   <point/>
+  </object>
+ </objectgroup>
+ <objectgroup id="5" name="Transitions">
+  <object id="80" x="929.894" y="1099.92" width="63.6667" height="8.3333">
+   <properties>
+    <property name="dest" value="ufes"/>
+    <property name="src" value="ct9"/>
+   </properties>
+  </object>
+  <object id="81" x="1293.17" y="464.833" width="63.6667" height="8.3333">
+   <properties>
+    <property name="dest" value="labgrad"/>
+    <property name="src" value="ct9"/>
+   </properties>
+  </object>
+ </objectgroup>
+</map>
