@@ -69,7 +69,7 @@ ITEMS_DATA = {
     },
     '1': {
 		'name': 'chave da monalessa',
-        'description':'chave da mona, é a prova de que voce conseguiu a \naprovação da monalessa para entrar no sigamaes',
+        'description':'chave da mona, é a prova de que voce conseguiu a aprovação da monalessa para entrar no sigamaes',
     },
     '2': {
 		'name': 'chave da patrícia',

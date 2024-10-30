@@ -77,6 +77,10 @@ def check_connections(radius, entity, target, tolerance = 30):
 			entity.facing_direction == 'up' and relation.y < 0 and abs(relation.x) < tolerance or\
 			entity.facing_direction == 'down' and relation.y > 0 and abs(relation.x) < tolerance:
 			return True
+		
+def check_interaction(radius, entity, target, tolerance = 30):
+	relation = vector(target.rect.center) - vector(entity.rect.center)
+	return True if relation.length() < radius else False
 
 def import_folder_dict(*path):
 	frames = {}
