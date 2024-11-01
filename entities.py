@@ -23,6 +23,7 @@ class Entity(pygame.sprite.Sprite):
 
 # data
         self.character_data = character_data
+        self.questions  = character_data['questions']
 
     def block(self):
         self.blocked = True

@@ -1,10 +1,11 @@
 from settings import *
 from pytmx.util_pygame import load_pygame #carrega os mapas
 from os.path import join
-from sprites import Sprite, AnimatedSprite, CollisionSprite, CollidableSprite, TransitionSprite, DialogSprite
+from sprites import Sprite, AnimatedSprite, CollisionSprite, CollidableSprite, TransitionSprite, DialogSprite, InteractiveSprite
 from entities import Player, Character
 from inventory import Inventory
 from computer import Computer
+from battle import Battle
 from item import Item
 from link import Link
 from groups import AllSprites
@@ -14,7 +15,7 @@ from dialog import Dialog
 from time import sleep
 
 class Game:
-    def __init__(self):
+    def __init__(self): 
         pygame.init()
         self.screen = pygame.display.set_mode((WINDOW_WIDTH, WINDOW_HEIGHT))
         pygame.display.set_caption('Amaes Game')
@@ -33,33 +34,12 @@ class Game:
         self.tint_surf = pygame.Surface((WINDOW_WIDTH, WINDOW_HEIGHT))
         self.tint_mode = 'untint'
         self.tint_progress = 0
-        self.tint_direction = -1
+        self.tint_direction = 1
         self.tint_speed = 600
         
         self.import_assets()
-        self.setup(self.tmx_maps['ct9'], 'ufes')
+        self.setup(self.tmx_maps['sala_vitor'], 'ct7')
         
-        # Inventory
-        self.player_items = []
-        def create_inventory(self, inventory_size = 30):
-            for _ in range(inventory_size):
-                self.player_items.append({})
-
-        create_inventory(self)
-
-        def add_item(self, item):
-            for index, item_ in enumerate(self.player_items):
-                if (item_ == {}):
-                    self.player_items[index] = item
-                    break
-                else:
-                    pass
-
-        add_item(self,  Item('0'))
-        add_item(self,  Item('1'))
-        add_item(self,  Item('2'))
-        add_item(self,  Item('4'))
-
         # Computer
         self.computer_links = []
 
@@ -71,18 +51,34 @@ class Game:
                 add_link(self,Link(i))
 
         create_computer(self)
-        print(len(COMPUTER_DATA))
 
-
-
-
+        self.player_items = []
+        self.create_inventory()
         # overlays
         self.dialog_tree = None
         self.inventory = Inventory(self.player_items , self.fonts, self.interface_frames, self.player)
         self.inventory_open = False
         self.computer = Computer(self.computer_links,self.fonts, self.interface_frames)
         self.computer_open = False
+        self.battle_open = False
+        self.add_item(Item('0'))
+        self.add_item(Item('1'))
+        self.add_item(Item('2'))
+        self.add_item(Item('4'))
 
+        # Inventory
+    def create_inventory(self):
+        inventory_size = 30
+        for _ in range(inventory_size):
+            self.player_items.append({})
+
+    def add_item(self, item):
+        for index, item_ in enumerate(self.player_items):
+            if (item_ == {}):
+                self.player_items[index] = item
+                break
+            else:
+                pass
 
     # carrega todos os assets do jogo
     def import_assets(self):
@@ -114,6 +110,7 @@ class Game:
                 Sprite((x * TILE_SIZE, y * TILE_SIZE), surf, self.all_sprites, GAME_LAYERS['bg'])
         except ValueError as ve:
             print(ve)
+            # manter os items do jogador aqui
 
 		# water 
         try:
@@ -145,8 +142,9 @@ class Game:
             print(ve)
         # objects
         try:
-            for obj in tmx_map.get_layer_by_name('Iterative Objects'):
-                Sprite((obj.x, obj.y), obj.image, (self.all_sprites, self.interaction_sprites), GAME_LAYERS['top'])
+            for obj in tmx_map.get_layer_by_name('Interactive Objects'):
+                print(obj.properties['item_id'])
+                InteractiveSprite((obj.x, obj.y), obj.image, (self.all_sprites, self.interaction_sprites), obj.properties['item_id'], GAME_LAYERS['top'])
         except ValueError as ve:
             print(ve)
 
@@ -211,19 +209,38 @@ class Game:
             if keys[pygame.K_SPACE] and not self.dialog_tree:
                 for character in self.character_sprites:
                     if check_connections(100, self.player, character):
+                        # for i in character.character_data['questions']:
+                        #     print (i)
+                        #     for value in character.character_data['questions'][i].values():
+                        #         print (value)
+
+
+                            # print(question)
+                            # for a, b in question.items():1
+                        #     print(a, b)
+                            # print(question['title'], question['description'], question['options'])
+
                         character.change_facing_direction(self.player.rect.center)
                         self.create_dialog(character)
                 for sprite in self.interaction_sprites:
                     if check_interaction(150, self.player, sprite):
-                        self.computer_open = not self.computer_open
-                        self.player.blocked = not self.player.blocked
+                        if sprite.item_id == 'computer':
+                            self.computer_open = not self.computer_open
+                            self.player.blocked = not self.player.blocked
+                            # emitir som
+                        if sprite.item_id == 'coffe':
+                            self.add_item(Item('4'))
+                            sprite.kill()
+                            # emitir som
             if keys[pygame.K_i]:
                 self.inventory_open = not self.inventory_open
                 self.player.blocked = not self.player.blocked
+                # emitir som
             if keys[pygame.K_ESCAPE]:
                 self.inventory_open = False
                 self.computer_open = False
                 self.player.blocked = False
+                self.battle_open = False
 
     def create_dialog(self, character, message = None):
         if not self.dialog_tree:
@@ -231,6 +248,9 @@ class Game:
             self.dialog_tree = Dialog(character, self.player, self.all_sprites, self.fonts['dialog'], self.end_dialog, message)
 
     def end_dialog(self,character):
+        if (check_questions(character)):
+            self.battle = Battle(self.player, character, self.interface_frames, self.fonts)
+            self.battle_open = True
         # self.dialog_tree = Dialog(self.player, self.player, self.all_sprites, self.fonts['dialog'], self.end_dialog)
         # pause game
         # index com a escolha da resposta
@@ -289,7 +309,7 @@ class Game:
             if self.dialog_tree: self.dialog_tree.update()
             if self.inventory_open: self.inventory.update(dt)
             if self.computer_open: self.computer.update(dt)
-            
+            if self.battle_open: self.battle.update(dt)
             self.tint(dt)
             pygame.display.update()
 

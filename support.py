@@ -91,6 +91,9 @@ def import_folder_dict(*path):
 			frames[image_name.split('.')[0]] = surf
 	return frames
 
+def check_questions(character):
+	return character.questions
+
 # def import_sub_folders(*path):
 # 	frames = {}
 # 	for _, sub_folders, __ in walk(join(*path)):

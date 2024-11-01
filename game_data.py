@@ -6,11 +6,13 @@ CHARACTERS_DATA = {
 		'directions': ['down'],
 		'look_around': True,
 		'visited': False,
+        'questions': {},
 		},
     'player': {
 		'dialog': {
             'default': ['Sim', 'Não'],
             },
+        'questions': {},    
 		},
     'vitor': {
 		'dialog': {
@@ -19,14 +21,16 @@ CHARACTERS_DATA = {
 		'directions': ['down'],
 		'look_around': True,
 		'visited': False,
+        'questions': {},
 		},
     'monalessa': {
 		'dialog': {
-            'default': ['então você conseguiu a chave do vitor!', 'nada mal', 'vamos ver se você é bom em gerencia de projetos!!!'],
+            'default': ['aaaaaaaaaaaaaaa\n\naaaaaaaaaaaaaaa', 'nada mal', 'vamos ver se você é bom em gerencia de projetos!!!'],
 			'visited': ['meus parabéns!', 'você acertou x questões', 'vamos! pegue isso você vai precisar!']},
 		'directions': ['down'],
 		'look_around': True,
 		'visited': False,
+        'questions': {},
 		},
     'patricia': {
 		'dialog': {
@@ -35,6 +39,7 @@ CHARACTERS_DATA = {
 		'directions': ['down'],
 		'look_around': True,
 		'visited': False,
+        'questions': {},
 		},
     'mae': {
 		'dialog': {
@@ -43,14 +48,41 @@ CHARACTERS_DATA = {
 		'directions': ['down'],
 		'look_around': True,
 		'visited': False,
+        'questions': {},
 		},
     'pai': {
 		'dialog': {
             'default': ['o que será que eu leio hoje??'],
-			'visited': ['to cansada de lavar louça nessa casa!']},
+			'visited': ['tenho 237 encomendas pra entregar hoje, é brincadeira!']},
 		'directions': ['down'],
 		'look_around': True,
 		'visited': False,
+        'questions': {
+				0: {
+					'title': 'Java',
+					'description':'qual é o simbolo do java?',
+					'options': ['Sim', 'Não', 'café', 'Não sei'],
+                    'correct': 0,
+				},
+				0: {
+					'title': 'Java',
+					'description':'qual é o simbolo do java?',
+					'options': ['Sim', 'Não', 'café', 'Não sei'],
+                    'correct': 0,
+				},
+				2: {
+					'title': 'seila2',
+					'description':'Aqui você pode aprender e testar seus conhecimentos em Java',
+					'options': ['Sim', 'Não', 'Talvez', 'Não sei'],
+                    'correct': 2,
+				},
+				3: {
+					'title': 'seila3',
+					'description':'Aqui você pode aprender e testar seus conhecimentos em Java',
+					'options': ['Sim', 'Não', 'Talvez', 'Não sei'],
+                    'correct': 3,
+				},
+			},
 		},
     'luaninha': {
 		'dialog': {
@@ -59,6 +91,7 @@ CHARACTERS_DATA = {
 		'directions': ['down'],
 		'look_around': True,
 		'visited': False,
+        'questions': {},
 		},
     }
 
@@ -95,5 +128,7 @@ COMPUTER_DATA = {
         'url': 'https://www.google.com',
         'color': 'white',
 	},
+    
+	
         
 }
