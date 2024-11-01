@@ -212,17 +212,7 @@
   </object>
  </objectgroup>
  <objectgroup id="3" name="Entities">
-  <object id="2" name="Character" x="1579.67" y="559.667">
-   <properties>
-    <property name="change_direction" type="bool" value="true"/>
-    <property name="character_id" value="luaninha"/>
-    <property name="direction" value="down"/>
-    <property name="graphic" value="luaninha"/>
-    <property name="radius" value="400"/>
-   </properties>
-   <point/>
-  </object>
-  <object id="6" name="Player" x="1692" y="439.333">
+  <object id="6" name="Player" x="644" y="610.333">
    <properties>
     <property name="character_id" value="player"/>
     <property name="direction" value="down"/>

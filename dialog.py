@@ -55,8 +55,8 @@ class DialogSprite(pygame.sprite.Sprite):
         self.z = GAME_LAYERS['top']
 
         # text 
-        text_surf = font.render(message, False, COLORS['black'])
-        padding = 5
+        text_surf = font.render(message, False, COLORS['black'], wraplength = 300)
+        padding = 8
         width = max(30, text_surf.get_width() + padding * 2)
         height = text_surf.get_height() + padding * 2
 

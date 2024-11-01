@@ -88,7 +88,7 @@
   </object>
  </objectgroup>
  <objectgroup id="6" name="Dialogs">
-  <object id="18" name="house_dialog1" x="1074.73" y="989.545" width="402.539" height="123.577" rotation="359.656">
+  <object id="18" name="house_dialog1" x="1105.4" y="988.212" width="402.539" height="123.577" rotation="359.656">
    <properties>
     <property name="message">!!
  meu onibus já está ali
