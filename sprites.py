@@ -28,8 +28,8 @@ class CollisionSprite(Sprite):
 		self.hitbox = self.rect.copy()
 
 class CollidableSprite(Sprite):
-	def __init__(self, pos, surf, groups):
-		super().__init__(pos, surf, groups)
+	def __init__(self, pos, surf, groups, z = GAME_LAYERS['objects']):
+		super().__init__(pos, surf, groups, z)
 		self.hitbox = self.rect.inflate(0, -self.rect.height * 0.6)
 
 class TransitionSprite(Sprite):

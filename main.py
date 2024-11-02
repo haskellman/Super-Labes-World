@@ -38,7 +38,12 @@ class Game:
         self.tint_speed = 600
         
         self.import_assets()
-        self.setup(self.tmx_maps['sala_vitor'], 'ct7')
+
+        self.setup(self.tmx_maps['sala_monalessa'], 'ct7')
+
+        self.audio = audio_importer('.', 'audios')
+        self.sound = audio_importer('.', 'sounds')
+        self.audio['Lorencia Theme'].play(-1)
         
         # Computer
         self.computer_links = []
@@ -56,7 +61,7 @@ class Game:
         self.create_inventory()
         # overlays
         self.dialog_tree = None
-        self.inventory = Inventory(self.player_items , self.fonts, self.interface_frames, self.player)
+        self.inventory = Inventory(self.player_items , self.fonts, self.interface_frames, self.player, self.sound)
         self.inventory_open = False
         self.computer = Computer(self.computer_links,self.fonts, self.interface_frames)
         self.computer_open = False
@@ -97,6 +102,7 @@ class Game:
         self.interface_frames = {
             'interface': import_folder_dict('.', 'graphics', 'interface'),
             'items': import_folder_dict('.', 'graphics', 'items'),
+            'interactive_objects': import_folder_dict('.', 'graphics', 'interactive_objects'),
         }
 
     # carrega o mapa a ordem é importante pois vai sobrepor os objetos
@@ -111,6 +117,13 @@ class Game:
         except ValueError as ve:
             print(ve)
             # manter os items do jogador aqui
+
+        try:
+            for obj in tmx_map.get_layer_by_name('Terrain Objects'):
+                print(obj)
+                Sprite((obj.x, obj.y), obj.image, self.all_sprites, GAME_LAYERS['bg'])
+        except ValueError as ve:
+            print(ve)
 
 		# water 
         try:
@@ -133,27 +146,20 @@ class Game:
         # objects
         try:
             for obj in tmx_map.get_layer_by_name('Objects'):
-                if obj.name == 'passarela_ufes_top':
-                    Sprite((obj.x, obj.y), obj.image, self.all_sprites, GAME_LAYERS['top'])
-                else:
-                    # print(obj)
-                    CollidableSprite((obj.x, obj.y), obj.image, (self.all_sprites, self.collision_sprites))
+                CollidableSprite((obj.x, obj.y), obj.image, (self.all_sprites, self.collision_sprites))
         except ValueError as ve:
             print(ve)
-        # objects
+        # interactive objects
         try:
             for obj in tmx_map.get_layer_by_name('Interactive Objects'):
-                print(obj.properties['item_id'])
-                InteractiveSprite((obj.x, obj.y), obj.image, (self.all_sprites, self.interaction_sprites), obj.properties['item_id'], GAME_LAYERS['top'])
+                InteractiveSprite((obj.x, obj.y), obj.image, (self.all_sprites, self.interaction_sprites), obj.properties['item_id'], GAME_LAYERS['interactive_objects'])
         except ValueError as ve:
             print(ve)
 
         # collision
         try:
             for obj in tmx_map.get_layer_by_name('Collisions'):
-                # print(obj)
                 CollisionSprite((obj.x, obj.y), pygame.Surface((obj.width, obj.height)), (self.collision_sprites))
-                # print (type((obj.width, obj.height)))
         except ValueError as ve:
             print(ve)
 
@@ -232,6 +238,16 @@ class Game:
                             self.add_item(Item('4'))
                             sprite.kill()
                             # emitir som
+                        if sprite.item_id == 'abajour1':
+                            sprite.item_id = 'abajour2'
+                            sprite.image = self.interface_frames['interactive_objects']['abajour2']
+                            break
+                        if sprite.item_id == 'abajour2':
+                            sprite.item_id = 'abajour1'
+                            sprite.image = self.interface_frames['interactive_objects']['abajour1']
+                            break
+                        if sprite.item_id == 'dragon':
+                            self.create_dialog(self.player, "acho melhor eu não acorda-lo", False)
             if keys[pygame.K_i]:
                 self.inventory_open = not self.inventory_open
                 self.player.blocked = not self.player.blocked
@@ -242,10 +258,10 @@ class Game:
                 self.player.blocked = False
                 self.battle_open = False
 
-    def create_dialog(self, character, message = None):
+    def create_dialog(self, character, message = None, colision_message = True):
         if not self.dialog_tree:
             self.player.block()
-            self.dialog_tree = Dialog(character, self.player, self.all_sprites, self.fonts['dialog'], self.end_dialog, message)
+            self.dialog_tree = Dialog(character, self.player, self.all_sprites, self.fonts['dialog'], self.end_dialog, message, colision_message)
 
     def end_dialog(self,character):
         if (check_questions(character)):

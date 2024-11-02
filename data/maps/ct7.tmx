@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.10" tiledversion="1.11.0" orientation="orthogonal" renderorder="right-down" width="35" height="24" tilewidth="64" tileheight="64" infinite="0" nextlayerid="7" nextobjectid="87">
+<map version="1.10" tiledversion="1.11.0" orientation="orthogonal" renderorder="right-down" width="35" height="24" tilewidth="64" tileheight="64" infinite="0" nextlayerid="8" nextobjectid="97">
  <tileset firstgid="1" name="chao_ct" tilewidth="64" tileheight="64" tilecount="80" columns="10">
   <image source="../tilesets/israel-collection/chao_ct.png" width="640" height="512"/>
  </tileset>
- <tileset firstgid="81" name="objects" tilewidth="128" tileheight="192" tilecount="14" columns="0">
+ <tileset firstgid="81" name="objects" tilewidth="128" tileheight="192" tilecount="16" columns="0">
   <grid orientation="orthogonal" width="1" height="1"/>
   <tile id="0">
    <image source="../tilesets/israel-collection/porta.png" width="87" height="104"/>
@@ -45,10 +45,16 @@
    <image source="../tilesets/israel-collection/cafe.png" width="46" height="46"/>
   </tile>
   <tile id="27">
-   <image source="../tilesets/israel-collection/java.png" width="48" height="48"/>
+   <image source="../tilesets/israel-collection/java.png" width="54" height="54"/>
+  </tile>
+  <tile id="29">
+   <image source="../tilesets/israel-collection/porta_monalessa.png" width="87" height="104"/>
+  </tile>
+  <tile id="30">
+   <image source="../tilesets/israel-collection/espelho.png" width="32" height="41"/>
   </tile>
  </tileset>
- <tileset firstgid="109" name="world" tilewidth="64" tileheight="64" tilecount="210" columns="10">
+ <tileset firstgid="112" name="world" tilewidth="64" tileheight="64" tilecount="210" columns="10">
   <image source="../../graphics/tilesets/world.png" width="640" height="1344"/>
  </tileset>
  <layer id="1" name="Terrain" width="35" height="24">
@@ -62,14 +68,14 @@
 0,0,0,0,44,55,55,55,55,55,55,55,55,55,55,55,55,55,55,55,55,55,55,55,55,55,55,55,55,55,55,1610612743,55,1610612797,0,
 0,0,0,0,44,55,55,55,55,55,55,55,55,55,55,55,55,55,55,55,55,55,55,55,55,55,55,55,55,55,55,55,42,66,0,
 0,0,0,0,44,55,55,55,42,65,65,65,65,65,43,69,69,69,71,72,69,69,42,65,65,65,65,65,43,55,55,55,46,0,0,
-0,0,0,0,44,55,55,55,36,0,0,0,0,0,44,150,150,150,150,150,119,121,36,0,0,0,0,0,44,55,55,55,46,0,0,
-0,0,0,0,44,55,55,55,36,0,0,0,0,0,44,150,150,150,150,150,119,121,36,0,0,0,0,0,44,55,55,55,46,0,0,
-0,0,0,0,44,55,55,55,36,0,0,0,0,0,44,150,150,150,150,150,150,150,36,0,0,0,0,0,44,55,55,55,46,0,0,
-0,0,0,0,44,55,55,55,36,0,0,0,0,0,44,150,150,150,150,180,150,150,36,0,0,0,0,0,44,55,55,55,46,0,0,
-0,0,0,0,44,55,55,55,36,0,0,0,0,0,44,150,150,150,109,111,150,150,36,0,0,0,0,0,44,55,55,55,46,0,0,
-0,0,0,0,44,55,55,55,36,0,0,0,0,0,44,150,150,150,129,131,150,150,36,0,0,0,0,0,44,55,55,55,46,0,0,
-0,0,0,0,44,55,55,55,36,5,5,5,5,5,44,150,150,150,150,150,150,150,36,5,5,5,5,5,44,55,55,55,46,0,0,
-0,0,0,0,44,55,55,55,52,15,15,15,15,15,53,150,150,150,150,150,150,150,52,15,15,15,15,15,53,55,55,55,46,0,0,
+0,0,0,0,44,55,55,55,36,0,0,0,0,0,44,153,153,153,153,153,122,124,36,0,0,0,0,0,44,55,55,55,46,0,0,
+0,0,0,0,44,55,55,55,36,0,0,0,0,0,44,153,153,153,153,153,122,124,36,0,0,0,0,0,44,55,55,55,46,0,0,
+0,0,0,0,44,55,55,55,36,0,0,0,0,0,44,153,153,153,153,153,153,153,36,0,0,0,0,0,44,55,55,55,46,0,0,
+0,0,0,0,44,55,55,55,36,0,0,0,0,0,44,153,153,153,153,183,153,153,36,0,0,0,0,0,44,55,55,55,46,0,0,
+0,0,0,0,44,55,55,55,36,0,0,0,0,0,44,153,153,153,112,114,153,153,36,0,0,0,0,0,44,55,55,55,46,0,0,
+0,0,0,0,44,55,55,55,36,0,0,0,0,0,44,153,153,153,132,134,153,153,36,0,0,0,0,0,44,55,55,55,46,0,0,
+0,0,0,0,44,55,55,55,36,5,5,5,5,5,44,153,153,153,153,153,153,153,36,5,5,5,5,5,44,55,55,55,46,0,0,
+0,0,0,0,44,55,55,55,52,15,15,15,15,15,53,153,153,153,153,153,153,153,52,15,15,15,15,15,53,55,55,55,46,0,0,
 0,0,0,0,44,55,55,55,2147483695,29,29,29,29,29,29,29,29,47,3221225544,3221225543,2147483695,29,29,29,29,29,29,29,47,55,55,55,46,0,0,
 0,0,0,0,44,55,55,55,45,45,45,45,45,45,45,45,45,45,55,55,45,45,45,45,45,45,45,45,45,55,55,55,46,0,0,
 0,0,0,0,44,55,55,55,55,55,55,55,55,55,55,55,55,55,55,55,55,55,55,55,55,55,55,55,55,55,55,55,46,0,0,
@@ -84,7 +90,6 @@
   <object id="7" gid="85" x="1727.75" y="288.875" width="87" height="104"/>
   <object id="10" gid="88" x="1731.63" y="184.75" width="80" height="12"/>
   <object id="11" gid="89" x="1056.88" y="184.625" width="100" height="12"/>
-  <object id="12" gid="85" x="1401.33" y="288.917" width="87" height="104"/>
   <object id="13" gid="90" x="1395.09" y="184.909" width="100" height="12"/>
   <object id="14" gid="91" x="1025" y="766" width="64" height="64"/>
   <object id="15" gid="91" x="1279" y="888" width="64" height="64"/>
@@ -98,6 +103,14 @@
   <object id="59" gid="101" x="654.5" y="289" width="126" height="159"/>
   <object id="71" gid="102" x="785.5" y="214" width="100" height="80"/>
   <object id="86" gid="108" x="1824" y="231.273" width="48" height="48"/>
+  <object id="94" gid="110" x="1401.67" y="289" width="87" height="104"/>
+ </objectgroup>
+ <objectgroup id="7" name="Interactive Objects">
+  <object id="96" gid="111" x="1428.86" y="243.489" width="32" height="41">
+   <properties>
+    <property name="item_id" value="sala_monalessa"/>
+   </properties>
+  </object>
  </objectgroup>
  <objectgroup id="4" name="Collisions">
   <object id="25" x="301.25" y="216.75" width="1812" height="15.5"/>

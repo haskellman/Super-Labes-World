@@ -1,7 +1,7 @@
 from settings import * 
 
 class Inventory:
-    def __init__(self, player_items, fonts, interface_frames, player):
+    def __init__(self, player_items, fonts, interface_frames, player, sound):
         self.fonts = fonts
         self.display_surface = pygame.display.get_surface()
         self.rows = 3
@@ -13,9 +13,9 @@ class Inventory:
         self.border = 4
         self.index = 0
         self.selected_index = 0
+        self.inventory_size = 30
+        self.sound = sound
 
-
-        self.interface_frames = interface_frames['items'] 
         self.player_items = player_items
         self.inventory_bg = interface_frames['interface']['inventory_interface']
         self.player = player
@@ -74,17 +74,27 @@ class Inventory:
         keys = pygame.key.get_just_pressed()
         if keys[pygame.K_UP] or keys[pygame.K_w]:
             self.index -= 10
+            self.play_sound()
         if keys[pygame.K_DOWN] or keys[pygame.K_s]:
             self.index += 10
+            self.play_sound()
         if keys[pygame.K_RIGHT] or keys[pygame.K_d]:
             self.index += 1
+            self.play_sound()
         if keys[pygame.K_LEFT] or keys[pygame.K_a]:
             self.index -= 1
-        self.index = self.index % 30 # [LEN] voltar para o inicio
+            self.play_sound()
+        self.index = self.index % self.inventory_size # [LEN] voltar para o inicio
         if keys[pygame.K_SPACE]:
             if self.player_items[self.index] and self.player_items[self.index].name == 'cafe': # verificar se o item é utilizavel emitir um som
+                print(self.player.speed)
                 self.player.speed += 1000
+                print(self.player.speed)
+                self.sound['drink'].play()
                 self.player_items[self.index] = None # remove item
+
+    def play_sound(self):
+        self.sound['inventory_select'].play()
 
     def update(self, dt):
         self.input()

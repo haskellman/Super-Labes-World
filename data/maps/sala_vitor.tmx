@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.10" tiledversion="1.11.0" orientation="orthogonal" renderorder="right-down" width="12" height="14" tilewidth="64" tileheight="64" infinite="0" nextlayerid="8" nextobjectid="48">
+<map version="1.10" tiledversion="1.11.0" orientation="orthogonal" renderorder="right-down" width="12" height="14" tilewidth="64" tileheight="64" infinite="0" nextlayerid="9" nextobjectid="61">
  <tileset firstgid="1" name="chao_ct" tilewidth="64" tileheight="64" tilecount="80" columns="10">
   <image source="../tilesets/israel-collection/chao_ct.png" width="640" height="512"/>
  </tileset>
- <tileset firstgid="81" name="objects" tilewidth="256" tileheight="220" tilecount="39" columns="0">
+ <tileset firstgid="81" name="objects" tilewidth="256" tileheight="220" tilecount="45" columns="0">
   <grid orientation="orthogonal" width="1" height="1"/>
   <tile id="40">
    <image source="../tilesets/top-down-collection-pack/objects/vaso_sanitario.png" width="64" height="128"/>
@@ -122,9 +122,24 @@
   <tile id="86">
    <image source="../tilesets/israel-collection/santuario.png" width="57" height="72"/>
   </tile>
- </tileset>
- <tileset firstgid="168" name="tapete" tilewidth="64" tileheight="64" tilecount="6" columns="3">
-  <image source="../tilesets/israel-collection/tapete_tiled.png" width="192" height="128"/>
+  <tile id="90">
+   <image source="../tilesets/israel-collection/dragon.png" width="201" height="100"/>
+  </tile>
+  <tile id="91">
+   <image source="../tilesets/israel-collection/macbook.png" width="84" height="56"/>
+  </tile>
+  <tile id="92">
+   <image source="../tilesets/israel-collection/sofa_rosa.png" width="196" height="124"/>
+  </tile>
+  <tile id="93">
+   <image source="../tilesets/israel-collection/tapete1.png" width="192" height="128"/>
+  </tile>
+  <tile id="94">
+   <image source="../tilesets/israel-collection/tapete2.png" width="192" height="128"/>
+  </tile>
+  <tile id="95">
+   <image source="../tilesets/israel-collection/tapete2_grande.png" width="256" height="128"/>
+  </tile>
  </tileset>
  <layer id="1" name="Terrain" width="12" height="14">
   <data encoding="csv">
@@ -138,18 +153,21 @@
 54,55,55,55,55,55,55,55,55,55,55,56,
 54,55,55,55,55,55,55,55,55,55,55,56,
 54,55,55,55,55,55,55,55,55,55,55,56,
-54,168,169,170,55,55,55,55,55,55,55,56,
-54,171,172,173,55,55,55,55,55,55,55,56,
+54,55,55,55,55,55,55,55,55,55,55,56,
+54,55,55,55,55,55,55,55,55,55,55,56,
 54,55,55,55,55,7,8,55,55,55,55,56,
 64,65,65,65,65,61,62,65,65,65,65,66
 </data>
  </layer>
+ <objectgroup id="8" name="Terrain Objects">
+  <object id="59" gid="174" x="66" y="768" width="192" height="128"/>
+ </objectgroup>
  <objectgroup id="3" name="Objects">
   <object id="25" gid="160" x="63.5" y="254.833" width="147" height="144"/>
   <object id="26" gid="160" x="311" y="256.5" width="147" height="144"/>
   <object id="27" gid="160" x="557" y="256" width="147" height="144"/>
   <object id="40" gid="166" x="515.5" y="515" width="184" height="120"/>
-  <object id="41" gid="167" x="128" y="726.167" width="57" height="72"/>
+  <object id="41" gid="167" x="130" y="726.167" width="57" height="72"/>
  </objectgroup>
  <objectgroup id="7" name="Interactive Objects">
   <object id="39" gid="165" x="521" y="461.5" width="112" height="90">
@@ -157,7 +175,7 @@
     <property name="item_id" value="computer"/>
    </properties>
   </object>
-  <object id="43" gid="163" x="136.25" y="671.167" width="46" height="46">
+  <object id="43" gid="163" x="138.25" y="671.167" width="46" height="46">
    <properties>
     <property name="item_id" value="coffe"/>
    </properties>

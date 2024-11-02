@@ -29,6 +29,8 @@ GAME_LAYERS = {
 	'water': 0,
 	'bg': 1,
 	'shadow': 2,
-	'main': 3,
-	'top': 4
+    'objects': 3,
+    'interactive_objects': 4,
+	'main': 5,
+	'top': 6
 }
