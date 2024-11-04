@@ -28,7 +28,7 @@ class CollisionSprite(Sprite):
 		self.hitbox = self.rect.copy()
 
 class CollidableSprite(Sprite):
-	def __init__(self, pos, surf, groups, z = GAME_LAYERS['objects']):
+	def __init__(self, pos, surf, groups, z = GAME_LAYERS['main']):
 		super().__init__(pos, surf, groups, z)
 		self.hitbox = self.rect.inflate(0, -self.rect.height * 0.6)
 

@@ -1,17 +1,20 @@
 from settings import * 
-
+from time import sleep
 class Battle():
-    def __init__(self, player, character, interface_frames, fonts):
+    def __init__(self, player, character, interface_frames, fonts, end_battle, sounds):
         self.player = player
         self.character = character
-        self.max_option = 4
-        self.option = 0
         self.interface_frames = interface_frames
         self.battle_bg = interface_frames['interface']['battle_interface']
-        self.display_surface = pygame.display.get_surface()
+        self.frames = character.frames
         self.fonts = fonts
+        self.end_battle = end_battle
+        self.sounds = sounds
+        self.display_surface = pygame.display.get_surface()
+
         self.rows = 2
         self.cols = 2
+        self.option = 0
         self.rect_width = 310
         self.rect_height = 90
         
@@ -19,41 +22,45 @@ class Battle():
         self.questions = self.character.questions
         self.qtd_questions = len(self.questions)
         self.current_question = 0
-        self.current_question_dict = self.questions[self.current_question].values()
-        self.icon = self.interface_frames['interface'][str(self.option)]
-
-        self.correct_answer = self.get_correct_answer(self.current_question_dict)
+        self.answer = -1
 
 
+    def draw(self, dt):
+        if self.current_question != self.qtd_questions:
+            text_color = COLORS['black']
+            current_question_dict = self.questions[self.current_question].values()
+            current_answer = self.get_correct_answer(current_question_dict)
 
-    def draw(self):
-        text_color = COLORS['black']
+            self.answer = current_answer
 
-        # rectangles
-        rect_A = pygame.Rect(632, 540, self.rect_width, self.rect_height)
-        rect_B = pygame.Rect(942, 540, self.rect_width, self.rect_height)
-        rect_C = pygame.Rect(632, 630, self.rect_width, self.rect_height)
-        rect_D = pygame.Rect(942, 630, self.rect_width, self.rect_height)
-        question_rect = pygame.Rect(608, 4, self.rect_width, self.rect_height)
-        
+            # rectangles
+            rect_A = pygame.Rect(632, 540, self.rect_width, self.rect_height)
+            rect_B = pygame.Rect(942, 540, self.rect_width, self.rect_height)
+            rect_C = pygame.Rect(632, 630, self.rect_width, self.rect_height)
+            rect_D = pygame.Rect(942, 630, self.rect_width, self.rect_height)
+            question_rect = pygame.Rect(756, 29, 421, 99)
+            self.icon = self.interface_frames['interface'][str(self.option)]
 
-        # surfaces
-        text_surf = self.fonts['regular'].render(self.get_options(self.current_question_dict), False, text_color)
-        question_surf = self.fonts['regular'].render(self.get_question(self.current_question_dict), False, text_color)
-        print(self.get_question(self.current_question_dict))
+            # character
+            character_surf = self.frames['down_idle'][0]
+            character_rect = pygame.Rect(853, 137, 0, 0)
+            self.display_surface.blit(pygame.transform.scale(character_surf,(192,192)), character_rect)
 
-        # draw
-        if(self.option == 0):
-            self.display_surface.blit(self.icon, rect_A, special_flags = pygame.BLEND_RGB_ADD )
-        elif(self.option == 1):
-            self.display_surface.blit(self.icon, rect_B, special_flags = pygame.BLEND_RGB_ADD )
-        elif(self.option == 2):
-            self.display_surface.blit(self.icon, rect_C, special_flags = pygame.BLEND_RGB_ADD )
-        elif(self.option == 3):
-            self.display_surface.blit(self.icon, rect_D, special_flags = pygame.BLEND_RGB_ADD )
-        self.display_surface.blit(text_surf, self.option_rect)
-        self.display_surface.blit(question_surf, question_rect)
-        # print(self.get_correct_answer(self.current_question_dict))
+            # surfaces
+            text_surf = self.fonts['regular'].render(self.get_options(current_question_dict), False, text_color)
+            question_surf = self.fonts['regular'].render(self.get_question(current_question_dict), False, text_color)
+
+            # draw
+            if(self.option == 0):
+                self.display_surface.blit(self.icon, rect_A, special_flags = pygame.BLEND_RGB_ADD )
+            elif(self.option == 1):
+                self.display_surface.blit(self.icon, rect_B, special_flags = pygame.BLEND_RGB_ADD )
+            elif(self.option == 2):
+                self.display_surface.blit(self.icon, rect_C, special_flags = pygame.BLEND_RGB_ADD )
+            elif(self.option == 3):
+                self.display_surface.blit(self.icon, rect_D, special_flags = pygame.BLEND_RGB_ADD )
+            self.display_surface.blit(text_surf, self.option_rect)
+            self.display_surface.blit(question_surf, question_rect)
 
     def get_options(self,text_dict):
         new_text = []
@@ -64,9 +71,22 @@ class Battle():
     def get_question(self, text_dict):
         new_text = []
         values_list = list(text_dict)
-        new_text.append(values_list[0] + ':\n')
-        new_text.append(values_list[1] + '\n')
+        new_text.append(values_list[0] + ':\n') # title
+        new_text.append (self.text_format(values_list[1])) # question
         return ''.join(new_text)
+    
+    def text_format(self, text):
+        words = text.split()
+        lines = []
+        current_line = ""
+        for word in words:
+            if len(current_line) + len(word) <= 40:
+                current_line += word + " "
+            else:
+                lines.append(current_line + '\n')
+                current_line = word + " "
+        lines.append(current_line)
+        return ''.join(lines)
 
     def get_correct_answer(self, text_dict):
         values_list = list(text_dict)
@@ -82,15 +102,21 @@ class Battle():
            self.option += 1
         if keys[pygame.K_LEFT] or keys[pygame.K_a]:
            self.option -= 1
-        self.option =self.option % self.max_option
-        if keys[pygame.K_SPACE]:
+        self.option =self.option % self.qtd_questions
+        if keys[pygame.K_RETURN]:
             self.current_question += 1
-            print(self.current_question)
-            if self.current_question == self.correct_answer:
-                print('Acertou')
+            if self.option == self.answer:
+                self.sounds['correct_answer'].play()
+            else:
+                self.sounds['wrong_answer'].play()
+
+    def check_end_battle(self):
+        if self.current_question == self.qtd_questions:
+            self.end_battle(self.character)
 
 
     def update(self, dt):
+        self.check_end_battle()
         self.input()
         self.display_surface.blit(self.battle_bg)
-        self.draw()
+        self.draw(dt)

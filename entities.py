@@ -25,6 +25,9 @@ class Entity(pygame.sprite.Sprite):
         self.character_data = character_data
         self.questions  = character_data['questions']
 
+    def speed_boost(self, value):
+        self.speed *= value
+
     def block(self):
         self.blocked = True
         self.direction = vector(0,0)
@@ -82,10 +85,10 @@ class Player(Entity):
         if keys[pygame.K_RIGHT] or keys[pygame.K_d]:
             input_vector.x += 1
         self.direction = input_vector.normalize() if input_vector else input_vector
-        # print(self.direction)
 
     def move(self, dt):
         self.rect.centerx += self.direction.x * self.speed *dt
+        # print(self.rect.centerx , self.direction.x , self.speed ,dt)
         self.hitbox.centerx = self.rect.centerx
         self.collisions('horizontal')
 
@@ -124,7 +127,6 @@ class Player(Entity):
 class Character(Entity):
     def __init__(self, pos, groups, frames, facing_direction, collision_sprites, character_data):
         super().__init__(pos, frames, groups, facing_direction, character_data)
-        # print(character_data)
     def update(self, dt):
         self.animate(dt)
 

@@ -56,7 +56,6 @@ def lake_importer(cols, rows, *path):
 
 	for key, pos in sides.items():
 			new_dict[key] = [frame_dict[(pos[0], pos[1] + row)] for row in range(0,rows, 3)] # todos os frames de cada lado
-	# print(new_dict)
 	return new_dict
 
 def import_folder(*path):
@@ -66,6 +65,15 @@ def import_folder(*path):
 			full_path = join(folder_path, image_name)
 			surf = pygame.image.load(full_path).convert_alpha()
 			frames.append(surf)
+	return frames
+
+def import_folder_dict(*path):
+	frames = {}
+	for folder_path, sub_folders, image_names in walk(join(*path)):
+		for image_name in image_names:
+			full_path = join(folder_path, image_name)
+			surf = pygame.image.load(full_path).convert_alpha()
+			frames[image_name.split('.')[0]] = surf
 	return frames
 
 # game functions
@@ -82,16 +90,8 @@ def check_interaction(radius, entity, target, tolerance = 30):
 	relation = vector(target.rect.center) - vector(entity.rect.center)
 	return True if relation.length() < radius else False
 
-def import_folder_dict(*path):
-	frames = {}
-	for folder_path, sub_folders, image_names in walk(join(*path)):
-		for image_name in image_names:
-			full_path = join(folder_path, image_name)
-			surf = pygame.image.load(full_path).convert_alpha()
-			frames[image_name.split('.')[0]] = surf
-	return frames
 
-def check_questions(character):
+def check_battle(character):
 	return character.questions
 
 def audio_importer(*path):
@@ -102,12 +102,5 @@ def audio_importer(*path):
 			files[file_name.split('.')[0]] = pygame.mixer.Sound(full_path)
 	return files
 
-# def import_sub_folders(*path):
-# 	frames = {}
-# 	for _, sub_folders, __ in walk(join(*path)):
-# 		if sub_folders:
-# 			for sub_folder in sub_folders:
-# 				frames[sub_folder] = import_folder(*path, sub_folder)
-# 	return frames
 
 

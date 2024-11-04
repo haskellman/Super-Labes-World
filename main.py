@@ -6,6 +6,7 @@ from entities import Player, Character
 from inventory import Inventory
 from computer import Computer
 from battle import Battle
+from choose_dialog import ChooseDialog
 from item import Item
 from link import Link
 from groups import AllSprites
@@ -36,14 +37,14 @@ class Game:
         self.tint_progress = 0
         self.tint_direction = 1
         self.tint_speed = 600
-        
+
         self.import_assets()
 
-        self.setup(self.tmx_maps['sala_monalessa'], 'ct7')
+        self.current_map = 'house'
+        self.audios = audio_importer('.', 'audios')
+        self.sounds = audio_importer('.', 'sounds')
 
-        self.audio = audio_importer('.', 'audios')
-        self.sound = audio_importer('.', 'sounds')
-        self.audio['Lorencia Theme'].play(-1)
+        self.setup(self.tmx_maps['ct7'], 'ct7', 'ufes')
         
         # Computer
         self.computer_links = []
@@ -59,19 +60,25 @@ class Game:
 
         self.player_items = []
         self.create_inventory()
+
         # overlays
-        self.dialog_tree = None
-        self.inventory = Inventory(self.player_items , self.fonts, self.interface_frames, self.player, self.sound)
+        self.dialog_open = None
+        self.inventory = Inventory(self.player_items , self.fonts, self.interface_frames, self.player, self.sounds, self.item_used)
         self.inventory_open = False
-        self.computer = Computer(self.computer_links,self.fonts, self.interface_frames)
+        self.computer = Computer(self.computer_links,self.fonts, self.interface_frames, self.sounds)
         self.computer_open = False
         self.battle_open = False
-        self.add_item(Item('0'))
-        self.add_item(Item('1'))
-        self.add_item(Item('2'))
-        self.add_item(Item('4'))
+        self.choose_dialog_open = False
 
-        # Inventory
+
+        # items iniciais
+        # self.add_item(Item('0'))
+        # self.add_item(Item('1'))
+        # self.add_item(Item('2'))
+        # self.add_item(Item('4'))
+
+# ------------------------------------------------------------------------------------------------------------------------------------
+    # Inventory
     def create_inventory(self):
         inventory_size = 30
         for _ in range(inventory_size):
@@ -82,8 +89,14 @@ class Game:
             if (item_ == {}):
                 self.player_items[index] = item
                 break
-            else:
-                pass
+
+    def check_item(self, item):
+        for index, item_ in enumerate(self.player_items):
+            if (item_ != {} and item_.name == item.name):
+                return True
+        return False
+ 
+            
 
     # carrega todos os assets do jogo
     def import_assets(self):
@@ -98,6 +111,7 @@ class Game:
             'dialog': pygame.font.Font(join('.', 'graphics', 'fonts', 'PixeloidSans.ttf'), 30),
             'bold': pygame.font.Font(join('.', 'graphics', 'fonts', 'dogicapixelbold.otf'), 20),
             'regular': pygame.font.Font(join('.', 'graphics', 'fonts', 'PixeloidSans.ttf'), 18),
+            'regular_big': pygame.font.Font(join('.', 'graphics', 'fonts', 'PixeloidSans.ttf'), 34),
         }
         self.interface_frames = {
             'interface': import_folder_dict('.', 'graphics', 'interface'),
@@ -106,17 +120,28 @@ class Game:
         }
 
     # carrega o mapa a ordem é importante pois vai sobrepor os objetos
-    def setup(self,tmx_map, player_start_pos = 'house'):
+    def setup(self,tmx_map, dest_map, src_map):
+        self.current_map = dest_map
         # clean sprites
         for group in (self.all_sprites, self.collision_sprites, self.character_sprites, self.transition_sprites):
             group.empty()
         # terrain 
+        # map theme
+        self.audios[src_map].stop()
+        self.audios[dest_map].play(-1)   
+
         try:
             for x, y, surf in tmx_map.get_layer_by_name('Terrain').tiles():
                 Sprite((x * TILE_SIZE, y * TILE_SIZE), surf, self.all_sprites, GAME_LAYERS['bg'])
         except ValueError as ve:
             print(ve)
             # manter os items do jogador aqui
+
+        try:
+            for x, y, surf in tmx_map.get_layer_by_name('Terrain Top').tiles():
+                Sprite((x * TILE_SIZE, y * TILE_SIZE), surf, self.all_sprites, GAME_LAYERS['bg'])
+        except ValueError as ve:
+            print(ve)
 
         try:
             for obj in tmx_map.get_layer_by_name('Terrain Objects'):
@@ -187,7 +212,7 @@ class Game:
             for obj in tmx_map.get_layer_by_name('Entities'):
                 if obj.name == 'Player':
                     # print(obj.x, obj.y) # pos do player
-                    if obj.properties['pos'] == player_start_pos:
+                    if obj.properties['pos'] == src_map:
                         self.player = Player(
                             pos = (obj.x, obj.y),
                             groups = self.all_sprites,
@@ -208,36 +233,28 @@ class Game:
         except ValueError as ve:
             print(ve)
 
-    # verifica o input do jogador
+    # verifica a entrada do jogador
     def input(self):
-        if not self.dialog_tree: # and not self.battle:
+        if not self.dialog_open and not self.choose_dialog_open and not self.battle_open:
             keys = pygame.key.get_just_pressed()
-            if keys[pygame.K_SPACE] and not self.dialog_tree:
+            if keys[pygame.K_SPACE] and not self.dialog_open:
+                # interações com personagens
                 for character in self.character_sprites:
                     if check_connections(100, self.player, character):
-                        # for i in character.character_data['questions']:
-                        #     print (i)
-                        #     for value in character.character_data['questions'][i].values():
-                        #         print (value)
-
-
-                            # print(question)
-                            # for a, b in question.items():1
-                        #     print(a, b)
-                            # print(question['title'], question['description'], question['options'])
-
                         character.change_facing_direction(self.player.rect.center)
                         self.create_dialog(character)
+                # interações com objetos
                 for sprite in self.interaction_sprites:
                     if check_interaction(150, self.player, sprite):
                         if sprite.item_id == 'computer':
                             self.computer_open = not self.computer_open
                             self.player.blocked = not self.player.blocked
+                            break
                             # emitir som
                         if sprite.item_id == 'coffe':
                             self.add_item(Item('4'))
                             sprite.kill()
-                            # emitir som
+                            break
                         if sprite.item_id == 'abajour1':
                             sprite.item_id = 'abajour2'
                             sprite.image = self.interface_frames['interactive_objects']['abajour2']
@@ -248,55 +265,114 @@ class Game:
                             break
                         if sprite.item_id == 'dragon':
                             self.create_dialog(self.player, "acho melhor eu não acorda-lo", False)
+
+            # inventario
             if keys[pygame.K_i]:
                 self.inventory_open = not self.inventory_open
                 self.player.blocked = not self.player.blocked
                 # emitir som
+            # fechar sobreposições
             if keys[pygame.K_ESCAPE]:
                 self.inventory_open = False
                 self.computer_open = False
                 self.player.blocked = False
-                self.battle_open = False
+
+    def item_used(self,character):
+        Player.speed_boost(5)
 
     def create_dialog(self, character, message = None, colision_message = True):
-        if not self.dialog_tree:
+        print(self.dialog_open)
+        if not self.dialog_open:
+            print(self.dialog_open)
+            self.sounds['notice'].play()
             self.player.block()
-            self.dialog_tree = Dialog(character, self.player, self.all_sprites, self.fonts['dialog'], self.end_dialog, message, colision_message)
+            self.dialog_open = Dialog(character, self.player, self.all_sprites, self.fonts['dialog'], self.end_dialog, message, colision_message, self.add_item)
 
     def end_dialog(self,character):
-        if (check_questions(character)):
-            self.battle = Battle(self.player, character, self.interface_frames, self.fonts)
-            self.battle_open = True
-        # self.dialog_tree = Dialog(self.player, self.player, self.all_sprites, self.fonts['dialog'], self.end_dialog)
-        # pause game
-        # index com a escolha da resposta
-        if True:
-            self.dialog_tree = None
+        if check_battle(character) and not self.battle_open and character.character_data['visited'] == False:
+            self.player.block()
+            # dialogo de escolha
+            self.choose_dialog = ChooseDialog(character, self.interface_frames, self.fonts, self.end_choose_dialog)
+            self.choose_dialog_open = True
+        else:
+            self.dialog_open = None
             self.player.unblock()
             character.character_data['visited'] = True
 
-    def check_transitions(self):
-        transition_rect = [sprite for sprite in self.transition_sprites if sprite.rect.colliderect(self.player.hitbox)]
-        if transition_rect:
+    def end_choose_dialog(self, answer, character):
+        if answer:
+            self.audios[self.current_map].stop()
+            self.audios['battle'].play(-1)
+            self.choose_dialog_open = False
             self.player.block()
-            self.transition_area = transition_rect
-            self.tint_mode = 'tint'
+            self.battle = Battle(self.player, character, self.interface_frames, self.fonts, self.end_battle, self.sounds)
+            self.dialog_open = None
+            self.battle_open = True
+        else:
+            self.dialog_open = None
+            self.choose_dialog_open = False
+            self.player.unblock()
 
+    def end_battle(self, character):
+        self.audios['battle'].stop()
+        # self.tint_mode = 'tint'
+        self.sounds['correct_answer'].play()
+        self.audios[self.current_map].play(-1)
+        self.battle_open = False
+        character.character_data['visited'] = True
+        self.create_dialog(character)
+        self.player.unblock()
+        self.transition_dest = 'level'
+
+    # verifica se o player colidiu com uma transição
+    # para entrar na sala da monalessa é necessário ter a chave 0 do vitor
+    # para entrar na sala da patricia é necessário ter a chave 1 da monalessa
+    # para vencer o jogo é necessário ter as 3 chaves
+    def check_transitions(self):
+        transition_rect = [sprite for sprite in self.transition_sprites if sprite.rect.colliderect(self.player.hitbox)]    
+        if transition_rect:
+            if transition_rect[0].dest == 'sala_monalessa' and not self.check_item(Item('0')):
+                self.sounds['51 - MMX - Can\'t Exit'].play()
+            elif transition_rect[0].dest == 'sala_patricia' and not self.check_item(Item('1')):
+                self.sounds['51 - MMX - Can\'t Exit'].play()
+            elif transition_rect[0].dest == 'end' and (not self.check_item(Item('0')) or not self.check_item(Item('1')) or not self.check_item(Item('2'))):
+                self.sounds['51 - MMX - Can\'t Exit'].play()
+                key = pygame.key.get_pressed()
+                if key[pygame.K_SPACE]:
+                    self.create_dialog(self.player, "Você não pode sair sem os itens necessários", False)
+            else:       
+                self.player.block()
+                self.transition_area = transition_rect
+                self.tint_mode = 'tint'
+
+    # verifica se o player colidiu com uma caixa de dialogo
     def check_dialog(self):
         for sprite in self.dialogs_sprites:
             if sprite.hitbox.colliderect(self.player.hitbox):
                 self.create_dialog(self.player, sprite.message)
                 sprite.kill()
 
+    # efeito de transição
     def tint(self, dt):
         if self.tint_mode == 'untint':
             self.tint_progress -= self.tint_speed * dt
         if self.tint_mode == 'tint':
             self.tint_progress += self.tint_speed * dt    
-            if self.tint_progress >= 255: 
-                self.setup(self.tmx_maps[self.transition_area[0].dest], self.transition_area[0].src)
-                self.tint_mode = 'untint'
-                self.transition_area = None
+            if self.tint_progress >= 255:
+                if self.transition_area == 'level':
+                    self.battle_open = False
+                    self.setup(self.tmx_maps[self.current_map], self.current_map, self.current_map)
+                    self.transition_area = None
+                else:
+                    dest_map = self.transition_area[0].dest
+                    src_map = self.transition_area[0].src
+                    self.setup(self.tmx_maps[dest_map], dest_map, src_map)
+                    self.tint_mode = 'untint'
+                    self.transition_area = None
+
+        self.tint_progress = max(0, min(self.tint_progress, 255))
+        self.tint_surf.set_alpha(self.tint_progress)
+        self.screen.blit(self.tint_surf, (0,0))
 
         self.tint_progress = max(0, min(self.tint_progress, 255))
         self.tint_surf.set_alpha(self.tint_progress)
@@ -322,10 +398,19 @@ class Game:
             self.all_sprites.draw(self.player)
 
             # overlays
-            if self.dialog_tree: self.dialog_tree.update()
+            if self.dialog_open: self.dialog_open.update()
             if self.inventory_open: self.inventory.update(dt)
             if self.computer_open: self.computer.update(dt)
             if self.battle_open: self.battle.update(dt)
+            if self.choose_dialog_open: self.choose_dialog.update()
+
+            # print('Dialog', self.dialog_open)
+            # print('Inventory', self.inventory_open)
+            # print('Computer', self.computer_open)
+            # print('Battle', self.battle_open)
+            # print('Choose Dialog', self.choose_dialog_open)
+
+            # tint
             self.tint(dt)
             pygame.display.update()
 

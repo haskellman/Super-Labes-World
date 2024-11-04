@@ -1,7 +1,8 @@
 from settings import * 
+from entities import Player
 
 class Inventory:
-    def __init__(self, player_items, fonts, interface_frames, player, sound):
+    def __init__(self, player_items, fonts, interface_frames, player, sound, item_used):
         self.fonts = fonts
         self.display_surface = pygame.display.get_surface()
         self.rows = 3
@@ -15,6 +16,7 @@ class Inventory:
         self.selected_index = 0
         self.inventory_size = 30
         self.sound = sound
+        self.item_used = item_used
 
         self.player_items = player_items
         self.inventory_bg = interface_frames['interface']['inventory_interface']
@@ -87,10 +89,8 @@ class Inventory:
         self.index = self.index % self.inventory_size # [LEN] voltar para o inicio
         if keys[pygame.K_SPACE]:
             if self.player_items[self.index] and self.player_items[self.index].name == 'cafe': # verificar se o item é utilizavel emitir um som
-                print(self.player.speed)
-                self.player.speed += 1000
-                print(self.player.speed)
-                self.sound['drink'].play()
+                Player.speed_boost(self.player, 5)
+                self.sound['item_used'].play()
                 self.player_items[self.index] = None # remove item
 
     def play_sound(self):
