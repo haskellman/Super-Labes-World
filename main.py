@@ -1,7 +1,7 @@
 from settings import *
 from pytmx.util_pygame import load_pygame #carrega os mapas
 from os.path import join
-from sprites import Sprite, AnimatedSprite, CollisionSprite, CollidableSprite, TransitionSprite, DialogSprite, InteractiveSprite, TopSprite
+from sprites import Sprite, AnimatedSprite, CollisionSprite, CollidableSprite, TransitionSprite, DialogSprite, InteractiveSprite
 from entities import Player, Character
 from inventory import Inventory
 from computer import Computer
@@ -45,7 +45,7 @@ class Game:
         self.audios = audio_importer('.', 'audios')
         self.sounds = audio_importer('.', 'sounds')
 
-        self.setup(self.tmx_maps['ct7'], 'ct7', 'ufes')
+        self.setup(self.tmx_maps['house'], 'house', 'house')
         
         # Computer
         self.computer_links = []
