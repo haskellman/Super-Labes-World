@@ -9,6 +9,7 @@ CHARACTERS_DATA = {
         'questions': {},
 		},
     'player': {
+        'name': 'player',
 		'dialog': {
             'default': ['Sim', 'Não'],
 		'visited': False,

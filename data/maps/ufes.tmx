@@ -9,7 +9,7 @@
  <tileset firstgid="301" name="asphalt-red" tilewidth="64" tileheight="64" tilecount="90" columns="10">
   <image source="../tilesets/israel-collection/asphalt-red.png" width="640" height="576"/>
  </tileset>
- <tileset firstgid="391" name="objects" tilewidth="569" tileheight="472" tilecount="33" columns="0">
+ <tileset firstgid="391" name="objects" tilewidth="569" tileheight="472" tilecount="31" columns="0">
   <grid orientation="orthogonal" width="1" height="1"/>
   <tile id="15">
    <image source="../tilesets/objects/grass.png" width="64" height="64"/>
@@ -73,12 +73,6 @@
   </tile>
   <tile id="45">
    <image source="../tilesets/israel-collection/grade.png" width="128" height="128"/>
-  </tile>
-  <tile id="46">
-   <image source="../tilesets/israel-collection/passarela_ufes_top.png" width="242" height="205"/>
-  </tile>
-  <tile id="48">
-   <image source="../tilesets/israel-collection/passarela_ufes_column.png" width="23" height="68"/>
   </tile>
   <tile id="53">
    <image source="../tilesets/israel-collection/house_small_alt5-5.png" width="320" height="320"/>

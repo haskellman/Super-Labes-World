@@ -290,7 +290,6 @@ class Game:
 
     def create_dialog(self, character, message = None, colision_message = True):
         if not self.dialog_open:
-            print(self.dialog_open) 
             self.sounds['notice'].play()
             self.player.block()
             self.dialog_open = Dialog(character, self.player, self.all_sprites, self.fonts['dialog'], self.end_dialog, message, colision_message)
@@ -304,14 +303,13 @@ class Game:
             self.choose_dialog = ChooseDialog(character, self.interface_frames, self.fonts, self.end_choose_dialog)
             self.choose_dialog_open = True
         # item
-        elif character.character_data['visited'] != False and character.character_data['visited'] == True and character.character_data['item'] != None:
+        elif character.character_data['name'] != 'player' and character.character_data['visited'] != False and character.character_data['visited'] == True and character.character_data['item'] != None:
             self.sounds['get_item'].play()
             self.add_item(Item(character.character_data['item']))
             character.character_data['item'] = None
         if not self.choose_dialog_open:
             self.dialog_open = None
             self.player.unblock()
-            print('bbbbbb')
             character.character_data['visited'] = True
 
     def end_choose_dialog(self, answer, character):
