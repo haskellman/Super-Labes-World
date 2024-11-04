@@ -30,7 +30,6 @@ GAME_LAYERS = {
 	'bg': 1,
 	'shadow': 2,
     'objects': 3,
-    'interactive_objects': 4,
-	'main': 5,
-	'top': 6
+	'main': 4,
+	'top': 5
 }

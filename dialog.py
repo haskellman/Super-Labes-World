@@ -3,7 +3,7 @@ from timer import Timer
 from item import Item
 
 class Dialog:
-    def __init__(self, character, player, all_sprites, font, end_dialog, message = None, colision_message =  True, add_item = None):
+    def __init__(self, character, player, all_sprites, font, end_dialog, message = None, colision_message =  True):
         self.player = player
         self.character = character
         self.font = font 
@@ -14,8 +14,6 @@ class Dialog:
         self.dialog_num = len(self.dialog)
         self.dialog_index = 0
         self.dialog_timer = Timer(500, autostart = True)
-
-        self.add_item = add_item
 
         # colision message
         if colision_message and message:
@@ -32,10 +30,6 @@ class Dialog:
             self.dialog = character.get_dialog()
             self.dialog_num = len(self.dialog)
             self.current_dialog = DialogSprite(self.dialog[self.dialog_index], self.character, self.all_sprites, self.font)
-            # adiciona item ao player
-            if character.character_data['visited'] == True and character.character_data['item'] != None:
-                self.add_item(Item(character.character_data['item']))
-                character.character_data['item'] = None
                 
     def input(self):
         keys = pygame.key.get_just_pressed()

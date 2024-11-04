@@ -3,12 +3,11 @@ import webbrowser
 
 
 class Computer:
-    def __init__(self, computer_links, fonts, interface_frames):
+    def __init__(self, computer_links, fonts, interface_frames, sounds):
         self.fonts = fonts
         self.display_surface = pygame.display.get_surface()
         self.rows = len(computer_links)
         self.visible_items = 3
-
         self.index = 0
         self.rect = pygame.Rect(192,176, 608, 108)
 
@@ -19,6 +18,7 @@ class Computer:
 
         self.computer_bg = interface_frames['interface']['computer_interface']
         self.computer_links = computer_links
+        self.sounds = sounds
 
         # tint
         self.tint_surface = pygame.Surface((WINDOW_WIDTH, WINDOW_HEIGHT))
@@ -83,12 +83,18 @@ class Computer:
     def input(self):
         keys = pygame.key.get_just_pressed()
         if keys[pygame.K_UP] or keys[pygame.K_w]:
+            self.play_sound()
             self.index -= 1
         if keys[pygame.K_DOWN] or keys[pygame.K_s]:
+            self.play_sound()
             self.index += 1
         if keys[pygame.K_BACKSPACE] or keys[pygame.K_RETURN]:
+            self.play_sound()
             webbrowser.open(self.computer_links[self.index].url, new=0, autoraise=True)
         self.index = self.index % self.rows # [LEN] voltar para o inicio
+
+    def play_sound(self):
+        self.sound['inventory_select'].play()
 
     def update(self, dt):
         self.input()

@@ -11,6 +11,7 @@ CHARACTERS_DATA = {
     'player': {
 		'dialog': {
             'default': ['Sim', 'Não'],
+		'visited': False,
             },
         'questions': {},    
 		},
@@ -89,7 +90,7 @@ CHARACTERS_DATA = {
     'monalessa': {
 		'name': 'Monalessa',
 		'dialog': {
-            'default': ['aaaaaaaaaaaaaaa\n\naaaaaaaaaaaaaaa', 'nada mal', 'vamos ver se você é bom em gerencia de projetos!!!'],
+            'default': ['então voce foi aprovado pelo java master, vitor', 'nada mal', 'vamos ver se você é bom em gerencia de projetos!!!'],
 			'visited': ['meus parabéns!', 'você acertou x questões', 'vamos! pegue isso você vai precisar!']},
 		'directions': ['down'],
 		'look_around': True,
@@ -232,20 +233,22 @@ CHARACTERS_DATA = {
 		},
     'mae': {
 		'dialog': {
-            'default': ['to cansada de lavar louça nessa casa!'],
-			'visited': ['']},
+            'default': ['TO CANSADA DE LAVAR LOUÇA NESSA CASA!!!', '...' ,'ja está indo meu filho?', 'só um segundo pro café ficar pronto'],
+			'visited': ['prontinho hehe', 'eu disse que só levaria um segundo ^.^']},
 		'directions': ['down'],
 		'look_around': True,
 		'visited': False,
+        'item': '4',
         'questions': {},
 		},
     'pai': {
 		'dialog': {
-            'default': ['o que será que eu leio hoje??'],
+            'default': ['o que será que eu leio hoje...', 'bom dia filho!', 'você ja está indo?', 'pegue café com sua mãe antes de sair!', 'nada melhor que um cafézinho para começar o dia!'],
 			'visited': ['tenho 237 encomendas pra entregar hoje, é brincadeira!']},
 		'directions': ['down'],
 		'look_around': True,
 		'visited': False,
+        'item': None,
         'questions': {},
 		},
     'luaninha': {
@@ -255,9 +258,21 @@ CHARACTERS_DATA = {
 		'directions': ['down'],
 		'look_around': True,
 		'visited': False,
+        'item': None,
+        'questions': {},
+		},
+    'aninha': {
+		'dialog': {
+            'default': ['bom dia irmão', 'não vá se esquecer de nada antes de sair', 'verifique sua mochila apertando a tecla "i"', 'boa sorte!'],
+			'visited': ['vai logo!!']},
+		'directions': ['down'],
+		'look_around': True,
+		'visited': False,
+        'item': None,
         'questions': {},
 		},
     }
+
 
 ITEMS_DATA = {
     '0': {

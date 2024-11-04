@@ -1,5 +1,6 @@
 from settings import * 
 from time import sleep
+from timer import Timer
 class Battle():
     def __init__(self, player, character, interface_frames, fonts, end_battle, sounds):
         self.player = player
@@ -11,6 +12,8 @@ class Battle():
         self.end_battle = end_battle
         self.sounds = sounds
         self.display_surface = pygame.display.get_surface()
+        self.battle_timer = Timer(2000, autostart = True)
+        self.test = []
 
         self.rows = 2
         self.cols = 2
@@ -94,28 +97,33 @@ class Battle():
 
     def input(self):
         keys = pygame.key.get_just_pressed()
-        if keys[pygame.K_UP] or keys[pygame.K_w]:
-           self.option -= 2
-        if keys[pygame.K_DOWN] or keys[pygame.K_s]:
-           self.option += 2
-        if keys[pygame.K_RIGHT] or keys[pygame.K_d]:
-           self.option += 1
-        if keys[pygame.K_LEFT] or keys[pygame.K_a]:
-           self.option -= 1
-        self.option =self.option % self.qtd_questions
-        if keys[pygame.K_RETURN]:
-            self.current_question += 1
-            if self.option == self.answer:
-                self.sounds['correct_answer'].play()
-            else:
-                self.sounds['wrong_answer'].play()
+        if not self.battle_timer.active:
+            if keys[pygame.K_UP] or keys[pygame.K_w]:
+                self.option -= 2
+            if keys[pygame.K_DOWN] or keys[pygame.K_s]:
+                self.option += 2
+            if keys[pygame.K_RIGHT] or keys[pygame.K_d]:
+                self.option += 1
+            if keys[pygame.K_LEFT] or keys[pygame.K_a]:
+                self.option -= 1
+            self.option =self.option % 4
+            if keys[pygame.K_RETURN]:
+                self.battle_timer.activate()
+                self.current_question += 1
+                if self.option == self.answer:
+                    self.test.append(1)
+                    self.sounds['correct_answer'].play()
+                else:
+                    self.test.append(0)
+                    self.sounds['wrong_answer'].play()
 
     def check_end_battle(self):
         if self.current_question == self.qtd_questions:
-            self.end_battle(self.character)
+            self.end_battle(self.character, self.test)
 
 
     def update(self, dt):
+        self.battle_timer.update()
         self.check_end_battle()
         self.input()
         self.display_surface.blit(self.battle_bg)

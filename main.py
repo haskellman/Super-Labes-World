@@ -1,7 +1,7 @@
 from settings import *
 from pytmx.util_pygame import load_pygame #carrega os mapas
 from os.path import join
-from sprites import Sprite, AnimatedSprite, CollisionSprite, CollidableSprite, TransitionSprite, DialogSprite, InteractiveSprite
+from sprites import Sprite, AnimatedSprite, CollisionSprite, CollidableSprite, TransitionSprite, DialogSprite, InteractiveSprite, TopSprite
 from entities import Player, Character
 from inventory import Inventory
 from computer import Computer
@@ -29,6 +29,7 @@ class Game:
         self.transition_sprites  = pygame.sprite.Group()
         self.dialogs_sprites     = pygame.sprite.Group()
         self.interaction_sprites = pygame.sprite.Group()
+        self.top_sprites         = pygame.sprite.Group()
 
         # transition
         self.transition_area = None
@@ -72,10 +73,10 @@ class Game:
 
 
         # items iniciais
-        # self.add_item(Item('0'))
+        self.add_item(Item('0'))
         # self.add_item(Item('1'))
         # self.add_item(Item('2'))
-        # self.add_item(Item('4'))
+        self.add_item(Item('4'))
 
 # ------------------------------------------------------------------------------------------------------------------------------------
     # Inventory
@@ -130,63 +131,70 @@ class Game:
         self.audios[src_map].stop()
         self.audios[dest_map].play(-1)   
 
+        # Terreno
         try:
             for x, y, surf in tmx_map.get_layer_by_name('Terrain').tiles():
                 Sprite((x * TILE_SIZE, y * TILE_SIZE), surf, self.all_sprites, GAME_LAYERS['bg'])
         except ValueError as ve:
-            print(ve)
+           pass
             # manter os items do jogador aqui
 
+        # Coisas acima do terreno sem colisão
         try:
             for x, y, surf in tmx_map.get_layer_by_name('Terrain Top').tiles():
                 Sprite((x * TILE_SIZE, y * TILE_SIZE), surf, self.all_sprites, GAME_LAYERS['bg'])
         except ValueError as ve:
-            print(ve)
+           pass
 
+        # Objetos em cima do terreno
         try:
             for obj in tmx_map.get_layer_by_name('Terrain Objects'):
                 print(obj)
                 Sprite((obj.x, obj.y), obj.image, self.all_sprites, GAME_LAYERS['bg'])
         except ValueError as ve:
-            print(ve)
+            pass
 
-		# water 
+		# agua
         try:
             for obj in tmx_map.get_layer_by_name('Lake'):
                 for x in range(int(obj.x), int(obj.x + obj.width), TILE_SIZE):
                     for y in range(int(obj.y), int(obj.y + obj.height), TILE_SIZE):
                         AnimatedSprite((x,y), self.overworld_frames['water'], self.all_sprites, GAME_LAYERS['water'])
         except ValueError as ve:
-            print(ve)
+            pass
 
-        # lake edges
+        # bordas do lago
         try:
             if tmx_map.get_layer_by_name('Lake Edges'):
                 for obj in tmx_map.get_layer_by_name('Lake Edges'):
                     side = obj.properties['side']
                     AnimatedSprite((obj.x, obj.y), self.overworld_frames['lake'][side], self.all_sprites, GAME_LAYERS['bg'])
         except ValueError as ve:
-            print(ve)
+            pass
 
-        # objects
+        # objetos
         try:
             for obj in tmx_map.get_layer_by_name('Objects'):
+                # if obj.name == 'passarela_ufes_top':
+                #     TopSprite((obj.x, obj.y), obj.image, (self.all_sprites, self.top_sprites), GAME_LAYERS['top'])
+                # else:
                 CollidableSprite((obj.x, obj.y), obj.image, (self.all_sprites, self.collision_sprites))
         except ValueError as ve:
-            print(ve)
-        # interactive objects
+            pass
+
+        # objetos interativos 
         try:
             for obj in tmx_map.get_layer_by_name('Interactive Objects'):
-                InteractiveSprite((obj.x, obj.y), obj.image, (self.all_sprites, self.interaction_sprites), obj.properties['item_id'], GAME_LAYERS['interactive_objects'])
+                InteractiveSprite((obj.x, obj.y), obj.image, (self.all_sprites, self.interaction_sprites), obj.properties['item_id'])
         except ValueError as ve:
-            print(ve)
+            pass
 
-        # collision
+        # Colisões invisíveis
         try:
             for obj in tmx_map.get_layer_by_name('Collisions'):
                 CollisionSprite((obj.x, obj.y), pygame.Surface((obj.width, obj.height)), (self.collision_sprites))
         except ValueError as ve:
-            print(ve)
+           pass
 
         # dialogs
         
@@ -197,7 +205,7 @@ class Game:
                     DialogSprite((obj.x, obj.y), pygame.Surface((obj.width, obj.height)), (self.dialogs_sprites), obj.properties['message'])
                     # print (type((obj.width, obj.height)))
             except ValueError as ve:
-                print(ve)
+               pass
 
         # transitions
         try:
@@ -205,7 +213,7 @@ class Game:
                 # print(obj.x, obj.y, obj.properties['dest'], obj.properties['src'])
                 TransitionSprite((obj.x, obj.y), obj.properties['dest'], obj.properties['src'], self.transition_sprites, (obj.width, obj.height))
         except ValueError as ve:
-            print(ve)
+           pass
 
         # entities
         try:
@@ -231,7 +239,7 @@ class Game:
                         character_data = CHARACTERS_DATA[obj.properties['character_id']],
                     )
         except ValueError as ve:
-            print(ve)
+           pass
 
     # verifica a entrada do jogador
     def input(self):
@@ -281,22 +289,29 @@ class Game:
         Player.speed_boost(5)
 
     def create_dialog(self, character, message = None, colision_message = True):
-        print(self.dialog_open)
         if not self.dialog_open:
-            print(self.dialog_open)
+            print(self.dialog_open) 
             self.sounds['notice'].play()
             self.player.block()
-            self.dialog_open = Dialog(character, self.player, self.all_sprites, self.fonts['dialog'], self.end_dialog, message, colision_message, self.add_item)
+            self.dialog_open = Dialog(character, self.player, self.all_sprites, self.fonts['dialog'], self.end_dialog, message, colision_message)
 
     def end_dialog(self,character):
+        # batalha
         if check_battle(character) and not self.battle_open and character.character_data['visited'] == False:
             self.player.block()
             # dialogo de escolha
+            self.player.block()
             self.choose_dialog = ChooseDialog(character, self.interface_frames, self.fonts, self.end_choose_dialog)
             self.choose_dialog_open = True
-        else:
+        # item
+        elif character.character_data['visited'] != False and character.character_data['visited'] == True and character.character_data['item'] != None:
+            self.sounds['get_item'].play()
+            self.add_item(Item(character.character_data['item']))
+            character.character_data['item'] = None
+        if not self.choose_dialog_open:
             self.dialog_open = None
             self.player.unblock()
+            print('bbbbbb')
             character.character_data['visited'] = True
 
     def end_choose_dialog(self, answer, character):
@@ -313,16 +328,21 @@ class Game:
             self.choose_dialog_open = False
             self.player.unblock()
 
-    def end_battle(self, character):
+    # função de callback chamada ao final da batalha
+    def end_battle(self, character, test):
+        result = sum(test)
         self.audios['battle'].stop()
-        # self.tint_mode = 'tint'
-        self.sounds['correct_answer'].play()
         self.audios[self.current_map].play(-1)
         self.battle_open = False
-        character.character_data['visited'] = True
-        self.create_dialog(character)
-        self.player.unblock()
-        self.transition_dest = 'level'
+        text = 'voce acertou ' + str(result) + ' das ' + str(len(test)) + ' perguntas, tome... pegue a minha chave'
+        if (result >= 7):
+            self.sounds['correct_answer'].play()
+            character.character_data['visited'] = True
+            self.create_dialog(character, text, False)
+        else:
+            self.sounds['wrong_answer'].play()
+            self.create_dialog(character, text, False)
+
 
     # verifica se o player colidiu com uma transição
     # para entrar na sala da monalessa é necessário ter a chave 0 do vitor
