@@ -109,7 +109,7 @@
    <image source="../tilesets/top-down-collection-pack/objects/fogao-export.png" width="77" height="112"/>
   </tile>
  </tileset>
- <tileset firstgid="260" name="objects" tilewidth="256" tileheight="220" tilecount="47" columns="0">
+ <tileset firstgid="260" name="objects" tilewidth="256" tileheight="220" tilecount="46" columns="0">
   <grid orientation="orthogonal" width="1" height="1"/>
   <tile id="40">
    <image source="../tilesets/top-down-collection-pack/objects/vaso_sanitario.png" width="64" height="128"/>
@@ -212,9 +212,6 @@
   </tile>
   <tile id="78">
    <image source="../tilesets/top-down-collection-pack/objects/fogao-export.png" width="77" height="112"/>
-  </tile>
-  <tile id="79">
-   <image source="../../estante_livros_resized.png" width="147" height="144"/>
   </tile>
   <tile id="82">
    <image source="../tilesets/israel-collection/cafe.png" width="46" height="46"/>
@@ -347,7 +344,7 @@
   <object id="46" x="1858.67" y="176.667" width="18.6667" height="604.667"/>
  </objectgroup>
  <objectgroup id="7" name="Dialogs">
-  <object id="115" name="house_dialog1" x="2065.4" y="416.545" width="402.539" height="123.577" rotation="359.656">
+  <object id="115" name="house_dialog1" x="1459.4" y="530.545" width="402.539" height="123.577" rotation="359.656">
    <properties>
     <property name="message">!!
  nossa já são 8:00 

@@ -107,9 +107,6 @@
   <tile id="78">
    <image source="../tilesets/top-down-collection-pack/objects/fogao-export.png" width="77" height="112"/>
   </tile>
-  <tile id="79">
-   <image source="../../estante_livros_resized.png" width="147" height="144"/>
-  </tile>
   <tile id="82">
    <image source="../tilesets/israel-collection/cafe.png" width="46" height="46"/>
   </tile>
@@ -232,9 +229,6 @@
   </tile>
   <tile id="78">
    <image source="../tilesets/top-down-collection-pack/objects/fogao-export.png" width="77" height="112"/>
-  </tile>
-  <tile id="79">
-   <image source="../../estante_livros_resized.png" width="147" height="144"/>
   </tile>
   <tile id="82">
    <image source="../tilesets/israel-collection/cafe.png" width="46" height="46"/>
@@ -361,9 +355,6 @@
   </tile>
   <tile id="78">
    <image source="../tilesets/top-down-collection-pack/objects/fogao-export.png" width="77" height="112"/>
-  </tile>
-  <tile id="79">
-   <image source="../../estante_livros_resized.png" width="147" height="144"/>
   </tile>
   <tile id="82">
    <image source="../tilesets/israel-collection/cafe.png" width="46" height="46"/>
