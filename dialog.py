@@ -3,7 +3,7 @@ from timer import Timer
 from item import Item
 
 class Dialog:
-    def __init__(self, character, player, all_sprites, font, end_dialog, message = None, colision_message =  True):
+    def __init__(self, character, player, all_sprites, font, end_dialog, message = None, collision_message =  True):
         self.player = player
         self.character = character
         self.font = font 
@@ -15,13 +15,13 @@ class Dialog:
         self.dialog_index = 0
         self.dialog_timer = Timer(500, autostart = True)
 
-        # colision message
-        if colision_message and message:
+        # collision message
+        if collision_message and message:
             self.dialog = message.split('\n')
             self.dialog_num = len(self.dialog)
             self.current_dialog = DialogSprite(message[self.dialog_index], self.character, self.all_sprites, self.font)
         # sprite message
-        elif not colision_message and message:
+        elif not collision_message and message:
             self.dialog = message
             self.dialog_num = 1
             self.current_dialog = DialogSprite(self.dialog, self.character, self.all_sprites, self.font)

@@ -94,7 +94,7 @@ class Computer:
         self.index = self.index % self.rows # [LEN] voltar para o inicio
 
     def play_sound(self):
-        self.sound['inventory_select'].play()
+        self.sounds['inventory_select'].play()
 
     def update(self, dt):
         self.input()

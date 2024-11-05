@@ -185,7 +185,7 @@ class Game:
         # objetos interativos 
         try:
             for obj in tmx_map.get_layer_by_name('Interactive Objects'):
-                InteractiveSprite((obj.x, obj.y), obj.image, (self.all_sprites, self.interaction_sprites), obj.properties['item_id'])
+                InteractiveSprite((obj.x, obj.y), obj.image, (self.all_sprites, self.interaction_sprites, self.collision_sprites), obj.properties['item_id'])
         except ValueError as ve:
             pass
 
@@ -273,6 +273,8 @@ class Game:
                             break
                         if sprite.item_id == 'dragon':
                             self.create_dialog(self.player, "acho melhor eu não acorda-lo", False)
+                        if sprite.item_id == 'placa_prograd':
+                            self.create_dialog(self.player, "A placa diz: 'Prograd - Pró-Reitoria de Graduação', o labes deve estar mais a frente", False)
 
             # inventario
             if keys[pygame.K_i]:
@@ -288,11 +290,11 @@ class Game:
     def item_used(self,character):
         Player.speed_boost(5)
 
-    def create_dialog(self, character, message = None, colision_message = True):
+    def create_dialog(self, character, message = None, collision_message = True):
         if not self.dialog_open:
             self.sounds['notice'].play()
             self.player.block()
-            self.dialog_open = Dialog(character, self.player, self.all_sprites, self.fonts['dialog'], self.end_dialog, message, colision_message)
+            self.dialog_open = Dialog(character, self.player, self.all_sprites, self.fonts['dialog'], self.end_dialog, message, collision_message)
 
     def end_dialog(self,character):
         # batalha
@@ -332,11 +334,11 @@ class Game:
         self.audios['battle'].stop()
         self.audios[self.current_map].play(-1)
         self.battle_open = False
-        text = 'voce acertou ' + str(result) + ' das ' + str(len(test)) + ' perguntas, tome... pegue a minha chave'
+        text = 'voce acertou ' + str(result) + ' das ' + str(len(test))  + ' perguntas'
         if (result >= 7):
             self.sounds['correct_answer'].play()
             character.character_data['visited'] = True
-            self.create_dialog(character, text, False)
+            self.create_dialog(character, text + ' tome... pegue a minha chave', False)
         else:
             self.sounds['wrong_answer'].play()
             self.create_dialog(character, text, False)

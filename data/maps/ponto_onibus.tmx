@@ -160,7 +160,7 @@
     <property name="src" value="ponto_onibus"/>
    </properties>
   </object>
-  <object id="15" x="1252.67" y="938.292" width="57.3333" height="44.0833">
+  <object id="15" x="419.337" y="930.292" width="57.3333" height="44.0833">
    <properties>
     <property name="dest" value="house"/>
     <property name="src" value="ponto_onibus"/>
