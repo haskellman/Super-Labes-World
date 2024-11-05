@@ -62,14 +62,19 @@ class Inventory:
         return ''.join(new_text)
     
     def draw_item_info(self):
-        image_rect = pygame.Rect(429,461,128,128)
-        text_rect = pygame.Rect(565,461,432,128)
+        # rectangles
+        item_name_rect = pygame.Rect(384, 458, 0, 0)
+        image_rect = pygame.Rect(404,477,128,128)
+        description_rect = pygame.Rect(565,461,432,128)
         pygame.draw.rect(self.display_surface,COLORS['white'],image_rect)
-        pygame.draw.rect(self.display_surface,COLORS['dark-brown'],text_rect)
         if self.player_items[self.index]:
+            # texts
+            item_name_surf = self.fonts['regular'].render(self.player_items[self.index].name, False, COLORS['black'])
+            description_surf = self.fonts['regular'].render(self.text_format(self.player_items[self.index].description), False, COLORS['black'])
+            # draw
             self.display_surface.blit(pygame.transform.scale(self.player_items[self.index].icon,(image_rect.width,image_rect.height)), image_rect)
-            text_surf = self.fonts['regular'].render(self.text_format(self.player_items[self.index].description), False, COLORS['black'])
-            self.display_surface.blit(text_surf, text_rect)
+            self.display_surface.blit(description_surf, description_rect)
+            self.display_surface.blit(item_name_surf, item_name_rect)
         
 
     def input(self):
@@ -89,9 +94,9 @@ class Inventory:
         self.index = self.index % self.inventory_size # [LEN] voltar para o inicio
         if keys[pygame.K_SPACE]:
             if self.player_items[self.index] and self.player_items[self.index].name == 'cafe': # verificar se o item é utilizavel emitir um som
-                Player.speed_boost(self.player, 5)
                 self.sounds['item_used'].play()
                 self.player_items[self.index] = {} # remove item
+                self.item_used()
 
     def play_sound(self):
         self.sounds['inventory_select'].play()

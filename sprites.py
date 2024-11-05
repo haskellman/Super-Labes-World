@@ -45,7 +45,7 @@ class DialogSprite(Sprite):
 		self.message = message
 
 class InteractiveSprite(Sprite):
-	def __init__(self, pos, surf, groups, item_id, z = GAME_LAYERS['main']):
+	def __init__(self, pos, surf, groups, item_id, z = GAME_LAYERS['interactive_object']):
 		super().__init__(pos, surf, groups, z)
 		self.hitbox = self.rect.copy()
 		self.item_id = item_id

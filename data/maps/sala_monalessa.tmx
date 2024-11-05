@@ -457,7 +457,7 @@
   <object id="16" x="447.584" y="801.333" width="256.333" height="17.3333"/>
   <object id="17" x="424.667" y="820.833" width="32.6663" height="17.3333"/>
   <object id="18" x="316.167" y="817.333" width="32.6663" height="17.3333"/>
-  <object id="33" x="480.667" y="601.333" width="183.333" height="66.6667"/>
+  <object id="33" x="480.667" y="601.333" width="183.333" height="75.3334"/>
   <object id="34" x="860.667" y="770"/>
  </objectgroup>
  <objectgroup id="6" name="Dialogs"/>

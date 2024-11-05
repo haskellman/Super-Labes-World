@@ -123,7 +123,10 @@ class Player(Entity):
 
     def get_dialog(self):
         return self.character_data['dialog']['default']
-
+    
+    def speed_boost(self, value):
+        self.speed *= value
+        
 class Character(Entity):
     def __init__(self, pos, groups, frames, facing_direction, collision_sprites, character_data):
         super().__init__(pos, frames, groups, facing_direction, character_data)

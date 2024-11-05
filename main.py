@@ -2,7 +2,7 @@ from settings import *
 from pytmx.util_pygame import load_pygame #carrega os mapas
 from os.path import join
 from sprites import Sprite, AnimatedSprite, CollisionSprite, CollidableSprite, TransitionSprite, DialogSprite, InteractiveSprite
-from entities import Player, Character
+from entities import Player, Character, Entity
 from inventory import Inventory
 from computer import Computer
 from battle import Battle
@@ -13,14 +13,15 @@ from groups import AllSprites
 from support import *
 from game_data import *
 from dialog import Dialog
+from timer import Timer
 from time import sleep
-
 class Game:
     def __init__(self): 
         pygame.init()
         self.screen = pygame.display.set_mode((WINDOW_WIDTH, WINDOW_HEIGHT))
         pygame.display.set_caption('Amaes Game')
         self.clock = pygame.time.Clock()
+        self.buff_timer = Timer(15000, autostart = True)
         
         # groups
         self.all_sprites = AllSprites()
@@ -29,7 +30,6 @@ class Game:
         self.transition_sprites  = pygame.sprite.Group()
         self.dialogs_sprites     = pygame.sprite.Group()
         self.interaction_sprites = pygame.sprite.Group()
-        self.top_sprites         = pygame.sprite.Group()
 
         # transition
         self.transition_area = None
@@ -45,20 +45,24 @@ class Game:
         self.audios = audio_importer('.', 'audios')
         self.sounds = audio_importer('.', 'sounds')
 
-        self.setup(self.tmx_maps['house'], 'house', 'house')
+        # mapa iniciais
+        # self.setup(self.tmx_maps['house'], 'house', 'house') #house
+        # self.setup(self.tmx_maps['ponto_onibus'], 'ponto_onibus', 'house') #ponto_onibus
+        # self.setup(self.tmx_maps['ufes'], 'ufes', 'ponto_onibus') #ufes
+        # self.setup(self.tmx_maps['ct7'], 'ct7', 'ufes') #ct7
+        self.setup(self.tmx_maps['sala_vitor'], 'sala_vitor', 'ct7') #sala_vitor
+        # self.setup(self.tmx_maps['sala_monalessa'], 'sala_monalessa', 'ct7') #sala_monalessa
+        # self.setup(self.tmx_maps['sala_patricia'], 'sala_patricia', 'ct7') #sala_patricia
+        # self.setup(self.tmx_maps['ct9'], 'ct9', 'ufes') #ct9
+        # self.setup(self.tmx_maps['labgrad'], 'labgrad', 'ct9') labrad
+    
         
+
         # Computer
         self.computer_links = []
+        self.create_computer()
 
-        def add_link(self, item):
-            self.computer_links.append(item)
-
-        def create_computer(self):
-            for i in COMPUTER_DATA:
-                add_link(self,Link(i))
-
-        create_computer(self)
-
+        # Inventory
         self.player_items = []
         self.create_inventory()
 
@@ -74,12 +78,28 @@ class Game:
 
         # items iniciais
         self.add_item(Item('0'))
-        # self.add_item(Item('1'))
-        # self.add_item(Item('2'))
+        self.add_item(Item('1'))
+        self.add_item(Item('2'))
         self.add_item(Item('4'))
 
 # ------------------------------------------------------------------------------------------------------------------------------------
-    # Inventory
+    #  Computer functions
+    def add_link(self, item):
+        self.computer_links.append(item)
+
+    def create_computer(self):
+        for i in COMPUTER_DATA:
+            self.add_link(Link(i))
+    
+    def clean_computer(self):
+        self.computer_links = []
+
+    def create_computer_by_result(self, list, character):
+        for index, item in enumerate(list):
+            if item == 0:
+                self.add_link(Link(character.questions[index]['link']))
+    
+    # Inventory functions
     def create_inventory(self):
         inventory_size = 30
         for _ in range(inventory_size):
@@ -124,7 +144,7 @@ class Game:
     def setup(self,tmx_map, dest_map, src_map):
         self.current_map = dest_map
         # clean sprites
-        for group in (self.all_sprites, self.collision_sprites, self.character_sprites, self.transition_sprites):
+        for group in (self.all_sprites, self.collision_sprites, self.character_sprites, self.transition_sprites, self.dialogs_sprites, self.interaction_sprites):
             group.empty()
         # terrain 
         # map theme
@@ -175,9 +195,6 @@ class Game:
         # objetos
         try:
             for obj in tmx_map.get_layer_by_name('Objects'):
-                # if obj.name == 'passarela_ufes_top':
-                #     TopSprite((obj.x, obj.y), obj.image, (self.all_sprites, self.top_sprites), GAME_LAYERS['top'])
-                # else:
                 CollidableSprite((obj.x, obj.y), obj.image, (self.all_sprites, self.collision_sprites))
         except ValueError as ve:
             pass
@@ -261,6 +278,7 @@ class Game:
                             # emitir som
                         if sprite.item_id == 'coffe':
                             self.add_item(Item('4'))
+                            self.sounds['get_item'].play()
                             sprite.kill()
                             break
                         if sprite.item_id == 'abajour1':
@@ -274,8 +292,19 @@ class Game:
                         if sprite.item_id == 'dragon':
                             self.create_dialog(self.player, "acho melhor eu não acorda-lo", False)
                         if sprite.item_id == 'placa_prograd':
-                            self.create_dialog(self.player, "A placa diz: 'Prograd - Pró-Reitoria de Graduação', o labes deve estar mais a frente", False)
-
+                            self.create_dialog(self.player, "A placa diz: 'Prograd - Pró-Reitoria de Graduação'...\n\n o labes deve estar mais a frente", False)
+                        if sprite.item_id == 'placa_ic1':
+                            self.create_dialog(self.player, "A placa diz: 'IC1 - Centro de Ciências Exatas'...\n\no labes deve estar mais a frente", False)
+                        if sprite.item_id == 'placa_ic2':
+                            self.create_dialog(self.player, "A placa diz: 'IC2 - CCHN | Centro de Ciências Humanas e Naturais'...\n\no labes deve estar mais a frente", False)
+                        if sprite.item_id == 'placa_ic3':
+                            self.create_dialog(self.player, "A placa diz: 'IC3 - CCHN | Centro de Ciências Humanas e Naturais'...\n\no labes deve estar mais a frente", False)
+                        if sprite.item_id == 'placa_ic4':
+                            self.create_dialog(self.player, "A placa diz: 'IC4 - CE | Centro de Educação'...\n\nsinto que estou próximo", False)
+                        if sprite.item_id == 'placa_ct3':
+                            self.create_dialog(self.player, "A placa diz: 'CT3 - Centro Tecnológico'...\n\nopa ja estou no ct ", False)
+                        if sprite.item_id == 'placa_ct12':
+                            self.create_dialog(self.player, "A placa diz: 'CT12 - Centro Tecnológico'...\n\no ct7 deve ser logo acima ", False)
             # inventario
             if keys[pygame.K_i]:
                 self.inventory_open = not self.inventory_open
@@ -287,8 +316,10 @@ class Game:
                 self.computer_open = False
                 self.player.blocked = False
 
-    def item_used(self,character):
-        Player.speed_boost(5)
+    def item_used(self):
+        self.player.speed_boost(1.5)
+        self.buff_timer.activate()
+
 
     def create_dialog(self, character, message = None, collision_message = True):
         if not self.dialog_open:
@@ -296,6 +327,7 @@ class Game:
             self.player.block()
             self.dialog_open = Dialog(character, self.player, self.all_sprites, self.fonts['dialog'], self.end_dialog, message, collision_message)
 
+    # Callback functions
     def end_dialog(self,character):
         # batalha
         if check_battle(character) and not self.battle_open and character.character_data['visited'] == False:
@@ -320,6 +352,8 @@ class Game:
             self.audios['battle'].play(-1)
             self.choose_dialog_open = False
             self.player.block()
+            self.tint_mode = 'battle_mode'
+            sleep(2)
             self.battle = Battle(self.player, character, self.interface_frames, self.fonts, self.end_battle, self.sounds)
             self.dialog_open = None
             self.battle_open = True
@@ -328,9 +362,10 @@ class Game:
             self.choose_dialog_open = False
             self.player.unblock()
 
-    # função de callback chamada ao final da batalha
     def end_battle(self, character, test):
         result = sum(test)
+        self.tint_mode = 'battle_mode'
+        sleep(2)
         self.audios['battle'].stop()
         self.audios[self.current_map].play(-1)
         self.battle_open = False
@@ -342,7 +377,9 @@ class Game:
         else:
             self.sounds['wrong_answer'].play()
             self.create_dialog(character, text, False)
-
+        self.clean_computer()
+        self.create_computer_by_result(test, character)
+        self.computer = Computer(self.computer_links,self.fonts, self.interface_frames, self.sounds)
 
     # verifica se o player colidiu com uma transição
     # para entrar na sala da monalessa é necessário ter a chave 0 do vitor
@@ -351,10 +388,13 @@ class Game:
     def check_transitions(self):
         transition_rect = [sprite for sprite in self.transition_sprites if sprite.rect.colliderect(self.player.hitbox)]    
         if transition_rect:
+            # restrição sala monalessa
             if transition_rect[0].dest == 'sala_monalessa' and not self.check_item(Item('0')):
                 self.sounds['51 - MMX - Can\'t Exit'].play()
+            # restrição sala patricia
             elif transition_rect[0].dest == 'sala_patricia' and not self.check_item(Item('1')):
                 self.sounds['51 - MMX - Can\'t Exit'].play()
+            # restrição sala final
             elif transition_rect[0].dest == 'end' and (not self.check_item(Item('0')) or not self.check_item(Item('1')) or not self.check_item(Item('2'))):
                 self.sounds['51 - MMX - Can\'t Exit'].play()
                 key = pygame.key.get_pressed()
@@ -372,28 +412,36 @@ class Game:
                 self.create_dialog(self.player, sprite.message)
                 sprite.kill()
 
+    # efeitos de status do player
+    def player_effects(self):
+        # timer
+        if not self.buff_timer.active:
+            self.player.speed = 350
+
     # efeito de transição
-    def tint(self, dt):
+    def tint_screen(self, dt):
         if self.tint_mode == 'untint':
             self.tint_progress -= self.tint_speed * dt
         if self.tint_mode == 'tint':
             self.tint_progress += self.tint_speed * dt    
             if self.tint_progress >= 255:
-                if self.transition_area == 'level':
-                    self.battle_open = False
-                    self.setup(self.tmx_maps[self.current_map], self.current_map, self.current_map)
-                    self.transition_area = None
-                else:
-                    dest_map = self.transition_area[0].dest
-                    src_map = self.transition_area[0].src
-                    self.setup(self.tmx_maps[dest_map], dest_map, src_map)
-                    self.tint_mode = 'untint'
-                    self.transition_area = None
-
+                dest_map = self.transition_area[0].dest
+                src_map = self.transition_area[0].src
+                self.setup(self.tmx_maps[dest_map], dest_map, src_map)
+                self.tint_mode = 'untint'
+                self.transition_area = None
         self.tint_progress = max(0, min(self.tint_progress, 255))
         self.tint_surf.set_alpha(self.tint_progress)
         self.screen.blit(self.tint_surf, (0,0))
 
+    # efeito de transição
+    def tint_battle(self, dt):
+        if self.tint_mode == 'end_battle':
+            self.tint_progress -= self.tint_speed * dt * 0.3
+        if self.tint_mode == 'battle_mode':
+            self.tint_progress += self.tint_speed * dt * 0.3
+            if self.tint_progress >= 255:
+                self.tint_mode = 'end_battle'
         self.tint_progress = max(0, min(self.tint_progress, 255))
         self.tint_surf.set_alpha(self.tint_progress)
         self.screen.blit(self.tint_surf, (0,0))
@@ -431,8 +479,13 @@ class Game:
             # print('Choose Dialog', self.choose_dialog_open)
 
             # tint
-            self.tint(dt)
+            self.tint_screen(dt)
+            self.tint_battle(dt)
             pygame.display.update()
+
+            # player buffs
+            self.player_effects()
+            self.buff_timer.update()
 
 if __name__ == '__main__':
 	game = Game()

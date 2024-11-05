@@ -1,6 +1,5 @@
 from settings import * 
 from timer import Timer
-from item import Item
 
 class Dialog:
     def __init__(self, character, player, all_sprites, font, end_dialog, message = None, collision_message =  True):
@@ -42,17 +41,6 @@ class Dialog:
             else:
                 self.end_dialog(self.character)
 
-    # def next_dialog(self):
-    #     self.dialog_index += 1
-    #     if self.dialog_index >= self.dialog_num:
-    #         self.current_dialog.kill()
-    #         return False
-    #     else:
-    #         self.current_dialog.kill()
-    #         self.current_dialog = DialogSprite(self.dialog[self.dialog_index], self.character, self.all_sprites, self.font)
-    #         return True
-        
-
     def update(self):
         self.dialog_timer.update()
         self.input()
@@ -63,7 +51,7 @@ class DialogSprite(pygame.sprite.Sprite):
         self.z = GAME_LAYERS['top']
 
         # text 
-        text_surf = font.render(message, False, COLORS['black'], wraplength = 300)
+        text_surf = font.render(message, False, COLORS['black'], wraplength = 400)
         padding = 8
         width = max(30, text_surf.get_width() + padding * 2)
         height = text_surf.get_height() + padding * 2

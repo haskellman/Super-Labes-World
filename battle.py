@@ -1,20 +1,24 @@
 from settings import * 
 from time import sleep
 from timer import Timer
+from support import import_image
 class Battle():
     def __init__(self, player, character, interface_frames, fonts, end_battle, sounds):
         self.player = player
         self.character = character
         self.interface_frames = interface_frames
         self.battle_bg = interface_frames['interface']['battle_interface']
-        self.frames = character.frames
+        self.character_frames = character.frames
+        self.player_frames = import_image('.', 'graphics', 'characters', 'player_battle')
         self.fonts = fonts
         self.end_battle = end_battle
         self.sounds = sounds
         self.display_surface = pygame.display.get_surface()
         self.battle_timer = Timer(2000, autostart = True)
         self.test = []
+        self.shadow = import_image('.', 'graphics', 'shadow', 'shadow')
 
+        self.frame_index = 0
         self.rows = 2
         self.cols = 2
         self.option = 0
@@ -26,6 +30,9 @@ class Battle():
         self.qtd_questions = len(self.questions)
         self.current_question = 0
         self.answer = -1
+
+        self.x = 0
+        self.move_right = True
 
 
     def draw(self, dt):
@@ -45,9 +52,25 @@ class Battle():
             self.icon = self.interface_frames['interface'][str(self.option)]
 
             # character
-            character_surf = self.frames['down_idle'][0]
-            character_rect = pygame.Rect(853, 137, 0, 0)
+            self.frame_index += ANIMATION_SPEED * dt 
+            character_surf = self.character_frames['down'][int(self.x % 4)]
+            # player
+            player_surf = self.player_frames
+            
+            # movement
+            if self.move_right:
+                self.x += 30 * dt
+                if self.x > 30:
+                    self.move_right = False
+            else:
+                self.x -= 30 * dt
+                if self.x < 0:
+                    self.move_right = True
+             
+            character_rect = pygame.Rect(853 + self.x, 137, 192, 192)
             self.display_surface.blit(pygame.transform.scale(character_surf,(192,192)), character_rect)
+            self.display_surface.blit(pygame.transform.scale(self.shadow, (78,30)), character_rect.midbottom + vector(-36,-20))
+            self.display_surface.blit(player_surf, (148 + self.x , 284))
 
             # surfaces
             text_surf = self.fonts['regular'].render(self.get_options(current_question_dict), False, text_color)
@@ -68,22 +91,22 @@ class Battle():
     def get_options(self,text_dict):
         new_text = []
         values_list = list(text_dict)
-        new_text.append(values_list[2][self.option] + ':\n')
+        new_text.append(self.text_format(values_list[2][self.option],60))
         return ''.join(new_text)
     
     def get_question(self, text_dict):
         new_text = []
         values_list = list(text_dict)
         new_text.append(values_list[0] + ':\n') # title
-        new_text.append (self.text_format(values_list[1])) # question
+        new_text.append (self.text_format(values_list[1],40)) # question
         return ''.join(new_text)
     
-    def text_format(self, text):
+    def text_format(self, text, size):
         words = text.split()
         lines = []
         current_line = ""
         for word in words:
-            if len(current_line) + len(word) <= 40:
+            if len(current_line) + len(word) <= size:
                 current_line += word + " "
             else:
                 lines.append(current_line + '\n')

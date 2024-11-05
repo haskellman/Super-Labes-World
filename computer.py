@@ -6,7 +6,7 @@ class Computer:
     def __init__(self, computer_links, fonts, interface_frames, sounds):
         self.fonts = fonts
         self.display_surface = pygame.display.get_surface()
-        self.rows = len(computer_links)
+        self.rows = len(computer_links) if len(computer_links) > 0 else 1 # correção de divisão por zero
         self.visible_items = 3
         self.index = 0
         self.rect = pygame.Rect(192,176, 608, 108)
