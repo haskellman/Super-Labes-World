@@ -233,6 +233,7 @@ CHARACTERS_DATA = {
 			},
 		},
     'mae': {
+        'name': 'tania',
 		'dialog': {
             'default': ['TO CANSADA DE LAVAR LOUÇA NESSA CASA!!!', '...' ,'ja está indo meu filho?', 'só um segundo pro café ficar pronto'],
 			'visited': ['prontinho hehe', 'eu disse que só levaria um segundo ^.^']},
@@ -243,6 +244,7 @@ CHARACTERS_DATA = {
         'questions': {},
 		},
     'pai': {
+        'name': 'wilson',
 		'dialog': {
             'default': ['o que será que eu leio hoje...', 'bom dia filho!', 'você ja está indo?', 'pegue café com sua mãe antes de sair!', 'nada melhor que um cafézinho para começar o dia!'],
 			'visited': ['tenho 237 encomendas pra entregar hoje, é brincadeira!']},
@@ -253,6 +255,7 @@ CHARACTERS_DATA = {
         'questions': {},
 		},
     'luaninha': {
+        'name': 'luana',
 		'dialog': {
             'default': ['seja bem vindo ao labgrad', 'aqui voce pode usar os computadores a vontade para estudar', 'mas tem uma regra muito importante rs','faça silencio!'],
 			'visited': ['seja bem vindo ao labgrad', 'aqui voce pode usar os computadores a vontade para estudar', 'mas tem uma regra muito importante rs','faça silencio!']},
@@ -263,6 +266,7 @@ CHARACTERS_DATA = {
         'questions': {},
 		},
     'aninha': {
+        'name': 'ana',
 		'dialog': {
             'default': ['bom dia irmão', 'não vá se esquecer de nada antes de sair', 'verifique sua mochila apertando a tecla "i"', 'boa sorte!'],
 			'visited': ['vai logo!!']},

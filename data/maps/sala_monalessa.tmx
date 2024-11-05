@@ -3,7 +3,7 @@
  <tileset firstgid="1" name="chao_ct" tilewidth="64" tileheight="64" tilecount="80" columns="10">
   <image source="../tilesets/israel-collection/chao_ct.png" width="640" height="512"/>
  </tileset>
- <tileset firstgid="81" name="objects" tilewidth="256" tileheight="220" tilecount="41" columns="0">
+ <tileset firstgid="81" name="objects" tilewidth="256" tileheight="220" tilecount="40" columns="0">
   <grid orientation="orthogonal" width="1" height="1"/>
   <tile id="40">
    <image source="../tilesets/top-down-collection-pack/objects/vaso_sanitario.png" width="64" height="128"/>
@@ -251,8 +251,11 @@
   <tile id="92">
    <image source="../tilesets/israel-collection/sofa_rosa.png" width="196" height="124"/>
   </tile>
+  <tile id="93">
+   <image source="../tilesets/israel-collection/estante_livros_resized.png" width="147" height="144"/>
+  </tile>
  </tileset>
- <tileset firstgid="266" name="objects" tilewidth="256" tileheight="220" tilecount="47" columns="0">
+ <tileset firstgid="267" name="objects" tilewidth="256" tileheight="220" tilecount="46" columns="0">
   <grid orientation="orthogonal" width="1" height="1"/>
   <tile id="40">
    <image source="../tilesets/top-down-collection-pack/objects/vaso_sanitario.png" width="64" height="128"/>
@@ -412,8 +415,8 @@
 </data>
  </layer>
  <objectgroup id="8" name="Terrain Objects">
-  <object id="26" gid="361" x="437.667" y="749.333" width="256" height="128"/>
-  <object id="27" gid="360" x="67" y="577.5" width="192" height="128"/>
+  <object id="26" gid="362" x="437.667" y="749.333" width="256" height="128"/>
+  <object id="27" gid="361" x="67" y="577.5" width="192" height="128"/>
  </objectgroup>
  <objectgroup id="3" name="Objects">
   <object id="20" gid="166" x="66.6667" y="484" width="184" height="120"/>
@@ -430,17 +433,17 @@
     <property name="item_id" value="computer"/>
    </properties>
   </object>
-  <object id="30" gid="362" x="645.5" y="287.5" width="60" height="184">
+  <object id="30" gid="363" x="645.5" y="287.5" width="60" height="184">
    <properties>
     <property name="item_id" value="abajour1"/>
    </properties>
   </object>
-  <object id="31" gid="363" x="398.167" y="287.5" width="60" height="184">
+  <object id="31" gid="364" x="398.167" y="287.5" width="60" height="184">
    <properties>
     <property name="item_id" value="abajour2"/>
    </properties>
   </object>
-  <object id="36" gid="356" x="477.5" y="723.333" width="201" height="100">
+  <object id="36" gid="357" x="477.5" y="723.333" width="201" height="100">
    <properties>
     <property name="item_id" value="dragon"/>
    </properties>
