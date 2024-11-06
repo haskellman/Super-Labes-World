@@ -299,6 +299,17 @@ CHARACTERS_DATA = {
         'item': None,
         'questions': {},
 		},
+    'angelus': {
+        'name': 'angelo',
+		'dialog': {
+            'default': ['qual foi meu parceiro', 'é muito fácil se perder na ufes', 'as placas ajudam bastante', 'aperte "BACKSPACE" próximo a elas', 'boa sorte mano!'],
+			'visited': ['qual foi meu parceiro', 'é muito fácil se perder na ufes', 'as placas ajudam bastante', 'aperte "BACKSPACE" próximo a elas', 'boa sorte mano!']},
+		'directions': ['down'],
+		'look_around': True,
+		'visited': False,
+        'item': None,
+        'questions': {},
+		},
     }
 
 
@@ -318,7 +329,7 @@ ITEMS_DATA = {
     '4': {
 		'name': 'cafe',
         'description':'Uma xícara de café forte e revigorante, feito com grãos de alta qualidade.' \
-        '+ 50% velocidade 15 segundos\n "seu ótimo efeito combinado a sua curta duração pode se tornar viciante cuidado"',
+        '+ 50% velocidade 15 segundos\n "seu ótimo efeito combinado a sua curta duração pode se tornar viciante. CUIDADO"',
     },
 }
 

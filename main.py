@@ -46,11 +46,11 @@ class Game:
         self.sounds = audio_importer('.', 'sounds')
 
         # mapa iniciais
-        # self.setup(self.tmx_maps['house'], 'house', 'house') #house
+        self.setup(self.tmx_maps['house'], 'house', 'house') #house
         # self.setup(self.tmx_maps['ponto_onibus'], 'ponto_onibus', 'house') #ponto_onibus
         # self.setup(self.tmx_maps['ufes'], 'ufes', 'ponto_onibus') #ufes
         # self.setup(self.tmx_maps['ct7'], 'ct7', 'ufes') #ct7
-        self.setup(self.tmx_maps['sala_vitor'], 'sala_vitor', 'ct7') #sala_vitor
+        # self.setup(self.tmx_maps['sala_vitor'], 'sala_vitor', 'ct7') #sala_vitor
         # self.setup(self.tmx_maps['sala_monalessa'], 'sala_monalessa', 'ct7') #sala_monalessa
         # self.setup(self.tmx_maps['sala_patricia'], 'sala_patricia', 'ct7') #sala_patricia
         # self.setup(self.tmx_maps['ct9'], 'ct9', 'ufes') #ct9
@@ -77,9 +77,46 @@ class Game:
 
 
         # items iniciais
-        self.add_item(Item('0'))
-        self.add_item(Item('1'))
-        self.add_item(Item('2'))
+        # self.add_item(Item('0'))
+        # self.add_item(Item('1'))
+        # self.add_item(Item('2'))
+        self.add_item(Item('4'))
+        self.add_item(Item('4'))
+        self.add_item(Item('4'))
+        self.add_item(Item('4'))
+        self.add_item(Item('4'))
+        self.add_item(Item('4'))
+        self.add_item(Item('4'))
+        self.add_item(Item('4'))
+        self.add_item(Item('4'))
+        self.add_item(Item('4'))
+        self.add_item(Item('4'))
+        self.add_item(Item('4'))
+        self.add_item(Item('4'))
+        self.add_item(Item('4'))
+        self.add_item(Item('4'))
+        self.add_item(Item('4'))
+        self.add_item(Item('4'))
+        self.add_item(Item('4'))
+        self.add_item(Item('4'))
+        self.add_item(Item('4'))
+        self.add_item(Item('4'))
+        self.add_item(Item('4'))
+        self.add_item(Item('4'))
+        self.add_item(Item('4'))
+        self.add_item(Item('4'))
+        self.add_item(Item('4'))
+        self.add_item(Item('4'))
+        self.add_item(Item('4'))
+        self.add_item(Item('4'))
+        self.add_item(Item('4'))
+        self.add_item(Item('4'))
+        self.add_item(Item('4'))
+        self.add_item(Item('4'))
+        self.add_item(Item('4'))
+        self.add_item(Item('4'))
+        self.add_item(Item('4'))
+        self.add_item(Item('4'))
         self.add_item(Item('4'))
 
 # ------------------------------------------------------------------------------------------------------------------------------------
@@ -302,9 +339,25 @@ class Game:
                         if sprite.item_id == 'placa_ic4':
                             self.create_dialog(self.player, "A placa diz: 'IC4 - CE | Centro de Educação'...\n\nsinto que estou próximo", False)
                         if sprite.item_id == 'placa_ct3':
-                            self.create_dialog(self.player, "A placa diz: 'CT3 - Centro Tecnológico'...\n\nopa ja estou no ct ", False)
+                            self.create_dialog(self.player, "A placa diz: 'CT3 - Centro Tecnológico'...\n\nessas numerações de ct não fazem sentido algum!! ", False)
+                        if sprite.item_id == 'placa_ct7':
+                            self.create_dialog(self.player, "A placa diz: 'CT7 - Centro Tecnológico'...\n\nFinalmente cheguei ", False)
+                        if sprite.item_id == 'placa_ct9':
+                            self.create_dialog(self.player, "A placa diz: 'CT9 - Centro Tecnológico'...\n\ntalvez eu deva estudar aqui antes do meu teste", False)
+                        if sprite.item_id == 'placa_ct10':
+                            self.create_dialog(self.player, "A placa diz: 'CT10 - Centro Tecnológico'...\n\nopa o ct9 é logo acima", False)
                         if sprite.item_id == 'placa_ct12':
                             self.create_dialog(self.player, "A placa diz: 'CT12 - Centro Tecnológico'...\n\no ct7 deve ser logo acima ", False)
+                        if sprite.item_id == 'placa_vire_esquerda':
+                            self.create_dialog(self.player, "A placa diz: CT7 e CT9 a esquerda'...\n\n...que coisa! parece que essas placas sabem pra onde eu quero ir ", False)
+                        if sprite.item_id == 'placa_cantina':
+                            self.create_dialog(self.player, "A placa diz: 'Cantina'...\n\n...hummm cheirinho de gordura ", False)
+                        if sprite.item_id == 'placa_ru':
+                            self.create_dialog(self.player, "A placa diz: Restaurante Universitário'...\n\n...poh bateu a fome... mas está fechado ", False)
+                        if sprite.item_id == 'placa_bc':
+                            self.create_dialog(self.player, "A placa diz: Biblioteca Central'...\n\n...eu até que estudaria... mas está fechado ", False)
+                        if sprite.item_id == 'placa_lake':
+                            self.create_dialog(self.player, "A placa diz: Lagoa da Ufes Reza a lenda que sua água é radioativa'...\n\n...'-' ", False)
             # inventario
             if keys[pygame.K_i]:
                 self.inventory_open = not self.inventory_open
