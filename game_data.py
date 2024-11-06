@@ -19,7 +19,7 @@ CHARACTERS_DATA = {
     'vitor': {
 		'name': 'Vitor',
 		'dialog': {
-            'default': ['então você conseguiu chegar até aqui!', 'devo parabenizá-lo', 'mas daqui você não passa!', 'sou conhecido como javaboy', 'para conseguir a minha chave você terá que me vencer em uma batalha!', 'você aceita o desafio?'],
+            'default': ['então você conseguiu chegar até aqui!', 'devo parabenizá-lo por isso...', 'mas voce não vai conseguir minha chave tão facilmente', 'sou vitor, o javaboy', 'para conseguir a minha chave você terá que me vencer em uma batalha de java!', 'você aceita o desafio?'],
 			'visited': ['parabéns!', 'você conseguiu mostrar domínio teórico em java', 'meus parabéns!', 'agora vá conseguir a aprovação da monalessa', 'sei que você consegue' ,'boa sorte!']},
 		'directions': ['down'],
 		'look_around': True,
@@ -28,7 +28,7 @@ CHARACTERS_DATA = {
         'questions': {
 				0: {
 					'title': 'Pergunta 1',
-					'description':'Você e sua equipe estão atuando no desenvolvimento de um sistema para a plataforma de educação online. Um dos membros da equipe apresentou uma dúvida sobre a utilização do comando “try..catch..finally”.',
+					'description':'o que o bloco de comando “try..catch..finally” faz?.',
 					'options': ['Um bloco opcional que contém o código a ser executado sempre, independentemente de ocorrer ou não uma exceção. ',
                  				'Um bloco reservado apenas para manipulação de erros críticos. ',
                                 'Um bloco que só é executado se uma exceção for lançada. ',
@@ -346,7 +346,14 @@ COMPUTER_DATA = {
         'url': 'https://www.google.com',
         'color': 'white',
 	},
-    
-	
-        
 }
+
+CORRECTS_SPEAKS =[ 'vamos ver se voce é bom mesmo', 'Parabéns! Quem diria que você sabia a resposta.', 'Uau, acertou! Talvez você realmente saiba do que estamos falando aqui',
+                  'Acertou de primeira? Vou anotar isso, é um milagre!', 'Ora, ora, parece que alguém andou estudando!', 'Ah, que surpresa agradável, você acertou!',
+                  'Nossa, até me emocionei com essa resposta!', 'Ah, sabia que esse dia chegaria! Você acertou!', 'É, parece que milagres realmente acontecem!',
+                  'Veja só, nem precisei desenhar pra você entender!']
+
+WRONGS_SPEAKS = ['Nossa, quase... só faltaram todos os detalhes certos!', 'Interessante! Só não foi a resposta que eu esperava.', 'Uau, passou longe! Mas foi uma tentativa original, eu diria.',
+                  'Chegou bem perto... de errar tudo!', 'Interessante abordagem... só não se aplica a essa matéria.', 'Quase lá! Só faltou tudo!', 'Quase lá! Tipo... quase na mesma galáxia!',
+                  'Interessante abordagem! Se estivéssemos falando de outra coisa.', 'É uma resposta! Só não para essa questão.', 'Você chegou lá! Só que no lugar errado.']
+

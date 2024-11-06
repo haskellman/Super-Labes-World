@@ -169,6 +169,7 @@ class Game:
             'dialog': pygame.font.Font(join('.', 'graphics', 'fonts', 'PixeloidSans.ttf'), 30),
             'bold': pygame.font.Font(join('.', 'graphics', 'fonts', 'dogicapixelbold.otf'), 20),
             'regular': pygame.font.Font(join('.', 'graphics', 'fonts', 'PixeloidSans.ttf'), 18),
+            'regular_mid': pygame.font.Font(join('.', 'graphics', 'fonts', 'PixeloidSans.ttf'), 22),
             'regular_big': pygame.font.Font(join('.', 'graphics', 'fonts', 'PixeloidSans.ttf'), 34),
         }
         self.interface_frames = {
@@ -206,7 +207,6 @@ class Game:
         # Objetos em cima do terreno
         try:
             for obj in tmx_map.get_layer_by_name('Terrain Objects'):
-                print(obj)
                 Sprite((obj.x, obj.y), obj.image, self.all_sprites, GAME_LAYERS['bg'])
         except ValueError as ve:
             pass
@@ -382,6 +382,7 @@ class Game:
 
     # Callback functions
     def end_dialog(self,character):
+        self.dialog_open = None
         # batalha
         if check_battle(character) and not self.battle_open and character.character_data['visited'] == False:
             self.player.block()
@@ -395,7 +396,7 @@ class Game:
             self.add_item(Item(character.character_data['item']))
             character.character_data['item'] = None
         if not self.choose_dialog_open:
-            self.dialog_open = None
+            # self.dialog_open = None
             self.player.unblock()
             character.character_data['visited'] = True
 
@@ -411,9 +412,11 @@ class Game:
             self.dialog_open = None
             self.battle_open = True
         else:
-            self.dialog_open = None
+            self.create_dialog(character, "hahaha, veio de tão longe para arregar?", False)
+            # self.dialog_open = None
             self.choose_dialog_open = False
             self.player.unblock()
+        self.dialog_open = None
 
     def end_battle(self, character, test):
         result = sum(test)
@@ -426,7 +429,7 @@ class Game:
         if (result >= 7):
             self.sounds['correct_answer'].play()
             character.character_data['visited'] = True
-            self.create_dialog(character, text + ' tome... pegue a minha chave', False)
+            self.create_dialog(character, text + ' tome... pode ficar com a chave\ncheque no computador as questões que voce errou', False)
         else:
             self.sounds['wrong_answer'].play()
             self.create_dialog(character, text, False)
@@ -452,7 +455,7 @@ class Game:
                 self.sounds['51 - MMX - Can\'t Exit'].play()
                 key = pygame.key.get_pressed()
                 if key[pygame.K_SPACE]:
-                    self.create_dialog(self.player, "Você não pode sair sem os itens necessários", False)
+                    print('implementar')
             else:       
                 self.player.block()
                 self.transition_area = transition_rect

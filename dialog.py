@@ -15,12 +15,12 @@ class Dialog:
         self.dialog_timer = Timer(500, autostart = True)
 
         # collision message
-        if collision_message and message:
+        if message and collision_message:
             self.dialog = message.split('\n')
             self.dialog_num = len(self.dialog)
             self.current_dialog = DialogSprite(message[self.dialog_index], self.character, self.all_sprites, self.font)
         # sprite message
-        elif not collision_message and message:
+        elif message and not collision_message:
             self.dialog = message
             self.dialog_num = 1
             self.current_dialog = DialogSprite(self.dialog, self.character, self.all_sprites, self.font)

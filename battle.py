@@ -2,6 +2,10 @@ from settings import *
 from time import sleep
 from timer import Timer
 from support import import_image
+from dialog import DialogSprite
+from game_data import CORRECTS_SPEAKS, WRONGS_SPEAKS
+# CORRECTS_SPEAKS =[ 'essa tava']
+# WRONGS_SPEAKS = ['Que pena! Você errou!', 'Não foi dessa vez! Você errou!', 'Você errou!']
 class Battle():
     def __init__(self, player, character, interface_frames, fonts, end_battle, sounds):
         self.player = player
@@ -31,8 +35,19 @@ class Battle():
         self.current_question = 0
         self.answer = -1
 
+        # animation
         self.x = 0
-        self.move_right = True
+        self.y = 0
+        self.move_horizontal = True
+        self.move_vertical = False
+        self.error_mode = False
+
+        # speak
+        self.character_rect = pygame.Rect(853, 137, 192, 192)
+        self.counter = 0
+        self.speed = 300
+        self.done = False
+        self.speak_rect = pygame.Rect(756, 29, 421, 99)
 
 
     def draw(self, dt):
@@ -48,33 +63,32 @@ class Battle():
             rect_B = pygame.Rect(942, 540, self.rect_width, self.rect_height)
             rect_C = pygame.Rect(632, 630, self.rect_width, self.rect_height)
             rect_D = pygame.Rect(942, 630, self.rect_width, self.rect_height)
-            question_rect = pygame.Rect(756, 29, 421, 99)
+            question_rect = pygame.Rect(93, 29, 421, 99)
             self.icon = self.interface_frames['interface'][str(self.option)]
+            name_rect = pygame.Rect(838, 370, 0, 0)
+            level_rect = pygame.Rect(844, 396, 0, 0)
 
-            # character
+
+            # character animation
             self.frame_index += ANIMATION_SPEED * dt 
-            character_surf = self.character_frames['down'][int(self.x % 4)]
+            character_surf = self.character_frames['up' if self.error_mode else 'left'][int(self.frame_index % 4)] # animation
             # player
             player_surf = self.player_frames
             
             # movement
-            if self.move_right:
-                self.x += 30 * dt
-                if self.x > 30:
-                    self.move_right = False
-            else:
-                self.x -= 30 * dt
-                if self.x < 0:
-                    self.move_right = True
-             
-            character_rect = pygame.Rect(853 + self.x, 137, 192, 192)
-            self.display_surface.blit(pygame.transform.scale(character_surf,(192,192)), character_rect)
-            self.display_surface.blit(pygame.transform.scale(self.shadow, (78,30)), character_rect.midbottom + vector(-36,-20))
-            self.display_surface.blit(player_surf, (148 + self.x , 284))
+            self.x = self.move_x(dt, 30, 30)
+            self.y = self.move_y(dt, 50, 30)
+            self.character_rect = pygame.Rect(853 + self.x, 137 + self.y, 192, 192)
+
+            self.display_surface.blit(pygame.transform.scale(character_surf,(192,192)), self.character_rect)
+            self.display_surface.blit(pygame.transform.scale(self.shadow, (78,30)), self.character_rect.midbottom + vector(-36,-20))
+            self.display_surface.blit(player_surf, (148 + (self.x // 3), 284))
 
             # surfaces
             text_surf = self.fonts['regular'].render(self.get_options(current_question_dict), False, text_color)
             question_surf = self.fonts['regular'].render(self.get_question(current_question_dict), False, text_color)
+            name_surf = self.fonts['regular_mid'].render(self.character.character_data['name'], False, text_color)
+            level_surf = self.fonts['regular_mid'].render('??????', False, text_color)
 
             # draw
             if(self.option == 0):
@@ -87,11 +101,38 @@ class Battle():
                 self.display_surface.blit(self.icon, rect_D, special_flags = pygame.BLEND_RGB_ADD )
             self.display_surface.blit(text_surf, self.option_rect)
             self.display_surface.blit(question_surf, question_rect)
+            self.display_surface.blit(name_surf, name_rect)
+            self.display_surface.blit(level_surf, level_rect)
+
+    def move_x(self, dt, speed, range):
+        if not self.error_mode:
+            if self.move_horizontal:
+                self.x += speed * dt
+                if self.x > range:
+                    self.move_horizontal = False
+            else:
+                self.x -= speed * dt
+                if self.x < 0:
+                    self.move_horizontal = True
+        return self.x
+    
+    def move_y(self, dt, speed, range):
+        if self.error_mode:
+            if self.move_vertical:
+                self.y += speed * dt
+                if self.y > range:
+                    self.move_vertical = False
+            else:
+                self.y -= speed * dt
+                if self.y < 0:
+                    self.move_vertical = True
+        return self.y
+
 
     def get_options(self,text_dict):
         new_text = []
         values_list = list(text_dict)
-        new_text.append(self.text_format(values_list[2][self.option],60))
+        new_text.append(self.text_format(values_list[2][self.option],48))
         return ''.join(new_text)
     
     def get_question(self, text_dict):
@@ -133,17 +174,47 @@ class Battle():
             if keys[pygame.K_RETURN]:
                 self.battle_timer.activate()
                 self.current_question += 1
-                if self.option == self.answer:
-                    self.test.append(1)
-                    self.sounds['correct_answer'].play()
-                else:
-                    self.test.append(0)
-                    self.sounds['wrong_answer'].play()
+                self.check_answer()
+                
+    # checagem da resposta
+    def check_answer(self):
+        if self.option == self.answer:
+            self.test.append(1)
+            self.error_mode = False
+            self.sounds['correct_answer'].play()
+            self.counter = 0
+            self.done = False
+
+        else:
+            self.test.append(0)
+            self.error_mode = True
+            self.sounds['wrong_answer'].play()
+            self.counter = 0
+            self.done = False
 
     def check_end_battle(self):
         if self.current_question == self.qtd_questions:
             self.end_battle(self.character, self.test)
 
+    def draw_dialog(self, dt):
+        # quando a pessoa erra o personagem fala um dos dialogos de erro
+        text = self.text_format(WRONGS_SPEAKS[self.current_question], 30)
+        if self.error_mode:
+            if self.counter < len(WRONGS_SPEAKS[self.current_question]) * self.speed:
+                self.counter += int(5000 * dt)
+            elif self.counter >= len(WRONGS_SPEAKS[self.current_question]) * self.speed:
+                self.done = True
+            text_surf = self.fonts['regular'].render(text[0:self.counter//self.speed], True, COLORS['black'])
+            self.display_surface.blit(text_surf, self.speak_rect)
+
+        # quando a pessoa acerta o personagem fala o dialogo de acerto
+        else:
+            if self.counter < len(CORRECTS_SPEAKS[self.current_question]) * self.speed:
+                self.counter += int(5000 * dt)
+            elif self.counter >= len(CORRECTS_SPEAKS[self.current_question]) * self.speed:
+                self.done = True                
+            text_surf = self.fonts['regular'].render(CORRECTS_SPEAKS[self.current_question][0:self.counter//self.speed], True, COLORS['black'])
+            self.display_surface.blit(text_surf, self.speak_rect)  
 
     def update(self, dt):
         self.battle_timer.update()
@@ -151,3 +222,5 @@ class Battle():
         self.input()
         self.display_surface.blit(self.battle_bg)
         self.draw(dt)
+        self.draw_dialog(dt)
+        print(self.current_question)
