@@ -1,0 +1,163 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.10" tiledversion="1.11.0" orientation="orthogonal" renderorder="right-down" width="19" height="20" tilewidth="64" tileheight="64" infinite="0" nextlayerid="7" nextobjectid="22">
+ <tileset firstgid="1" name="tapete_vermelho" tilewidth="64" tileheight="64" tilecount="20" columns="5">
+  <image source="../tilesets/israel-collection/tapete_vermelho.png" width="320" height="256"/>
+ </tileset>
+ <tileset firstgid="21" name="chao_ct" tilewidth="64" tileheight="64" tilecount="80" columns="10">
+  <image source="../tilesets/israel-collection/chao_ct.png" width="640" height="512"/>
+ </tileset>
+ <layer id="2" name="Terrain" width="19" height="20">
+  <data encoding="csv">
+34,35,35,35,35,35,35,35,35,35,35,35,35,35,35,35,35,35,36,
+44,45,22,23,45,22,23,45,45,45,45,45,22,23,45,22,23,45,46,
+54,55,32,33,55,32,33,55,55,55,55,55,32,33,55,32,33,55,56,
+64,65,65,65,65,65,65,65,65,65,65,65,65,65,65,65,65,65,66,
+74,75,75,75,75,75,75,75,75,75,75,75,75,75,75,75,75,75,76,
+74,75,75,75,75,75,75,75,75,75,75,75,75,75,75,75,75,75,76,
+74,75,75,75,75,75,75,75,75,75,75,75,75,75,75,75,75,75,76,
+74,75,75,75,75,75,75,75,75,75,75,75,75,75,75,75,75,75,76,
+74,75,75,75,75,75,75,75,75,75,75,75,75,75,75,75,75,75,76,
+74,75,75,75,75,75,75,75,75,75,75,75,75,75,75,75,75,75,76,
+74,75,75,75,75,75,75,75,75,75,75,75,75,75,75,75,75,75,76,
+74,75,75,75,75,75,75,75,75,75,75,75,75,75,75,75,75,75,76,
+74,75,75,75,75,75,75,75,75,75,75,75,75,75,75,75,75,75,76,
+74,75,75,75,75,75,75,75,75,75,75,75,75,75,75,75,75,75,76,
+74,75,75,75,75,75,75,75,75,75,75,75,75,75,75,75,75,75,76,
+74,75,75,75,75,75,75,75,75,75,75,75,75,75,75,75,75,75,76,
+74,75,75,75,75,75,75,75,75,75,75,75,75,75,75,75,75,75,76,
+74,75,75,75,75,75,75,75,75,75,75,75,75,75,75,75,75,75,76,
+74,75,75,75,75,75,75,75,75,75,75,75,75,75,75,75,75,75,76,
+84,85,85,85,85,85,85,85,81,83,82,85,85,85,85,85,85,85,86
+</data>
+ </layer>
+ <layer id="1" name="Terrain Top" width="19" height="20">
+  <data encoding="csv">
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+52,52,52,52,52,52,52,0,2,3,4,0,52,52,52,52,52,52,52,
+52,52,52,52,52,52,52,6,7,13,9,10,52,52,52,52,52,52,52,
+52,52,52,52,52,52,52,6,7,13,9,10,52,52,52,52,52,52,52,
+52,52,52,52,52,52,52,6,7,13,9,10,52,52,52,52,52,52,52,
+52,52,52,52,52,52,52,6,7,13,9,10,52,52,52,52,52,52,52,
+52,52,52,52,52,52,52,6,7,13,9,10,52,52,52,52,52,52,52,
+52,52,52,52,52,52,52,6,7,13,9,10,52,52,52,52,52,52,52,
+52,52,52,52,52,52,52,6,7,13,9,10,52,52,52,52,52,52,52,
+52,52,52,52,52,52,52,6,7,13,9,10,52,52,52,52,52,52,52,
+52,52,52,52,52,52,52,6,7,13,9,10,52,52,52,52,52,52,52,
+52,52,52,52,52,52,52,6,7,13,9,10,52,52,52,52,52,52,52,
+52,52,52,52,52,52,52,6,7,8,9,10,52,52,52,52,52,52,52,
+52,52,52,52,52,52,52,6,7,8,9,10,52,52,52,52,52,52,52,
+52,52,52,52,52,52,52,11,7,13,9,15,52,52,52,52,52,52,52,
+52,52,52,52,52,52,52,11,12,13,14,15,52,52,52,0,52,52,52,
+52,52,52,52,52,52,52,52,17,18,19,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+</data>
+ </layer>
+ <objectgroup id="3" name="Objects"/>
+ <objectgroup id="5" name="Collisions">
+  <object id="8" x="678.915" y="1182.87" width="478.833" height="17.3333"/>
+  <object id="9" x="64.9151" y="1184.37" width="478.833" height="17.3333"/>
+  <object id="10" x="46.4983" y="113.376" width="22.6667" height="1117.83"/>
+  <object id="11" x="1159.5" y="82.1277" width="22.6667" height="1117.83"/>
+  <object id="12" x="67.4151" y="136.876" width="1096.33" height="17.3333"/>
+ </objectgroup>
+ <objectgroup id="6" name="Entities">
+  <object id="13" name="Player" x="607.5" y="1180">
+   <properties>
+    <property name="character_id" value="player"/>
+    <property name="direction" value="up"/>
+    <property name="pos" value="ct7"/>
+   </properties>
+   <point/>
+  </object>
+  <object id="14" name="Character" x="481.333" y="1040">
+   <properties>
+    <property name="change_direction" type="bool" value="false"/>
+    <property name="character_id" value="monalessa"/>
+    <property name="direction" value="down"/>
+    <property name="graphic" value="monalessa"/>
+    <property name="radius" value="400"/>
+   </properties>
+   <point/>
+  </object>
+  <object id="15" name="Character" x="478.667" y="906.667">
+   <properties>
+    <property name="change_direction" type="bool" value="true"/>
+    <property name="character_id" value="aninha"/>
+    <property name="direction" value="down"/>
+    <property name="graphic" value="aninha"/>
+    <property name="radius" value="400"/>
+   </properties>
+   <point/>
+  </object>
+  <object id="16" name="Character" x="746.667" y="976.333">
+   <properties>
+    <property name="change_direction" type="bool" value="true"/>
+    <property name="character_id" value="pai"/>
+    <property name="direction" value="down"/>
+    <property name="graphic" value="pai"/>
+    <property name="radius" value="400"/>
+   </properties>
+   <point/>
+  </object>
+  <object id="17" name="Character" x="480.667" y="777.333">
+   <properties>
+    <property name="change_direction" type="bool" value="true"/>
+    <property name="character_id" value="luaninha"/>
+    <property name="direction" value="down"/>
+    <property name="graphic" value="luaninha"/>
+    <property name="radius" value="400"/>
+   </properties>
+   <point/>
+  </object>
+  <object id="18" name="Character" x="749.333" y="1086">
+   <properties>
+    <property name="change_direction" type="bool" value="false"/>
+    <property name="character_id" value="patricia"/>
+    <property name="direction" value="down"/>
+    <property name="graphic" value="patricia"/>
+    <property name="radius" value="400"/>
+   </properties>
+   <point/>
+  </object>
+  <object id="19" name="Character" x="747.333" y="852.333">
+   <properties>
+    <property name="change_direction" type="bool" value="true"/>
+    <property name="character_id" value="mae"/>
+    <property name="direction" value="down"/>
+    <property name="graphic" value="mae"/>
+    <property name="radius" value="400"/>
+   </properties>
+   <point/>
+  </object>
+  <object id="20" name="Character" x="480.667" y="653.667">
+   <properties>
+    <property name="change_direction" type="bool" value="true"/>
+    <property name="character_id" value="vitor"/>
+    <property name="direction" value="down"/>
+    <property name="graphic" value="vitor"/>
+    <property name="radius" value="400"/>
+   </properties>
+   <point/>
+  </object>
+  <object id="21" name="Character" x="745.333" y="715.333">
+   <properties>
+    <property name="change_direction" type="bool" value="false"/>
+    <property name="character_id" value="angelus"/>
+    <property name="direction" value="down"/>
+    <property name="graphic" value="young_guy"/>
+    <property name="radius" value="400"/>
+   </properties>
+   <point/>
+  </object>
+ </objectgroup>
+ <objectgroup id="4" name="Transitions">
+  <object id="2" x="551.167" y="1220.33" width="115.167" height="17.8333">
+   <properties>
+    <property name="dest" value="ct7"/>
+    <property name="src" value="end"/>
+   </properties>
+  </object>
+ </objectgroup>
+</map>
