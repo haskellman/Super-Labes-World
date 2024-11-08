@@ -18,7 +18,7 @@ class Battle():
         self.end_battle = end_battle
         self.sounds = sounds
         self.display_surface = pygame.display.get_surface()
-        self.battle_timer = Timer(2000, autostart = True)
+        self.battle_timer = Timer(1, autostart = True)
         self.test = []
         self.shadow = import_image('.', 'graphics', 'shadow', 'shadow')
 
@@ -70,15 +70,31 @@ class Battle():
 
 
             # character animation
-            self.frame_index += ANIMATION_SPEED * dt 
-            character_surf = self.character_frames['up' if self.error_mode else 'left'][int(self.frame_index % 4)] # animation
+            # self.frame_index += ANIMATION_SPEED * dt 
+            # character_surf = self.character_frames['up' if self.error_mode else 'left'][int(self.frame_index % 4)] # animation
             # player
             player_surf = self.player_frames
             
             # movement
-            self.x = self.move_x(dt, 30, 30)
-            self.y = self.move_y(dt, 50, 30)
+            if self.current_question < self.qtd_questions / 3:
+                self.frame_index += ANIMATION_SPEED * dt 
+                self.x = self.move_x(dt, 30, 30)
+                self.y = self.move_y(dt, 50, 30)
+            elif self.current_question < self.qtd_questions / 2 + 1:
+                self.frame_index += 2 * ANIMATION_SPEED * dt 
+                self.x = self.move_x(dt, 60, 35)
+                self.y = self.move_y(dt, 100, 35)
+            elif self.current_question < self.qtd_questions / 2 + 3:
+                self.frame_index += 3 * ANIMATION_SPEED * dt 
+                self.x = self.move_x(dt, 90, 40)
+                self.y = self.move_y(dt, 150, 40)
+            else: # 9 e 10
+                self.frame_index += 4 * ANIMATION_SPEED * dt 
+                self.x = self.move_x(dt, 120, 50)
+                self.y = self.move_y(dt, 200, 50)
+
             self.character_rect = pygame.Rect(853 + self.x, 137 + self.y, 192, 192)
+            character_surf = self.character_frames['up' if self.error_mode else 'left'][int(self.frame_index % 4)] # animation
 
             self.display_surface.blit(pygame.transform.scale(character_surf,(192,192)), self.character_rect)
             self.display_surface.blit(pygame.transform.scale(self.shadow, (78,30)), self.character_rect.midbottom + vector(-36,-20))
@@ -198,8 +214,8 @@ class Battle():
 
     def draw_dialog(self, dt):
         # quando a pessoa erra o personagem fala um dos dialogos de erro
-        text = self.text_format(WRONGS_SPEAKS[self.current_question], 30)
         if self.error_mode:
+            text = self.text_format(WRONGS_SPEAKS[self.current_question], 30)
             if self.counter < len(WRONGS_SPEAKS[self.current_question]) * self.speed:
                 self.counter += int(5000 * dt)
             elif self.counter >= len(WRONGS_SPEAKS[self.current_question]) * self.speed:
@@ -209,6 +225,7 @@ class Battle():
 
         # quando a pessoa acerta o personagem fala o dialogo de acerto
         else:
+            text = self.text_format(CORRECTS_SPEAKS[self.current_question], 30)
             if self.counter < len(CORRECTS_SPEAKS[self.current_question]) * self.speed:
                 self.counter += int(5000 * dt)
             elif self.counter >= len(CORRECTS_SPEAKS[self.current_question]) * self.speed:
