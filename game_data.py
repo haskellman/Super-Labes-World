@@ -1,13 +1,4 @@
 CHARACTERS_DATA = {
-	'char_1': {
-		'dialog': {
-			'default': ['voce entendeu?'], 
-			'visited': ['Parabens poh voce é brabo', 'potato']},
-		'directions': ['down'],
-		'look_around': True,
-		'visited': False,
-        'questions': {},
-		},
     'player': {
         'name': 'player',
 		'dialog': {
@@ -20,10 +11,11 @@ CHARACTERS_DATA = {
 		'name': 'Vitor',
 		'dialog': {
             'default': ['então você conseguiu chegar até aqui!', 'devo parabenizá-lo por isso...', 'mas voce não vai conseguir minha chave tão facilmente', 'sou vitor, o javaboy', 'então voce quer minha chave? para isso você terá que me vencer em uma batalha de java!', 'vamos começar!!!'],
-			'visited': ['parabéns!', 'você conseguiu mostrar domínio teórico em java', 'meus parabéns!', 'agora vá conseguir a aprovação da monalessa', 'sei que você consegue' ,'boa sorte!']},
+			'visited': ['parabéns!', 'você conseguiu mostrar domínio teórico em java', 'meus parabéns!', 'agora vá conseguir a aprovação da monalessa', 'sei que você consegue' ,'boa sorte!'],
+            'end': ['parabéns!'],},
 		'directions': ['down'],
-		'look_around': True,
 		'visited': False,
+        'end': False,
         'item': '0',
         'questions': {
 				0: {
@@ -132,10 +124,11 @@ CHARACTERS_DATA = {
 		'name': 'Monalessa',
 		'dialog': {
             'default': ['se você está aqui isso significa...', 'que você foi aprovado pelo java master, vitor', 'nada mal...', 'mas agora a coisa fica séria', 'eu sou a monalessa', 'e você vai ter que me provar que manja de git', 'vamos começar!!!'],
-			'visited': ['meus parabéns!', 'você está quase pronto para entrar no labes', 'mas o teste final é com a patricia', 'ela não é fácil não mas...', 'eu acredito em você', 'boa sorte!']},
+			'visited': ['meus parabéns!', 'você está quase pronto para entrar no labes', 'mas o teste final é com a patricia', 'ela não é fácil não mas...', 'eu acredito em você', 'boa sorte!'],
+            'end': ['parabéns!'],},
 		'directions': ['down'],
-		'look_around': True,
 		'visited': False,
+        'end': False,
         'item': '1',
         'questions': {
 				0: {
@@ -254,10 +247,11 @@ CHARACTERS_DATA = {
         'name': 'Patricia',
 		'dialog': {
             'default': ['seja bem vindo!', 'então voce conseguiu vencer os meus colegas...', 'eles devem ter pegado leve com você', 'não espere o mesmo de mim haha', 'eu sou a patricia', 'está pronto para voltar pra casa chorando?',],
-			'visited': ['uauu', 'voce conseguiu superar o meu desafio', 'você merece isso!', 'com isso você tem todas as chaves!', 'agora que desafio de verdade', 'você pode entrar no sigAmaes', 'boa sorte!']},
+			'visited': ['uauu', 'voce conseguiu superar o meu desafio', 'você merece isso!', 'com isso você tem todas as chaves!', 'agora que desafio de verdade', 'você pode entrar no sigAmaes', 'boa sorte!'],
+            'end': ['parabéns!', 'você conseguiu!', 'você é um verdadeiro mestre!', 'agora você pode entrar no sigAmaes', 'boa sorte!'],},
 		'directions': ['down'],
-		'look_around': True,
 		'visited': False,
+        'end': False,
         'item': '2',
         'questions': {
 				0: {
@@ -276,10 +270,11 @@ CHARACTERS_DATA = {
         'name': 'tania',
 		'dialog': {
             'default': ['TO CANSADA DE LAVAR LOUÇA NESSA CASA!!!', '...' ,'ja está indo meu filho?', 'só um segundo pro café ficar pronto'],
-			'visited': ['prontinho hehe', 'eu disse que só levaria um segundo ^.^']},
+			'visited': ['prontinho hehe', 'eu disse que só levaria um segundo ^.^'],
+            'end': ['parabéns!'],},
 		'directions': ['down'],
-		'look_around': True,
 		'visited': False,
+        'end': False,
         'item': '4',
         'questions': {},
 		},
@@ -287,10 +282,11 @@ CHARACTERS_DATA = {
         'name': 'wilson',
 		'dialog': {
             'default': ['o que será que eu leio hoje...', 'bom dia filho!', 'você ja está indo?', 'pegue café com sua mãe antes de sair!', 'nada melhor que um cafézinho para começar o dia!'],
-			'visited': ['tenho 237 encomendas pra entregar hoje, é brincadeira!']},
+			'visited': ['tenho 237 encomendas pra entregar hoje, é brincadeira!'],
+            'end': ['parabéns!'],},
 		'directions': ['down'],
-		'look_around': True,
 		'visited': False,
+        'end': False,
         'item': None,
         'questions': {},
 		},
@@ -298,10 +294,11 @@ CHARACTERS_DATA = {
         'name': 'luana',
 		'dialog': {
             'default': ['seja bem vindo ao labgrad', 'aqui voce pode usar os computadores a vontade para estudar', 'mas tem uma regra muito importante rs','faça silencio!'],
-			'visited': ['seja bem vindo ao labgrad', 'aqui voce pode usar os computadores a vontade para estudar', 'mas tem uma regra muito importante rs','faça silencio!']},
+			'visited': ['seja bem vindo ao labgrad', 'aqui voce pode usar os computadores a vontade para estudar', 'mas tem uma regra muito importante rs','faça silencio!'],
+            'end': ['parabéns!'],},
 		'directions': ['down'],
-		'look_around': True,
 		'visited': False,
+        'end': False,
         'item': None,
         'questions': {},
 		},
@@ -309,21 +306,23 @@ CHARACTERS_DATA = {
         'name': 'ana',
 		'dialog': {
             'default': ['bom dia irmão', 'não vá se esquecer de nada antes de sair', 'verifique sua mochila apertando a tecla "i"', 'boa sorte!'],
-			'visited': ['vai logo!!']},
+			'visited': ['vai logo!!'],
+            'end': ['parabéns irmão!', 'você é o melhor!', 'sabia que voce conseguiria!'],},
 		'directions': ['down'],
-		'look_around': True,
 		'visited': False,
+        'end': False,
         'item': None,
         'questions': {},
 		},
     'angelus': {
         'name': 'angelo',
 		'dialog': {
-            'default': ['qual foi meu parceiro', 'é muito fácil se perder na ufes', 'as placas ajudam bastante', 'aperte "BACKSPACE" próximo a elas', 'boa sorte mano!'],
-			'visited': ['qual foi meu parceiro', 'é muito fácil se perder na ufes', 'as placas ajudam bastante', 'aperte "BACKSPACE" próximo a elas', 'boa sorte mano!']},
+            'default': ['qual foi meu parceiro', 'a ufes é enorme e é muito fácil perder', 'as placas ajudam bastante', 'aperte "BACKSPACE" próximo a elas', 'boa sorte mano!'],
+			'visited': ['aperte "BACKSPACE" próximo as placas elas para se localizar'],
+            'end': ['boa meu parceiro!', 'seja bem vindo!'],},
 		'directions': ['down'],
-		'look_around': True,
 		'visited': False,
+        'end': False,
         'item': None,
         'questions': {},
 		},
@@ -359,7 +358,7 @@ COMPUTER_DATA = {
         'title': 'java - jakarta ee - (wildfly), postgreSQL e maven',
         'description':'o melhor conteudo de java da internet',
         'url': 'https://gitlab.labes.inf.ufes.br/labes/catalogo/-/wikis/plataformas/java,-jakarta-ee-(wildfly),-postgresql-e-maven#o-que-é',
-        'color': 'gray',
+        'color': 'violet',
 	},
     '1': {
         'title': 'git',
@@ -371,25 +370,25 @@ COMPUTER_DATA = {
         'title': 'gitlab',
         'description':'catálogo labes - guia gitlab',
         'url': 'https://gitlab.labes.inf.ufes.br/labes/catalogo/-/wikis/ferramentas/git',
-        'color': 'black',
+        'color': 'orange',
 	},
     '3': {
         'title': 'gitLabES flow',
         'description':'catálogo labes - guia gitlab flow',
         'url': 'https://gitlab.labes.inf.ufes.br/labes/catalogo/-/wikis/ferramentas/git',
-        'color': 'black',
+        'color': 'purple',
 	},
     '4': {
         'title': 'java keywords',
         'description':'palavras chave em java',
         'url': 'https://www.w3schools.com/java/java_ref_keywords.asp',
-        'color': 'blue',
+        'color': 'mid-blue',
 	},
     '5': {
         'title': 'docker - dockerfile - docker-compose',
         'description':'catalogo labes - guia docker',
         'url': 'https://gitlab.labes.inf.ufes.br/labes/catalogo/-/wikis/ferramentas/Docker,-Dockerfile-e-docker-compose',
-        'color': 'blue',
+        'color': 'ocean',
 	},
 }
 

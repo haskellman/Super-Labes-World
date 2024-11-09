@@ -76,22 +76,23 @@ class Battle():
             player_surf = self.player_frames
             
             # movement
-            if self.current_question < self.qtd_questions / 3:
-                self.frame_index += ANIMATION_SPEED * dt 
-                self.x = self.move_x(dt, 30, 30)
-                self.y = self.move_y(dt, 50, 30)
-            elif self.current_question < self.qtd_questions / 2 + 1:
-                self.frame_index += 2 * ANIMATION_SPEED * dt 
-                self.x = self.move_x(dt, 60, 35)
-                self.y = self.move_y(dt, 100, 35)
-            elif self.current_question < self.qtd_questions / 2 + 3:
-                self.frame_index += 3 * ANIMATION_SPEED * dt 
-                self.x = self.move_x(dt, 90, 40)
-                self.y = self.move_y(dt, 150, 40)
-            else: # 9 e 10
-                self.frame_index += 4 * ANIMATION_SPEED * dt 
-                self.x = self.move_x(dt, 120, 50)
-                self.y = self.move_y(dt, 200, 50)
+            if self.current_question > 0:
+                if self.current_question < self.qtd_questions / 3:
+                    self.frame_index += ANIMATION_SPEED * dt 
+                    self.x = self.move_x(dt, 30, 30)
+                    self.y = self.move_y(dt, 50, 30)
+                elif self.current_question < self.qtd_questions / 2 + 1:
+                    self.frame_index += 2 * ANIMATION_SPEED * dt 
+                    self.x = self.move_x(dt, 60, 35)
+                    self.y = self.move_y(dt, 100, 35)
+                elif self.current_question < self.qtd_questions / 2 + 3:
+                    self.frame_index += 3 * ANIMATION_SPEED * dt 
+                    self.x = self.move_x(dt, 90, 40)
+                    self.y = self.move_y(dt, 150, 40)
+                else: # 9 e 10
+                    self.frame_index += 4 * ANIMATION_SPEED * dt 
+                    self.x = self.move_x(dt, 120, 50)
+                    self.y = self.move_y(dt, 200, 50)
 
             self.character_rect = pygame.Rect(853 + self.x, 137 + self.y, 192, 192)
             character_surf = self.character_frames['up' if self.error_mode else 'left'][int(self.frame_index % 4)] # animation
@@ -240,4 +241,3 @@ class Battle():
         self.display_surface.blit(self.battle_bg)
         self.draw(dt)
         self.draw_dialog(dt)
-        print(self.current_question)

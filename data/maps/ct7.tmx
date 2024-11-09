@@ -186,7 +186,7 @@ Que lugar longe viu!
    <properties>
     <property name="character_id" value="player"/>
     <property name="direction" value="down"/>
-    <property name="pos" value="end"/>
+    <property name="pos" value="ending"/>
    </properties>
    <point/>
   </object>
@@ -218,7 +218,7 @@ Que lugar longe viu!
   </object>
   <object id="98" x="659.5" y="246.5" width="116.667" height="8.3333">
    <properties>
-    <property name="dest" value="end"/>
+    <property name="dest" value="ending"/>
     <property name="src" value="ct7"/>
    </properties>
   </object>

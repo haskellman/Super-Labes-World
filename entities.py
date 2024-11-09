@@ -4,16 +4,16 @@ class Entity(pygame.sprite.Sprite):
     def __init__(self, pos, frames, groups, facing_direction, character_data):
         super().__init__(groups)
 
-# graphics 
+        # graphics 
         self.frame_index, self.frames = 0, frames
         self.facing_direction = facing_direction
 
-# movement 
+        # movement 
         self.direction = vector()
         self.speed = 350
         self.blocked = False
 
-# sprite setup
+        # sprite setup
         self.image = self.frames[self.get_state()][self.frame_index]
         self.rect = self.image.get_frect(center = pos)
         self.hitbox = self.rect.inflate(-self.rect.width / 2, -60)
@@ -21,7 +21,7 @@ class Entity(pygame.sprite.Sprite):
         self.z = GAME_LAYERS['main']
         self.y_sort = self.rect.centery
 
-# data
+        # data
         self.character_data = character_data
         self.questions  = character_data['questions']
 
@@ -134,4 +134,7 @@ class Character(Entity):
         self.animate(dt)
 
     def get_dialog(self):
-        return self.character_data['dialog'][f"{'visited' if self.character_data['visited'] else 'default'}"]
+        if self.character_data['end'] != None and self.character_data['end']:
+            return self.character_data['dialog']['end']
+        else:
+            return self.character_data['dialog'][f"{'visited' if self.character_data['visited'] else 'default'}"]

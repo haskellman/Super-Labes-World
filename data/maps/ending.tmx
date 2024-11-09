@@ -156,7 +156,7 @@
   <object id="2" x="551.167" y="1220.33" width="115.167" height="17.8333">
    <properties>
     <property name="dest" value="ct7"/>
-    <property name="src" value="end"/>
+    <property name="src" value="ending"/>
    </properties>
   </object>
  </objectgroup>

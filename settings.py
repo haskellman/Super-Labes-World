@@ -23,6 +23,11 @@ COLORS = {
     'brown': '#fdc175',
     'dark-brown': '#d68f54',
     'mid-brown': '#a87042',
+    'ocean': '#24354f',
+    'mid-blue': '#24354f',
+    'purple': '#372e4f',
+    'orange': '#fb6d25',
+    'violet': '#3b4289',
 }
 
 GAME_LAYERS = {
