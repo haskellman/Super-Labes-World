@@ -50,10 +50,10 @@ class Game:
         self.sounds = audio_importer('.', 'sounds')
 
         # mapa iniciais
-        # self.setup(self.tmx_maps['house'], 'house', 'house') #house
+        self.setup(self.tmx_maps['house'], 'house', 'house') #house
         # self.setup(self.tmx_maps['ponto_onibus'], 'ponto_onibus', 'house') #ponto_onibus
         # self.setup(self.tmx_maps['ufes'], 'ufes', 'ponto_onibus') #ufes
-        self.setup(self.tmx_maps['ct7'], 'ct7', 'ufes') #ct7
+        # self.setup(self.tmx_maps['ct7'], 'ct7', 'ufes') #ct7
         # self.setup(self.tmx_maps['sala_vitor'], 'sala_vitor', 'ct7') #sala_vitor
         # self.setup(self.tmx_maps['sala_monalessa'], 'sala_monalessa', 'ct7') #sala_monalessa
         # self.setup(self.tmx_maps['sala_patricia'], 'sala_patricia', 'ct7') #sala_patricia
@@ -209,7 +209,7 @@ class Game:
 
         # Objetos em cima do terreno sem colisão (tapetes) 
         try:
-            for obj in tmx_map.get_layer_by_name('Terrain Objects').tiles():
+            for obj in tmx_map.get_layer_by_name('Terrain Objects'):
                 Sprite((obj.x, obj.y), obj.image, self.all_sprites, GAME_LAYERS['bg'])
         except ValueError as ve:
             pass
