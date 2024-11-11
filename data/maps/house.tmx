@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.10" tiledversion="1.11.0" orientation="orthogonal" renderorder="right-down" width="34" height="27" tilewidth="64" tileheight="64" infinite="0" nextlayerid="9" nextobjectid="120">
+<map version="1.10" tiledversion="1.11.0" orientation="orthogonal" renderorder="right-down" width="34" height="27" tilewidth="64" tileheight="64" infinite="0" nextlayerid="9" nextobjectid="122">
  <tileset firstgid="1" source="../tilesets/indoor.tsx"/>
  <tileset firstgid="91" name="indoor" tilewidth="64" tileheight="64" tilecount="90" columns="10">
   <image source="../tilesets/israel-collection/indoor.png" width="640" height="576"/>
@@ -109,7 +109,7 @@
    <image source="../tilesets/top-down-collection-pack/objects/fogao-export.png" width="77" height="112"/>
   </tile>
  </tileset>
- <tileset firstgid="260" name="objects" tilewidth="256" tileheight="220" tilecount="46" columns="0">
+ <tileset firstgid="260" name="objects" tilewidth="256" tileheight="220" tilecount="47" columns="0">
   <grid orientation="orthogonal" width="1" height="1"/>
   <tile id="40">
    <image source="../tilesets/top-down-collection-pack/objects/vaso_sanitario.png" width="64" height="128"/>
@@ -249,6 +249,9 @@
   <tile id="97">
    <image source="../tilesets/top-down-collection-pack/objects/abajour2.png" width="60" height="184"/>
   </tile>
+  <tile id="98">
+   <image source="../tilesets/israel-collection/halter.png" width="142" height="52"/>
+  </tile>
  </tileset>
  <layer id="1" name="Terrain" width="34" height="27">
   <data encoding="csv">
@@ -305,6 +308,7 @@
   <object id="106" gid="230" x="282.667" y="1391.17" width="64" height="108"/>
   <object id="107" gid="230" x="368" y="1391" width="64" height="108"/>
   <object id="108" gid="258" x="1360" y="1324" width="88" height="220"/>
+  <object id="121" gid="358" x="1203" y="1274.5" width="142" height="52"/>
  </objectgroup>
  <objectgroup id="8" name="Interactive Objects">
   <object id="118" gid="356" x="1658.67" y="390.667" width="60" height="184">
@@ -402,6 +406,16 @@
     <property name="character_id" value="aninha"/>
     <property name="direction" value="down"/>
     <property name="graphic" value="aninha"/>
+    <property name="radius" value="400"/>
+   </properties>
+   <point/>
+  </object>
+  <object id="120" name="Character" x="1270" y="1173.5">
+   <properties>
+    <property name="change_direction" type="bool" value="true"/>
+    <property name="character_id" value="eliseu"/>
+    <property name="direction" value="down"/>
+    <property name="graphic" value="eliseu"/>
     <property name="radius" value="400"/>
    </properties>
    <point/>

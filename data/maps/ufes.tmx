@@ -992,7 +992,7 @@
   </object>
   <object id="1312" name="placa_ct9" gid="454" x="2151" y="1571" width="48" height="96">
    <properties>
-    <property name="item_id" value="placa_ct10"/>
+    <property name="item_id" value="placa_ct9"/>
    </properties>
   </object>
   <object id="1313" name="placa_ct7" gid="454" x="2811" y="1381" width="48" height="96">
