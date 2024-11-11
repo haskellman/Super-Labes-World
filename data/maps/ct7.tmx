@@ -139,13 +139,13 @@
   <object id="75" gid="102" x="1141.67" y="261.333" width="100" height="80"/>
  </objectgroup>
  <objectgroup id="6" name="Dialogs">
-  <object id="60" x="2313.5" y="158.167" width="54.6667" height="180.667">
+  <object id="60" x="2004.17" y="282.167" width="54.6667" height="180.667">
    <properties>
     <property name="message">!!! 
 Então aqui é o CT7!
 Que lugar longe viu!
  devo me apressar para fazer os testes!
- o sigAmaes precisa de mim!</property>
+ o labes precisa de mim!</property>
    </properties>
   </object>
  </objectgroup>

@@ -4,8 +4,7 @@ from timer import Timer
 from support import import_image
 from dialog import DialogSprite
 from game_data import CORRECTS_SPEAKS, WRONGS_SPEAKS
-# CORRECTS_SPEAKS =[ 'essa tava']
-# WRONGS_SPEAKS = ['Que pena! Você errou!', 'Não foi dessa vez! Você errou!', 'Você errou!']
+
 class Battle():
     def __init__(self, player, character, interface_frames, fonts, end_battle, sounds):
         self.player = player
@@ -64,14 +63,10 @@ class Battle():
             rect_C = pygame.Rect(632, 630, self.rect_width, self.rect_height)
             rect_D = pygame.Rect(942, 630, self.rect_width, self.rect_height)
             question_rect = pygame.Rect(93, 29, 421, 99)
-            self.icon = self.interface_frames['interface'][str(self.option)]
             name_rect = pygame.Rect(838, 370, 0, 0)
             level_rect = pygame.Rect(844, 396, 0, 0)
 
-
-            # character animation
-            # self.frame_index += ANIMATION_SPEED * dt 
-            # character_surf = self.character_frames['up' if self.error_mode else 'left'][int(self.frame_index % 4)] # animation
+            self.icon = self.interface_frames['interface'][str(self.option)]
             # player
             player_surf = self.player_frames
             
@@ -94,11 +89,15 @@ class Battle():
                     self.x = self.move_x(dt, 120, 50)
                     self.y = self.move_y(dt, 200, 50)
 
+            # character animation
             self.character_rect = pygame.Rect(853 + self.x, 137 + self.y, 192, 192)
             character_surf = self.character_frames['up' if self.error_mode else 'left'][int(self.frame_index % 4)] # animation
 
+            # teacher character 
             self.display_surface.blit(pygame.transform.scale(character_surf,(192,192)), self.character_rect)
+            # shadow
             self.display_surface.blit(pygame.transform.scale(self.shadow, (78,30)), self.character_rect.midbottom + vector(-36,-20))
+            # player character
             self.display_surface.blit(player_surf, (148 + (self.x // 3), 284))
 
             # surfaces

@@ -19,7 +19,6 @@ class Credits:
         icon = self.menu_frames['interface']['github'] if self.index == 0 else self.menu_frames['interface']['voltar']
         self.display_surface.blit(self.menu_frames['interface']['credits_interface'])
         self.display_surface.blit(icon, new_rect, special_flags = pygame.BLEND_RGB_ADD)
-        # pygame.display.update()
 
     def input(self):
         keys = pygame.key.get_just_pressed()
@@ -42,5 +41,4 @@ class Credits:
         self.display_surface.blit(self.menu_frames['interface']['credits_interface'])
         self.input()
         self.draw_menu()
-        print(self.index)
 

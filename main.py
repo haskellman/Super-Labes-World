@@ -1,6 +1,9 @@
 from settings import *
 from pytmx.util_pygame import load_pygame #carrega os mapas
 from os.path import join
+from home import Home
+from credits import Credits
+from game_controls import GameControls
 from sprites import Sprite, AnimatedSprite, CollisionSprite, CollidableSprite, TransitionSprite, DialogSprite, InteractiveSprite
 from entities import Player, Character
 from inventory import Inventory
@@ -19,7 +22,6 @@ class Game:
     def __init__(self): 
         # inicialização
         self.screen = pygame.display.set_mode((WINDOW_WIDTH, WINDOW_HEIGHT))
-        pygame.display.set_caption('Super Labes World')
         self.clock = pygame.time.Clock()
         self.buff_timer = Timer(15000, autostart = True) # 15 segundos
         
@@ -49,9 +51,9 @@ class Game:
 
         # mapa iniciais
         # self.setup(self.tmx_maps['house'], 'house', 'house') #house
-        self.setup(self.tmx_maps['ponto_onibus'], 'ponto_onibus', 'house') #ponto_onibus
+        # self.setup(self.tmx_maps['ponto_onibus'], 'ponto_onibus', 'house') #ponto_onibus
         # self.setup(self.tmx_maps['ufes'], 'ufes', 'ponto_onibus') #ufes
-        # self.setup(self.tmx_maps['ct7'], 'ct7', 'ufes') #ct7
+        self.setup(self.tmx_maps['ct7'], 'ct7', 'ufes') #ct7
         # self.setup(self.tmx_maps['sala_vitor'], 'sala_vitor', 'ct7') #sala_vitor
         # self.setup(self.tmx_maps['sala_monalessa'], 'sala_monalessa', 'ct7') #sala_monalessa
         # self.setup(self.tmx_maps['sala_patricia'], 'sala_patricia', 'ct7') #sala_patricia
@@ -81,45 +83,45 @@ class Game:
         # items iniciais
         self.add_item(Item('0'))
         self.add_item(Item('1'))
-        self.add_item(Item('2'))
+        # self.add_item(Item('2'))
         self.add_item(Item('4'))
-        self.add_item(Item('4'))
-        self.add_item(Item('4'))
-        self.add_item(Item('4'))
-        self.add_item(Item('4'))
-        self.add_item(Item('4'))
-        self.add_item(Item('4'))
-        self.add_item(Item('4'))
-        self.add_item(Item('4'))
-        self.add_item(Item('4'))
-        self.add_item(Item('4'))
-        self.add_item(Item('4'))
-        self.add_item(Item('4'))
-        self.add_item(Item('4'))
-        self.add_item(Item('4'))
-        self.add_item(Item('4'))
-        self.add_item(Item('4'))
-        self.add_item(Item('4'))
-        self.add_item(Item('4'))
-        self.add_item(Item('4'))
-        self.add_item(Item('4'))
-        self.add_item(Item('4'))
-        self.add_item(Item('4'))
-        self.add_item(Item('4'))
-        self.add_item(Item('4'))
-        self.add_item(Item('4'))
-        self.add_item(Item('4'))
-        self.add_item(Item('4'))
-        self.add_item(Item('4'))
-        self.add_item(Item('4'))
-        self.add_item(Item('4'))
-        self.add_item(Item('4'))
-        self.add_item(Item('4'))
-        self.add_item(Item('4'))
-        self.add_item(Item('4'))
-        self.add_item(Item('4'))
-        self.add_item(Item('4'))
-        self.add_item(Item('4'))
+        # self.add_item(Item('4'))
+        # self.add_item(Item('4'))
+        # self.add_item(Item('4'))
+        # self.add_item(Item('4'))
+        # self.add_item(Item('4'))
+        # self.add_item(Item('4'))
+        # self.add_item(Item('4'))
+        # self.add_item(Item('4'))
+        # self.add_item(Item('4'))
+        # self.add_item(Item('4'))
+        # self.add_item(Item('4'))
+        # self.add_item(Item('4'))
+        # self.add_item(Item('4'))
+        # self.add_item(Item('4'))
+        # self.add_item(Item('4'))
+        # self.add_item(Item('4'))
+        # self.add_item(Item('4'))
+        # self.add_item(Item('4'))
+        # self.add_item(Item('4'))
+        # self.add_item(Item('4'))
+        # self.add_item(Item('4'))
+        # self.add_item(Item('4'))
+        # self.add_item(Item('4'))
+        # self.add_item(Item('4'))
+        # self.add_item(Item('4'))
+        # self.add_item(Item('4'))
+        # self.add_item(Item('4'))
+        # self.add_item(Item('4'))
+        # self.add_item(Item('4'))
+        # self.add_item(Item('4'))
+        # self.add_item(Item('4'))
+        # self.add_item(Item('4'))
+        # self.add_item(Item('4'))
+        # self.add_item(Item('4'))
+        # self.add_item(Item('4'))
+        # self.add_item(Item('4'))
+        # self.add_item(Item('4'))
 
 # ------------------------------------------------------------------------------------------------------------------------------------
     #  Computer functions
@@ -207,7 +209,7 @@ class Game:
 
         # Objetos em cima do terreno sem colisão (tapetes) 
         try:
-            for obj in tmx_map.get_layer_by_name('Terrain Objects'):
+            for obj in tmx_map.get_layer_by_name('Terrain Objects').tiles():
                 Sprite((obj.x, obj.y), obj.image, self.all_sprites, GAME_LAYERS['bg'])
         except ValueError as ve:
             pass
@@ -540,47 +542,51 @@ class Game:
 
 # Menu Inicial
 if __name__ == '__main__':
-        initial_screen = pygame.display.set_mode((WINDOW_WIDTH, WINDOW_HEIGHT))
-        index = 0
-        # seila = pygame.image.load('graphics/interface/opening_interface.png')
-        pygame.init()
-        opening_music = pygame.mixer.Sound('./audios/opening.wav').play()
-        index_plus_sound = pygame.mixer.Sound('./sounds/index_plus.wav')
-        index_less_sound = pygame.mixer.Sound('./sounds/index_less.wav')
-        select_sound = pygame.mixer.Sound('./sounds/select.wav')
-        menu_frames = {'interface': import_folder_dict('.', 'graphics', 'interface') }
+    pygame.init()
+    pygame.display.set_caption('Super Labes World')
 
-        while True:
-            for event in pygame.event.get():
-                index = index % 3
-                new_rect = pygame.Rect(363,564,123,90) if index == 0 else pygame.Rect(601,564,123,90) if index == 1 else pygame.Rect(837,564,123,90)
-                icon = menu_frames['interface']['new'] if index == 0 else menu_frames['interface']['credits'] if index == 1 else menu_frames['interface']['exit']
-                if event.type == pygame.QUIT:
-                    pygame.quit()
-                    exit()
-                if event.type == pygame.KEYDOWN:
-                    if event.key == pygame.K_d or event.key == pygame.K_RIGHT:
-                        index += 1
-                        index_plus_sound.play()
-                        break
-                    if event.key == pygame.K_a or event.key == pygame.K_LEFT:
-                        index -= 1
-                        index_less_sound.play()
-                    if index == 0 and (event.key == pygame.K_SPACE or event.key == pygame.K_RETURN):
-                        opening_music.stop()
-                        select_sound.play()
-                        game = Game()
-                        game.run()
-                    if index == 1 and (event.key == pygame.K_SPACE or event.key == pygame.K_RETURN):
-                        select_sound.play()
-                        print('credits')
-                    if index == 2 and (event.key == pygame.K_SPACE or event.key == pygame.K_RETURN):
-                        pygame.quit()
-                        exit()
-                else:
-                    initial_screen.blit(menu_frames['interface']['opening_interface'])
-                    initial_screen.blit(icon, new_rect, special_flags = pygame.BLEND_RGB_ADD)
-                    pygame.display.update()
+    home_open = True
+    credits_open = False
+    controls_open = False
+    
+    def run_game():
+        global home_open; home_open = False
 
+    def run_credits():
+        global credits_open; credits_open = True
+        global home_open; home_open = False
+
+    def end_credits():
+        global credits_open; credits_open = False
+        global home_open; home_open = True
+
+    def run_game_controls():
+        global controls_open; controls_open = True
+        global home_open; home_open = False
+
+    def end_game_controls():
+        global controls_open; controls_open = False
+        global home_open; home_open = True
+
+
+    home = Home(run_game,run_credits,run_game_controls)
+    credits = Credits(end_credits)
+    controls = GameControls(end_game_controls)
+
+    while home_open or credits_open or controls_open:
+        for event in pygame.event.get():
+            if event.type == pygame.QUIT:
+                pygame.quit()
+                exit()
+            elif credits_open:
+                credits.update()
+            elif controls_open:
+                controls.update()
+            else:
+                home.update()
+            pygame.display.update()
+
+    game = Game()
+    game.run()
 
 

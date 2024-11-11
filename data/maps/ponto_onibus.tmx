@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.10" tiledversion="1.11.0" orientation="orthogonal" renderorder="right-down" width="47" height="32" tilewidth="64" tileheight="64" infinite="0" nextlayerid="7" nextobjectid="45">
+<map version="1.10" tiledversion="1.11.0" orientation="orthogonal" renderorder="right-down" width="47" height="32" tilewidth="64" tileheight="64" infinite="0" nextlayerid="8" nextobjectid="47">
  <tileset firstgid="1" name="world" tilewidth="64" tileheight="64" tilecount="210" columns="10">
   <image source="../../graphics/tilesets/world.png" width="640" height="1344"/>
  </tileset>
@@ -125,7 +125,6 @@
  </layer>
  <objectgroup id="2" name="Objects">
   <object id="2" gid="303" x="1186" y="971.333" width="320" height="320"/>
-  <object id="4" gid="302" x="1577.33" y="1317.67" width="569" height="252"/>
   <object id="20" gid="322" x="897.333" y="658.667" width="128" height="192"/>
   <object id="21" gid="322" x="1205.33" y="552" width="128" height="192"/>
   <object id="22" gid="322" x="2149.33" y="708" width="128" height="192"/>
@@ -150,7 +149,13 @@
   <object id="41" gid="351" x="768.5" y="1036.5" width="38" height="50"/>
   <object id="42" gid="351" x="768.833" y="988.333" width="38" height="50"/>
   <object id="43" gid="351" x="768.167" y="942.667" width="38" height="50"/>
+  <object id="46" gid="302" x="1590.17" y="1330" width="569" height="252">
+   <properties>
+    <property name="item_id" value="onibus_gv"/>
+   </properties>
+  </object>
  </objectgroup>
+ <objectgroup id="7" name="Interactive Objects"/>
  <objectgroup id="4" name="Entities">
   <object id="6" name="Player" x="1259.33" y="1028.67">
    <properties>
@@ -170,7 +175,7 @@
   </object>
  </objectgroup>
  <objectgroup id="5" name="Transitions">
-  <object id="7" x="2037.83" y="1204.33" width="85" height="47.6666">
+  <object id="7" x="2037.83" y="1214.33" width="85" height="47.6666">
    <properties>
     <property name="dest" value="ufes"/>
     <property name="src" value="ponto_onibus"/>
@@ -184,7 +189,7 @@
   </object>
  </objectgroup>
  <objectgroup id="6" name="Dialogs">
-  <object id="18" name="house_dialog1" x="1136.07" y="995.88" width="402.539" height="123.577" rotation="359.656">
+  <object id="18" name="house_dialog1" x="1078.07" y="956.546" width="402.539" height="123.577" rotation="359.656">
    <properties>
     <property name="message">!!
  meu onibus já está ali
