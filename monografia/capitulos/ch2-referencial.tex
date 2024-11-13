@@ -4,15 +4,47 @@
 % ==============================================================================
 \chapter{Referencial Teórico e Tecnologias Utilizadas}
 \label{sec-referencial}
-
 % Este capítulo deve apresentar os aspectos relativos ao conteúdo teórico relevante para o trabalho.  Incluirá conhecimento adquirido a partir de livros, artigos, relatórios técnicos, dissertações, teses e outros materiais bibliográficos.  O capítulo deve apresentar, além do referencial teórico, informações sobre as tecnologias utilizadas no trabalho. O capítulo deve ter cerca de 12-15 páginas e deve demonstrar conhecimento básico da literatura técnico-científica sobre o tema abordado no trabalho.
+Neste capítulo serão apresentados os conceitos teóricos que guiaram o desenvolvi
+mento do jogo, bem como as tecnologias usadas para implementar o sistema
+% colocar os links para as seções explicando oq cada uma fala 
 
+\section{Princípios de Design de Software}
+Os princípios de design de software constituem diretrizes fundamentais para o desenvolvimento de sistemas de software eficazes, robustos e manuteníveis. Esses princípios orientam todo o ciclo de vida do software desde o surgimento da ideia até o sistema em produção. 
+\subsection{Engenharia de Software}
+A engenharia de sofware é a área da computação que se preocupa em propor e aplicar princípios de engenharia na construção de softwares\cite{EngSoftMod} ou seja é uma área de estudos da computação que se preocupa em projetar, arquitetar melhorar a qualidade dos produtos de software e aumentar a produtividade no processo de desenvolvimento. 
 
+Para seguir as práticas recomendadas de engenharia de software o primeiro passo a ser definido é qual paradigmas de processo de software ser seguido, existem vários modelos para diferentes cenários possíveis, o escolhido para esse trabalho foi o modelo evolutivo.
+
+O modelo evolutivo como seu nome sugere, os requisitos vão evoluindo conforme a aplicação evolui, esse processo ocorre em paralelo à evolução da aplicação, esse paradigma é muito útil quando o cliente não tem todas as funcionalidades necessárias para a solução. Nesse contexto foi oque mais se adequou a esse trabalho tendo em vista que nem todos os requisitos eram bem definidos de início e as funcionalidades do jogo precisam ser validadas frequentemente, uma vez que, a jogabilidade precisa ser atraente ao público, então a cada nova versão foram realizadas reuniões com colegas, e com a orientadora, a fim de receber feedbacks que auxiliem na melhoria dos recursos de modo contínuo.
+
+\newpage
+\begin{figure}
+    \centering
+    \includegraphics[width=0.9\linewidth]{figuras/spiral_model.jpg}
+    \caption{Ciclo de vida do modelo espiral}
+    \label{fig:enter-label}
+\end{figure}
+Cada uma das atividades realizadas no modelo ilustrado acima são:
+\begin{itemize}
+    \item \textbf{Planejamento:} A fase de planejamento é base sobre a qual todo o projeto de desenvolvimento de software deve ser construído. Durante essa fase foram definidos os requisitos e as ferramentas que seriam utilizadas;
+    \item \textbf{Análise de riscos:} Nessa fase é feito tanto o levantamento dos riscos associados ao desenvolvimento do sistema, mas também como mitigá-los no geral sendo uma etapa para gerenciar os riscos, e na avaliação da viabilidade técnica. 
+    \item \textbf{Engenharia (Projeto e Codificação):} Aqui é onde são desenvolvidos os o designs do software, codificação, integração, testes e por fim a implantação no sistema.
+    \item \textbf{Validação):} Ao chegar nessa fase já temos uma versão 1.0 e podemos coletar feedbacks o observações sobre o sistema, essa etapa é fundamental nessa abordagem, pois a qualidade da próxima versão é diretamente proporcional a qualidade dos feedbacks aqui coletados.
+\end{itemize}
 \section{Pygame-ce}
+Pygame-ce (Community Edition) é uma biblioteca multiplataforma gratuita e de código aberto que surgiu de um fork do projeto pygame por seus antigos desenvolvedores principais, e foi criado após desafios impossíveis os impedirem de continuar o desenvolvimento upstream. Essa nova distribuição visa oferecer lançamentos mais frequentes, correções de bugs e melhorias contínuas para o desenvolvimento de aplicativos multimídia como videogames utilizando a linguagem Python. Ela usa a biblioteca SDL (Simple DirectMedia Layer)\footnote{SDL (Simple DirectMedia Layer) \url{https://www.libsdl.org/}} que é uma biblioteca de desenvolvimento multiplataforma projetada para fornecer acesso de baixo nível a hardware de áudio, teclado, mouse, joystick e gráficos via OpenGL e Direct3D além de várias outras bibliotecas populares para abstrair as funções mais comuns, tornando a escrita desses programas uma tarefa mais intuitiva, assim então permitindo que você crie jogos e programas multimídia com todos os recursos na linguagem python.\cite{Pygame-ce}
 
-Pygame-ce (Community Edition) é uma biblioteca multiplataforma gratuita e de código aberto que surgiu de um fork do projeto pygame por seus antigos desenvolvedores principais, e foi criado após desafios impossíveis os impedirem de continuar o desenvolvimento upstream. Essa nova distribuição visa oferecer lançamentos mais frequentes, correções de bugs e melhorias contínuas para o desenvolvimento de aplicativos multimídia como videogames usando Python. Ela usa a biblioteca SDL (Simple DirectMedia Layer) e várias outras bibliotecas populares para abstrair as funções mais comuns, tornando a escrita desses programas uma tarefa mais intuitiva, assim então permitindo que você crie jogos e programas multimídia com todos os recursos na linguagem python. Pygame-ce é altamente portátil e roda em quase todas as plataformas e sistemas operacionais.\cite{Pygame-ce}
+As principais funcionalidades do pygame incluem
+\begin{itemize}
+    \item carregar e exibir imagens;
+    \item criar animações e renderizar quadros de jogos;
+    \item adicionar música de fundo e efeitos sonoros;
+    \item Manipulação de dispositivos de entrada;
+    \item Gerenciamento de sprites através de classes integradas;
+\end{itemize}
 
-Como a maioria das bibliotecas no python ela pode ser adicionada via prompt de comandos do sistema operacional  por meio do pip, o pip é um sistema de gerenciamento de pacotes usado para instalar e gerenciar pacotes de software escritos na linguagem de programação Python. Ele simplifica o processo de instalação, atualização e remoção de pacotes Python e suas dependências. 
+Como a maioria das bibliotecas no python ela pode ser adicionada via prompt de comandos do sistema operacional  por meio do pip\footnote{pip \url{https://pip.pypa.io/en/stable/}}, o pip é um sistema de gerenciamento de pacotes para Python, usado para instalar e gerenciar pacotes de software escritos na linguagem de programação Python. Ele simplifica o processo de instalação, atualização e remoção de pacotes Python e suas dependências. 
 % colocar em código
 % colocar um codigo com \href{https://pyga.me/docs/ref/music.html}{pygame.mixer.música} \href{https://pyga.me/docs/ref/draw.html}{pygame.draw} 
 % \href{https://pyga.me/docs/ref/event.html}{pygame.event} 
@@ -24,17 +56,20 @@ Como a maioria das bibliotecas no python ela pode ser adicionada via prompt de c
 % \href{https://pyga.me/docs/ref/surface.html}{pygame.Surface} 
 % \href{https://pyga.me/docs/ref/transform.html}{pygame.transform} 
 % \href{https://pyga.me/docs/ref/window.html}{pygame.Window} 
+Após isso ja é possível acessar e usar a biblioteca por meio do "import" do python como no exemplo abaixo que demonstra uma main de projeto pygame.
 
+
+\newpage
 \begin{lstlisting}[language=C++,breaklines, caption= Instalação Pytmx]
 pip install pygame-ce
 \end{lstlisting}
-e esse é um exemplo de main de um projeto pygame
-\begin{lstlisting}[language=C++,breaklines, caption= Exemplo de main de um projeto Pygame]
-# Example file showing a basic pygame "game loop"
+
+\begin{lstlisting}[language=Python,breaklines, caption= Exemplo de main de um projeto Pygame]
+# Arquivo de exemplo mostrando um "game loop" básico do pygame
 import pygame
 
 # pygame setup
-pygame.init()
+pygame.init() 
 screen = pygame.display.set_mode((1280, 720))
 clock = pygame.time.Clock()
 running = True
@@ -58,8 +93,8 @@ while running:
 
 pygame.quit()
 \end{lstlisting}
+Esse é um exemplo básico de uma main  com uma configuração básica, na linha (2) importamos o pygame e dizemos ao compilador 
 
-Esse é um exemplo básico de uma main  com uma configuração básica (abre a janela, atualiza a tela e manipula eventos)...
 
 \section{Pytmx}
 PyTMX é um carregador de mapas para python/pygame projetado para jogos. Ele fornece carregamento inteligente de tiles com uma base de armazenamento rápida e eficiente. Ele não apenas manipula corretamente a maioria dos tipos de objetos Tiled, como também carrega metadados para eles, para que você possa modificar seus mapas e objetos no Tiled, em vez de modificar seu código-fonte.\cite{PyTMX} 
