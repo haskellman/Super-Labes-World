@@ -30,7 +30,7 @@ class Credits:
             self.index -= 1
         if self.index == 0 and (keys[pygame.K_SPACE] or keys[pygame.K_RETURN]):
             self.sounds['select'].play()
-            webbrowser.open('https://github.com/haskellman', new=0, autoraise=True)
+            webbrowser.open('https://github.com/haskellman/Super-Labes-World', new=0, autoraise=True)
         if self.index == 1 and (keys[pygame.K_SPACE] or keys[pygame.K_RETURN]):
             self.sounds['select'].play()
             self.end_credits()

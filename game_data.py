@@ -365,15 +365,15 @@ CHARACTERS_DATA = {
 ITEMS_DATA = {
     '0': {
         'name': 'chave do vitor',
-        'description':'chave do vitor, é a prova de que voce conseguiu a aprovação do javaboy para entrar no sigamaes. você deve ter um alto conhecimento em java para pussuir esse item',
+        'description':'é a prova de que voce conseguiu a aprovação do javaboy para entrar no sigamaes. você deve ter um alto conhecimento em java para pussuir esse item',
     },
     '1': {
 		'name': 'chave da mona',
-        'description':'chave da mona, é a prova de que voce conseguiu a aprovação da monalessa para entrar no sigamaes',
+        'description':'estar em posso dessa chave significa que você tem domínio em git gitlab e gitlab flow, agora vá em frente e consiga a ultima chave',
     },
     '2': {
 		'name': 'chave da patrícia',
-        'description':'chave da patrícia, é a prova de que voce conseguiu a aprovação da patricia para entrar no sigamaes',
+        'description':'Parabéns, ter isso em seu inventário significa que você tem todas as três aprovações necessárias para entrar no labes, Parabéns!',
     },
     '4': {
 		'name': 'cafe',
