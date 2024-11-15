@@ -87,5 +87,4 @@ class Home:
         self.draw_menu()
         # self.fall_objects()
         self.input()
-        print(self.y)
 
