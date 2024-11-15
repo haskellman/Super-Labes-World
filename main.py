@@ -59,8 +59,7 @@ class Game:
         # self.setup(self.tmx_maps['sala_patricia'], 'sala_patricia', 'ct7') #sala_patricia
         # self.setup(self.tmx_maps['ct9'], 'ct9', 'ufes') #ct9
         # self.setup(self.tmx_maps['labgrad'], 'labgrad', 'ct9') labrad
-    
-        
+        # self.setup(self.tmx_maps['ending'], 'ending', 'ct7') #ending
 
         # Computer
         self.computer_links = []
@@ -79,48 +78,6 @@ class Game:
         self.battle_open = False
         self.choose_dialog_open = False
 
-
-        # items iniciais
-        self.add_item(Item('0'))
-        self.add_item(Item('1'))
-        # self.add_item(Item('2'))
-        self.add_item(Item('4'))
-        # self.add_item(Item('4'))
-        # self.add_item(Item('4'))
-        # self.add_item(Item('4'))
-        # self.add_item(Item('4'))
-        # self.add_item(Item('4'))
-        # self.add_item(Item('4'))
-        # self.add_item(Item('4'))
-        # self.add_item(Item('4'))
-        # self.add_item(Item('4'))
-        # self.add_item(Item('4'))
-        # self.add_item(Item('4'))
-        # self.add_item(Item('4'))
-        # self.add_item(Item('4'))
-        # self.add_item(Item('4'))
-        # self.add_item(Item('4'))
-        # self.add_item(Item('4'))
-        # self.add_item(Item('4'))
-        # self.add_item(Item('4'))
-        # self.add_item(Item('4'))
-        # self.add_item(Item('4'))
-        # self.add_item(Item('4'))
-        # self.add_item(Item('4'))
-        # self.add_item(Item('4'))
-        # self.add_item(Item('4'))
-        # self.add_item(Item('4'))
-        # self.add_item(Item('4'))
-        # self.add_item(Item('4'))
-        # self.add_item(Item('4'))
-        # self.add_item(Item('4'))
-        # self.add_item(Item('4'))
-        # self.add_item(Item('4'))
-        # self.add_item(Item('4'))
-        # self.add_item(Item('4'))
-        # self.add_item(Item('4'))
-        # self.add_item(Item('4'))
-        # self.add_item(Item('4'))
         # self.add_item(Item('4'))
 
 # ------------------------------------------------------------------------------------------------------------------------------------
@@ -311,6 +268,7 @@ class Game:
                     if check_connections(100, self.player, character):
                         character.change_facing_direction(self.player.rect.center)
                         self.create_dialog(character)
+
                 # interações com objetos
                 for sprite in self.interaction_sprites:
                     if check_interaction(150, self.player, sprite):
@@ -331,6 +289,16 @@ class Game:
                         if sprite.item_id == 'abajour2':
                             sprite.item_id = 'abajour1'
                             sprite.image = self.interface_frames['interactive_objects']['abajour1']
+                            break
+                        if sprite.item_id == 'geladeira1':
+                            sprite.item_id = 'geladeira2'
+                            sprite.image = self.interface_frames['interactive_objects']['geladeira2']
+                            self.add_item(Item('4'))
+                            self.sounds['get_item'].play()
+                            break
+                        if sprite.item_id == 'geladeira2':
+                            sprite.item_id = 'geladeira1'
+                            sprite.image = self.interface_frames['interactive_objects']['geladeira1']
                             break
                         if sprite.item_id == 'dragon':
                             self.create_dialog(self.player, "acho melhor eu não acorda-lo", False)
@@ -379,7 +347,6 @@ class Game:
         self.player.speed_boost(1.5)
         self.buff_timer.activate()
 
-
     def create_dialog(self, character, message = None, collision_message = True):
         if not self.dialog_open:
             self.sounds['notice'].play()
@@ -387,13 +354,15 @@ class Game:
             self.dialog_open = Dialog(character, self.player, self.all_sprites, self.fonts['dialog'], self.end_dialog, message, collision_message)
 
     # Callback functions
+    # callback chamado ao final do dialogo
+    # verifica se o personagem tem questões (se sim, vai para a batalha)
+    # se não verifica se o pergonagem tem items para dar ao jogador
     def end_dialog(self,character):
         self.dialog_open = None
         # batalha
         if check_battle(character) and not self.battle_open and character.character_data['visited'] == False:
             self.player.block()
             # dialogo de escolha
-            self.player.block()
             self.choose_dialog = ChooseDialog(character, self.interface_frames, self.fonts, self.end_choose_dialog)
             self.choose_dialog_open = True
         # item
@@ -402,17 +371,18 @@ class Game:
             self.add_item(Item(character.character_data['item']))
             character.character_data['item'] = None
         if not self.choose_dialog_open:
-            # self.dialog_open = None
             self.player.unblock()
             character.character_data['visited'] = True
 
+    # callback chamado ao responder o dialogo de escolha
+    # se o jogador escolher sim vai para a batalha
+    # se o jogador escolher não, o personagem fala algo variando por qual for o professor
     def end_choose_dialog(self, answer, character):
         if answer:
             self.audios[self.current_map].stop()
             self.audios['battle'].play(-1)
             self.choose_dialog_open = False
             self.player.block()
-            self.tint_mode = 'battle_mode'
             sleep(2)
             self.battle = Battle(self.player, character, self.interface_frames, self.fonts, self.end_battle, self.sounds)
             self.dialog_open = None
@@ -429,9 +399,11 @@ class Game:
             self.player.unblock()
         self.dialog_open = None
 
+    # callback chamado ao final da batalha
+    # verifica se o jogador acertou mais que 70% das perguntas
+    # cria os links do computador com as perguntas erradas
     def end_battle(self, character, test):
         result = sum(test)
-        self.tint_mode = 'battle_mode'
         sleep(2)
         self.audios['battle'].stop()
         self.audios[self.current_map].play(-1)
@@ -524,12 +496,6 @@ class Game:
             if self.computer_open: self.computer.update(dt)
             if self.battle_open: self.battle.update(dt)
             if self.choose_dialog_open: self.choose_dialog.update()
-
-            # print('Dialog', self.dialog_open)
-            # print('Inventory', self.inventory_open)
-            # print('Computer', self.computer_open)
-            # print('Battle', self.battle_open)
-            # print('Choose Dialog', self.choose_dialog_open)
 
             # tint
             self.tint_screen(dt)

@@ -28,6 +28,7 @@ COLORS = {
     'purple': '#372e4f',
     'orange': '#fb6d25',
     'violet': '#3b4289',
+    'pink': '#f737ac',
 }
 
 GAME_LAYERS = {

@@ -1,10 +1,43 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.10" tiledversion="1.11.0" orientation="orthogonal" renderorder="right-down" width="19" height="20" tilewidth="64" tileheight="64" infinite="0" nextlayerid="7" nextobjectid="22">
+<map version="1.10" tiledversion="1.11.0" orientation="orthogonal" renderorder="right-down" width="19" height="20" tilewidth="64" tileheight="64" infinite="0" nextlayerid="8" nextobjectid="64">
  <tileset firstgid="1" name="tapete_vermelho" tilewidth="64" tileheight="64" tilecount="20" columns="5">
   <image source="../tilesets/israel-collection/tapete_vermelho.png" width="320" height="256"/>
  </tileset>
  <tileset firstgid="21" name="chao_ct" tilewidth="64" tileheight="64" tilecount="80" columns="10">
   <image source="../tilesets/israel-collection/chao_ct.png" width="640" height="512"/>
+ </tileset>
+ <tileset firstgid="101" name="objects" tilewidth="248" tileheight="192" tilecount="10" columns="0">
+  <grid orientation="orthogonal" width="1" height="1"/>
+  <tile id="3">
+   <image source="../tilesets/israel-collection/mesa.png" width="184" height="120"/>
+  </tile>
+  <tile id="4">
+   <image source="../tilesets/objects/computer4-export.png" width="158" height="76"/>
+  </tile>
+  <tile id="5">
+   <image source="../tilesets/objects/computer3-export.png" width="160" height="76"/>
+  </tile>
+  <tile id="7">
+   <image source="../tilesets/objects/cadeira_gamer1.png" width="108" height="108"/>
+  </tile>
+  <tile id="8">
+   <image source="../tilesets/objects/cadeira_gamer2.png" width="108" height="108"/>
+  </tile>
+  <tile id="9">
+   <image source="../tilesets/objects/ar_condicionado-export.png" width="136" height="60"/>
+  </tile>
+  <tile id="10">
+   <image source="../tilesets/objects/ar_condicionado2.png" width="128" height="96"/>
+  </tile>
+  <tile id="11">
+   <image source="../tilesets/objects/home_sweet_home.png" width="248" height="116"/>
+  </tile>
+  <tile id="13">
+   <image source="../../graphics/interactive_objects/geladeira1.png" width="112" height="184"/>
+  </tile>
+  <tile id="14">
+   <image source="../../graphics/interactive_objects/geladeira2.png" width="112" height="192"/>
+  </tile>
  </tileset>
  <layer id="2" name="Terrain" width="19" height="20">
   <data encoding="csv">
@@ -54,7 +87,48 @@
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
 </data>
  </layer>
- <objectgroup id="3" name="Objects"/>
+ <objectgroup id="3" name="Objects">
+  <object id="32" gid="104" x="93.6667" y="309.75" width="184" height="120"/>
+  <object id="33" gid="104" x="278.667" y="309.25" width="184" height="120"/>
+  <object id="34" gid="104" x="750.5" y="309.917" width="184" height="120"/>
+  <object id="35" gid="104" x="935.5" y="309.417" width="184" height="120"/>
+  <object id="42" gid="108" x="141.333" y="389.333" width="108" height="108"/>
+  <object id="43" gid="109" x="321.75" y="390" width="108" height="108"/>
+  <object id="46" gid="111" x="64" y="128" width="128" height="96"/>
+  <object id="47" gid="111" x="1024" y="128" width="128" height="96"/>
+  <object id="48" gid="110" x="414.273" y="136" width="136" height="60"/>
+  <object id="49" gid="110" x="665.727" y="135.364" width="136" height="60"/>
+  <object id="55" gid="108" x="977.791" y="383.666" width="108" height="108"/>
+  <object id="56" gid="109" x="798.208" y="384.333" width="108" height="108"/>
+  <object id="58" gid="112" x="490.667" y="42.6667" width="248" height="116"/>
+ </objectgroup>
+ <objectgroup id="7" name="Interactive Objects">
+  <object id="37" gid="106" x="104.5" y="254" width="160" height="76">
+   <properties>
+    <property name="item_id" value="computer"/>
+   </properties>
+  </object>
+  <object id="38" gid="105" x="295" y="254" width="158" height="76">
+   <properties>
+    <property name="item_id" value="computer"/>
+   </properties>
+  </object>
+  <object id="53" gid="105" x="771" y="254" width="158" height="76">
+   <properties>
+    <property name="item_id" value="computer"/>
+   </properties>
+  </object>
+  <object id="54" gid="106" x="949.333" y="254" width="160" height="76">
+   <properties>
+    <property name="item_id" value="computer"/>
+   </properties>
+  </object>
+  <object id="59" gid="114" x="552" y="320" width="112" height="184">
+   <properties>
+    <property name="item_id" value="geladeira1"/>
+   </properties>
+  </object>
+ </objectgroup>
  <objectgroup id="5" name="Collisions">
   <object id="8" x="678.915" y="1182.87" width="478.833" height="17.3333"/>
   <object id="9" x="64.9151" y="1184.37" width="478.833" height="17.3333"/>
@@ -81,7 +155,7 @@
    </properties>
    <point/>
   </object>
-  <object id="15" name="Character" x="478.667" y="906.667">
+  <object id="15" name="Character" x="479.667" y="868.667">
    <properties>
     <property name="change_direction" type="bool" value="true"/>
     <property name="character_id" value="aninha"/>
@@ -91,7 +165,7 @@
    </properties>
    <point/>
   </object>
-  <object id="16" name="Character" x="746.667" y="976.333">
+  <object id="16" name="Character" x="748.667" y="910.333">
    <properties>
     <property name="change_direction" type="bool" value="true"/>
     <property name="character_id" value="pai"/>
@@ -101,7 +175,7 @@
    </properties>
    <point/>
   </object>
-  <object id="17" name="Character" x="480.667" y="777.333">
+  <object id="17" name="Character" x="479.667" y="722.333">
    <properties>
     <property name="change_direction" type="bool" value="true"/>
     <property name="character_id" value="luaninha"/>
@@ -111,7 +185,7 @@
    </properties>
    <point/>
   </object>
-  <object id="18" name="Character" x="749.333" y="1086">
+  <object id="18" name="Character" x="756.333" y="1068">
    <properties>
     <property name="change_direction" type="bool" value="false"/>
     <property name="character_id" value="patricia"/>
@@ -121,7 +195,7 @@
    </properties>
    <point/>
   </object>
-  <object id="19" name="Character" x="747.333" y="852.333">
+  <object id="19" name="Character" x="749.333" y="641.333">
    <properties>
     <property name="change_direction" type="bool" value="true"/>
     <property name="character_id" value="mae"/>
@@ -131,7 +205,7 @@
    </properties>
    <point/>
   </object>
-  <object id="20" name="Character" x="480.667" y="653.667">
+  <object id="20" name="Character" x="477.667" y="585.667">
    <properties>
     <property name="change_direction" type="bool" value="true"/>
     <property name="character_id" value="vitor"/>
@@ -141,12 +215,52 @@
    </properties>
    <point/>
   </object>
-  <object id="21" name="Character" x="745.333" y="715.333">
+  <object id="21" name="Character" x="748.333" y="773.333">
    <properties>
     <property name="change_direction" type="bool" value="false"/>
     <property name="character_id" value="angelus"/>
     <property name="direction" value="down"/>
     <property name="graphic" value="young_guy"/>
+    <property name="radius" value="400"/>
+   </properties>
+   <point/>
+  </object>
+  <object id="60" name="Character" x="745" y="501">
+   <properties>
+    <property name="change_direction" type="bool" value="false"/>
+    <property name="character_id" value="eliseu"/>
+    <property name="direction" value="up"/>
+    <property name="graphic" value="eliseu"/>
+    <property name="radius" value="400"/>
+   </properties>
+   <point/>
+  </object>
+  <object id="61" name="Character" x="478" y="449">
+   <properties>
+    <property name="change_direction" type="bool" value="true"/>
+    <property name="character_id" value="verdinho"/>
+    <property name="direction" value="down"/>
+    <property name="graphic" value="verdinho"/>
+    <property name="radius" value="400"/>
+   </properties>
+   <point/>
+  </object>
+  <object id="62" name="Character" x="758" y="373">
+   <properties>
+    <property name="change_direction" type="bool" value="true"/>
+    <property name="character_id" value="azulzinha"/>
+    <property name="direction" value="down"/>
+    <property name="graphic" value="azulzinha"/>
+    <property name="radius" value="400"/>
+   </properties>
+   <point/>
+  </object>
+  <object id="63" name="Character" x="482" y="1169">
+   <properties>
+    <property name="change_direction" type="bool" value="true"/>
+    <property name="character_id" value="roxinha"/>
+    <property name="direction" value="down"/>
+    <property name="graphic" value="roxinha"/>
     <property name="radius" value="400"/>
    </properties>
    <point/>
