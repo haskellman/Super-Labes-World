@@ -78,8 +78,6 @@ class Game:
         self.battle_open = False
         self.choose_dialog_open = False
 
-        # self.add_item(Item('4'))
-
 # ------------------------------------------------------------------------------------------------------------------------------------
     #  Computer functions
     def add_link(self, item):
