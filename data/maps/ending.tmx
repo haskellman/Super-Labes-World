@@ -145,7 +145,7 @@
    </properties>
    <point/>
   </object>
-  <object id="14" name="Character" x="481.333" y="1040">
+  <object id="14" name="Character" x="481.333" y="998">
    <properties>
     <property name="change_direction" type="bool" value="false"/>
     <property name="character_id" value="monalessa"/>
@@ -229,7 +229,7 @@
    <properties>
     <property name="change_direction" type="bool" value="false"/>
     <property name="character_id" value="eliseu"/>
-    <property name="direction" value="up"/>
+    <property name="direction" value="down"/>
     <property name="graphic" value="eliseu"/>
     <property name="radius" value="400"/>
    </properties>
@@ -255,7 +255,7 @@
    </properties>
    <point/>
   </object>
-  <object id="63" name="Character" x="482" y="1169">
+  <object id="63" name="Character" x="482" y="1141">
    <properties>
     <property name="change_direction" type="bool" value="true"/>
     <property name="character_id" value="roxinha"/>

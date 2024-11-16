@@ -25,8 +25,6 @@ class Entity(pygame.sprite.Sprite):
         self.character_data = character_data
         self.questions  = character_data['questions']
 
-    def speed_boost(self, value):
-        self.speed *= value
 
     def block(self):
         self.blocked = True
@@ -55,20 +53,10 @@ class Entity(pygame.sprite.Sprite):
         else:
             self.facing_direction = 'down' if relation.y > 0 else 'up'
 
-    def block(self):
-        self.blocked = True
-        self.direction = vector(0,0)
-
-    def unblock(self):
-        self.blocked = False
-
 class Player(Entity):
     def __init__(self, pos, groups, frames, facing_direction, collision_sprites, character_data):
         super().__init__(pos, frames, groups, facing_direction, character_data)
         self.collision_sprites = collision_sprites
-
-        self.image = pygame.Surface((16, 16))
-        self.image.fill(COLORS['red'])
 
         self.direction = vector()
 

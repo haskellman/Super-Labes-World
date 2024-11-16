@@ -2,12 +2,11 @@ from settings import *
 from entities import Player
 
 class Inventory:
-    def __init__(self, player_items, fonts, interface_frames, player, sounds, item_used):
+    def __init__(self, player_items, fonts, interface_frames, sounds, item_used):
         self.fonts = fonts
         self.display_surface = pygame.display.get_surface()
         self.rows = 3
         self.cols = 10
-        self.items = [[None for _ in range(self.rows)] for _ in range(self.cols)]
         self.box_size = 93
         self.x = (WINDOW_WIDTH - 968) / 2 
         self.y = (WINDOW_HEIGHT - 500) / 2
@@ -20,7 +19,6 @@ class Inventory:
 
         self.player_items = player_items
         self.inventory_bg = interface_frames['interface']['inventory_interface']
-        self.player = player
 
         self.offset_bgx = (WINDOW_WIDTH - self.inventory_bg.width) / 2
         self.offset_bgy = (WINDOW_HEIGHT- self.inventory_bg.height) / 2

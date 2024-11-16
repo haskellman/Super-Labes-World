@@ -12,7 +12,7 @@ from battle import Battle
 from choose_dialog import ChooseDialog
 from item import Item
 from link import Link
-from groups import AllSprites
+from all_sprites import AllSprites
 from support import *
 from game_data import *
 from dialog import Dialog
@@ -58,7 +58,7 @@ class Game:
         # self.setup(self.tmx_maps['sala_monalessa'], 'sala_monalessa', 'ct7') #sala_monalessa
         # self.setup(self.tmx_maps['sala_patricia'], 'sala_patricia', 'ct7') #sala_patricia
         # self.setup(self.tmx_maps['ct9'], 'ct9', 'ufes') #ct9
-        # self.setup(self.tmx_maps['labgrad'], 'labgrad', 'ct9') labrad
+        # self.setup(self.tmx_maps['labgrad'], 'labgrad', 'ct9') #labgrad
         # self.setup(self.tmx_maps['ending'], 'ending', 'ct7') #ending
 
         # Computer
@@ -71,7 +71,7 @@ class Game:
 
         # overlays
         self.dialog_open = None
-        self.inventory = Inventory(self.player_items , self.fonts, self.interface_frames, self.player, self.sounds, self.item_used)
+        self.inventory = Inventory(self.player_items , self.fonts, self.interface_frames, self.sounds, self.item_used)
         self.inventory_open = False
         self.computer = Computer(self.computer_links,self.fonts, self.interface_frames, self.sounds)
         self.computer_open = False

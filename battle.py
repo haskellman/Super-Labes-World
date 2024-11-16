@@ -43,9 +43,9 @@ class Battle():
 
         # speak
         self.character_rect = pygame.Rect(853, 137, 192, 192)
-        self.counter = 0
-        self.speed = 300
-        self.done = False
+        self.counter_text_speak = 0
+        self.speed_text_speak = 300
+        self.done_text_speak = False
         self.speak_rect = pygame.Rect(756, 29, 421, 99)
 
 
@@ -198,15 +198,15 @@ class Battle():
             self.test.append(1)
             self.error_mode = False
             self.sounds['correct_answer'].play()
-            self.counter = 0
-            self.done = False
+            self.counter_text_speak = 0
+            self.done_text_speak = False
 
         else:
             self.test.append(0)
             self.error_mode = True
             self.sounds['wrong_answer'].play()
-            self.counter = 0
-            self.done = False
+            self.counter_text_speak = 0
+            self.done_text_speak = False
 
     def check_end_battle(self):
         if self.current_question == self.qtd_questions:
@@ -216,21 +216,21 @@ class Battle():
         # quando a pessoa erra o personagem fala um dos dialogos de erro
         if self.error_mode:
             text = self.text_format(WRONGS_SPEAKS[self.current_question], 30)
-            if self.counter < len(WRONGS_SPEAKS[self.current_question]) * self.speed:
-                self.counter += int(5000 * dt)
-            elif self.counter >= len(WRONGS_SPEAKS[self.current_question]) * self.speed:
-                self.done = True
-            text_surf = self.fonts['regular'].render(text[0:self.counter//self.speed], True, COLORS['black'])
+            if self.counter_text_speak < len(WRONGS_SPEAKS[self.current_question]) * self.speed_text_speak:
+                self.counter_text_speak += int(5000 * dt)
+            elif self.counter_text_speak >= len(WRONGS_SPEAKS[self.current_question]) * self.speed_text_speak:
+                self.done_text_speak = True
+            text_surf = self.fonts['regular'].render(text[0:self.counter_text_speak//self.speed_text_speak], True, COLORS['black'])
             self.display_surface.blit(text_surf, self.speak_rect)
 
         # quando a pessoa acerta o personagem fala o dialogo de acerto
         else:
             text = self.text_format(CORRECTS_SPEAKS[self.current_question], 30)
-            if self.counter < len(CORRECTS_SPEAKS[self.current_question]) * self.speed:
-                self.counter += int(5000 * dt)
-            elif self.counter >= len(CORRECTS_SPEAKS[self.current_question]) * self.speed:
-                self.done = True                
-            text_surf = self.fonts['regular'].render(CORRECTS_SPEAKS[self.current_question][0:self.counter//self.speed], True, COLORS['black'])
+            if self.counter_text_speak < len(CORRECTS_SPEAKS[self.current_question]) * self.speed_text_speak:
+                self.counter_text_speak += int(5000 * dt)
+            elif self.counter_text_speak >= len(CORRECTS_SPEAKS[self.current_question]) * self.speed_text_speak:
+                self.done_text_speak = True                
+            text_surf = self.fonts['regular'].render(CORRECTS_SPEAKS[self.current_question][0:self.counter_text_speak//self.speed_text_speak], True, COLORS['black'])
             self.display_surface.blit(text_surf, self.speak_rect)  
 
     def update(self, dt):

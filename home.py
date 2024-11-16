@@ -22,7 +22,6 @@ class Home:
         self.object_rect = pygame.Rect(randint(100, 1180), randint(-50, 0), 0, 0)
         self.object_surf = self.fall_items['down'][0]
         self.fall_objects_list = self.generate_list_fall_objects()
-        self.qtd_items = 20
 
         # callbacks
         self.run_game = run_game
