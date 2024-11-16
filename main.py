@@ -4,7 +4,7 @@ from os.path import join
 from home import Home
 from credits import Credits
 from game_controls import GameControls
-from sprites import Sprite, AnimatedSprite, CollisionSprite, CollidableSprite, TransitionSprite, DialogSprite, InteractiveSprite
+from sprites import Sprite, AnimatedSprite, CollisionSprite, CollidableSprite, TransitionSprite, CollidableDialogSprite, InteractiveSprite
 from entities import Player, Character
 from inventory import Inventory
 from computer import Computer
@@ -214,7 +214,7 @@ class Game:
             # dialogos de colisão
             try:
                 for obj in tmx_map.get_layer_by_name('Dialogs'):
-                    DialogSprite((obj.x, obj.y), pygame.Surface((obj.width, obj.height)), (self.dialogs_sprites), obj.properties['message'])
+                    CollidableDialogSprite((obj.x, obj.y), pygame.Surface((obj.width, obj.height)), (self.dialogs_sprites), obj.properties['message'])
                     # print (type((obj.width, obj.height)))
             except ValueError as ve:
                pass

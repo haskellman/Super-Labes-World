@@ -38,7 +38,7 @@ class TransitionSprite(Sprite):
 		self.src = src
 		self.dest = dest
 
-class DialogSprite(Sprite):
+class CollidableDialogSprite(Sprite):
 	def __init__(self, pos, surf, groups, message):
 		super().__init__(pos, surf, groups)
 		self.hitbox = self.rect.copy()
