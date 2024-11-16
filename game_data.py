@@ -547,10 +547,10 @@ CORRECTS_SPEAKS =[ 'vamos ver se voce é bom mesmo', 'Parabéns! Quem diria que 
                   'Nossa, até me emocionei com essa resposta!', 'Ah, sabia que esse dia chegaria! Você acertou!', 'É, parece que milagres realmente acontecem!',
                   'Veja só, nem precisei desenhar pra você entender!','Finalmente']
 
-# Lista com as falas em caso de erro em batalha do jogador
+# Lista com as falas em caso de erro em batalha do jogador 
 WRONGS_SPEAKS = ['Nossa, quase... só faltaram todos os detalhes certos!', 'Interessante! Só não foi a resposta que eu esperava.', 'Uau, passou longe! Mas foi uma tentativa original, eu diria.',
                   'Chegou bem perto... de errar tudo!', 'Interessante abordagem... só não se aplica a essa matéria.', 'Quase lá! Só faltou tudo!', 'Quase lá! Tipo... quase na mesma galáxia!',
-                  'Interessante abordagem! Se estivéssemos falando de outra coisa.', 'É uma resposta! Só não para essa questão.', 'Você chegou lá! Só que no lugar errado.', 'Quase lá! Só que não.','Nossa, quase... só faltaram todos os detalhes certos!', 'Interessante! Só não foi a resposta que eu esperava.', 'Uau, passou longe! Mas foi uma tentativa original, eu diria.',
+                  'Que nteressante! Se estivéssemos falando de outra coisa.', 'É uma resposta! Só não para essa questão.', 'Você chegou lá! Só que no lugar errado.', 'Quase lá! Só que não.','Nossa, quase... só faltaram todos os detalhes certos!', 'Interessante! Só não foi a resposta que eu esperava.', 'Uau, passou longe! Mas foi uma tentativa original, eu diria.',
                   'Chegou bem perto... de errar tudo!', 'Interessante abordagem... só não se aplica a essa matéria.', 'Quase lá! Só faltou tudo!', 'Quase lá! Tipo... quase na mesma galáxia!',
-                  'Interessante abordagem! Se estivéssemos falando de outra coisa.', 'É uma resposta! Só não para essa questão.', 'Você chegou lá! Só que no lugar errado.', 'Quase lá! Só que não.',]
+                  'Que interessante! Se estivéssemos falando de outra coisa.', 'É uma resposta! Só não para essa questão.', 'Você chegou lá! Só que no lugar errado.', 'Quase lá! Só que não.',]
 
