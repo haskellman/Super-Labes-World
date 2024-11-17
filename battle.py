@@ -2,7 +2,6 @@ from settings import *
 from time import sleep
 from timer import Timer
 from support import import_image
-from dialog import DialogSprite
 from game_data import CORRECTS_SPEAKS, WRONGS_SPEAKS
 from random import choice
 
@@ -109,13 +108,13 @@ class Battle():
             level_surf = self.fonts['regular_mid'].render('??????', False, text_color)
 
             # draw
-            if(self.option == 0):
+            if self.option == 0:
                 self.display_surface.blit(self.icon, rect_A, special_flags = pygame.BLEND_RGB_ADD )
-            elif(self.option == 1):
+            elif self.option == 1:
                 self.display_surface.blit(self.icon, rect_B, special_flags = pygame.BLEND_RGB_ADD )
-            elif(self.option == 2):
+            elif self.option == 2:
                 self.display_surface.blit(self.icon, rect_C, special_flags = pygame.BLEND_RGB_ADD )
-            elif(self.option == 3):
+            elif self.option == 3:
                 self.display_surface.blit(self.icon, rect_D, special_flags = pygame.BLEND_RGB_ADD )
             self.display_surface.blit(text_surf, self.option_rect)
             self.display_surface.blit(question_surf, question_rect)
@@ -214,6 +213,8 @@ class Battle():
 
     def check_end_battle(self):
         if self.current_question == self.qtd_questions:
+            self.end_battle(self.character, self.test)
+        if self.test.count(0) >= self.qtd_questions * 0.3:
             self.end_battle(self.character, self.test)
 
     def draw_dialog(self, dt):

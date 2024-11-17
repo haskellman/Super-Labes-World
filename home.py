@@ -81,7 +81,6 @@ class Home:
         return self.y
 
     def update(self):
-        self.initial_screen.fill(COLORS['black'])
         self.initial_screen.blit(self.menu_frames['interface']['opening_interface'])
         self.draw_menu()
         # self.fall_objects()

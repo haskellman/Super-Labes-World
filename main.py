@@ -21,7 +21,7 @@ from time import sleep
 class Game:
     def __init__(self): 
         # inicialização
-        self.screen = pygame.display.set_mode((WINDOW_WIDTH, WINDOW_HEIGHT))
+        self.screen = pygame.display.get_surface()
         self.clock = pygame.time.Clock()
         self.buff_timer = Timer(15000, autostart = True) # 15 segundos
         
@@ -153,7 +153,6 @@ class Game:
                 Sprite((x * TILE_SIZE, y * TILE_SIZE), surf, self.all_sprites, GAME_LAYERS['bg'])
         except ValueError as ve:
            pass
-            # manter os items do jogador aqui
 
         # Coisas acima do terreno sem colisão
         try:
@@ -260,6 +259,16 @@ class Game:
     def input(self):
         if not self.dialog_open and not self.choose_dialog_open and not self.battle_open:
             keys = pygame.key.get_just_pressed()
+            # inventario
+            if keys[pygame.K_i]:
+                self.inventory_open = not self.inventory_open
+                self.player.blocked = not self.player.blocked
+                # emitir som
+            # fechar sobreposições
+            if keys[pygame.K_ESCAPE]:
+                self.inventory_open = False
+                self.computer_open = False
+                self.player.blocked = False
             if keys[pygame.K_SPACE] and not self.dialog_open:
                 # interações com personagens
                 for character in self.character_sprites:
@@ -330,16 +339,6 @@ class Game:
                             self.create_dialog(self.player, "A placa diz: Biblioteca Central'...\n\n...eu até que estudaria... mas está fechado ", False)
                         if sprite.item_id == 'placa_lake':
                             self.create_dialog(self.player, "A placa diz: Lagoa da Ufes Reza a lenda que sua água é radioativa'...\n\n...'-' ", False)
-            # inventario
-            if keys[pygame.K_i]:
-                self.inventory_open = not self.inventory_open
-                self.player.blocked = not self.player.blocked
-                # emitir som
-            # fechar sobreposições
-            if keys[pygame.K_ESCAPE]:
-                self.inventory_open = False
-                self.computer_open = False
-                self.player.blocked = False
 
     def item_used(self):
         self.player.speed_boost(1.5)
