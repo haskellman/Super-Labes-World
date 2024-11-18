@@ -35,7 +35,7 @@
 %%% Importação de pacotes. %%%
 
 % Conserta o erro "No room for a new \count". 
-% O comando \reserveinserts deve ser comentado ou não, dependendo da versão do LaTeX.
+% O comando \reserveinserts deve ser comentado ou não, dependendo da versão do A Utilização do Role-Playing Game (RPG) LaTeX.
 \usepackage{etex}
 %\reserveinserts{28}
 
@@ -56,6 +56,10 @@
 
 % Controle das cores.
 \usepackage[usenames,dvipsnames]{xcolor}
+\usepackage{colortbl} % Para adicionar cor às tabelas
+\definecolor{myblue}{cmyk}{86,59,0,40}
+
+\usepackage{pdflscape} % Para girar páginas automaticamente no PDF
 
 % Inclusão de gráficos.
 \usepackage{graphicx}
@@ -169,7 +173,7 @@
 %%% Definição de variáveis. %%%
 
 % (*) Substituir os textos abaixo com as informações apropriadas.
-\titulo{Ainda não sei}
+\titulo{Super Labes World: um Role-Playing Game (RPG) e a sua Utilização para Propósitos Educacionais}
 \autor{Israel dos Santos Candeias}
 \local{Vitória, ES}
 \data{\the\year}
@@ -417,9 +421,10 @@
 \include{capitulos/ch1-introducao}
 \include{capitulos/ch2-referencial}
 \include{capitulos/ch3-contribuicao}
-\include{capitulos/ch4-avaliacao}
-\include{capitulos/ch5-conclusoes}
-\include{capitulos/ch6-dicaslatex}
+\include{capitulos/ch4-implementacao}
+\include{capitulos/ch5-avaliacao}
+\include{capitulos/ch6-conclusoes}
+\include{capitulos/ch7-dicaslatex}
 
 
 
