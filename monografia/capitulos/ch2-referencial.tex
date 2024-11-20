@@ -5,60 +5,61 @@
 \chapter{Referencial Teórico e Tecnologias Utilizadas}
 \label{sec-referencial}
 % Este capítulo deve apresentar os aspectos relativos ao conteúdo teórico relevante para o trabalho.  Incluirá conhecimento adquirido a partir de livros, artigos, relatórios técnicos, dissertações, teses e outros materiais bibliográficos.  O capítulo deve apresentar, além do referencial teórico, informações sobre as tecnologias utilizadas no trabalho. O capítulo deve ter cerca de 12-15 páginas e deve demonstrar conhecimento básico da literatura técnico-científica sobre o tema abordado no trabalho.
-Neste capítulo serão apresentados os conceitos teóricos que guiaram o desenvolvimento do jogo, bem como as tecnologias usadas para implementar o sistema, no capítulo \ref{sec-principios-de-design-de-software} abordamos alguns dos conceitos fundamentais de engenharia de software e também como isso foi usado nessa trabalho, na seção \ref{sec-desenvolvimento-de-jogos} é exposto alguns princípios básicos de desenvolvimento de jogos e as ferramentas e padrões que foram utilizadas na programação, a seção \ref{sec-mapas} fala sobre os programas que foram utilizados para o desenvolvimento de mapas desse jogo e a seção \ref{sec:pixel-art} explica como a parte artística do jogo foi feita e brevemente a ferramenta que foi utilizada.
+Neste capítulo serão apresentados os conceitos teóricos que guiaram o desenvolvimento do jogo, bem como as tecnologias usadas para implementá-lo. No capítulo \ref{sec-principios-de-design-de-software} abordamos alguns dos conceitos fundamentais de Engenharia de Software e como métodos desta área foram usados neste trabalho; na seção \ref{sec-desenvolvimento-de-jogos} é exposto alguns princípios básicos de desenvolvimento de jogos e as ferramentas e padrões que foram utilizados na programação; a seção \ref{sec-mapas} fala sobre os programas que foram utilizados para o desenvolvimento de mapas desse jogo e a seção \ref{sec:pixel-art} explica como a parte artística do jogo foi feita e, brevemente, explora a ferramenta utilizada.
 % colocar os links para as seções explicando oq cada uma fala 
 
 % =============================== 2.1 Princípios de Design de Software ===========================
-\section{Princípios de Design de Software}
-\label{sec-principios-de-design-de-software}
-Os princípios de design de software constituem diretrizes fundamentais para o desenvolvimento de sistemas de software eficazes, robustos e manuteníveis. Esses princípios orientam todo o ciclo de vida do software desde o surgimento da ideia até o sistema em produção. 
-\subsection{Engenharia de Software}
+\section{Engenharia de Software}
 \label{sec:engenharia-de-software}
-A engenharia de software é a área da computação que se preocupa em propor e aplicar princípios de engenharia na construção de softwares\cite{engsoftmoderna} ou seja é uma área de estudos da computação que se preocupa em projetar, arquitetar melhorar a qualidade dos produtos de software aumentando assim a produtividade no processo de desenvolvimento. 
+A ideia de um software ter uma arquitetura se tornou importante, de forma a entender como ele foi construído e como suas operações funcionam. Assim como na construção de um prédio ou de um navio, a arquitetura oferece uma maneira de visualizar de forma simples e clara como algo é organizado e estruturado \cite{budgen2020software}. 
 
-Para seguir as práticas recomendadas de engenharia de software o primeiro passo a ser definido é qual paradigmas de processo de software ser seguido, existem vários modelos para diferentes cenários possíveis, o escolhido para esse trabalho foi o modelo evolutivo.
+A Engenharia de Software é a área da computação que se preocupa em propor e aplicar princípios de engenharia na construção de softwares\cite{engsoftmoderna}, ou seja, é uma área de estudos da computação que se preocupa em projetar, arquitetar e melhorar a qualidade dos produtos de software aumentando assim a produtividade no processo de desenvolvimento. 
 
-O modelo evolutivo como o próprio nome sugere, os requisitos vão evoluindo conforme a aplicação evolui, esse processo ocorre em paralelo à evolução da aplicação, esse paradigma é muito útil quando o cliente não tem todas as funcionalidades necessárias para a solução. Nesse contexto foi oque mais se adequou a esse trabalho tendo em vista que nem todos os requisitos eram bem definidos de início e as funcionalidades do jogo precisam ser validadas frequentemente, uma vez que, a jogabilidade precisa ser atraente ao público, então a cada nova versão foram realizadas reuniões com colegas, e com a orientadora, a fim de receber feedbacks que auxiliem na melhoria dos recursos de modo contínuo.
+Para seguir as práticas recomendadas da engenharia de software, o primeiro passo a ser definido é modelo de processo prescritivo a ser seguido, existem vários modelos para diferentes cenários possíveis como o modelo em cascata, ou o modelo incremental, nesse trabalho foi utilizado como base o modelo de processo evolucionário, mais precisamente o modelo espiral.
 
-A Figura \ref{spiral-model} ilustra esse modelo
+Esse modelo tem como característica principal que o diferencia de outros modelos a sua abordagem cíclica tem como objetivo aumentar gradualmente o nível de definição e implementação de um sistema, ao mesmo tempo em que reduz os riscos associados ao seu desenvolvimento. \cite{maxim2021engenharia}. Durante o uso desse modelo, o desenvolvimento do software ocorre por meio de uma série de versões evolutivas, nas primeiras iterações as versões podem ser representadas por modelos ou protótipos. À medida que o processo avança, as iterações subsequentes resultam em versões progressivamente mais completas do sistema, passando por etapas refinadas do processo de engenharia.
 
-\newpage
-\begin{figure}
+\begin{figure}[h!]
     \centering
-    \includegraphics[width=0.9\linewidth]{figuras/spiral-model.jpg}
+    \includegraphics[width=0.9\linewidth]{figuras/spiral-model.png}
     \caption{Ciclo de vida do modelo espiral}
     \label{spiral-model}
 \end{figure}
-Cada uma das atividades realizadas no modelo ilustrado acima são:
+Um modelo espiral é dividido em um conjunto de atividades metodológicas, cada uma dessas atividades representa um segmento do caminho espiral ilustrado na Figura \ref{spiral-model} Diferente de outros modelos de processo, que terminam quando o software é entregue, o modelo espiral pode ser adaptado para ser aplicado ao longo de todo ciclo de vida do software.
+
+O primeiro circuito em torno da espiral pode representar um “projeto de desenvolvimento de conceitos” que começa no núcleo da espiral e continua por várias iterações, até que o desenvolvimento de conceitos esteja completo. Se o conceito for desenvolvido para ser um requisito final, o processo prossegue pela espiral pelas “bordas” e um “novo projeto de desenvolvimento de produto” se inicia \cite{maxim2021engenharia}. As ideias precisavam de validação de usuários. Por isso, a prototipação foi muito utilizada como mecanismo de redução de riscos como o modelo sugere. 
+
+% No modelo evolutivo, como o próprio nome sugere, os requisitos vão evoluindo conforme a aplicação evolui e esse processo ocorre em paralelo à evolução da aplicação. Esse paradigma é muito útil quando o cliente não tem todas as funcionalidades necessárias para a solução. Nesse contexto, foi paradigma que mais se adequou a esse trabalho tendo em vista que nem todos os requisitos eram bem definidos de início. Além disto, as funcionalidades do jogo precisam ser validadas frequentemente uma vez que a jogabilidade precisa ser atraente ao público. Portanto, a cada nova versão foram realizadas reuniões com colegas, e com a orientadora, a fim de receber \textit{feedbacks} que auxiliem na melhoria dos recursos, de modo contínuo.
+
+As atividades realizadas no modelo ilustrado na Figura \ref{spiral-model} são:
 \begin{itemize}
-    \item \textbf{Planejamento:} A fase de planejamento é base sobre a qual todo o projeto de desenvolvimento de software deve ser construído. Durante essa fase foram definidos os requisitos e as ferramentas que seriam utilizadas;
-    \item \textbf{Análise de riscos:} Nessa fase é feito tanto o levantamento dos riscos associados ao desenvolvimento do sistema, mas também como mitigá-los no geral sendo uma etapa para gerenciar os riscos, e na avaliação da viabilidade técnica;
-    \item \textbf{Engenharia (Projeto e Codificação):} Aqui é onde são desenvolvidos os o designs do software, codificação, integração, testes e por fim a implantação no sistema;
-    \item \textbf{Validação:} Ao chegar nessa fase já temos uma versão inicial do projeto, agora podemos coletar feedbacks o observações sobre o sistema, essa etapa é fundamental nessa abordagem, pois a qualidade da próxima versão é diretamente proporcional a qualidade dos feedbacks aqui coletados;
+    \item \textbf{Planejamento:} A fase de planejamento é a base sobre a qual todo o projeto de desenvolvimento de software deve ser construído. Durante essa fase são definidos os recursos um cronograma e a análise de riscos;
+    \item \textbf{Modelagem:} Nessa fase elabora-se um "esboço" do sistema, permitindo uma visão geral de sua estrutura e funcionamento;
+    \item \textbf{Construção:} Essa etapa envolve a produção do código e a realização de testes para identificar e corrigir possíveis erros na codificação.;
+    \item \textbf{Validação:} Ao chegar nessa etapa, O software, seja como uma solução completa ou como um incremento parcialmente implementado, é entregue ao cliente para avaliação. Com base nessa análise, o cliente fornece \textit{feedback} sobre o produto entregue.
 \end{itemize}
 
-Essas Etapas se repetem num \textit{loop}, o número exato de \textit{loops} do modelo é indefinido e varia de projeto para projeto. Cada loop da espiral é nomeado fase do processo de desenvolvimento de software.
 
-\section{RPG}
+\section{\textit{Role-Playing Games} (RPG)}
 \label{sec:rpg}
+
+Um \textit{role-playing game}\footnote{Role Playing Game \url{https://en.wikipedia.org/wiki/Role-playing_game}} consiste de um tipo de jogo no qual jogadores assumem papéis de algum domínio proposto e devem atuar de acordo com um sistema de regras definido. Há diversos tipo de RPG, com regras e estilos bem variados. As seções a seguir exploram alguns estilos de RPG.
+
 \subsection{RPG de Mesa}
 \label{sec:rpg-de-mesa}
-Em meados de 1974 nos Estados Unidos foi publicado o um jogo chamado \textit{Dungeons} \& \textit{Dragons} \footnote{D\&D - \textit{Dungeons and Dragons} \url{https://dnd.wizards.com/pt-BR}}, esse que e considerado o primeiro RPG (\textit{Role-Playing Game}) em português jogo de interpretação de papéis com ambientação em um universo de fantasia medieval.
+Em meados de 1974, nos Estados Unidos, foi publicado um jogo chamado \textit{Dungeons} \& \textit{Dragons} \footnote{D\&D - \textit{Dungeons and Dragons} \url{https://dnd.wizards.com/pt-BR}}. Este jogo foi considerado o primeiro RPG com interpretação de papéis e ambientação em um universo de fantasia medieval.
 
-A ideia do jogo consistem em cada jogador na mesa construir a história, personalidade e ficha de seu personagem, após isso o mestre de jogo ou narrador que já planejou a história anteriormente irá dar prosseguimento narrando a história dando início do jogo, conduzido pela imaginação. Os jogadores jogam dados para determinar quais dos seus ataques acertam ou erram e se seu personagem percebe ou não uma armadilha escondida, todas as ações são determinadas através dos dados. 
-
-A ficha de personagem é um documento que deve conter todas as características que definem os detalhes necessários do seu personagem. É ela que diz o quão bom seu personagem é em fazer em determinadas ações, já a história se refere a um plano de fundo que o jogador inventa para o seu personagem com o intuito de contribuir para um jogo rico em detalhes. 
+A ideia do jogo consiste de cada jogador na mesa construir a história, personalidade e ficha de seu personagem; após, o mestre de jogo (ou narrador), que já planejou a história anteriormente, irá dar prosseguimento narrando a história dando início ao jogo, conduzido pela própria imaginação. Os jogadores jogam dados para determinar quais dos seus ataques acertam ou erram e se seu personagem percebe ou não uma armadilha escondida; as ações são determinadas através dos dados. Ou elemento do jogo é a ``ficha de personagem'' que consiste de um documento que deve conter as características que definem os detalhes necessários do personagem de um jogador. Esta ficha determina o quão bom seu personagem é em fazer determinadas ações. Já a história refere-se a um plano de fundo que o jogador inventa para o seu personagem com o intuito de contribuir para um jogo rico em detalhes. 
 
 \subsection{RPG Eletrônico}
 \label{sec:rpg-eletronico}
-Após o sucesso do RPG de mesa, e com o avanço da tecnologia esse estilo de jogo saiu da mesa e chegou aos computadores e consoles já não mais precisando depender totalmente da imaginação, os computadores renderizam gráficos cada vez mais melhores e realistas. Esse estilo de jogo se popularizou e atualmente é um dos gêneros de jogos mais populares segundo a NEWZOO \cite{NEWZOO}.
+Após o sucesso do RPG de mesa, e com o avanço da tecnologia, esse estilo de jogo saiu da mesa e chegou aos computadores e consoles já não mais precisando depender totalmente da imaginação, pois os computadores renderizam gráficos melhores e mais realistas. Esse estilo de jogo se popularizou e atualmente é um dos gêneros de jogos mais populares segundo a NEWZOO \cite{NEWZOO}.
 
-Atualmente todos os RPGs giram em torno de um universo fictício chamado ambientação que pode ser medieval, ocidental, espacial, realístico e o que mais a imaginação inventar. Esse universo forma o cenário onde os personagens interagem e constroem a sua história, profissão, cultura e tecnologias. \cite{duflo1999jogo}
+Atualmente, os RPGs giram em torno de um universo fictício chamado \textit{ambientação} que pode ser medieval, ocidental, espacial, realístico e o que mais a imaginação inventar. Esse universo forma o cenário onde os personagens interagem e constroem a sua história, profissão, cultura e tecnologias \cite{duflo1999jogo}.
 
 \subsection{O RPG na Educação}
 \label{sec:rpg-na-educacao}
-Esse gênero têm se destacado não apenas no video-game, mas também como ferramentas versáteis com aplicações em diversas áreas. Esses jogos, caracterizados pela imersão em narrativas interativas e pela personalização de personagens já foram utilizados em diversas áreas fora o entretenimento e tiveram resultados bem positivos. Na UFG (universidade de Goiás) foi desenvolvido um jogo RPG cujo para o curso de Ciências e Biologia, o 
-objetivo era mediar a aprendizagem, diversificar e avaliar a transmissão do conhecimento e que fosse útil em sua prática profissional. O jogo consistia de uma aventura dentro do corpo humano com 25 questões a respeito de Fisiologia Humana Básica, os alunos do curso demonstraram grande interesse pelo jogo e aprovaram o modelo didático e perceberam sua eficácia ao associar a imaginação e a forma como pode ser utilizado para ensinar e avaliar os conhecimentos adquiridos.\cite{soares2016role}
+Esse gênero de jogo tem se destacado não apenas no video-game, mas também como ferramentas versáteis com aplicações em diversas áreas. Caracterizados pela imersão em narrativas interativas e pela personalização de personagens, esses jogos já foram utilizados em diversas áreas fora o entretenimento e tiveram resultados positivos. Por exemplo, na UFG (universidade de Goiás), foi desenvolvido um jogo RPG para o curso de Ciências e Biologia (\cite{soares2016role}) com o objetivo de mediar a aprendizagem, diversificar e avaliar a transmissão do conhecimento. O jogo consiste de uma aventura dentro do corpo humano com 25 questões a respeito de Fisiologia Humana Básica; os alunos do curso demonstram grande interesse pelo jogo e aprovaram o modelo didático e perceberam sua eficácia ao associar a imaginação e a forma como pode ser utilizado para ensinar e avaliar os conhecimentos adquiridos.
 
 
 %  ================================ 2.2 Princípios de Game Design ================================
@@ -67,83 +68,109 @@ objetivo era mediar a aprendizagem, diversificar e avaliar a transmissão do con
 % =================== PYGAME-CE =======================================
 \section{Desenvolvimento de Jogos}
 \label{sec-desenvolvimento-de-jogos}
-Um jogo é um tipo de aplicativo que normalmente é usado para fins de entretenimento, mas também pode ser projetado para objetivos mais sérios, com potencial de aplicação em diversas áreas, como exemplo educação, negócios e saúde.
-Desenvolver um jogo é uma tarefa desafiadora devido às diversas atividades multidisciplinares envolvidas, tornando o processo altamente complexo. 
+Um jogo eletrônico é um tipo de aplicativo que normalmente é usado para fins de entretenimento, mas também pode ser projetado para objetivos mais sérios, com potencial de aplicação em diversas áreas, como por exemplo educação, negócios e saúde. Desenvolver um jogo é uma tarefa desafiadora devido às diversas atividades multidisciplinares envolvidas, tornando o processo altamente complexo, como discutido nas seções a seguir. 
 
 \subsection{Princípios de Game Design}
 \label{sec:principios-de-game-design}
-O processo de aprendizagem envolvido na criação e no desenvolvimento de jogos integra uma ampla variedade de conhecimentos. Para criar um jogo, é fundamental dominar não apenas a programação, mas também áreas como Música, Desenho, inglês, Geometria, Física, Matemática, Lógica, Geografia e Linguagens se tornam indispensáveis, pois o desenvolvimento de um jogo exige o domínio de programação, design gráfico, efeitos sonoros, criação de fases (\textit{level design}), elaboração de histórias e narrativas (\textit{storytelling}), temática e contextualização.
+O processo de aprendizagem envolvido na criação e no desenvolvimento de jogos integra uma ampla variedade de conhecimentos. Para criar um jogo, é fundamental dominar não apenas a programação, mas também áreas como Música, Desenho, inglês, Geometria, Física, Matemática, Lógica, Geografia e Linguagens se tornam indispensáveis, pois o desenvolvimento de um jogo exige o domínio de programação, design gráfico, efeitos sonoros, criação de fases (\textit{level design}), elaboração de histórias e narrativas (\textit{storytelling}), temática e contextualização \cite{cestari2022aprendizagem}.
 
-Nos primeiros dias do desenvolvimento de videogames, os jogos eram criados por grupos pequenos de pessoas, porém, com a complexidade dos jogos aumentando e a industria vendo oportunidades sérias, as equipes eventualmente foram acompanhando o ritmo a especialização está se tornando cada vez mais necessária à medida que os jogos se tornam maiores uma equipe de produção média inclui vários membros. Atualmente, uma equipe de desenvolvimento de jogos engloba profissionais multidisciplinares de diversas áreas, cada um com um foco especifico para a produção do jogo. Scott Rogers cita em seu livro \cite{GameDesign} as seguintes: 
+Nos primeiros dias do desenvolvimento de videogames, os jogos eram criados por grupos pequenos de pessoas; porém, com a complexidade dos jogos aumentando e a industria vendo oportunidades sérias, as equipes eventualmente foram acompanhando o ritmo e a especialização está se tornando cada vez mais necessária à medida que os jogos se tornam maiores. Atualmente, uma equipe de desenvolvimento de jogos engloba profissionais multidisciplinares, cada um com um foco especifico para a produção do jogo. Scott Rogers cita em seu livro \cite{GameDesign} as seguintes: 
 \begin{itemize}
-    \item \textbf{Programador(a):} Responsável pela programação do software do jogo e das ferramentas utilizadas quando se aplicam também escreve o documento técnico;
-    \item \textbf{Artista:} Responsável pela representação visual dos componentes do jogo desde as interfaces aos personagens estipulados no documento técnico ;
-    \item \textbf{Designer do Jogo:} cria as ideias e regras que compõem o jogo do conceito até a forma final também cuida da documentação do sistema de interação;
+    \item \textbf{Programador(a):} Responsável pela programação do software do jogo e das ferramentas utilizadas. Também escreve o documento técnico;
+    \item \textbf{Artista:} Responsável pela representação visual dos componentes do jogo desde as interfaces aos personagens estipulados no documento técnico;
+    \item \textbf{Designer do Jogo:} cria as ideias e regras que compõem o jogo do conceito até a forma final.
     \item \textbf{Produtor(a): }Responsável por supervisionar toda a equipe de desenvolvimento do jogo;
-    \item \textbf{Testador:} Responsável por jogar compulsivamente o jogo e relatar problemas ou \textit{bugs} encontrados
-    \item \textbf{Compositor:} Aquele responsável por criar temas e tilhas marcantes que sejam capazes de compor o cenário do jogo e passar os sentimentos que o designer do jogo estipulou.
+    \item \textbf{Testador:} Responsável por jogar constantemente o jogo e relatar problemas ou \textit{bugs} encontrados;
+    \item \textbf{Compositor:} Aquele responsável por criar temas e tilhas marcantes que sejam capazes de compor o cenário do jogo e passar os sentimentos que o designer do jogo estipulou;
     \item \textbf{Designer de Som:} cria todos os efeitos sonoros que são usados em um jogo;
     \item \textbf{Roteirista:}  Responsável por escrever o manual do jogo e qualquer material de suporte fictício, como  biografias de personagens;
     \item \textbf{Gerente de produto:} Um gerente de produto trabalha com a equipe de desenvolvimento e os gerencia com base no cronograma de produção;
     \item \textbf{Diretor Criativo:} é responsável por toda a gestão criativa de uma marca ou projeto;
     \item \textbf{Diretor(a) de Arte:} Responsável por ajudar a equipe a criar um estilo visual do jogo e trabalham com as equipes de marketing a fim de criar os designs dos produtos;
-    \item \textbf{Diretor(a) Técnico:} Eles revisam e recomendam ferramentas e softwares para equipes para ajudá-las a trabalhar de forma mais eficiente. Eles fornecem suporte técnico e aconselhamento quando há deficiências na equipe;
+    \item \textbf{Diretor(a) Técnico:} Revisam e recomendam ferramentas e softwares para equipes para ajudá-las a trabalhar de forma mais eficiente. Eles fornecem suporte técnico e aconselhamento quando há deficiências na equipe.
 \end{itemize}
 
-Em um jogo com finalidade pedagógica, é essencial não esquecer-se que tenha elementos a favor da diversão e do entretenimento utilizando o melhor de todas as áreas citadas anteriormente para esse finalidade. Muitos jogos educacionais infringem este princípio por se preocuparem demais com as questões escolares que o jogo se torna chato e o propósito do \textit{game} não é alcançado, é necessário pensar se aquele elemento educacional vai contribuir com a diversão também. Para alcançar esse objetivo uma equipe de desenvolvimento de jogos.
+Em um jogo com finalidade pedagógica, é essencial não esquecer de incluir elementos a favor da diversão e do entretenimento utilizando o melhor de todas as áreas citadas anteriormente para essa finalidade. Muitos jogos educacionais infringem este princípio por se preocuparem demais com as questões escolares. Com isso, o jogo se torna chato e o seu propósito não é alcançado. É necessário unir o elemento educacional ao entretenimento para alcançar o objetivo de forma equilibrada.
 
+\subsection{\textit{Game Loop}}
+\label{sec:game-loop}
+Cada jogo consiste de uma sequência de pegar a entrada do usuário, atualizar o estado do jogo, lidar com a IA, tocar música e efeitos sonoros, e mostrar o jogo na tela. Esta sequência é feita através do \textit{"game loop"}. Basicamente o "\textit{game loop}" é o batimento cardíaco do jogo cada iteração do loop corresponde a um \textit{frame} (quadro) do jogo, \footnote{Python Brasil \url{https://wiki.python.org.br/GameLoop#:~:text="game%20loop".-,O%20"Game%20Loop",batimento%20cardíaco%20de%20cada%20jogo.}}.
+
+A figura \ref{fig:event-loop} ilustra um loop de jogo com os três elementos básicos, que são executados continuamente a cada volta do loop durante o jogo\footnote{Game Programming Patterns \url{https://gameprogrammingpatterns.com/game-loop.html}}.
+
+
+\begin{figure}[h!]
+    \centering
+    \includegraphics[width=1\linewidth]{figuras/event-loop.png}
+    \caption{Event Loop}
+    \label{fig:event-loop}
+\end{figure}
+
+\begin{itemize}
+    \item \textit{\textbf{input:}} processa a entrada do usuário sem bloqueio;
+    \item \textit{\textbf{update:}} atualiza o estado do jogo;
+    \item \textit{\textbf{render:}}  desenha o jogo;
+    \item \textit{\textbf{delta time:}} o relógio na figura simboliza que este loop é executado a uma velocidade constante, independentemente das diferenças no hardware utilizado essa parte será explicada a seguir. 
+\end{itemize}
+
+% Delta time
+\subsection{Delta Time}
+\label{sec:delta-time}
+Nos primeiros videogames os programadores sabiam exatamente o hardware que iria executar o jogo que eles estavam codificando, o código era escrito especificamente para isso, eles eram cuidadosamente projetados visando fazer apenas o trabalho suficiente em cada quadro para que o jogo rodasse na velocidade que os desenvolvedores queriam. Atualmente é pouco provável saber em qual hardware o jogo será executado, ou seja, quando estivermos codificando um jogo temos que fazer ele se adaptar de forma inteligente a diversos dispositivos.
+
+ Para solucionar isso o \textit{Delta time} (diferença de tempo) é um padrão que a maioria dos jogos utilizam, ela consiste de uma variável com um valor numérico associado correspondente à diferença de valores do último \textit{clock} do processador (\textit{t'}) e o \textit{clock} atual (\textit{t}), como mostrado na equação a seguir.
+ \begin{equation}
+    \Delta t = t' - t
+    \label{eq:dt_equation}
+\end{equation}
+
+Supondo que tenhamos dois computadores diferentes para executar o jogo, um potente que consiga rodar a 120 FPS (\textit{frames per second}) quadros por segundo e outro menos potente que execute a 30 FPS, sem o delta time, um objeto que se move 1 unidade por quadro seria:
+\begin{itemize}
+    \item \textbf{Computador Potente:} 1 unidade x 120 quadros = 120 unidades de movimento por segundo.
+    \item \textbf{Computador Lento:} 1 unidade x 30 quadros = 30 unidades de movimento por segundo.
+\end{itemize}
+
+Se assim fosse feito, o jogador do computador potente se moveria quatro vezes mais rápido em relação ao jogador do computador lento, os jogos seriam injustos e inconsistentes. Veja agora como é feito com o \textit{delta time}.
+\begin{itemize}
+    \item \textbf{Computador Potente (120FPS):} Valor do delta = \(\frac{1}{120}\) = 0.0083 x 120 quadros \begin{math} \approx\end{math} 1 unidade.
+    \item \textbf{Computador Lento (30FPS):} \(\frac{1}{30}\) = 0.0333 x 30 quadros \begin{math} \approx\end{math} 1 unidade.
+\end{itemize}
+
+Esse valor é usado para ajustar todas as operações dependentes de tempo, como movimento ou animações.
+
+ % Quando dizemos que um jogo roda a 30 FPS (\textit{frames per second}) quadros por segundo, queremos dizer que o \textit{game loop} é executado 30 vezes por segundo, temos o valor de delta como \(\frac{1}{30}\), o que significa dizer que o \textit{game loop} do jogo leva \(\frac{1}{30}\) segundos para ser executado. Essa informação é utilizada para resolver o problema introduzido pela evolução dos computadores que, hoje, são extremamente mais velozes hoje do que nas décadas de 80 e 90. Jogos desenvolvidos nesta época não rodariam nas máquinas atuais sem um controle temporal do \textit{delta time}. 
+ 
+ % , e se um computador atual executasse um jogo dos anos 80 hoje sem nenhum mecanismo de controle, o jogo rodaria a alguns milhares de quadros e a experiência não seria boa se não fosse utilizado desse \textit{pattern} de jogos, não existiria uma normalidade entre dispositivos.
+ 
 \subsection{Pygame-ce}
 \label{sec:pygame-ce}
-Pygame-ce (Community Edition) \footnote{https://github.com/pygame-community/pygame-ce/} é uma biblioteca multiplataforma gratuita e de código aberto que surgiu de um fork do projeto pygame por seus antigos desenvolvedores principais, ela foi criado após desafios impossíveis os impedirem de continuar o desenvolvimento upstream. Seu foco é construir aplicativos multimídia como videogames utilizando a linguagem Python. Ela está sobre a licença GNU LGPL version 2.1 oque significa que pode ser usada em qualquer projeto que quiser, mas se forem feitas quaisquer alterações ou adições ao codigo-fonte, elas devem ser lançadas com uma licença compatível. 
- Ela usa a biblioteca SDL (Simple DirectMedia Layer)\footnote{SDL (Simple DirectMedia Layer) \url{https://www.libsdl.org/}} que é uma biblioteca de desenvolvimento multiplataforma também de código aberto e escrita em C, projetada para fornecer acesso de baixo nível a hardware de áudio, teclado, mouse, joystick e gráficos via OpenGL e Direct3D além de várias outras bibliotecas populares para abstrair as funções mais comuns. O SDL age como um \textit{wrapper} de camada fina e multiplataforma, fornecendo suporte a operações de pixel 2D, som, acesso à arquivos, manipulação de eventos, temporizadores, threading,
-As principais funcionalidades do pygame incluem
+Pygame-ce (Community Edition) \footnote{https://github.com/pygame-community/pygame-ce/} é uma biblioteca multiplataforma gratuita e de código aberto que surgiu de um \textit{fork} do projeto \textit{pygame} por seus antigos desenvolvedores principais. Seu foco é construir aplicativos multimídia como videogames utilizando a linguagem Python. A biblioteca está sob a licença GNU LGPL version 2.1, o que significa que pode ser usada em qualquer projeto desde que, se forem feitas quaisquer alterações ou adições ao código-fonte, elas devem ser lançadas com uma licença compatível. 
+ A Pygame-ce usa a biblioteca SDL (Simple DirectMedia Layer)\footnote{SDL (Simple DirectMedia Layer) \url{https://www.libsdl.org/}} que consiste de uma biblioteca de desenvolvimento multiplataforma também de código aberto e escrita em C, projetada para fornecer acesso de baixo nível a hardware de áudio, teclado, mouse, \textit{joystick} e gráficos via OpenGL e Direct3D além de várias outras bibliotecas populares para abstrair as funções mais comuns. A SDL age como um \textit{wrapper} de camada fina e multiplataforma, fornecendo suporte a operações de pixel 2D, som, acesso à arquivos, manipulação de eventos, temporizadores e \textit{threading}.
+As principais funcionalidades da \textit{pygame} incluem:
 \begin{itemize}
-    \item carregar e exibir imagens;
-    \item criar animações e renderizar quadros de jogos;
-    \item adicionar música de fundo e efeitos sonoros;
+    \item Carregamento e exibição de imagens;
+    \item Criação de animações e renderização quadros de jogos;
+    \item Adição de música de fundo e efeitos sonoros;
     \item Manipulação de dispositivos de entrada;
-    \item Gerenciamento de sprites através de classes integradas;
+    \item Gerenciamento de \textit{sprites} através de classes integradas.
 \end{itemize}
 
-Como a maioria das bibliotecas no python ela pode ser adicionada via \textit{prompt} de comandos do sistema operacional  por meio do pip\footnote{pip \url{https://pip.pypa.io/en/stable/}}, o pip é um sistema de gerenciamento de pacotes para Python, usado para instalar e gerenciar pacotes de software escritos na linguagem de programação Python. Ele simplifica o processo de instalação, atualização e remoção de pacotes Python e suas dependências, as listagens seguintes mostram como é feito o processo de instalação e um programa inicial \footnote{Pygame Docs \url{https://pyga.me/docs/}}. 
+Como a maioria das bibliotecas de python, \textit{pygame} pode ser adicionada via \textit{prompt} de comandos do sistema operacional  por meio do pip\footnote{pip \url{https://pip.pypa.io/en/stable/}}, que é um sistema de gerenciamento de pacotes para Python, usado para instalar e gerenciar pacotes de software escritos na linguagem de programação Python. Ele simplifica o processo de instalação, atualização e remoção de pacotes e suas dependências. A listagem \ref{lst-circle-movement} mostra um exemplo de código para criar um circulo na tela e movimenta-lo \footnote{Pygame Docs \url{https://pyga.me/docs/}}. 
 
 \newpage
-\begin{lstlisting}[language=bash,breaklines, caption= Instalação Pygame]
-pip install pygame-ce
-\end{lstlisting}
 \lstinputlisting[label=lst-circle-movement, caption=Exemplo de código Pygame Para Mover um Circulo., language=Python, float=htpb]{codigos/circle_movement.py}
 % completar aqui
-Esse é um exemplo básico de um programa pygame com um circulo que se move, na linha (2) importamos o pygame e dizemos ao compilador para carregar os seus módulos, nas linhas (5) à (8) fazemos a inicialização básica de todo código pygame onde inicializamos o pygame configuramos a tela inicial, configuramos as variáveis de controle \textit{clock} e \textit{running}, a linha (11) é definido a posição inicial do círculo, na linha (13) é onde começa o \textit{loop} principal do jogo que consistem em:
+Na linha (2) é feito a importação do pygame e dizemos ao compilador para carregar os seus módulos; nas linhas (5) à (8) fazemos a inicialização básica de todo código pygame onde inicializamos o pygame configuramos a tela inicial, configuramos as variáveis de controle \textit{clock} e \textit{running}; a linha (11) é definida a posição inicial do círculo, na linha (13) é onde começa o \textit{loop} principal do jogo que consiste em:
 \begin{enumerate}
     \item verificar se o jogador fechou o jogo (linhas 16 a 18);
     \item preencher toda a tela com a cor roxa (linha 21);
     \item desenhar o círculo vermelho na posição \textit{player\_pos} (linha 23);
     \item fazer a captura da entrada do jogador (25) e se for o alguma das ("w", "s", "a", "d") move o círculo a respectiva direção (linhas 26 a 33);
     \item a linha (36) atualiza o conteúdo de toda essa exibição;
-    \item e por fim (linha 41) essa variável;
+    \item atualizamos o valor do \textit{delta\_time} como explicado na seção \ref{sec:delta-time} este método que deve ser chamado uma vez por \textit{frame} e retornará quantos milissegundos se passaram desde a chamada anterior, como passamos o valor 60 de parâmetro, o jogo não passará de 60 FPS.
 \end{enumerate}
 
-\subsection{Game Loop}
-\label{sec:game-loop}
-Jogos eletrônicos e programas interface gráfica não dependem da entrada do usuário para continuar funcionando, mesmo se nada for feito, o jogo ainda deve ser constantemente atualizado. Isso caracteriza um \textit{game loop} ou \textit{event loop}, independentemente da \textit{input} do jogador, a aplicação continuará sendo executado.
-Um game loop deve ter necessariamente três elementos (i)input onde é feito o gerenciamento da entrada de controles do jogador, que pode ser o mouse, teclado \textit{joystick} e afins (ii)update, neste método são realizadas todas as atualizações que são impostas a função, desde a movimentação de personagens, a checagem de transições, ou a morte do jogador por exemplo (iii)render essa função é responsável por renderizar, ou seja desenhar todos os sprites na tela de acordo com a ordem que é definida na programação.
-\begin{figure}[h!]
-    \centering
-    \includegraphics[width=1\linewidth]{figuras/event-loop.png}
-    \caption{Event Loop}
-    \label{fig:event-loopl}
-\end{figure}
 
-% Delta time
-\subsection{Delta Time}
-\label{sec:delta-time}
- \textit{Delta time} ou diferença de tempo é uma variável de controle que tem um valor numérico armazenado nela, esse valor corresponde a diferença de valores do ultimo \textit{clock} e o clock atual.
- \begin{equation}
-    \Delta t = t' - t
-    \label{eq:dt_equation}
-\end{equation}
-
- Quando dizemos que um jogo roda a 30 quadros por segundo, temos o valor do delta é \(\frac{1}{30}\) isso significa também dizer que o game loop do jogo leva \(\frac{1}{30}\) segundos para ser executado, isso é utilizado para resolver o problema a evolução dos computadores criou, onde se tinha jogos feitos para máquinas quem tinham recursos escassos, e se um computador atual executasse um jogo dos anos 80 hoje sem nenhum mecanismo de controle, o jogo rodaria a alguns milhares de quadros e a experiência não seria boa se não fosse utilizado desse \textit{pattern} de jogos, não existiria uma normalidade entre dispositivos.
 
 
 % coisas para explicar?
@@ -158,6 +185,9 @@ Um game loop deve ter necessariamente três elementos (i)input onde é feito o g
 % \href{https://pyga.me/docs/ref/transform.html}{pygame.transform} 
 % \href{https://pyga.me/docs/ref/window.html}{pygame.Window} 
 % completar aqui
+
+
+
 
 %  ======================================= 2.3 Mapas =================================
 \section{Mapas}
@@ -374,7 +404,7 @@ ilustra a tela básica do programa, a primeira vista ele é similar a outros pro
     \label{fig:aseprite}
 \end{figure}
 
-Um Sprite é um objeto gráfico bidimensional (2D) usado em computação gráfica e particularmente em videogames. Ele normalmente consiste em uma imagem de bitmap ou uma série de imagens que são combinadas para criar uma animação. Um sprite pode ser pensado como uma entidade separada que existe dentro de uma cena maior, como um mundo de videogame. No Aseprite, um sprite consiste de uma sequência de quadros somados uma pilha de camadas. A intersecção de quadros e camadas cria uma matriz de células gráficas editáveis com imagens/pixels que podem ser editados com o editor de sprites . Camadas, quadros e células são visíveis na linha do tempo
+Um \textit{Sprite} é um objeto gráfico bidimensional (2D) usado em computação gráfica e particularmente em videogames. Ele normalmente consiste em uma imagem de bitmap ou uma série de imagens que são combinadas para criar uma animação. Um sprite pode ser pensado como uma entidade separada que existe dentro de uma cena maior, como um mundo de videogame. No Aseprite, um sprite consiste de uma sequência de quadros somados uma pilha de camadas. A intersecção de quadros e camadas cria uma matriz de células gráficas editáveis com imagens/pixels que podem ser editados com o editor de sprites . Camadas, quadros e células são visíveis na linha do tempo
 \begin{figure}[h!]
     \centering
     \includegraphics[width=1\linewidth]{figuras/sprite-frog.png}
