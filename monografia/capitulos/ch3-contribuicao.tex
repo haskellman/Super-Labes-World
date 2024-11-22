@@ -12,27 +12,28 @@
 Este capítulo tem o propósito de detalhar o escopo da Super Labes World, aplicando os conceitos de engenharia de software para identificar seus requisitos para então construir modelos de casos de uso e diagramas de classe. Na seção \ref{sec:descricao-do-cenario} fazemos uma breve explicação do cenário que foi incentivo para a criação desse trabalho, a seção \ref{sec:escopo} descreve o o intuito desse trabalho, na seção\ref{sec:jogo} é ,  , na seção \ref{sec:usuarios} é descrito quem são os possíveis usuários desse software \ref{sec:diagrama-de-classes}
 \section{Descrição do Cenário}
 \label{sec:descricao-do-cenario}
-Alice uma estudante hipotética recém-chegada ao curso de ciência da computação na UFES, sonhava em participar de projetos práticos que envolvessem programação e inovação e que fizessem diferença na sociedade. Com isso em mente, ela decide se candidatar ao laboratório de extensão da UFES, LabES, pouco tempo após preencher o formulário no site ela é contactada pela equipe responsável pelo embarque e rapidamente entra em um dos projetos.
+Alice uma estudante hipotética recém-chegada ao curso de ciência da computação na UFES sonhava em participar de projetos práticos que envolvessem programação e inovação e que fizessem diferença na sociedade. Com isso em mente, ela decide se candidatar ao LabES, um laboratório de extensão da UFES. Pouco tempo após preencher o formulário no site ela é contactada pela equipe responsável pelo embarque e rapidamente entra em um dos projetos.
 
-Ao começar no projeto ela perceba que é a mais nova dentre os membros e não entende algumas metodologias, ferramentas e vocabulários usado entre eles, Bob, o membro sênior junto aos demais estudantes estão repletos de atividades e não consegue dar atenção inicial necessária a Alice. Mas Alice é uma estudante dedicada e persegue os seus objetivos, ela elaborou um plano de estudos e que o aplicava durante o noites em claro, e assim algumas semanas após começou a dar resultados.
+Ao começar no projeto ela percebe que é a mais nova dentre os membros e não entende alguns termos utilizados e ferramentas utilizados entre eles. Bob que é o membro sênior,  junto aos demais estudantes estão repletos de atividades e não consegue dar atenção inicial necessária a Alice. Mas ela é uma estudante dedicada e persegue os seus objetivos, então ela elaborou um plano de estudos e o aplicava durante as noites. Após algumas semanas após começou a dar bons resultados no projeto.
 
-Nesse processo que ocorre diariamente em vários laboratórios da UFES alguns dos estudantes desistem no meio do caminho, nem todos os estudantes são autodidata e persistentes como Alice, alguns desanimam no meio do caminho. É um problema complexo que vem desde a educação infantil e que não existe um único ponto a ser acertado para o fim da questão. 
+Nesse processo que ocorre diariamente em vários laboratórios da UFES alguns dos estudantes desistem no meio do caminho. Nem todos os estudantes são autodidata e persistem como Alice, alguns desanimam no meio do caminho. Esse é um problema complexo que não existe um único culpado nem um único ponto a ser resolvido. 
 
 \section{Escopo}
 \label{sec:escopo}
-Diante da situação descrita na seção \ref{sec:descricao-do-cenario} surge a ideia de ciar o Super Labes World um RPG desktop desenvolvido com o intuito de ser uma ferramenta lúdica e que possa ser utilizada de auxilio aos estudantes como forma de testar, adquirir e reforçar os conhecimentos. Em sua versão inicial focada aos estudantes do labes, porém que possa futuramente ser estendido para outros laboratórios e áreas da UFES uma vez que como dito na seção \ref{sec:rpg}. um RPG é um ambien
+Diante da situação descrita na seção \ref{sec:descricao-do-cenario} surge a ideia de ciar o Super Labes World um RPG desktop desenvolvido com o intuito de ser uma ferramenta lúdica e didática, que possa ser utilizada no auxilio de estudantes para testar, reforçar e adquirir novos conhecimentos. Em sua versão inicial focada aos estudantes do LabES, porém que possa futuramente ser estendido para outros laboratórios e áreas da UFES.
 
 \section{O Jogo}
 \label{sec:jogo}
-A ambientação do \textit{game} se passa na UFES, o personagem começa acordando em sua casa e lembra que que tem que realizar um teste para entrar no SigAMAES após interagir com personagens e explorar o mapa chega então no ct7 onde estão localizados os professores e assim travar uma batalha de perguntas cada professor sendo mestre de uma disciplina específica.
+A ambientação do \textit{game} se passa na UFES, o personagem começa acordando em sua casa e lembra que que tem que realizar um teste para entrar no SigAMAES. Durante a exploração inicial e interação com personagens, o jogador é dirigido ao ct7, onde estão localizados os professores e assim pode "batalhar" com os professores, que são os chefes a serem vencidos. A batalha é no estilo perguntas e respostas sendo que o jogador tem quatro opções para escolher. O tema das questões depende de cada professor, que são mestres em disciplinas específicas.
 \begin{itemize}
     \item \textbf{Professor Vitor: }contém perguntas relacionadas a área de programação em java e conceitos de docker;
     \item \textbf{Professor Monalessa: }contém questões atreladas a git, gitlab e gitflow;
     \item \textbf{Professor Patrícia: } contém as questões que vão de encontro a metodologia do LabES
 \end{itemize}
-Ao fim das batalhas, caso o jogador vença, o professor entrega sua chave, somando as três chaves o jogador pode ter acesso ao labes onde ele tem acesso a café infinito.
-Caso o jogador erre mais do que 30\% das perguntas a batalha é finalizada e o computador que é uma mecânica do jogo onde é possível associar  \textit{links} as respostas das perguntas, esses \textit{links} levam sites da internet com o conteúdo necessário para aprendizado desses quesitos.
+Ao final da batalha caso o jogador vença, o professor entrega sua chave, representando a sua aprovação nesta disciplina. Somando as três chaves o jogador pode finalmente ter acesso ao LabES.
+Caso o jogador erre mais do que 30\% das perguntas a batalha é finalizada, e o professor o instrui a utilizar o computador. 
 
+O computador é uma mecânica do jogo que pode ser acessada a partir dos mapas ''sala do professor'' e ''labgrad''.  Essa interface contém os \textit{links} para materiais de estudos abordados nas questões que o jogador errou. Ao clicar nesse \textit{link} ele será redirecionado a esse conteúdo onde o aluno poderá aprender e tentar passar de nível de novo.
 \subsection{Usuários}
 \label{sec:usuarios}
 O Super Labes World é uma versão inicial de um jogo que tem potencial de ser muito extensível, durante a elaboração do projeto foram identificados três potenciais usuários que podem ser usuário desse trabalho.
@@ -123,7 +124,9 @@ Para especificar o diagrama anterior, foi criada uma tabela descrevendo as class
 \clearpage
 \section{Conclusões do Capítulo}
 \label{sec:conclusoes-do-capitulo-3}
-Neste capítulo, foram abordados diversos aspectos fundamentais para o desenvolvimento do sistema. Primeiramente, foi definido o minimundo, que descreve de forma clara e concisa o contexto no qual o sistema está inserido. Essa definição permite uma melhor compreensão sobre os desafios e objetivos a serem alcançados.
+Este capítulo apresentou diversos aspectos essenciais para o desenvolvimento do sistema. Inicialmente, foi estabelecido o minimundo que foi o motivador para criação desse trabalho, nele é fornecido uma descrição clara e objetiva do contexto em que o sistema está inserido. Essa definição facilita a compreensão dos desafios e metas a serem atingidos.
 
-Este capítulo explorou diversos aspectos essenciais para o desenvolvimento do sistema. Inicialmente, foi feito a descrição do cenário que foi o motivador para criação desse trabalho, assim como a descrição do jogo e os potenciais usuários.
-Por fim, o capítulo também apresentou o diagrama de classes, que desempenha um papel essencial na definição da estrutura do sistema. Com esse diagrama, foram identificadas as classes que representam os elementos do sistema e as relações entre elas. Esse diagrama junto a tabela de especificação de classes ajudaram na representação visual e facilitou a compreensão das entidades do sistema e suas interações, auxiliando no planejamento para a implementação do sistema.
+Com isso foi possível definir o escopo que esse trabalho se propõe a atingir, bem como a história do jogo e as suas principais mecânicas.  
+
+Por fim foi apresentado o diagrama de classes, que desempenha um papel essencial na definição da estrutura do sistema. Com esse diagrama, foram identificadas as classes que representam os elementos do sistema e as relações entre elas. Esse diagrama junto a tabela de especificação de classes ajudaram na representação visual e facilitaram a compreensão das entidades do sistema e suas interações, auxiliando no planejamento para a implementação do sistema.
+
