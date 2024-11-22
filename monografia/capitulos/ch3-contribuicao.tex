@@ -70,16 +70,16 @@ Para especificar o diagrama anterior, foi criada uma tabela descrevendo as class
 	\begin{small}
 		\begin{tabular}{ | p{35mm} | p{100mm} |}\hline \rowcolor{MidnightBlue}
 			\centering{\textbf{Classe}} & \textbf{Descrição}  \\\hline		
-			\centering{\textit{AllSprites}} & Classe responsável por representar a câmera do jogador. \\\hline
+			\centering{\textit{AllSprites}} & Classe que representa a câmera do jogo. \\\hline
 			\centering{\textit{Entity}} & Classe Pai que contém informações comuns a todas as entidades do jogo como frames, \textit{hitbox} e métodos relacionados a animação.   \\\hline
-			\centering{\textit{Player}} & Classe filho de \textit{Entity}, configura atributos inerentes ao jogador como movimentação, colisão, e modificações de seus atributos.  \\\hline
-			\centering{\textit{Character}} & Classe que herda \textit{Entity} sua principal característica é o método de obtenção de diálogo relativo ao personagem.\\\hline
-			\centering{\textit{Battle}} & Classe que contém todas as informações que fazer parte da batalha do jogo, destacando \textit{questions} que contém as questões relativas ao personagem em batalha e \textit{test} que é uma lista que armazena 0 para respostas erradas e 1 para respostas corretas.\\\hline
+			\centering{\textit{Player}} & Classe filha de \textit{Entity}, configura atributos inerentes ao jogador como movimentação, colisão, e modificações de seus atributos.  \\\hline
+			\centering{\textit{Character}} & Classe filha de \textit{Entity} sua principal característica é a obtenção de diálogo relativo ao personagem.\\\hline
+			\centering{\textit{Battle}} & Classe que contém todas as informações que fazem parte da batalha do jogo, destacando \textit{questions} um dicionário com as questões relativas ao personagem e \textit{test} uma lista que mantém um vetor de 0 para respostas erradas e 1 para respostas corretas.\\\hline
 			\centering{\textit{Computer}} & Classe responsável pela tela de visualização do computador, sua maior peculiaridade é o atributo \textit{computer\_links} que mantém um \textit{array} de \textit{Items} que serão mostrados ao entrar nessa tela. \\\hline
-			\centering{\textit{Link}} & Contém informações que serão mostradas no computador como título, descrição, url a ser redirecionada, cor e icon que deve ser uma imagem 108 x 108 \\\hline
-			\centering{\textit{Game}} & Classe principal do jogo, contém o main loop é responsável por carregar todos os \textit{assets} e capturar todo o I/O do jogador. \\\hline
-			\centering{\textit{Inventory}} & Classe utilizada para representação visual do inventário do jogador. \\\hline
-			\centering{Item} & Classe que armazena informações do item (nome, descrição e ícone) o tamanho ícone deve ser 93 x 93 \\\hline
+			\centering{\textit{Link}} & Mantém informações que são utilizadas na interface \textit{Computer}. Sendo elas título, descrição, url, cor e icon que deve ser uma imagem 108 x 108 \\\hline
+			\centering{\textit{Game}} & Classe principal do jogo, contém o main loop. Também é responsável por carregar e armazenar todos os \textit{assets} e capturar o \textit{input} do jogador. \\\hline
+			\centering{\textit{Inventory}} & Classe utilizada para representação da interface de inventário do jogador. \\\hline
+			\centering{Item} & Classe que mantém informações dos items, nome, descrição e ícone, o tamanho ícone deve ser 93 x 93 \\\hline
 		\end{tabular}
 	\end{small}
 \end{table}
@@ -92,17 +92,17 @@ Para especificar o diagrama anterior, foi criada uma tabela descrevendo as class
 	\begin{small}
 		\begin{tabular}{ | p{35mm} | p{100mm} |}\hline \rowcolor{MidnightBlue}
 			  \centering{\textbf{Classe}} & \textbf{Descrição}  \\\hline
-			\centering{\textit{DialogSprite}} & Classe que realiza o desenho do diálogo na tela. \\\hline
-			\centering{\textit{CollisionSprite}} & Classe que contém as informações da sua classe pai \textit{Sprite}, sua singularidade é ter uma \textit{hitbox}\\\hline
-			\centering{\textit{CollidableSprite}} & Classe que herda os atributos de \textit{Sprite}, oque o difere de CollisionSprite é a área de colisão desses sprites é menor.  \\\hline
-			\centering{\textit{InteractiveSprite}} & Classe que herda a classe pai \textit{Sprite}, sua peculiaridade é ter uma variável item\_id que da liberdade ao programador para definir qual ação será realizada a partir de uma interação do jogador. \\\hline
-			\centering{\textit{CollidableDialogSprite}} & Classe que herda \textit{Sprite}, a sua característica que diferencia das outras é não ter uma imagem associada e armazenar uma mensagem  que ao player colidir é lançada na tela. \\\hline
-			\centering{\textit{AnimatedSprite}} & Classe filho de \textit{Sprite} contém todos os \textit{sprites} que são animados automaticamente  \\\hline
-			\centering{\textit{TransitionSprite}} & Classe que herda \textit{Sprite}, sua principal característa é que ela guarda informações de origem e destino para poder realizar as transições de forma correta. \\\hline
-			\centering{\textit{ChooseDialog}} & Classe que representa o diálogo de escolha do jogador antes de entrar em uma batalha. \\\hline
+			\centering{\textit{DialogSprite}} & Classe que realiza a renderização do diálogo na tela. \\\hline
+			\centering{\textit{CollisionSprite}} & Classe filha de \textit{Sprite}, sua singularidade é ter uma \textit{hitbox}\\\hline
+			\centering{\textit{CollidableSprite}} & Classe filha de \textit{Sprite}, similar a \textit{CollisionSprite} porém a colisão dos \textit{sprites} nessa classe é menor.  \\\hline
+			\centering{\textit{InteractiveSprite}} & Classe filha de \textit{Sprite}, contém uma variável \textit{item\_id} que pode ser programada para diversos propósitos a partir de uma interação do jogador. \\\hline
+			\centering{\textit{CollidableDialogSprite}} & Classe que herda \textit{Sprite}, nessa não tem uma imagem associada e mantém uma mensagem  que é disparada em colisões. \\\hline
+			\centering{\textit{AnimatedSprite}} & Classe filha de \textit{Sprite} mantém todos os \textit{sprites} que são animados automaticamente  \\\hline
+			\centering{\textit{TransitionSprite}} & Classe que herda \textit{Sprite}, essa guarda informações de origem e destino para poder realizar as transições entre mapas. \\\hline
+			\centering{\textit{ChooseDialog}} & Classe que representa a interface de escolha do jogador antes de entrar em uma batalha. \\\hline
 			\centering{\textit{Dialog}} & Classe responsável por criar os diálogos de todos os personagens do jogo. \\\hline
-			\centering{\textit{Sprite}} & Classe Pai de todas os tipos de sprites do jogo, suas informações mais importantes são a imagem que representa o sprite, a sua posição e em qual camada ele está. \\\hline
-			\centering{\textit{Timer}} & Classe que é responsável por realizar os controles de tempo do jogo.  \\\hline
+			\centering{\textit{Sprite}} & Classe Pai de todos os sprites do jogo, suas informações são imagem, posição e camada. \\\hline
+			\centering{\textit{Timer}} & Classe que é responsável por realizar os controles de tempo do jogo. \\\hline
 		\end{tabular}
 	\end{small}
 \end{table}
@@ -115,18 +115,16 @@ Para especificar o diagrama anterior, foi criada uma tabela descrevendo as class
 	\begin{small}
 		\begin{tabular}{ | p{35mm} | p{100mm} |}\hline \rowcolor{MidnightBlue}
 			  \centering{\textbf{Classe}} & \textbf{Descrição}  \\\hline
-			\centering{\textit{Home}} & Classe que representa o menu inicial. \\\hline
-			\centering{\textit{GameControls}} & Classe que representa a tela de controles que pode ser acessada apenas da tela inicial. \\\hline
-			\centering{\textit{Credits}} & Classe que representa a tela de créditos que apenas pode ser acessada da tela inicial.\\\hline
+			\centering{\textit{Home}} & Classe que representa a interface do menu inicial. \\\hline
+			\centering{\textit{GameControls}} & Classe que representa a interface de controles do jogo, que pode ser acessada a partir da tela inicial. \\\hline
+			\centering{\textit{Credits}} & Classe que representa a interface da tela de créditos que apenas pode ser acessada a partir da tela inicial.\\\hline
 		\end{tabular}
 	\end{small}
 \end{table}
 \clearpage
 \section{Conclusões do Capítulo}
 \label{sec:conclusoes-do-capitulo-3}
-Este capítulo apresentou diversos aspectos essenciais para o desenvolvimento do sistema. Inicialmente, foi estabelecido o minimundo que foi o motivador para criação desse trabalho, nele é fornecido uma descrição clara e objetiva do contexto em que o sistema está inserido. Essa definição facilita a compreensão dos desafios e metas a serem atingidos.
-
-Com isso foi possível definir o escopo que esse trabalho se propõe a atingir, bem como a história do jogo e as suas principais mecânicas.  
+Este capítulo apresentou diversos aspectos essenciais para o desenvolvimento do sistema. Inicialmente, foi estabelecido o minimundo que foi o motivador para criação desse trabalho, nele é fornecido uma descrição clara e objetiva do contexto em que o sistema está inserido. Essa definição facilita a compreensão dos desafios e metas a serem atingidos. Com isso foi possível definir o escopo que esse trabalho se propõe a atingir, bem como a história do jogo e as suas principais mecânicas.  
 
 Por fim foi apresentado o diagrama de classes, que desempenha um papel essencial na definição da estrutura do sistema. Com esse diagrama, foram identificadas as classes que representam os elementos do sistema e as relações entre elas. Esse diagrama junto a tabela de especificação de classes ajudaram na representação visual e facilitaram a compreensão das entidades do sistema e suas interações, auxiliando no planejamento para a implementação do sistema.
 
