@@ -88,7 +88,7 @@ class Computer:
         if keys[pygame.K_DOWN] or keys[pygame.K_s]:
             self.play_sound()
             self.index += 1
-        if keys[pygame.K_BACKSPACE] or keys[pygame.K_RETURN]:
+        if keys[pygame.K_SPACE] or keys[pygame.K_RETURN]:
             self.play_sound()
             webbrowser.open(self.computer_links[self.index].url, new=0, autoraise=True)
         self.index = self.index % self.rows # [LEN] voltar para o inicio

@@ -394,7 +394,7 @@ CHARACTERS_DATA = {
         'questions': {},
 		},
     'aninha': {
-        'name': 'ana',
+        'name': 'aninha',
 		'dialog': {
             'default': ['bom dia irmão', 'não vá se esquecer de nada antes de sair', 'verifique sua mochila apertando a tecla "i"', 'boa sorte!'],
 			'visited': ['vai logo!!'],
@@ -418,10 +418,10 @@ CHARACTERS_DATA = {
         'questions': {},
 		},
     'angelus': {
-        'name': 'angelo',
+        'name': 'angelus',
 		'dialog': {
-            'default': ['qual foi meu parceiro', 'a ufes é enorme e é muito fácil perder', 'as placas ajudam bastante', 'aperte "BACKSPACE" próximo a elas', 'boa sorte mano!'],
-			'visited': ['aperte "BACKSPACE" próximo as placas elas para se localizar'],
+            'default': ['qual foi meu parceiro', 'a ufes é enorme e é muito fácil perder', 'as placas ajudam bastante', 'aperte "SPACEBAR" próximo a elas', 'boa sorte mano!'],
+			'visited': ['aperte "SPACEBAR" próximo as placas elas para se localizar'],
             'end': ['boa meu parceiro!', 'seja bem vindo!'],},
 		'directions': ['down'],
 		'visited': False,

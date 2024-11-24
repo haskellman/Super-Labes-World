@@ -25,7 +25,6 @@ class Entity(pygame.sprite.Sprite):
         self.character_data = character_data
         self.questions  = character_data['questions']
 
-
     def block(self):
         self.blocked = True
         self.direction = vector(0,0)
@@ -76,7 +75,6 @@ class Player(Entity):
 
     def move(self, dt):
         self.rect.centerx += self.direction.x * self.speed *dt
-        # print(self.rect.centerx , self.direction.x , self.speed ,dt)
         self.hitbox.centerx = self.rect.centerx
         self.collisions('horizontal')
 
@@ -85,8 +83,6 @@ class Player(Entity):
         self.collisions('vertical')
 
     def update(self,dt):
-        # posição do player
-        # print (self.rect.centerx, self.rect.centery, self.direction.x, self.direction.y, self.speed, dt)
         self.y_sort = self.rect.centery
         if not self.blocked:
             self.input()

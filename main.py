@@ -1,5 +1,4 @@
 from settings import *
-from pytmx.util_pygame import load_pygame #carrega os mapas
 from os.path import join
 from home import Home
 from credits import Credits
@@ -49,7 +48,7 @@ class Game:
         self.audios = audio_importer('.', 'audios')
         self.sounds = audio_importer('.', 'sounds')
 
-        # mapa iniciais
+        # mapas iniciais
         self.setup(self.tmx_maps['house'], 'house', 'house') #house
         # self.setup(self.tmx_maps['ponto_onibus'], 'ponto_onibus', 'house') #ponto_onibus
         # self.setup(self.tmx_maps['ufes'], 'ufes', 'ponto_onibus') #ufes
@@ -214,14 +213,12 @@ class Game:
             try:
                 for obj in tmx_map.get_layer_by_name('Dialogs'):
                     CollidableDialogSprite((obj.x, obj.y), pygame.Surface((obj.width, obj.height)), (self.dialogs_sprites), obj.properties['message'])
-                    # print (type((obj.width, obj.height)))
             except ValueError as ve:
                pass
 
         # transitions
         try:
             for obj in tmx_map.get_layer_by_name('Transitions'):
-                # print(obj.x, obj.y, obj.properties['dest'], obj.properties['src'])
                 TransitionSprite((obj.x, obj.y), obj.properties['dest'], obj.properties['src'], self.transition_sprites, (obj.width, obj.height))
         except ValueError as ve:
            pass
@@ -230,7 +227,6 @@ class Game:
         try:
             for obj in tmx_map.get_layer_by_name('Entities'):
                 if obj.name == 'Player':
-                    # print(obj.x, obj.y) # pos do player
                     if obj.properties['pos'] == src_map:
                         self.player = Player(
                             pos = (obj.x, obj.y),
@@ -244,7 +240,7 @@ class Game:
                     Character(
                         pos = (obj.x, obj.y), 
                         groups = (self.all_sprites, self.collision_sprites, self.character_sprites),
-                        frames = self.overworld_frames['characters'][obj.properties['graphic']], 
+                        frames = self.overworld_frames['characters'][obj.properties['character_id']], 
                         facing_direction = obj.properties['direction'],
                         collision_sprites = self.collision_sprites,
                         character_data = CHARACTERS_DATA[obj.properties['character_id']],
@@ -493,10 +489,8 @@ class Game:
             if self.computer_open: self.computer.update(dt)
             if self.battle_open: self.battle.update(dt)
             if self.choose_dialog_open: self.choose_dialog.update()
-
             # tint
             self.tint_screen(dt)
-            # self.tint_battle(dt)
             pygame.display.update()
 
             # player buffs
