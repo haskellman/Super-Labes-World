@@ -3,20 +3,11 @@ class Home:
     def __init__(self, run_game, run_credits, run_game_controls):    
         self.initial_screen = pygame.display.set_mode((WINDOW_WIDTH, WINDOW_HEIGHT))
         self.menu_frames = {'interface': import_folder_dict('.', 'graphics', 'interface') }
-        self.fall_items = import_character(4, 4, '.', 'graphics', 'fall_objects', 'fall_objects')
         self.audios = audio_importer('.', 'audios')
         self.sounds = audio_importer('.', 'sounds')
         self.index = 0
         self.audios['opening'].play(-1)
-
-        # movement
-        self.x = 0
-        self.y = 0
-        self.speed = 10
-        self.object_rect = pygame.Rect(randint(100, 1180), randint(-50, 0), 0, 0)
-        self.object_surf = self.fall_items['down'][0]
-        self.fall_objects_list = self.generate_list_fall_objects()
-
+        
         # callbacks
         self.run_game = run_game
         self.run_credits = run_credits

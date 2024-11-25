@@ -1,7 +1,7 @@
 class Game:
     def __init__(self): 
         # inicialização
-        self.screen = pygame.display.set_mode((WINDOW_WIDTH, WINDOW_HEIGHT))
+        self.screen = pygame.display.get_surface()
         self.clock = pygame.time.Clock()
         self.buff_timer = Timer(15000, autostart = True) # 15 segundos
         
@@ -29,7 +29,7 @@ class Game:
         self.audios = audio_importer('.', 'audios')
         self.sounds = audio_importer('.', 'sounds')
 
-        # mapa iniciais
+        # inicialização do mapa
         self.setup(self.tmx_maps['house'], 'house', 'house') #house
 
         # Computer

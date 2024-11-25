@@ -199,7 +199,7 @@ Os mapas de jogo desempenham um papel fundamental no design e na experiência de
 \subsection{\textit{Tiles} e \textit{Tilesets}}
 \label{sec:tiles-e-tilesets}
 % explicar jogos 2d  podem ter dois tipos, 
-\textit{Tilesets} são coleções de pequenas imagens reutilizáveis, chamados ''tiles'', organizadas em uma grade. Cada \textit{tile} representa uma pequena parte do mundo do jogo, por exemplo, um pedaço de chão, um segmento de uma parede ou uma decoração. Ao combinar diferentes tiles em diferentes posições temos um cenário que pode ser utilizado como fase de um jogo. 
+\textit{Tilesets} são coleções de pequenas imagens reutilizáveis, chamados ''tiles'', organizadas em uma grade. Cada \textit{tile} representa uma pequena parte do mundo de um jogo 2D, por exemplo, um pedaço de chão, um segmento de uma parede ou uma decoração. Ao combinar diferentes tiles em diferentes posições temos um cenário que pode ser utilizado como fase de um jogo. 
 
 Trata-se de um recurso gráfico para desenhar níveis e outros componentes estáticos de um jogo de forma rápida e eficiente, já que não é necessário desenhar toda a área jogável. Esses \textit{tilesets} podem ser essencialmente duas formas: i) \textit{\textbf{top-down}} (cima para baixo) esses tiles são desenhados na perspectiva vista de cima para baixo, alguns jogos que utilizam desse tipo de tile são \textit{The Legend of Zelda} e \textit{Chrono Trigger} veja a figura \ref{fig:tileset-orthogonal} e ii) \textit{\textbf{platformer}} (plataforma) esses tiles são desenhados na perspectiva de lado utilizada em jogos onde o jogador realiza saltos e desvia de obstáculos é o caso de jogos como \textit{Super Mario} e \textit{Sonic} a figura \ref{fig:tileset-platform-orthogonal} ilustra esse tipo de \textit{tile}.
 
@@ -219,7 +219,7 @@ Trata-se de um recurso gráfico para desenhar níveis e outros componentes está
 \clearpage
 \subsection{Tiled}
 \label{sec:tiled}
-O Tiled \footnote{Tiled \textit{Map Editor} \url{https://www.mapeditor.org}} é um editor de mapas 2D que ajuda \textit{game designers} a desenvolverem o conteúdo de seus jogos. Seu principal recurso é desenhar editar mapas de \textit{tiles} de várias formas. O software também suporta posicionamento de imagens livres, e tem maneiras eficientes de colocar metadados em seus \textit{sprites} que futuramente poderão serem usados pelo programador.
+O Tiled \footnote{Tiled \textit{Map Editor} \url{https://www.mapeditor.org}} é um editor de mapas 2D de software aberto (confirmar aqui) que ajuda \textit{game designers} a desenvolverem o conteúdo de seus jogos. Seu principal recurso é desenhar editar mapas de \textit{tiles} de várias formas. O software também suporta posicionamento de imagens livres, e tem maneiras eficientes de colocar metadados em seus \textit{sprites} que futuramente poderão serem usados pelo programador.
 
 Tiled suporta camadas de tiles retangulares, retas, isométricas projetadas, isométricas escalonadas e hexagonais escalonadas \cite{tiled}.
 % No programa para carregar um \textit{tileset} pode ser uma única imagem contendo muitos tiles divididos por  ou pode ser uma coleção de imagens individuais.% 
@@ -393,8 +393,8 @@ Em um monitor que permite imagens coloridas, cada pixel é composto por um conju
 \subsection{Aseprite}  
 \label{sec:aseprite}
 % Para fazer um jogo é necessário ter sprites 
-O Aseprite\footnote{Aseprite \url{https://www.aseprite.org}} é um software comercial especializado em pixel art, ele possui recursos e ferramentas específicas para essa finalidade permitindo assim a criação de animações 2D para videogames. De sprites a pixel-art, gráficos estilo retrô a figura \ref{fig:aseprite}. O software possui ferramentas para controlar
-a animação quadro-a-quadro, rotações de pixel art pré-desenvolvidas, ferramentas que auxiliam na criação de tiles e tilesets
+O Aseprite\footnote{Aseprite \url{https://www.aseprite.org}} é um software comercial especializado em Pixel Art que oferece recursos e ferramentas específicas para essa finalidade permitindo, assim, a criação de animações 2D para videogames, como o exemplo da figura \ref{fig:aseprite}. As ferramentas de Aseprite conseguem controlar
+a animação quadro-a-quadro e fazer rotações de pixel art pré-desenvolvidas.
 ilustra a tela básica do programa, a primeira vista ele é similar a outros programas de criação de imagens com exceção da grade quadriculada.  
 \begin{figure}[ht!]
     \centering
@@ -403,18 +403,20 @@ ilustra a tela básica do programa, a primeira vista ele é similar a outros pro
     \label{fig:aseprite}
 \end{figure}
 
-Um \textit{Sprite} é um objeto gráfico bidimensional (2D) usado em computação gráfica e particularmente em videogames. Ele normalmente consiste em uma imagem de bitmap ou uma série de imagens que são combinadas para criar uma animação. Um sprite pode ser pensado como uma entidade separada que existe dentro de uma cena maior, como um mundo de videogame. No Aseprite, um sprite consiste de uma sequência de quadros somados uma pilha de camadas. A intersecção de quadros e camadas cria uma matriz de células gráficas editáveis com imagens/pixels que podem ser editados com o editor de sprites . Camadas, quadros e células são visíveis na linha do tempo
+Um \textit{Sprite} é um objeto gráfico bidimensional (2D) usado em computação gráfica e, particularmente, em videogames. Um sprite normalmente consiste de uma imagem de bitmap ou uma série de imagens que são combinadas para criar uma animação. Um sprite também pode ser pensado como uma entidade separada que existe dentro de uma cena maior. Especificamente no Aseprite, um sprite consiste de uma sequência de quadros somados em uma pilha de camadas. A intersecção de quadros e camadas cria uma matriz de células gráficas editáveis com imagens/pixels que podem ser editados com o editor de sprites . Camadas, quadros e células são visíveis na linha do tempo
 \begin{figure}[h!]
     \centering
     \includegraphics[width=1\linewidth]{figuras/sprite-frog.png}
     \caption{Ninja Frog Sprite de Pulo}
     \label{fig:enter-label}
 \end{figure}
+
+
 \subsection{Animação}
 \label{sec:animacao}
- A animação é a ilusão de movimento que nossos cérebros nos enganam para perceber quando vemos vários quadros estáticos de obras de arte reproduzidos em rápida sucessão.
-Um quadro é uma única imagem estática em um sprite, se adicionarmos e alterarmos os quadros a uma certa velocidade, cria-se a a impressão de movimento, essa impressão é chamada animação. 
-Em programação existem varias formas de fazer a animação uma delas é através de vetores, a técnica consiste em carregar uma imagem e dizemos ao computador que queremos dividir essa imagem e armazena-lo num vetor, a figura \ref{fig:sprite-animation} exemplifica isso, nesse caso um vetor de duas linhas e cinco colunas, assim para fazer a animação desse personagem, basta percorrer as imagens alternadamente enquanto capturamos a entrada do jogador e vemos se é movimento
+ A animação é a ilusão de movimento que nossos cérebros nos enganam para perceber quando vemos vários quadros de obras de arte estáticos reproduzidos em rápida sucessão.
+Um quadro é uma única imagem estática em um sprite, se adicionarmos e alterarmos os quadros a uma certa velocidade, cria-se a a impressão de movimento, ao qual dá-se o nome de Animação. 
+Em programação existem várias formas de fazer a animação e uma delas é através de vetores; essa técnica consiste em carregar uma imagem e dizemos ao computador que queremos dividir essa imagem e armazena-lo num vetor, a figura \ref{fig:sprite-animation} exemplifica isso, nesse caso um vetor de duas linhas e cinco colunas, assim para fazer a animação desse personagem, basta percorrer as imagens alternadamente enquanto capturamos a entrada do jogador e vemos se é movimento
 
 \begin{figure}[h!]
     \centering

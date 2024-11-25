@@ -49,7 +49,7 @@ def setup(self,tmx_map, dest_map, src_map): # carrega o mapa
                 Character(
                     pos = (obj.x, obj.y), 
                     groups = (self.all_sprites, self.collision_sprites, self.character_sprites),
-                    frames = self.overworld_frames['characters'][obj.properties['graphic']], 
+                    frames = self.overworld_frames['characters'][obj.properties['character_id']], 
                     facing_direction = obj.properties['direction'],
                     collision_sprites = self.collision_sprites,
                     character_data = CHARACTERS_DATA[obj.properties['character_id']],

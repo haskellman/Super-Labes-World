@@ -2,7 +2,7 @@
 % PG - Nome do Aluno
 % Capítulo 3 - Contribuição
 % ==============================================================================
-\chapter{Contribuição do Trabalho}
+\chapter{Desenvolvimento do Jogo}
 \label{sec-contribuicao}
 
 % Este capítulo deve apresentar a principal contribuição do trabalho. Caso o aluno e orientador desejem, o título do capítulo pode ser alterado para referenciar diretamente a contribuição (por exemplo, PIS: Plataforma para Integração de Serviços; Um Sistema para Controle de Processos da UFES, Solução de Otimização para Carregamento de Contêineres; etc.)
@@ -44,14 +44,77 @@ O Super Labes World é uma versão inicial de um jogo que tem potencial de ser m
     \item \textbf{Estudantes de computação:} O jogo pode ser interessante para qualquer estudante de computação, uma vez que trata de questões da área.
 \end{enumerate}
 
-\begin{landscape}
+\section{Requisitos do Jogo}
+\label{sec:requisitos-do-jogo}
+A partir do escopo do projeto apresentado na seção \ref{sec:escopo}, os requisitos identificados foram organizados em tabelas. A tabela \ref{tbl-requisitos-funcionais} apresentada os requisitos funcionais da aplicação, na tabela \ref{tbl-requisitos-de-dominio} os requisitos de domínio.
+
+Um dos principais indicadores de sucesso de um sistema de software é o nível de atendimento aos requisitos para os quais foi projetado. Os requisitos de um sistema de software abrangem as descrições das funcionalidades que o sistema deve prover, e das restrições que devem devem ser atendidas. Em essência, os requisitos definem o que o sistema deve fazer e as
+circunstâncias sob as quais deve operar. \cite{sommervilleengenharia}
+
+Requisitos funcionais definem os serviços e tarefas que o sistema deve prover. Eles descrevem as funcionalidades específicas do software. Requisitos de domínio (ou regras de negócio) são
+provenientes do domínio de aplicação do sistema e expressam características e restrições próprias desse contexto. Eles são baseados no negócio que o sistema visa atender, podendo limitar requisitos funcionais já definidos ou estabelecer como cálculos específicos devem ser realizados, refletindo fundamentos do domínio de aplicação. \cite{sommervilleengenharia}.
+
+ 
+\begin{table}[h!]
+	\caption{Tabela de requisitos funcionais do Super Labes World.}
+	\label{tbl-requisitos-funcionais}
+	\centering
+	\renewcommand{\arraystretch}{2}
+	\begin{small}
+		\begin{tabular}{ | p{20mm} | p{102mm} | p{20mm} |}\hline \rowcolor{MidnightBlue}
+			\centering{\textbf{Id}} & \textbf{Descrição} & \textbf{Relação} \\\hline		
+                \centering{RF1} & O jogo deve ser controlado pelo teclado &  \\\hline
+			\centering{RF2} & O jogo deve ter um menu inicial. &  \\\hline
+                \centering{RF3} & O jogo deve ter uma interface que mostre os controles do jogo. & RF2 \\\hline
+			\centering{RF4} & O jogo deve ter uma tela que mostre os créditos. & RF2 \\\hline
+                \centering{RF5} & Os cenários do jogo devem ser similares a UFES. &  \\\hline
+			\centering{RF6} & Os \textit{sprites} dos professores devem ser minimamente similares com os professores reais. &  \\\hline
+			\centering{RF7} & O jogo deve permitir o usuário abrir uma tela de inventário. & RF1 \\\hline
+			\centering{RF8} & No inventário deve ser possível visualizar o nome descrição dos itens. &  RF1, RF7\\\hline
+			\centering{RF9} & No inventário deve ser possível utilizar alguns itens. & RF1, RF7  \\\hline
+			\centering{RF10} & O jogo deve permitir o usuário dialogar com personagens. & RF1 \\\hline
+			\centering{RF11} & O jogo deve permitir o usuário interagir com alguns \textit{sprites}. &  RF1\\\hline
+			\centering{RF12} & O jogo deve ter uma tela na qual seja possível acessar links para materiais de estudo. &  RF1\\\hline
+			\centering{RF13} & O jogo deve permitir a transição entre mapas & RF1 \\\hline
+                \centering{RF14} & O jogo ter um sistema de batalha de perguntas de múltipla escolha &  RF1\\\hline
+                \centering{RF15} & As perguntas da batalha devem abordar questões relevantes para membros do LabES &  RF15\\\hline
+
+		\end{tabular}
+	\end{small}
+\end{table}
+
+\begin{table}[h!]
+	\caption{Tabela de requisitos de domínio do Super Labes World.}
+	\label{tbl-requisitos-de-dominio}
+	\centering
+	\renewcommand{\arraystretch}{2}
+	\begin{small}
+		\begin{tabular}{ | p{20mm} | p{122mm} | }\hline \rowcolor{MidnightBlue}
+			\centering{\textbf{Id}} & \textbf{Descrição} \\\hline
+                \centering{RN1} & A movimentação deve ser a partir dos direcionais e 'WASD' do teclado.\\\hline
+			\centering{RN2} & O personagem principal deve colidir com outros \textit{sprites}.  \\\hline
+			\centering{RN3} & Para o jogador interagir com os \textit{sprites} ele deve estar próximo a eles \\\hline
+                \centering{RN4} & Durante a batalha o usuário deve receber feedback de resposta.  \\\hline
+			\centering{RN5} & A batalha deve ser encerrada ao jogador errar 30\% da quantia total de perguntas.  \\\hline
+			\centering{RN6} & Ao final da batalha se o jogador teve uma pontuação superior a 70\% ele deve ganhar um item que represente a sua vitoria nesse desafio.  \\\hline
+			\centering{RN7} & Só deve ser possível o jogador zerar o jogo quando o jogador tiver todos os items dos professores  \\\hline
+			\centering{RN8} & Ao jogador entrar em quaisquer interfaces o personagem deve ficar bloqueado, desbloqueando somente ao sair.  \\\hline
+
+
+		\end{tabular}
+	\end{small}
+\end{table}
+
+
+\clearpage
 \section{Diagrama de Classes}
 \label{sec:diagrama-de-classes}
 % tabela com as classes
-Um Diagrama de classes UML (Unified Modeling Language) Linguagem de Modelagem Unificada é uma notação gráfica para modelagem de software. Essa linguagem define um conjunto de diagramas para documentar e ajudar no design de sistemas de software, particularmente sistemas orientados a objetos \cite{engsoftmoderna}. Esse tipo de modelagem e muito útil durante todo o desenvolvimento do sistema, porque auxilia os desenvolvedores a estruturar o sistema, identificar requisitos e remover os que não forem realmente necessários e ajudando na comunicação entre a equipe.
+Um Diagrama de classes UML (\textit{Unified Modeling Language}) Linguagem de Modelagem Unificada é uma notação gráfica para modelagem de software. Essa linguagem define um conjunto de diagramas para documentar e ajudar no design de sistemas de software, particularmente sistemas orientados a objetos \cite{engsoftmoderna}. Esse tipo de modelagem e muito útil durante todo o desenvolvimento do sistema, porque auxilia os desenvolvedores a estruturar o sistema, identificar requisitos e remover os que não forem realmente necessários e ajudando na comunicação entre a equipe.
 
 Para detalhar melhor cada uma das classes apresentadas, no diagrama \ref{fig:diagrama-de-classes-uml} foi elaborada o diagrama de classes UML afim de representar modelos de dados para sistemas de devido software e assim compreender de forma mais ampla a visão geral do trabalho. O resultado pode ser visualizado a seguir na figura \ref{fig:diagrama-de-classes-uml}
 seguir. 
+\begin{landscape}
 \begin{figure}[h!]
     \centering
     \includegraphics[width=0.8\linewidth]{figuras/diagrama-de-classes-uml.png}
@@ -103,17 +166,6 @@ Para especificar o diagrama anterior, foi criada uma tabela descrevendo as class
 			\centering{\textit{Dialog}} & Classe responsável por criar os diálogos de todos os personagens do jogo. \\\hline
 			\centering{\textit{Sprite}} & Classe Pai de todos os sprites do jogo, suas informações são imagem, posição e camada. \\\hline
 			\centering{\textit{Timer}} & Classe que é responsável por realizar os controles de tempo do jogo. \\\hline
-		\end{tabular}
-	\end{small}
-\end{table}
-
-\begin{table}[t]
-	\caption{Tabela com a continuação da especificação de classes do Super Labes World.}
-	\label{tbl-especificacao-classes-3}
-	\centering
-	\renewcommand{\arraystretch}{2}
-	\begin{small}
-		\begin{tabular}{ | p{35mm} | p{100mm} |}\hline \rowcolor{MidnightBlue}
 			  \centering{\textbf{Classe}} & \textbf{Descrição}  \\\hline
 			\centering{\textit{Home}} & Classe que representa a interface do menu inicial. \\\hline
 			\centering{\textit{GameControls}} & Classe que representa a interface de controles do jogo, que pode ser acessada a partir da tela inicial. \\\hline
@@ -121,6 +173,7 @@ Para especificar o diagrama anterior, foi criada uma tabela descrevendo as class
 		\end{tabular}
 	\end{small}
 \end{table}
+
 \clearpage
 \section{Conclusões do Capítulo}
 \label{sec:conclusoes-do-capitulo-3}
