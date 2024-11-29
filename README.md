@@ -11,7 +11,7 @@ Projeto de conclusão de curso de Israel dos Santos Candeias
 
 
 
-## Rodando localmente <img src="/gifs/happy_patricia.gif" width="50">
+## Rodando localmente <img src="/gifs/angry_patricia.gif" width="50">
 ```python main.py```
 
 # Rodando o programa (Método 2)  <img src="/gifs/angry_monalessa.gif" width="50">
