@@ -1,18 +1,23 @@
-# Super Labes World
-Projeto de conclusão de curso de Israel dos Santos Candeias
+<img src="/graphics/interface/banner.png"  display="block" margin-left="auto" margin-left="auto">
+<!--# <img src="/gifs/happy_patricia.gif" width="50"> Super Labes World <img src="/gifs/happy_patricia.gif" width="50"> -->
 
-# Rodando o programa (Método 1)
-## Instalando Dependências
+Projeto de conclusão de curso de Israel dos Santos Candeias 
+<img src="/gifs/player1.gif" width="50">
+
+# Rodando o programa (Método 1) <img src="/gifs/angry_vitor.gif" width="50">
+## Instalando Dependências 
 ```pip install pygame-ce```
 ```pip install pytmx```
 
-## Para Rodar Localmente
+
+
+## Rodando localmente <img src="/gifs/happy_patricia.gif" width="50">
 ```python main.py```
 
-# Rodando o programa (Método 2)
+# Rodando o programa (Método 2)  <img src="/gifs/angry_monalessa.gif" width="50">
 Execute o arquivo [Super Labes World](<Super Labes World.lnk>)
 
-# Creditos Adicionais
+# Creditos Adicionais  <img src="/gifs/happy_vitor.gif" width="50"> <img src="/gifs/happy_patricia.gif" width="50"> <img src="/gifs/happy_monalessa.gif" width="50">
 ## Sounds
 01 - Battle          -> Forgotten Temple B2F (Dungeon Theme) - CABAL Online OST \
 02 - CT7             -> Stardew Valley OST - Luau Festival \
@@ -31,3 +36,4 @@ Execute o arquivo [Super Labes World](<Super Labes World.lnk>)
 * https://penzilla.itch.io/top-down-retro-interior
 * https://scarloxy.itch.io/mpwsp01
 * https://livingtheindie.itch.io/pixel-cyberpunk-interior
+
