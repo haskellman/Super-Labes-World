@@ -44,82 +44,99 @@ class Battle():
 
         # speak
         self.character_rect = pygame.Rect(853, 137, 192, 192)
+        self.player_rect = pygame.Rect(148, 284, 192, 192)
         self.counter_text_speak = 0
         self.speed_text_speak = 300
         self.done_text_speak = False
         self.speak_rect = pygame.Rect(756, 29, 421, 99)
 
+    def draw_rectangles(self):
+        # rectangles
+        rect_A = pygame.Rect(632, 540, self.rect_width, self.rect_height)
+        rect_B = pygame.Rect(942, 540, self.rect_width, self.rect_height)
+        rect_C = pygame.Rect(632, 630, self.rect_width, self.rect_height)
+        rect_D = pygame.Rect(942, 630, self.rect_width, self.rect_height)
+        # icon
+        self.icon = self.interface_frames['interface'][str(self.option)]
+        # draw
+        if self.option == 0:
+            self.display_surface.blit(self.icon, rect_A, special_flags = pygame.BLEND_RGB_ADD )
+        elif self.option == 1:
+            self.display_surface.blit(self.icon, rect_B, special_flags = pygame.BLEND_RGB_ADD )
+        elif self.option == 2:
+            self.display_surface.blit(self.icon, rect_C, special_flags = pygame.BLEND_RGB_ADD )
+        elif self.option == 3:
+            self.display_surface.blit(self.icon, rect_D, special_flags = pygame.BLEND_RGB_ADD )
 
-    def draw(self, dt):
+    def draw_character_info(self):
+        text_color = COLORS['black']
+        name_rect = pygame.Rect(838, 370, 0, 0)
+        level_rect = pygame.Rect(844, 396, 0, 0)
+
+        name_surf = self.fonts['regular_mid'].render(self.character.character_data['name'], False, text_color)
+        level_surf = self.fonts['regular_mid'].render('??????', False, text_color)
+
+        self.display_surface.blit(name_surf, name_rect)
+        self.display_surface.blit(level_surf, level_rect)
+
+
+    def draw_questions(self):
         if self.current_question != self.qtd_questions:
             text_color = COLORS['black']
             current_question_dict = self.questions[self.current_question].values()
+
+            question_rect = pygame.Rect(93, 29, 421, 99)
+            question_surf = self.fonts['regular'].render(self.get_question(current_question_dict), False, text_color)
+
+            self.display_surface.blit(question_surf, question_rect)
+
+    def draw_answers(self):
+        if self.current_question != self.qtd_questions:
+            text_color = COLORS['black']
+
+            current_question_dict = self.questions[self.current_question].values()
             current_answer = self.get_correct_answer(current_question_dict)
+            # surfaces
+            text_surf = self.fonts['regular'].render(self.get_options(current_question_dict), False, text_color)
+
+            # draw
+            self.display_surface.blit(text_surf, self.option_rect)
 
             self.answer = current_answer
 
-            # rectangles
-            rect_A = pygame.Rect(632, 540, self.rect_width, self.rect_height)
-            rect_B = pygame.Rect(942, 540, self.rect_width, self.rect_height)
-            rect_C = pygame.Rect(632, 630, self.rect_width, self.rect_height)
-            rect_D = pygame.Rect(942, 630, self.rect_width, self.rect_height)
-            question_rect = pygame.Rect(93, 29, 421, 99)
-            name_rect = pygame.Rect(838, 370, 0, 0)
-            level_rect = pygame.Rect(844, 396, 0, 0)
+    def draw_characters(self, dt):
+        # movement
+        if self.current_question > 0:
+            if self.current_question < self.qtd_questions / 3:
+                self.frame_index += ANIMATION_SPEED * dt 
+                self.x = self.move_x(dt, 30, 30)
+                self.y = self.move_y(dt, 50, 30)
+            elif self.current_question < self.qtd_questions / 2 + 1:
+                self.frame_index += 2 * ANIMATION_SPEED * dt 
+                self.x = self.move_x(dt, 60, 35)
+                self.y = self.move_y(dt, 100, 35)
+            elif self.current_question < self.qtd_questions / 2 + 3:
+                self.frame_index += 3 * ANIMATION_SPEED * dt 
+                self.x = self.move_x(dt, 90, 40)
+                self.y = self.move_y(dt, 150, 40)
+            else:
+                self.frame_index += 4 * ANIMATION_SPEED * dt 
+                self.x = self.move_x(dt, 120, 50)
+                self.y = self.move_y(dt, 200, 50)
 
-            self.icon = self.interface_frames['interface'][str(self.option)]
-            # player
-            player_surf = self.player_frames
-            
-            # movement
-            if self.current_question > 0:
-                if self.current_question < self.qtd_questions / 3:
-                    self.frame_index += ANIMATION_SPEED * dt 
-                    self.x = self.move_x(dt, 30, 30)
-                    self.y = self.move_y(dt, 50, 30)
-                elif self.current_question < self.qtd_questions / 2 + 1:
-                    self.frame_index += 2 * ANIMATION_SPEED * dt 
-                    self.x = self.move_x(dt, 60, 35)
-                    self.y = self.move_y(dt, 100, 35)
-                elif self.current_question < self.qtd_questions / 2 + 3:
-                    self.frame_index += 3 * ANIMATION_SPEED * dt 
-                    self.x = self.move_x(dt, 90, 40)
-                    self.y = self.move_y(dt, 150, 40)
-                else: # 9 e 10
-                    self.frame_index += 4 * ANIMATION_SPEED * dt 
-                    self.x = self.move_x(dt, 120, 50)
-                    self.y = self.move_y(dt, 200, 50)
+        # character movement
+        self.character_rect = pygame.Rect(853 + self.x, 137 + self.y, 192, 192)
+        self.player_rect = pygame.Rect(148 + (self.x // 3), 284, 192, 192)
+        # character animation
+        character_surf = self.character_frames['up' if self.error_mode else 'left'][int(self.frame_index % 4)] 
+        # player
+        player_surf = self.player_frames
+        # draw
+        self.display_surface.blit(pygame.transform.scale(character_surf,(192,192)), self.character_rect)
+        self.display_surface.blit(pygame.transform.scale(self.shadow, (78,30)), self.character_rect.midbottom + vector(-36,-20))
+        self.display_surface.blit(player_surf, self.player_rect)
 
-            # character animation
-            self.character_rect = pygame.Rect(853 + self.x, 137 + self.y, 192, 192)
-            character_surf = self.character_frames['up' if self.error_mode else 'left'][int(self.frame_index % 4)] # animation
 
-            # teacher character 
-            self.display_surface.blit(pygame.transform.scale(character_surf,(192,192)), self.character_rect)
-            # shadow
-            self.display_surface.blit(pygame.transform.scale(self.shadow, (78,30)), self.character_rect.midbottom + vector(-36,-20))
-            # player character
-            self.display_surface.blit(player_surf, (148 + (self.x // 3), 284))
-
-            # surfaces
-            text_surf = self.fonts['regular'].render(self.get_options(current_question_dict), False, text_color)
-            question_surf = self.fonts['regular'].render(self.get_question(current_question_dict), False, text_color)
-            name_surf = self.fonts['regular_mid'].render(self.character.character_data['name'], False, text_color)
-            level_surf = self.fonts['regular_mid'].render('??????', False, text_color)
-
-            # draw
-            if self.option == 0:
-                self.display_surface.blit(self.icon, rect_A, special_flags = pygame.BLEND_RGB_ADD )
-            elif self.option == 1:
-                self.display_surface.blit(self.icon, rect_B, special_flags = pygame.BLEND_RGB_ADD )
-            elif self.option == 2:
-                self.display_surface.blit(self.icon, rect_C, special_flags = pygame.BLEND_RGB_ADD )
-            elif self.option == 3:
-                self.display_surface.blit(self.icon, rect_D, special_flags = pygame.BLEND_RGB_ADD )
-            self.display_surface.blit(text_surf, self.option_rect)
-            self.display_surface.blit(question_surf, question_rect)
-            self.display_surface.blit(name_surf, name_rect)
-            self.display_surface.blit(level_surf, level_rect)
 
     def move_x(self, dt, speed, range):
         if not self.error_mode:
@@ -219,11 +236,10 @@ class Battle():
 
     def draw_dialog(self, dt):
         # quando a pessoa erra o personagem fala um dos dialogos de erro
-
         if self.error_mode:
             text = self.text_format(self.current_text, 30)
             if self.counter_text_speak <  len(text) * self.speed_text_speak:
-                self.counter_text_speak += int(5000 * dt)
+                self.counter_text_speak += int(ANIMATION_SPEAK_SPEED * dt)
             elif self.counter_text_speak >=  len(text) * self.speed_text_speak:
                 self.done_text_speak = True
             text_surf = self.fonts['regular'].render(text[0:self.counter_text_speak//self.speed_text_speak], True, COLORS['black'])
@@ -233,7 +249,7 @@ class Battle():
         else:
             text = self.text_format(self.current_text, 30)
             if self.counter_text_speak < len(text) * self.speed_text_speak:
-                self.counter_text_speak += int(5000 * dt)
+                self.counter_text_speak += int(ANIMATION_SPEAK_SPEED * dt)
             elif self.counter_text_speak >=  len(text) * self.speed_text_speak:
                 self.done_text_speak = True
             text_surf = self.fonts['regular'].render(text[0:self.counter_text_speak//self.speed_text_speak], True, COLORS['black'])
@@ -244,5 +260,9 @@ class Battle():
         self.check_end_battle()
         self.input()
         self.display_surface.blit(self.battle_bg)
-        self.draw(dt)
+        self.draw_rectangles()
+        self.draw_questions()
+        self.draw_answers()
+        self.draw_character_info()
+        self.draw_characters(dt)
         self.draw_dialog(dt)
