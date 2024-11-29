@@ -1,14 +1,71 @@
 \chapter{Implementação}
 \label{sec-implementacao}
-Após a definição do escopo \ref{sec:escopo}, dos requisitos \ref{sec:requisitos-do-jogo}, do diagrama de classes \ref{sec:diagrama-de-classes}, da ideia do jogo \ref{sec:jogo}, do ferramental teórico e prático que será utilizado no desenvolvimento do trabalho \ref{sec-referencial} e uma motivação bem definida, temos uma base sólida para a implementação. Neste capítulo são apresentados os detalhes relacionados à implementação do software desenvolvido, bem como algumas das decisões de implementação tomadas com base na seção anterior. O objetivo deste capítulo é fornecer uma visão clara e detalhada de como o software foi estruturado e construído, demonstrando as escolhas técnicas realizadas para atender aos requisitos definidos previamente.
 
-\section{Definições Iniciais}
-Antes de começar um jogo \textit{pixel art} é importante definir qual vai ser o tamanho de cada \textit{tile}, os tamanhos mais comuns são 16 x 16, 32 x 32 e 64 x 64, para esse trabalho foi optado o tamanho 64 x 64. É importante que todos os tiles presentes no jogo respeitem o mesmo tamanho para uma melhor harmonia visual, e proporções de objetos compatíveis.
+Após a definição do escopo \ref{sec:escopo}, dos requisitos \ref{sec:requisitos-do-jogo}, do diagrama de classes \ref{sec:diagrama-de-classes}, da ideia do jogo \ref{sec:jogo}, do ferramental teórico e prático que será utilizado no desenvolvimento do trabalho \ref{sec-referencial} e uma motivação bem definida, temos uma base sólida para a implementação. Neste capítulo são apresentados os detalhes relacionados à arquitetura do programa implementação do software desenvolvido, bem como algumas das decisões de implementação tomadas com base na seção anterior. O objetivo deste capítulo é fornecer uma visão clara e detalhada de como o software foi estruturado e construído, demonstrando as escolhas técnicas realizadas para atender aos requisitos definidos previamente.
+
+Antes de começar um jogo em \textit{pixel art}, é importante definir o tamanho de cada \textit{tile}; os tamanhos mais comuns são (16 x 16), (32 x 32) e (64 x 64). Para esse trabalho, foi optado o tamanho (64 x 64). É importante que todos os tiles presentes no jogo respeitem o mesmo tamanho para uma melhor harmonia visual, e proporções de objetos compatíveis.
+
+\section{Arquitetura do Jogo}
+\label{sec:arquitetura-do-jogo}
+O desenvolvimento de um jogo envolve a integração de diversas camadas tecnológicas que, se não bem estruturadas, podem inviabilizar o software futuramente. Pensando em melhorar a estruturação do programa, foi projetado sua arquitetura em alto nível para melhor compreensão do código e seus componentes. A Figura \ref{fig:game-architecture} representa uma visão estática da implementação. O retângulo maior representa o jogo e dentro dele a sua lógica. A parte superior são os recursos que o jogo provê internamente, e a parte inferior são os recursos externos que são utilizados pelo jogo.
+
+\begin{figure}[h!]
+    \centering
+    \includegraphics[width=1\linewidth]{figuras/game-architecture.png}
+    \caption{Arquitetura do Super LabES World em alto nível}
+    \label{fig:game-architecture}
+\end{figure}
+  
+
+\clearpage
+\section{Game Loop do Super Labes World}
+\label{sec:game-loop-super-labes-world}
+% game loop
+
+O \textit{Game Loop} é o núcleo do jogo e é responsável por manter o jogo em execução contínua até que o jogador feche o programa ou o jogo termine. Nele são continuamente processadas tarefas predefinidas no código do jogo, como ilustrado na listagem \ref{lst-game-loop}.
+
+\lstinputlisting[label=lst-game-loop, caption=Main, language=Python, float=htpb]{codigos/game_loop.py}
+
+A função ilustrada na listagem \ref{lst-game-loop} implementa o \textit{Game Loop} do Super LabES World, composto pelos seguintes passos:
+\begin{enumerate}
+    \item Preencher o \textit{background} de preto e a área do mapa que não contém tiles também é preenchida com preto (linha 6);
+    \item Atualizar o valor do \textit{delta time} (linha 7). Sua importância foi explicada na seção \ref{sec:delta-time};
+    \item Verificar o evento de fechar o jogo (linhas 8 a 11);
+    \item Chamar a função de \textit{input} que lida com a entrada de controles do jogador (linha 14);
+    \item Verificar se o jogador colidiu com um \textit{sprite} de transição (linha 15). Se for o caso então é chamada a função \textit{setup} com os devidos parâmetros do mapa a ser transicionado;
+    \item Verificar se o jogador colidiu com alguma caixa de diálogo (linha 16). Se sim então é chamado a função para criar o diálogo com a mensagem;
+    \item Atualizar a posição de todos os \textit{sprites} da tela (linha 17). Essa função chama o método \textit{update} de todos os \textit{sprites} contidos no \textit{Group all\_sprites}; 
+    \item Desenhar todos os \textit{sprites} da tela;
+    \item Verificar se tem alguma sobreposição do jogo. Existem cinco possíveis sobreposições da tela no jogo, são elas;
+        \begin{itemize}
+        \item \textit{\textbf{dialog\_open: }} Verdadeiro quando o jogador aperta \textit{spacebar} próximo a uma personagem do jogo, então troca de contexto do \textit{loop} principal para o \textit{loop} da classe \textit{Dialog};
+        \item \textit{\textbf{inventory\_open: }}Verdadeiro caso o jogador aperte a tecla ''i'', troca o contexto do \textit{loop} principal para o \textit{loop} da classe \textit{Inventory}; 
+        \item \textit{\textbf{computer\_open: }} Verdadeiro quando o jogador aperta \textit{spacebar} próximo a \textit{InteractiveObject} com o \textit{item\_id} = \textit{computer}. Então troca de contexto do \textit{loop} principal para o \textit{loop} da classe \textit{Computer};
+        \item \textit{\textbf{battle\_open: }}  Verdadeiro quando o jogador responde sim para um desafio de um personagem. Nesse caso troca-se de contexto para a batalha;
+        \item \textit{\textbf{choose\_dialog\_open: }} Verdadeiro ao fim de um diálogo de um personagem que contém questões e que não foi derrotado;
+    \end{itemize}
+\end{enumerate}
+
+
+% input
+A função \textit{input}, ilustrada na listagem \ref{lst-input}, é a responsável por detectar e lidar com todas as entradas de comandos do jogador (exceto a movimentação que será detalhada na seção \ref{sec:personagens}). 
+% Nela são definidas todos os possíveis comandos e controles do jogo.
+O primeiro passo que deve ser realizado é verificar se o jogador não está bloqueado. Os bloqueios possíveis do jogo são as sobreposições de tela (batalha, inventário, computador) ou se o jogador está dialogando.  
+% Por isso antes de verificar a entrada do jogador é conferido os valores das variáveis \textit{booleanas} \textit{dialog\_open} que se verdadeira o jogador está dialogando, \textit{choose\_dialog\_open} se verdadeiro o jogador está na interface de seleção da resposta e \textit{battle\_open} verdadeira quando o jogador está em uma batalha.
+Se o jogador não está bloqueado, então é feita a captura da entrada. Os possíveis controles do jogo são:
+\begin{itemize}
+    \item \textbf{Tecla I: }Abre o inventário e coloca o player no estado bloqueado;
+    \item \textbf{Tecla ESC: }Fecha as interfaces de inventário, computador e tira o jogador do estado bloqueado;
+    \item \textbf{Tecla \textit{Spacebar}: }A tecla de interação do jogador, quando pressionada é verificado se o jogador está perto a um personagem, ou a um objeto interativo. Quando for o caso a função leva para o respectivo tratamento;
+\end{itemize}
+
+\lstinputlisting[label=lst-input, caption=Input, language=Python, float=htpb]{codigos/input.py} 
 
 \section{Principais Funções}
-Nessa seção serão detalhadas as principais funções que garantem o funcionamento adequado do software desenvolvido, a abordagem inclui uma explicação minuciosa sobre os módulos centrais abordando suas finalidades, interações e relevância para o cumprimento dos objetivos do sistema. Além disso, serão discutidas as escolhas realizadas durante o desenvolvimento, evidenciando como essas funções se complementam.
+\label{sec:principais-funcoes}
+Nessa seção serão detalhadas as principais funções que garantem o funcionamento adequado do jogo desenvolvido. Serão apresentados os módulos centrais, abordando suas finalidades, interações e relevância para o cumprimento dos objetivos do sistema. Além disso, serão discutidas as escolhas realizadas durante o desenvolvimento, evidenciando como essas funções se complementam.
 
-Antes de tudo, a primeira coisa a se fazer em um projeto Pygame é inicializa-lo \textit{pygame.init()} isso inicializará todos os módulos do Pygame e permitirá chamadas de funções do Pygame. Ao executar o programa a primeira tela que aparece ao jogador é a \textit{home}, essa tela pode levar a quatro outras possíveis transições sendo elas:
+A primeira coisa a se fazer em um projeto Pygame é inicializá-lo invocando o método \textit{pygame.init()}. Isso inicializará todos os módulos do Pygame e permitirá chamadas de funções. Ao executar o programa, a primeira tela que aparece ao jogador é a \textit{home}; essa tela pode levar a quatro outras possíveis transições, sendo elas:
 \begin{enumerate}
     \item \textbf{\textit{New: }} Começa um novo jogo;
     \item \textbf{\textit{Credits: }} Abre a tela de créditos;
@@ -18,11 +75,12 @@ Antes de tudo, a primeira coisa a se fazer em um projeto Pygame é inicializa-lo
 
 % Com isso feito é possível efetuar algumas configurações iniciais como por exemplo definir um título e redimensionar o tamanho da janela do jogo, esse passo é realizado somente em \textit{home} como mostra a listagem \ref{lst-home} a tela inicial do jogo, aqui na main \ref{lst-main} é apenas feita as chamadas para cada transição, sendo quatro possíveis i) iniciar um novo jogo; ii) abrir a tela de créditos; iii) abrir a tela de controles do jogo e iv) sair do jogo. 
 
-Para gerenciar essas transições são criadas três variáveis de controle \textit{home\_open, credits\_open} e \textit{controls\_open} na main, todas do tipo \textit{bool}. Elas servem para definir qual aba estará sendo renderizada, não sendo possível mais de uma delas serem verdadeiras simultaneamente. Após isso são instanciados três objetos \textit{Home}, \textit{Credits} e \textit{Controls} que são as classes que contém as definições da respectiva tela, a variável de controle \textit{home\_open} é a única inicializada como verdadeiro pois é a tela que é mostrada inicialmente. Esse programa fica em um \textit{loop} enquanto captura os eventos e \textit{inputs} do jogador na tela inicial como mostra a listagem \ref{lst-main}.
+Para gerenciar essas transições, são criadas três variáveis de controle \textit{home\_open, credits\_open} e \textit{controls\_open} na função principal (\textit{main}) do jogo, todas do tipo \textit{bool}. Elas servem para definir qual aba está sendo renderizada, não sendo possível mais de uma delas ser verdadeira simultaneamente. Após isso, são instanciados três objetos, a saber: \textit{Home}, \textit{Credits} e \textit{Controls}. Estes objetos são instâncias das classes que contêm as definições da respectiva tela. A variável de controle \textit{home\_open} é a única inicializada como verdadeira pois é a tela que é mostrada inicialmente. Esse programa fica em um \textit{loop} enquanto captura os eventos e \textit{inputs} do jogador na tela inicial, como mostra a listagem \ref{lst-main}.
+
 \lstinputlisting[label=lst-main, caption=Main, language=Python, float=htpb]{codigos/main.py}
 
-A troca de contexto é feito a partir das funções de \textit{callback} \textit{run\_game}, \textit{run\_credits}, \textit{run\_game\_controls} 
-. Dependendo da valor de \textit{index} o programa redireciona para uma tela diferente. A listagem \ref{lst-callback} mostra a definição da função de \textit{callback}, e a listagem \ref{lst-home}  mostra a classe \textit{Home} onde é executado esse processo.
+A troca de contexto é feita a partir das funções de \textit{callback} \textit{run\_game}, \textit{run\_credits}, \textit{run\_game\_controls}. Dependendo do valor da variável \textit{index}, o programa redireciona para uma tela diferente. A listagem \ref{lst-callback} mostra a definição da função de \textit{callback}, e a listagem \ref{lst-home} mostra a classe \textit{Home} onde é executado esse processo.
+
 \begin{lstlisting}[label= lst-callback,language=Python,breaklines, caption= Função de \textit{callback} responsávél por alterar a variável de controle.]
     def run_credits():
         global credits_open; credits_open = True
@@ -30,10 +88,12 @@ A troca de contexto é feito a partir das funções de \textit{callback} \textit
 \end{lstlisting}
 
 \lstinputlisting[label={lst-home}, caption=Home, language=Python, float=htpb]{codigos/home.py}
+
 \clearpage
-Em \textit{Home} é definido o tamanho da tela (1280 x 720), também é feita a importação de imagens, áudios que são utilizados nela.
+
+Em \textit{Home}, é definido o tamanho da tela (1280 x 720), também é feita a importação de imagens, áudios que são utilizados nela.
 % e a reprodução da musica (linha 9). O parâmetro ''-1'' da função \textit{play} diz ao interpretador Python para a música ficar em \textit{loop}. S
-No Super Labes World, todos os sprites utilizados são  baseados na classe \textit{Rect}. Essa classe pode ser utilizada para desenhar retângulos em determinados pontos da tela, essa também contem outras funções uteis para o programador, como detecção de colisões entre retângulos. Sua especificação é a seguinte:
+No Super Labes World, todos os \textit{sprites} utilizados são baseados na classe \textit{Rect}. Essa classe pode ser utilizada para desenhar retângulos em determinados pontos da tela, além de conter outras funções úteis para o programador, como detecção de colisões entre retângulos. Sua especificação é a seguinte:
 % podem ser baseados em figuras geométricas. se queremos desenhar uma imagem em um ponto específico, ou queremos posicionar um \textit{sprite} em determinado local, é possível utilizar a  classe \textit{Rect} para isso
 \begin{itemize}
     \item \textit{\textbf{x:}} posição em x em que sera desenhado;
@@ -42,7 +102,7 @@ No Super Labes World, todos os sprites utilizados são  baseados na classe \text
     \item \textit{\textbf{height:}} altura do retângulo;
 \end{itemize}
 
-% akiiiiiiiiiiiiiiiiiiiiiii
+
 Normalmente não queremos jogar com personagens que sejam retângulos, ou mesmo interagir com NPC's (\textit{Non Playable Character}) personagem não jogável que sejam quadrados ou círculos, então associamos imagens a retângulos no Pygame. O método \textit{pygame.image.load} permite carregar uma imagem para o Pygame passando o caminho do arquivo como parâmetro, o retorno é um objeto do tipo \textit{Surface}. A classe Surface no Pygame é utilizada  para a representação das imagens. A figura \ref{fig:player} mostra o resultado da associação de uma imagem a um retângulo.
 \begin{figure}[h!]
     \centering
@@ -51,7 +111,7 @@ Normalmente não queremos jogar com personagens que sejam retângulos, ou mesmo 
     \label{fig:player}
 \end{figure}
 
-O método \textit{blit} do Pygame, é utilizado para desenhar imagens \textit{Surfaces} na tela. Essa função tem a seguinte assinatura.
+O método \textit{blit} do Pygame, é utilizado para desenhar imagens do tipo \textit{Surface} na tela. Essa função tem a seguinte assinatura.
 \begin{itemize}
     \item \textit{\textbf{source}:} A imagem \textit{Surface} a ser desenhada sobre o \textit{Surface} atual;
     \item \textit{\textbf{dest (opcional):}} Posição onde será desenhado a imagem, sendo o padrão o canto superior esquerdo (0, 0);
@@ -59,7 +119,7 @@ O método \textit{blit} do Pygame, é utilizado para desenhar imagens \textit{Su
     \item \textit{\textbf{special\_flags (opcional):}} Controla como as cores do da imagem serão combinadas com a Superfície;
 \end{itemize}
 
-Na função \textit{draw\_menu} essa que é responsável por desenhar as informações na tela \textit{home} faz uso desse método, a imagem de \textit{background} é desenhada ao passar como parâmetro a imagem \textit{Surface} dessa interface. Para causar o efeito de iluminação sobre o index selecionado são usados também os parâmetros \textit{dest} e \textit{special\_flag}. O primeiro parâmetro é o ícone da imagem com o fundo branco, o segundo parâmetro é o retângulo com as coordenadas de onde está a seleção, este varia conforme o index, e o terceiro parâmetro é a \textit{special\_flag} \textit{BLEND\_RGB\_ADD }, essa \textit{flag} mistura os canais de cores RGB da imagem de \textit{background} com o ícone da imagem de fundo branco. A figura \ref{fig:blit-example} ilustra esse processo.
+Na função \textit{draw\_menu} que é responsável por desenhar as informações na tela \textit{home} faz uso desse método, a imagem de \textit{background} é desenhada ao passar como parâmetro a imagem \textit{Surface} dessa interface. Para causar o efeito de iluminação sobre o index selecionado são usados também os parâmetros \textit{dest} e \textit{special\_flag}. O primeiro parâmetro é o ícone da imagem com o fundo branco, o segundo parâmetro é o retângulo com as coordenadas de onde está a seleção, este varia conforme o index, e o terceiro parâmetro é a \textit{special\_flag} \textit{BLEND\_RGB\_ADD }, essa \textit{flag} mistura os canais de cores RGB da imagem de \textit{background} com o ícone da imagem de fundo branco. A figura \ref{fig:blit-example} ilustra esse processo.
 
 % a imagem de \textit{background} e os retângulos de seleção. Para causar o efeito de iluminação sobre os retângulos ao selecionar cada index é feito o uso do método \textit{blit} do pygame, esse método desenha uma imagem sobre outra imagem, sendo a primeira imagem o icone de exit com o fundo branco, e o destino onde será desenhado o retângulo com às coordenadas de cada botão, essa coordenada varia de acordo com o index. A fun tem a seguinte assinatura.
 % % \begin{itemize}
@@ -182,7 +242,29 @@ O método a anterior \textit{setup} (listagem \ref{lst-setup}) tem a função de
 	\end{small}
 \end{table}
 
+\clearpage
+Ao jogador entrar em uma batalha o programa bloqueia a entrada de comandos do \textit{game loop} principal e muda para o contexto da classe \textit{Battle}. A função que contém esse loop da função \textit{update} é mostrada a seguir na listagem \ref{lst-update-battle}.
+\lstinputlisting[label=lst-update-battle, caption=Loop da classe \textit{Battle}, language=Python, float=htpb]{codigos/update_battle.py}
+\begin{enumerate}
+    \item \textit{\textbf{battle\_timer.update:}} Função que atualiza a contagem de tempo na batalha;
+    \item \textbf{\textit{check\_end\_battle:}} Função que verifica se o fim da batalha chegou, ou seja todas as questões foram respondidas, ou o jogador errou 30\% do total de perguntas e chama a função de \textit{callback} para o \textit{loop} principal com uma lista de inteiros, sendo 0 para respostas erradas, 1 para respostas corretas;
+    \item \textbf{\textit{input: }} Função que captura a entrada de comandos do jogador e lida com os índices, similar ao menu inicial explicado em \ref{lst-home};
+    \item \textbf{\textit{display\_surface.blit:}} Função que desenha o background da batalha;
+    \item \textbf{\textit{draw\_rectangles:}} Função que desenha os retângulos associados as opções de escolha do jogador, similarmente como já explicado em \ref{fig:blit-example}
+    \item \textbf{\textit{draw\_questions:}} Função que desenha na tela o texto da questão atual
+    \item \textbf{\textit{draw\_answers:}} Função que desenha o conteúdo da resposta de acordo com a opção que o jogador está;
+    \item \textbf{\textit{draw\_character\_info:}} Função que desenha as informações do professor na tela (nome e level);
+    \item \textbf{\textit{draw\_characters:}} Função que realiza o desenho e a animação dos dos personagens nessa tela será mais detalhada a seguir;
+    \item \textbf{\textit{draw\_dialog:}} Função que desenha o diálogo do professor ao responder a questão;
+\end{enumerate}
+
+A função abaixo \ref{lst-check-answer} é chamada ao jogador apertar barra de espaço sobre alguma das opções da batalha, ela seta a variável \textit{error\_mode} e escolhe um texto randomicamente de acordo com a resposta da questão. Essas que são usadas para as funções de desenhar o texto na tela e também para a animação do personagem.
+\lstinputlisting[label=lst-check-answer, caption=Função chamada ao jogador escolher uma opção na batalha, language=Python, float=htpb]{codigos/check_answer.py}
+
+
+\clearpage
 \section{Personagens}
+\label{sec:personagens}
 Os personagens de um jogo são uma peça fundamental especialmente para um jogo do gênero RPG, eles desempenham um papel central na construção da experiência narrativa e interativa e enriquecem fortemente a ambientação do jogo, esse capítulo vai abordar em mais detalhes como foi feita a criação de personagens
 
 Os \textit{sprites} dos personagens do jogo foram desenhados no software Aseprite discutido na seção \ref{sec:aseprite} e exportados para o formato PNG (Portable Network Graphics). Cada \textit{sprite} de personagem tem o tamanho (512 x 512), mas no programa essa imagem é subdividida em 16 quadrados de tamanhos iguais (128 x 128) como mostra a figura \ref{fig:player-animation}
@@ -213,7 +295,7 @@ Animação como explicado na seção \ref{sec:animacao} é uma ilusão gerada pe
 \begin{figure}[h!]
     \centering
     \includegraphics[width=1\linewidth]{figuras/player-animation.png}
-    \caption{\textit{Sprite} de Animação do \textit{Player} }
+    \caption{\textit{Sprite} de Animação dos \textit{Player} }
     \label{fig:player-animation}
 \end{figure}
 
@@ -259,40 +341,7 @@ self.hitbox = self.rect.inflate(-self.rect.width / 2, -60)
     \label{fig:player-hitbox}
 \end{figure}
 
-\section{Game Loop do Super Labes World}
-\label{sec:game-loop-super-labes-world}
-% game loop
-\lstinputlisting[label=lst-game-loop, caption=Main, language=Python, float=htpb]{codigos/game_loop.py}
+\clearpage
+Na batalha, os personagens são animados pela função \textit{draw\_characters}. A animação só ocorre após a primeira resposta, e depende da variável \textit{error\_mode}, obtida logo após uma resposta do jogador. caso o valor seja verdadeiro, significa que o jogador errou, a movimentação do \textit{sprite} é vertical (eixo y), os frames utilizados será o dicionário com a chave ''\textit{up}'' \ref{fig:player-animation}. Caso contrário a movimentação é lateral (eixo x) e os frames utilizados serão os com a chave ''\textit{left}'' do dicionário.
+\lstinputlisting[label=lst-update-battle, caption=Função responsável por desenhar as animações da classe \textit{Battle}, language=Python, float=htpb]{codigos/draw_characters.py}
 
-O game loop é o núcleo principal do jogo, ele é responsável por manter o jogo em execução contínua até que o jogador feche o programa ou o jogo termine. Nele são processados um conjunto tarefas continuamente, no nosso programa, a função é a ilustrada na listagem \ref{lst-game-loop}, o loop e composto pelos seguintes passos.
-\begin{enumerate}
-    \item Preencher o \textit{background} de preto a área que do mapa que não contém tiles é preenchida com preto (linha 6);
-    \item Atualizar o valor do \textit{delta time} (linha 7). Sua importância foi explicada na seção \ref{sec:delta-time};
-    \item Verificar o evento de fechar o jogo (linhas 8 a 11);
-    \item Chamar a função de \textit{input} que lida com a entrada de controles do jogador (linha 14);
-    \item Verificar se o jogador colidiu com um \textit{sprite} de transição (linha 15). Se for o caso então é chamada a função \textit{setup} com os devidos parâmetros do mapa a ser transicionado;
-    \item Verificar se o jogador colidiu com alguma caixa de diálogo (linha 16). Se sim então é chamado a função para criar o diálogo com a mensagem;
-    \item Atualizar a posição de todos os sprites da tela (linha 17). Essa função chama o método update de todos os sprites contidos no \textit{Group all\_sprites}; 
-    \item Desenhar todos os sprites da tela;
-    \item Verificar se tem alguma sobreposição do jogo. Existem cinco possíveis sobreposições da tela no jogo, são elas;
-        \begin{itemize}
-        \item \textit{\textbf{dialog\_open: }} Verdadeiro quando o jogador aperta \textit{spacebar} 
-        próximo a uma personagem do jogo, então troca de contexto do \textit{loop} principal para o \textit{loop} da classe \textit{Dialog};
-        \item \textit{\textbf{inventory\_open: }}Verdadeiro caso de o jogador aperte a tecla ''i'', troca o contexto do \textit{loop} principal para o \textit{loop} da classe \textit{Inventory}; 
-        \item \textit{\textbf{computer\_open: }} Verdadeiro quando o jogador aperta \textit{spacebar} próximo a \textit{InteractiveObject} com o \textit{item\_id} = \textit{computer}. Então troca de contexto do \textit{loop} principal para o \textit{loop} da classe \textit{Computer};
-        \item \textit{\textbf{battle\_open: }}  Verdadeiro quando o jogador o jogador responde sim para um desafio de um personagem. Nesse caso troca-se de contexto para a batalha;
-        \item \textit{\textbf{choose\_dialog\_open: }} Verdadeiro ao fim de um diálogo de um personagem que contém questões e que não foi derrotado;
-    \end{itemize}
-\end{enumerate}
-% input
-A função \textit{input} é a responsável por detectar e lidar com todas as entradas de comandos do jogador, exceto a movimentação do jogador que explicada. Nela são definidas todos os possíveis comandos e controles do jogo. O primeiro passo a ser realizado antes de capturar a entrada do jogador é verificar se o mesmo não está bloqueado. Os bloqueios do jogo são feitos através das sobreposições explicadas anteriormente.  
-% Por isso antes de verificar a entrada do jogador é conferido os valores das variáveis \textit{booleanas} \textit{dialog\_open} que se verdadeira o jogador está dialogando, \textit{choose\_dialog\_open} se verdadeiro o jogador está na interface de seleção da resposta e \textit{battle\_open} verdadeira quando o jogador está em uma batalha.
-Se o jogador não está bloqueado, então é feita a captura da entrada. Os possíveis controles do jogo são.
-\begin{itemize}
-    \item \textbf{Tecla I: }Abre o inventário e coloca o player no estado bloqueado;
-    \item \textbf{Tecla ESC: }Fecha as interfaces de inventário, computador e tira o jogador do estado bloqueado;
-    \item \textbf{Tecla \textit{Spacebar}: }A tecla de interação do jogador, quando pressionada é verificado se o jogador está perto a um personagem, ou a um objeto interativo. Quando for o caso a função leva para o respectivo tratamento;
-\end{itemize}
-
-Veja a seguir na listagem \ref{lst-input} o código especificamente.
-\lstinputlisting[label=lst-input, caption=Input, language=Python, float=htpb]{codigos/input.py} 

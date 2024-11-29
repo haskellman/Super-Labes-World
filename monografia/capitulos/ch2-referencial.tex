@@ -107,10 +107,10 @@ A figura \ref{fig:event-loop} ilustra um loop de jogo com os três elementos bá
 \end{figure}
 
 \begin{itemize}
-    \item \textit{\textbf{Input:}} processa a entrada do usuário sem bloqueio;
-    \item \textit{\textbf{Update:}} atualiza o estado do jogo;
-    \item \textit{\textbf{Render:}}  desenha o jogo;
-    \item \textit{\textbf{Delta time:}} o relógio na figura simboliza que este loop é executado a uma velocidade constante. Será explicada a seguir. 
+    \item \textit{\textbf{Input:}} Processa a entrada do usuário sem bloqueio;
+    \item \textit{\textbf{Update:}} Atualiza o estado do jogo;
+    \item \textit{\textbf{Render:}}  Desenha o jogo;
+    \item \textit{\textbf{Delta time:}} O relógio na figura simboliza que este loop é executado a uma velocidade constante. Será explicada a seguir. 
 \end{itemize}
 
 % Delta time
@@ -193,25 +193,24 @@ Na linha (2) é feito a importação do pygame e dizemos ao compilador para carr
 
 Os mapas de jogo desempenham um papel fundamental no design e na experiência de um jogo, servindo como o alicerce do mundo virtual onde a narrativa, os desafios e a exploração ocorrem. Os mapas ajudam a transmitir a ambientação, geografia e lógica do universo do jogo proporcionando imersão e ambientação do jogador. Para a criação de mapas são utilizadas ferramentas que auxiliam nesse processo, esses são os editores de mapas.
 
- Os softwares editores de mapas permitem o designer do criar de forma visual e intuitiva os mapas de seus jogos. Praticamente todos os jogos usam uma ferramenta para esse propósito, tanto jogos 2D como também jogos 3D. Nesse trabalho  utilizou-se de editor 2D. Um editor de mapas 2D se fundamenta em uma técnica denominada \textit{Tile-Based}, onde o cenário é formado por pequenas imagens quadradas, retangulares ou hexagonais chamados \textit{tiles} (ladrilhos). .
+ Os softwares editores de mapas permitem o designer do criar de forma visual e intuitiva os mapas de seus jogos. Praticamente todos os jogos usam uma ferramenta para esse propósito, tanto jogos 2D como também jogos 3D. Nesse trabalho  utilizou-se de editor 2D. Um editor de mapas 2D se fundamenta em uma técnica denominada \textit{Tile-Based}, onde o cenário é formado por pequenas imagens quadradas, retangulares ou hexagonais chamados \textit{tiles} (ladrilhos).
 % citar jogos populares que utilizam essa técnica (dofus)
 
 \subsection{\textit{Tiles} e \textit{Tilesets}}
 \label{sec:tiles-e-tilesets}
-% explicar jogos 2d  podem ter dois tipos, 
-\textit{Tilesets} são coleções de pequenas imagens reutilizáveis, chamados ''tiles'', organizadas em uma grade. Cada \textit{tile} representa uma pequena parte do mundo de um jogo 2D, por exemplo, um pedaço de chão, um segmento de uma parede ou uma decoração. Ao combinar diferentes tiles em diferentes posições temos um cenário que pode ser utilizado como fase de um jogo. 
+\textit{Tilesets} são coleções de pequenas imagens reutilizáveis, chamados \textit{tiles}, organizadas em uma grade. Cada \textit{tile} representa uma pequena parte do mundo de um jogo 2D, por exemplo, um pedaço de chão, um segmento de uma parede ou uma decoração. Ao combinar diferentes tiles em diferentes posições temos um cenário que pode ser utilizado como fase de um jogo. 
 
 Trata-se de um recurso gráfico para desenhar níveis e outros componentes estáticos de um jogo de forma rápida e eficiente, já que não é necessário desenhar toda a área jogável. Esses \textit{tilesets} podem ser essencialmente duas formas: i) \textit{\textbf{top-down}} (cima para baixo) esses tiles são desenhados na perspectiva vista de cima para baixo, alguns jogos que utilizam desse tipo de tile são \textit{The Legend of Zelda} e \textit{Chrono Trigger} veja a figura \ref{fig:tileset-orthogonal} e ii) \textit{\textbf{platformer}} (plataforma) esses tiles são desenhados na perspectiva de lado utilizada em jogos onde o jogador realiza saltos e desvia de obstáculos é o caso de jogos como \textit{Super Mario} e \textit{Sonic} a figura \ref{fig:tileset-platform-orthogonal} ilustra esse tipo de \textit{tile}.
 
 \begin{figure}[h!]
     \centering
-    \includegraphics[width=0.5\linewidth]{figuras/tileset.png}
+    \includegraphics[width=1\linewidth]{figuras/tileset.png}
     \caption{Exemplo de \textit{tileset top-down}}
     \label{fig:tileset-orthogonal}
 \end{figure}
 \begin{figure}[h!]
     \centering
-    \includegraphics[width=0.5\linewidth]{figuras/tileset-orthogonal-platform.png}
+    \includegraphics[width=1\linewidth]{figuras/tileset-orthogonal-platform.png}
     \caption{Exemplo de \textit{tileset platformer}}
     \label{fig:tileset-platform-orthogonal}
 \end{figure}
@@ -219,48 +218,18 @@ Trata-se de um recurso gráfico para desenhar níveis e outros componentes está
 \clearpage
 \subsection{Tiled}
 \label{sec:tiled}
-O Tiled \footnote{Tiled \textit{Map Editor} \url{https://www.mapeditor.org}} é um editor de mapas 2D de software aberto (confirmar aqui) que ajuda \textit{game designers} a desenvolverem o conteúdo de seus jogos. Seu principal recurso é desenhar editar mapas de \textit{tiles} de várias formas. O software também suporta posicionamento de imagens livres, e tem maneiras eficientes de colocar metadados em seus \textit{sprites} que futuramente poderão serem usados pelo programador.
+O Tiled \footnote{Tiled \textit{Map Editor} \url{https://www.mapeditor.org}} é um editor de mapas 2D \textit{open source} que ajuda \textit{game designers} a desenvolverem o conteúdo de seus jogos. Seu principal recurso é desenhar editar mapas de \textit{tiles} de qualquer tamanho, sem restrições quanto ao tamanho do tile ou ao número de camadas ou tiles que podem ser usados de várias formas.
 
-Tiled suporta camadas de tiles retangulares, retas, isométricas projetadas, isométricas escalonadas e hexagonais escalonadas \cite{tiled}.
-% No programa para carregar um \textit{tileset} pode ser uma única imagem contendo muitos tiles divididos por  ou pode ser uma coleção de imagens individuais.% 
-O Tiled também é capaz de suportar algumas técnicas de simulação de profundidade por meio do deslocamento de camadas e alteração da ordem de renderização dos componentes.
-
-O Tiled suporta camadas de objetos, que podem ser usadas para colocar imagens: é possível adicionar objetos como retângulos, pontos, elipses, polígonos, polilinhas e ladrilhos, que podem ser dimensionados ou girados. A Figura \ref{fig:map-creation} mostra uma configuração inicial de criação de um mapa.
+No software é possível posicionar \textit{tiles} em ''quadradinhos'' e aos poucos o cenário vai ganhando forma, veja a figura \ref{fig:example-tiled}. Esses \textit{tiles} podem ser  retangulares, retas, isométricas projetadas, isométricas escalonadas e hexagonais escalonadas. Tiled Também é capaz adicionar imagens, retângulos, pontos e outras formas geométricas de forma livre ao mapa, bem como adicionar metadados a eles, que poderão futuramente serem usados pelo programador \cite{tiled}. 
 \begin{figure}[h!]
     \centering
-    \includegraphics[width=0.5\linewidth]{figuras/new-map-tiled.png}
-    \caption{Criação de mapa}
-    \label{fig:map-creation}
+    \includegraphics[width=1\linewidth]{figuras/example-tiled.png}
+    \caption{Exemplo de criação de mapa no \textit{Tiled} com tiles (16x16)}
+    \label{fig:example-tiled}
 \end{figure}
-% As características mais importantes a serem destacadas nessa tela são:
-% \begin{itemize}
-%     \item \textbf{Orientação (Orientation):} A orientação define como é o estilo de visualização do seu jogo, sendo possíveis 4 estilos “ortogonal”, “isométrico”, “escalonado” e “hexagonal”;
-%     \item \textbf{Tamanho do mapa \textit{(Map Size}):} nessa parte é definido o tamanho do mapa, é possível alterar os valores no decorrer da criação, o próprio software faz o calculo de quantos pixels o mapa ficará, na figura cada tile tem 32 píxels de tamanho, e o mapa é um quadrado 10 x 10 , sendo assim o tamanho final do mapa é 320 x 320
-%     \item \textbf{Tamanho do tile \textit{(Tile Size)}:}, essa é a informação mais importante dessa página, é nessa opção que se define o tamanho do tile que vai ser representado na tela, isso significa que cada azulejo do mapa terá exatamente esse tamanho, quando for a  hora de importar o tileset para o programa é importante garantir que o  tileset tem o mesmo tamanho do tile do mapa.
-% \end{itemize}
-% Com o mapa em branco criado agora é necessário importar um tileset para começar a desenhar o mapa a figura \ref{fig:new-tileset}  ilustra esse processo.
-% \begin{figure}[h!]
-%     \centering
-%     \includegraphics[width=0.5\linewidth]{figuras/new-tileset.png}
-%     \caption{Enter Caption}
-%     \label{fig:new-tileset}
-% \end{figure}
-% As Informações mais importantes aqui são:
-% \begin{itemize}
-%     \item \textbf{Procurar \textit{(Browse)}:} nessa opção você vai carregar o arquivo para o programa;
-%     \item \textbf{Tipo \textit{(Type)}:} aqui dizemos ao programa se é uma imagem única com múltiplos tilesets, ou uma imagem única;
-%     \item \textbf{Largura do Tile e Altura do tile \textit{(Tile Width)} \textit{(Tile Height)}:} Nessa parte você está dizendo ao programa como "fatiar" a imagem que está recebendo, dividindo assim em vários azulejos únicos reutilizáveis, com essas configurações ficamos com um algo assim;
-%     \begin{figure}[h!]
-%         \centering
-%         \includegraphics[width=0.8\linewidth]{figuras/tileset-dividido.png}
-%         \caption{Tileset dividido}
-%         \label{fig:tileset-dividido}
-%     \end{figure}
-% \end{itemize}
 
-\subsection{Camadas}
-\label{sec:camadas}
-Camadas ou \textit{layers} no Tiled definem a ordem com que os \textit{tiles} e \textit{sprites} serão desenhadas na tela de forma \textit{bottom-up}, ou seja, os \textit{tiles} serão renderizados de baixo para cima de forma que, em caso de blocos sobrepostos, o que está mais acima tem prioridade. A figura \ref{fig:layers} mostra as camadas relativas a um mapa de exemplo (i) terreno, (ii) topo do terreno (iii) objetos e (iv) entidades. 
+Jogos costumam ter cenários com várias camadas, o Tiled é capaz de trabalhar com camadas de forma similar a outros programas editores de imagens. Ao fazer isso é possível definir a ordem com que os ladrilhos serão renderizados no jogo, sendo o padrão \textit{bottom-up} (de baixo para cima), ou seja, em caso de blocos sobrepostos, o que está em uma camada mais acima tem prioridade. A figura \ref{fig:layers} ilustra as camadas do mapa da figura anterior sendo elas (i) terreno, (ii) topo do terreno (iii) objetos e (iv) entidades. 
+\clearpage
 \begin{figure}[h!]
     \centering
     \includegraphics[width=1\linewidth]{figuras/layers.png}
@@ -268,118 +237,40 @@ Camadas ou \textit{layers} no Tiled definem a ordem com que os \textit{tiles} e 
     \label{fig:layers}
 \end{figure}
 
-Existem 4 possíveis tipos de camadas no Tiled, duas delas foram utilizadas nesse trabalho: 
+Existem 4 possíveis tipos de camadas no Tiled, duas delas utilizadas nesse tela: 
 \begin{itemize}
-    \item \textbf{(i) Camada de tiles}: é nela que são feitos os terrenos do jogo bem como as coisas acima do terreno e sem colisão. São as camadas ``\textit{Terrain}'' e ``\textit{Terrain} Top'' mostradas na figura \ref{fig:layers};
-    \item \textbf{(ii) Camada de objetos} usadas para posicionar objetos e personagens ``\textit{Entities}'' e ``\textit{Objects}'' da figura \ref{fig:layers}. Nessa camada, é possível adicionar metadados que podem ser usados no código para identificação de e manejo desses \textit{sprites}.
+    \item \textbf{(i) Camada de tiles}: Nessa camada que é feito o posicionamento de \textit{tiles}. São as camadas ``\textit{Terrain}'' e ``\textit{Terrain} Top'' da figura \ref{fig:layers};
+    \item \textbf{(ii) Camada de objetos}  Nessa camada é permitido posicionar objetos, imagens, retângulos formas geométricas entre outros, sem a necessidade de posicionar na grade específica do software. É nessa camada que são adicionados metadados aos objetos nelas. São as camadas``\textit{Entities}'' e ``\textit{Objects}'' da figura \ref{fig:layers}.
 \end{itemize}
 
-% dados com chave/valor aos dados presentes aqui, a figura \ref{fig:add-custom-property-object} exemplifica como adicionar uma propriedade "quebrável" a uma caixa.
-% \begin{figure}[h!]
-%     \caption{Adicionando uma propriedade personalizada a um objeto}
-%     \label{fig:add-custom-property-object}
-%     \subfloat{
-%         \includegraphics[width=0.35\linewidth]{figuras/example-map.png}
-%     }\hfill
-%     \subfloat{
-%         \includegraphics[width=0.5\linewidth]{figuras/custom-property.png}
-%     }
-% \end{figure}
-% Ao salvar essas configurações o programa gera um arquivo com a extensão '.tmx' que é o acrônimo de Translation Memory eXchange, é um formato baseado no 'xml' devido a isso faz o uso de tags e atributos de arquivo padrão usado na indústria de tradução para armazenar e trocar memórias de tradução, basicamente consiste em uma seção de cabeçalho, seguido por uma ou várias seções de corpo, cada uma contendo unidades de tradução. A listagem a seguir ilustra isso.
-
-% \newpage
-% \begin{lstlisting}[language=xml,breaklines, caption= example.tmx terrain layer]
-% <?xml version="1.0" encoding="UTF-8"?>
-% <map version="1.10" tiledversion="1.11.0" orientation="orthogonal" renderorder="right-down" width="20" height="16" 
-% tilewidth="16" tileheight="16" infinite="0" nextlayerid="5" nextobjectid="7">
-%  <tileset firstgid="1" name="Terrain (16x16)" tilewidth="16" tileheight="16" tilecount="242" columns="22">
-%   <image source="Free/Terrain/Terrain (16x16).png" width="352" height="176"/>
-%  </tileset>
-%  <tileset firstgid="243" name="images" tilewidth="28" tileheight="24" tilecount="1" columns="0">
-%   <grid orientation="orthogonal" width="1" height="1"/>
-%   <tile id="0">
-%    <image source="Free/Items/Boxes/Box1/Idle.png" width="28" height="24"/>
-%   </tile>
-%  </tileset>
-%  <tileset firstgid="244" name="Blue" tilewidth="16" tileheight="16" tilecount="16" columns="4">
-%   <image source="Free/Background/Blue.png" width="64" height="64"/>
-%  </tileset>
-%  <layer id="1" name="Terrain" width="20" height="16">
-% \end{lstlisting}
-
-% \begin{lstlisting}[language=xml,breaklines, caption= example.tmx object layer]
-%  <objectgroup id="3" name="Objects">
-%   <object id="4" gid="243" x="153" y="147.25" width="28" height="24"/>
-%   <object id="5" gid="243" x="172.5" y="147.25" width="28" height="24"/>
-%   <object id="6" gid="243" x="163.75" y="128.25" width="28" height="24">
-%    <properties>
-%     <property name="breakable" type="bool" value="true"/>
-%    </properties>
-%   </object>
-%  </objectgroup>
-% \end{lstlisting}
-
-
-%parei aqui, continuo amanhã
 
 %  ======================================= PyTMX =======================================
+Após a criação do mapa, o programa é capaz de exportar o conteúdo para diversos formatos compatíveis com diferentes bibliotecas \footnote{Bibliotecas e \textit{frameworks} compatíveis com o Tiled \url{https://doc.mapeditor.org/en/stable/reference/support-for-tmx-maps/}}. Nesse trabalho foi utilizado o formato TMX \textit{(Translation Memory eXchange)}, esse formato se assemelha a um XML \textit{ (Extensible Markup Language)}, por ser composto de \textit{tags} e atributos que podem ser recuperadas pelo programador.
+
+% , e  (batalha naval) que é como o mapa é feito pelo programa acrônimo de Translation Memory eXchange, é um formato baseado no 'xml' devido a isso faz o uso de tags e atributos de arquivo padrão usado na indústria de tradução para armazenar e trocar memórias de tradução, basicamente consiste em uma seção de cabeçalho, seguido por uma ou várias seções de corpo, cada uma contendo unidades de tradução
+
 \subsection{PyTMX}
 \label{sec:pytmx}
-Pytmx é um software livre sobre a licença GNU Lesser General Public License (Licença Pública Geral Menor, em tradução livre) \footnote{LGPL Lesser General Public License\url{https://juristas.com.br/foruns/topic/significado-de-lgpl-lesser-general-public-license/}}
-PyTMX\footnote{PyTMX \url{https://pytmx.readthedocs.io/en/latest/}} é um carregador de mapas para python/pygame, projetado para jogos. Este software apoia o carregamento inteligente de \textit{tiles} com uma base de armazenamento rápida e eficiente. O PyTMX tem a capacidade de manipular a maioria dos tipos de objetos \textit{Tiled} com metadados. Isso é importante para que seja possível modificar mapas e objetos no Tiled, sem a necessidade de modificar código-fonte.
+Pytmx é uma biblioteca de código aberto escrita para a linguagem Python e projetada para jogos\footnote{PyTMX \url{https://pytmx.readthedocs.io/en/latest/}} sua principal função é carregar mapas e seus dados para o programa. software apoia o carregamento inteligente de \textit{tiles} com uma base de armazenamento rápida e eficiente, no PyTMX é possível manipular a maioria dos tipos de objetos \textit{Tiled} com metadados. Isso é importante para que seja possível modificar mapas e objetos no Tiled, sem a necessidade de modificar código-fonte. A listagem \ref{lst-load-map} mostra como é feita a importação de um mapa feito no Tiled para o Pygame.
 
-% \begin{lstlisting}[language=bash,breaklines, caption= Instalação Pytmx]
-% pip install pytmx
-% \end{lstlisting}
+\clearpage
+\lstinputlisting[label=lst-load-map, caption=Exemplo de utilização da biblioteca Pytmx, language=Python, float=htpb]{codigos/load_map.py}
 
-% \begin{lstlisting}[language=python,breaklines, caption= Uso Básico Pytmx]
-% import pytmx
+Na linha (7) da listagem acima é carregado todo o conteúdo do mapa para a variável \textit{tiled\_map}. Com isso é possível recuperar informações que estão no mapa como, objetos, posição, tamanho e propriedades. 
 
-% tmxdata = pytmx.TiledMap("example.tmx")
-
-% print(tmxdata.width)
-% print(tmxdata.height)
-% print(tmxdata.tilewidth)
-% print(tmxdata.orientation)
-% print(tmxdata.layernames)
-% \end{lstlisting}
-
-% \begin{lstlisting}[language=bash,breaklines, caption= Saída]
-% >>> 20
-% >>> 16
-% >>> 16
-% >>> orthogonal
-% >>> {'Terrain': <TiledTileLayer[1]: "Terrain">, 'Terrain Top': <TiledTileLayer[2]: "Terrain Top">, 'Objects': <TiledObjectGroup[3]: "Objects">, 'Entities': <TiledObjectGroup[4]: "Entities">}
-% \end{lstlisting}
-
-% Para podermos usar esse mapa é necessário anteriormente importarmos ele para dentro do código isso é feito na linha 1, na linha 3 criamos uma variável para armazenar o mapa, e com isso temos acesso as informações presentes naquele mapa.
-
-% Agora para termos acesso aos metadados presentes na camada de objetos, por exemplo, podemos fazer uma iteração e verificação do nome do \textit{layer} com isso temos acesso aos objetos quebráveis.
-% \begin{lstlisting}[language=python,breaklines, caption= Verificação de Objetos Quebráveis]
-% for layer in tmxdata.visible_layers:
-%     if layer.name == 'Objects':
-%         for obj in layer:
-%             print(obj.properties['breakable'], obj.x, obj.y)
-% \end{lstlisting}
-
-% \begin{lstlisting}[language=bash,breaklines, caption= Saída]
-% >>> True 163.75 104.25
-% >>> True 152.25 123.0
-% >>> True 172.5 123.25
-% \end{lstlisting}
 
 %  ======================================= Pixel Art ===================================
 \section{Pixel Art}
 \label{sec:pixel-art}
+O termo \textit{pixel}, originado de (\textit{picture} e \textit{element}), ou seja, elemento de imagem, é a menor unidade de uma imagem que é possível ser expressa digitalmente \cite{lyon2006brief}. A \textit{Pixel Art} consiste de um tipo de arte que usa pixels visíveis para compor uma image, que é formado pela junção de diversos pontos digitais. 
+
 A Pixel Art surgiu nos anos 60 mas foi popularizada nos anos 70 e 80. Nessa época de início dessas tecnologia, os monitores ainda não tinham a quantidade de pixels da atualidade. Era necessário desenhar objetos na tela com ''quadradinhos'' uma vez que era o único recurso que da época. Contudo, até nos dias atuais, é um estilo de arte que milhares de pessoas apreciam. Na figura \ref{fig:mario} vemos alguns exemplos de Pixel Arts.
 
-O termo \textit{pixel}, originado de (\textit{picture} e \textit{element}), ou seja, elemento de imagem, é a menor unidade de uma imagem que é possível ser expressa digitalmente \cite{lyon2006brief}. A \textit{Pixel Art} consiste de um tipo de arte que usa pixels visíveis para compor uma imagem ou um vídeo, que é formado pela junção de diversos pontos digitais.
-
-Em um monitor que permite imagens coloridas, cada pixel é composto por um conjunto de 3 cores: vermelho, verde e azul. Em bons monitores cada uma dessas cores é capaz de exibir 256 tonalidades diferentes (o equivalente a 8 bits). A partir da combinação dessas tonalidades é possível exibir pouco mais de 16.7 milhões de cores diferentes \(256 * 256 * 256\). A quantidade de pixels a serem mostradas na tela depende do tamanho do \textit{display}, por exemplo, em uma resolução HD (1280 x 720) temos 921.600 pixels, numa resolução 8K (7680 x 4320) temos 33.177.600 a serem preenchidos.
+% O uso de cores de forma consciente é imprescindível para a criação de imagens. Na\textit{pixel art} talvez seja ainda mais. Em monitores, Televisores ou quaisquer sistemas que permitam imagens coloridas, 
+%  Em sistemas de imagens coloridas, uma cor é tipicamente representada por três ou quatro intensidades de componentes, como vermelho, verde e azul (Sistema ou   cada pixel é composto por um conjunto de 3 cores: vermelho, verde e azul. Em bons monitores cada uma dessas cores é capaz de exibir 256 tonalidades diferentes (o equivalente a 8 bits). A partir da combinação dessas tonalidades é possível exibir pouco mais de 16.7 milhões de cores diferentes \(256 * 256 * 256\). A quantidade de pixels a serem mostradas na tela depende do tamanho do \textit{display}, por exemplo, em uma resolução HD (1280 x 720) temos 921.600 pixels, numa resolução 8K (7680 x 4320) temos 33.177.600 a serem preenchidos.
 
 
 \begin{figure}[ht!]
-    \caption{Exemplos de diferentes pixel arts em suas gerações esquerda Super Mario 8-bits (NES) /  Mega Man x4 32-bits (Playstation 1)}
     \label{fig:comparative-8bit-32-bit-pixel-art}
     \subfloat\label{fig:mario}1985.{
         \includegraphics[width=0.35\linewidth]{figuras/mario-sprite-nes.png}
@@ -387,33 +278,38 @@ Em um monitor que permite imagens coloridas, cada pixel é composto por um conju
     \subfloat\label{fig:mega_man}1998{
         \includegraphics[width=0.3\linewidth]{figuras/mega-man-ps1.png}
     }
+    \caption{Exemplos de diferentes pixel arts em suas gerações esquerda Super Mario 8-bits (NES) /  Mega Man x4 32-bits (Playstation 1)}
 \end{figure}
 
-\newpage
 \subsection{Aseprite}  
 \label{sec:aseprite}
 % Para fazer um jogo é necessário ter sprites 
-O Aseprite\footnote{Aseprite \url{https://www.aseprite.org}} é um software comercial especializado em Pixel Art que oferece recursos e ferramentas específicas para essa finalidade permitindo, assim, a criação de animações 2D para videogames, como o exemplo da figura \ref{fig:aseprite}. As ferramentas de Aseprite conseguem controlar
-a animação quadro-a-quadro e fazer rotações de pixel art pré-desenvolvidas.
-ilustra a tela básica do programa, a primeira vista ele é similar a outros programas de criação de imagens com exceção da grade quadriculada.  
+O Aseprite\footnote{Aseprite \url{https://www.aseprite.org}} é um software comercial especializado em Pixel Art que oferece recursos e ferramentas específicas para essa finalidade, permitindo assim a criação de \textit{sprites} e animações 2D para videogames. As ferramentas de Aseprite conseguem controlar a animação quadro-a-quadro e fazer rotações de pixel art pré-desenvolvidas.
+A figura \ref{fig:aseprite} ilustra a tela básica do programa, a primeira vista ele é similar a outros programas de criação de imagens com exceção da grade quadriculada.  
 \begin{figure}[ht!]
     \centering
-    \includegraphics[width=1\linewidth]{figuras/aseprite.jpg}
-    \caption{Visão Básica Aseprite}
+    \includegraphics[width=1\linewidth]{figuras/aseprite.png}
+    \caption{Visão básica do software Aseprite}
     \label{fig:aseprite}
 \end{figure}
 
-Um \textit{Sprite} é um objeto gráfico bidimensional (2D) usado em computação gráfica e, particularmente, em videogames. Um sprite normalmente consiste de uma imagem de bitmap ou uma série de imagens que são combinadas para criar uma animação. Um sprite também pode ser pensado como uma entidade separada que existe dentro de uma cena maior. Especificamente no Aseprite, um sprite consiste de uma sequência de quadros somados em uma pilha de camadas. A intersecção de quadros e camadas cria uma matriz de células gráficas editáveis com imagens/pixels que podem ser editados com o editor de sprites . Camadas, quadros e células são visíveis na linha do tempo
+% Um \textit{Sprite} é um objeto gráfico bidimensional (2D) usado em computação gráfica e, particularmente, em videogames.
+Um sprite normalmente consiste de uma imagem de \textit{bitmap} ou uma série de imagens que são combinadas para criar uma animação.
+% Um sprite também pode ser pensado como uma entidade separada que existe dentro de uma cena maior.
+
+Especificamente no Aseprite, um sprite consiste em uma sequência de quadros somados em uma pilha de camadas. A intersecção de quadros e camadas cria uma matriz de células gráficas editáveis com imagens/pixels que podem ser editados com o editor de sprites . Camadas, quadros e células são visíveis na linha do tempo
 \begin{figure}[h!]
     \centering
     \includegraphics[width=1\linewidth]{figuras/sprite-frog.png}
-    \caption{Ninja Frog Sprite de Pulo}
-    \label{fig:enter-label}
+    \caption{Ninja Frog exemplo de\textit{sprite}}
+    \label{fig:sprite-frog}
 \end{figure}
 
 
 \subsection{Animação}
 \label{sec:animacao}
+A simulação de movimento criada por uma série de imagens é denominada animação. O olho humano  consegue reter uma imagem por aproximadamente 1/10 de segundo
+
  A animação é a ilusão de movimento que nossos cérebros nos enganam para perceber quando vemos vários quadros de obras de arte estáticos reproduzidos em rápida sucessão.
 Um quadro é uma única imagem estática em um sprite, se adicionarmos e alterarmos os quadros a uma certa velocidade, cria-se a a impressão de movimento, ao qual dá-se o nome de Animação. 
 Em programação existem várias formas de fazer a animação e uma delas é através de vetores; essa técnica consiste em carregar uma imagem e dizemos ao computador que queremos dividir essa imagem e armazena-lo num vetor, a figura \ref{fig:sprite-animation} exemplifica isso, nesse caso um vetor de duas linhas e cinco colunas, assim para fazer a animação desse personagem, basta percorrer as imagens alternadamente enquanto capturamos a entrada do jogador e vemos se é movimento

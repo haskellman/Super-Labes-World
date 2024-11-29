@@ -2,57 +2,59 @@
 % PG - Nome do Aluno
 % Capítulo 3 - Contribuição
 % ==============================================================================
-\chapter{Desenvolvimento do Jogo}
+\chapter{Análise e Projeto}
 \label{sec-contribuicao}
 
 % Este capítulo deve apresentar a principal contribuição do trabalho. Caso o aluno e orientador desejem, o título do capítulo pode ser alterado para referenciar diretamente a contribuição (por exemplo, PIS: Plataforma para Integração de Serviços; Um Sistema para Controle de Processos da UFES, Solução de Otimização para Carregamento de Contêineres; etc.)
 
 % O capítulo deve ser estruturado em seções de forma a apresentar de forma clara e com todas as informações necessárias, a contribuição do trabalho. Por exemplo, caso a contribuição produzida seja um sistema de informação, espera-se que sejam apresentados seus requisitos, funcionalidades, modelos (p.ex., modelo estrutural, modelo da arquitetura, etc.) e telas do sistema. Caso seja uma plataforma, espera-se que a plataforma como um todo seja apresentada e que seus componentes sejam descritos sejam apropriadamente.
 
-Este capítulo tem o propósito de detalhar o escopo da Super Labes World, aplicando os conceitos de engenharia de software para identificar seus requisitos para então construir modelos de casos de uso e diagramas de classe. Na seção \ref{sec:descricao-do-cenario} fazemos uma breve explicação do cenário que foi incentivo para a criação desse trabalho, a seção \ref{sec:escopo} descreve o o intuito desse trabalho, na seção\ref{sec:jogo} é ,  , na seção \ref{sec:usuarios} é descrito quem são os possíveis usuários desse software \ref{sec:diagrama-de-classes}
+Este capítulo tem o propósito de detalhar o escopo do jogo Super Labes World, aplicando os conceitos de engenharia de software para então identificar seus requisitos e finalmente criar o diagramas de classe. Na seção \ref{sec:descricao-do-cenario} fazemos uma breve explicação do cenário que foi incentivo para a criação desse trabalho, a seção \ref{sec:escopo} descreve o intuito desse trabalho, na seção \ref{sec:jogo} é descrito o design do jogo e também os possíveis usuários desse software, na seção \ref{sec:requisitos-do-jogo} é feito o levantamento de requisitos do jogo e com tudo isso em mãos, foi possível criar o diagrama de classes seção \ref{sec:diagrama-de-classes}.
+
+
 \section{Descrição do Cenário}
 \label{sec:descricao-do-cenario}
-Alice uma estudante hipotética recém-chegada ao curso de ciência da computação na UFES sonhava em participar de projetos práticos que envolvessem programação e inovação e que fizessem diferença na sociedade. Com isso em mente, ela decide se candidatar ao LabES, um laboratório de extensão da UFES. Pouco tempo após preencher o formulário no site ela é contactada pela equipe responsável pelo embarque e rapidamente entra em um dos projetos.
+Alice, uma estudante hipotética recém-chegada ao curso de ciência da computação na UFES, sonhava em participar de projetos práticos que envolvessem programação e inovação e que fizessem diferença na sociedade. Com isso em mente, ela decide se candidatar ao LabES, um laboratório de extensão da UFES. Pouco tempo após preencher o formulário no site ela é contactada pela equipe responsável pelo embarque e rapidamente entra em um dos projetos.
 
-Ao começar no projeto ela percebe que é a mais nova dentre os membros e não entende alguns termos utilizados e ferramentas utilizados entre eles. Bob que é o membro sênior,  junto aos demais estudantes estão repletos de atividades e não consegue dar atenção inicial necessária a Alice. Mas ela é uma estudante dedicada e persegue os seus objetivos, então ela elaborou um plano de estudos e o aplicava durante as noites. Após algumas semanas após começou a dar bons resultados no projeto.
+Ao começar no projeto ela percebe que é a mais nova dentre os membros e não entende alguns termos e ferramentas utilizados entre eles; ela também percebe que há um grande volume de informações iniciais sobre o laboratório e também sobre o projeto. Pat, a professora coordenadora, Bob, membro sênior, junto aos demais estudantes do projeto, estão repletos de atividades e não conseguem dar atenção inicial necessária para ajudar Alice. Contudo, Alice é uma estudante dedicada e persegue os seus objetivos; diante dos desafios, ela elaborou um plano de estudos e o aplicava durante as noites. Após semanas de estudos, Alice começou a dar bons resultados no projeto.
 
-Nesse processo que ocorre diariamente em vários laboratórios da UFES alguns dos estudantes desistem no meio do caminho. Nem todos os estudantes são autodidata e persistem como Alice, alguns desanimam no meio do caminho. Esse é um problema complexo que não existe um único culpado nem um único ponto a ser resolvido. 
+Situações similares a esta ocorrem diariamente em vários laboratórios da UFES. Alguns estudantes, como Alice, conseguem se organizar de forma autônoma e, depois de algum tempo, passam a produzir para o projeto. Outros estudantes não têm a mesma resiliência e persistência de Alice e acabam desistindo no meio do caminho; ou então levam um tempo demasiado para conseguirem produzir, o que pode gerar uma certa desmotivação. Trata-se de um problema complexo, no qual que não existe um único culpado e nem um único ponto a ser resolvido. 
 
 \section{Escopo}
 \label{sec:escopo}
-Diante da situação descrita na seção \ref{sec:descricao-do-cenario} surge a ideia de ciar o Super Labes World um RPG desktop desenvolvido com o intuito de ser uma ferramenta lúdica e didática, que possa ser utilizada no auxilio de estudantes para testar, reforçar e adquirir novos conhecimentos. Em sua versão inicial focada aos estudantes do LabES, porém que possa futuramente ser estendido para outros laboratórios e áreas da UFES.
+Diante da situação descrita na seção \ref{sec:descricao-do-cenario}, surge a ideia de criar o \textit{Super Labes World}, um jogo RPG \textit{desktop} desenvolvido com o intuito de ser uma ferramenta lúdica e didática, que possa ser utilizada para apoiar os estudantes em processos de ``embarque'' em laboratórios. A ideia é que o jogo possa ser usado para testar, reforçar e adquirir novos conhecimentos. Em sua versão inicial, o jogo foca em estudantes do LabES e, portanto, considera questões inerentes ao laboratório; porém, futuramente, com as devidas alterações/extensões, o jogo pode ser considerado para outros laboratórios e áreas da UFES.
 
 \section{O Jogo}
 \label{sec:jogo}
-A ambientação do \textit{game} se passa na UFES, o personagem começa acordando em sua casa e lembra que que tem que realizar um teste para entrar no SigAMAES. Durante a exploração inicial e interação com personagens, o jogador é dirigido ao ct7, onde estão localizados os professores e assim pode "batalhar" com os professores, que são os chefes a serem vencidos. A batalha é no estilo perguntas e respostas sendo que o jogador tem quatro opções para escolher. O tema das questões depende de cada professor, que são mestres em disciplinas específicas.
-\begin{itemize}
-    \item \textbf{Professor Vitor: }contém perguntas relacionadas a área de programação em java e conceitos de docker;
-    \item \textbf{Professor Monalessa: }contém questões atreladas a git, gitlab e gitflow;
-    \item \textbf{Professor Patrícia: } contém as questões que vão de encontro a metodologia do LabES
-\end{itemize}
-Ao final da batalha caso o jogador vença, o professor entrega sua chave, representando a sua aprovação nesta disciplina. Somando as três chaves o jogador pode finalmente ter acesso ao LabES.
-Caso o jogador erre mais do que 30\% das perguntas a batalha é finalizada, e o professor o instrui a utilizar o computador. 
 
-O computador é uma mecânica do jogo que pode ser acessada a partir dos mapas ''sala do professor'' e ''labgrad''.  Essa interface contém os \textit{links} para materiais de estudos abordados nas questões que o jogador errou. Ao clicar nesse \textit{link} ele será redirecionado a esse conteúdo onde o aluno poderá aprender e tentar passar de nível de novo.
+O jogo começa com o personagem acordando em sua casa e lembrando que precisa realizar um teste para entrar no projeto SigAMAES do LabES. Após este primeiro momento, a ambientação do jogo se passa na UFES. Durante a exploração inicial e interação com personagens, o jogador é dirigido ao prédio CT7, onde estão localizados o laboratório e os professores e, assim, pode começar a ``batalhar'' com alguns dos professores, que são os chefes a serem vencidos. A batalha é no estilo perguntas e respostas sendo que o jogador tem quatro opções para escolher. O tema das questões depende de cada professor, que são mestres em disciplinas específicas. Alguns exemplos de conteúdo de batalhas:
+
+\begin{itemize}
+    \item \textbf{Professor Vitor: }contém perguntas relacionadas a área de programação em java e conceitos de \textit{docker};
+    \item \textbf{Professora Monalessa: }contém questões relacionadas a git, gitlab e gitflow;
+    \item \textbf{Professora Patrícia: } contém as questões sobre a metodologia do LabES.
+\end{itemize}
+
+Ao final da batalha, caso o jogador vença, o professor entrega sua chave, representando a sua aprovação nesta disciplina. Somando as três chaves, o jogador pode finalmente ter acesso ao LabES. Caso o jogador erre mais do que 30\% das perguntas, a batalha é finalizada e o professor o instrui a utilizar o \textit{computador}. O \textit{computador} é uma mecânica do jogo que pode ser acessada a partir dos mapas ``sala do professor'' e ``labgrad'' e contém os \textit{links} para materiais de estudos abordados nas questões que o jogador errou. Ao clicar nesse \textit{link}, o jogador será redirecionado a esse conteúdo para estudar, aprender e tentar passar de nível novamente.
+
 \subsection{Usuários}
 \label{sec:usuarios}
-O Super Labes World é uma versão inicial de um jogo que tem potencial de ser muito extensível, durante a elaboração do projeto foram identificados três potenciais usuários que podem ser usuário desse trabalho.
+O Super Labes World é uma versão inicial de um jogo que tem potencial de ser extensível. Foram identificados três potenciais usuários deste trabalho:
 
 \begin{enumerate}
-    \item \textbf{Estudantes da UFES que desejam iniciar LabES:} O principal usuário do Super Labes World são estudantes da UFES que desejam iniciar ou são iniciantes no LabES, toda a história do jogo, musicas, efeitos sonoros, interface, items, questões, diálogos de personagens e personagens foram criados com isso em mente, de forma que o jogador possa se identificar e manter-se engajado no game. 
+    \item \textbf{Estudantes da UFES que desejam iniciar no LabES:} O principal usuário do Super Labes World são estudantes da UFES que desejam iniciar ou são iniciantes no LabES. Toda a história, músicas, efeitos sonoros, interface, itens, questões, diálogos de personagens e personagens foram criados com isso em mente, de forma que o jogador possa se identificar e manter-se engajado no \textit{game}. 
     \item \textbf{Professores:} Um outro possível usuário do jogo são professores que podem alterar as perguntas e recriar o jogo, para diferentes propósitos. 
     \item \textbf{Estudantes de computação:} O jogo pode ser interessante para qualquer estudante de computação, uma vez que trata de questões da área.
 \end{enumerate}
 
 \section{Requisitos do Jogo}
 \label{sec:requisitos-do-jogo}
-A partir do escopo do projeto apresentado na seção \ref{sec:escopo}, os requisitos identificados foram organizados em tabelas. A tabela \ref{tbl-requisitos-funcionais} apresentada os requisitos funcionais da aplicação, na tabela \ref{tbl-requisitos-de-dominio} os requisitos de domínio.
+A partir do escopo do projeto apresentado na seção \ref{sec:escopo}, os requisitos identificados foram organizados em tabelas. A tabela \ref{tbl-requisitos-funcionais} apresentada os requisitos funcionais e, na tabela \ref{tbl-requisitos-de-dominio}, os requisitos de domínio.
 
 Um dos principais indicadores de sucesso de um sistema de software é o nível de atendimento aos requisitos para os quais foi projetado. Os requisitos de um sistema de software abrangem as descrições das funcionalidades que o sistema deve prover, e das restrições que devem devem ser atendidas. Em essência, os requisitos definem o que o sistema deve fazer e as
 circunstâncias sob as quais deve operar. \cite{sommervilleengenharia}
 
-Requisitos funcionais definem os serviços e tarefas que o sistema deve prover. Eles descrevem as funcionalidades específicas do software. Requisitos de domínio (ou regras de negócio) são
-provenientes do domínio de aplicação do sistema e expressam características e restrições próprias desse contexto. Eles são baseados no negócio que o sistema visa atender, podendo limitar requisitos funcionais já definidos ou estabelecer como cálculos específicos devem ser realizados, refletindo fundamentos do domínio de aplicação. \cite{sommervilleengenharia}.
+Requisitos funcionais definem os serviços e tarefas que o sistema deve prover. Eles descrevem as funcionalidades específicas do software. Requisitos de domínio (ou regras de negócio) são provenientes do domínio de aplicação do sistema e expressam características e restrições próprias desse contexto. Eles são baseados no negócio que o sistema visa atender, podendo limitar requisitos funcionais já definidos ou estabelecer como cálculos específicos devem ser realizados, refletindo fundamentos do domínio de aplicação. \cite{sommervilleengenharia}.
 
  
 \begin{table}[h!]
@@ -112,8 +114,13 @@ provenientes do domínio de aplicação do sistema e expressam características 
 % tabela com as classes
 Um Diagrama de classes UML (\textit{Unified Modeling Language}) Linguagem de Modelagem Unificada é uma notação gráfica para modelagem de software. Essa linguagem define um conjunto de diagramas para documentar e ajudar no design de sistemas de software, particularmente sistemas orientados a objetos \cite{engsoftmoderna}. Esse tipo de modelagem e muito útil durante todo o desenvolvimento do sistema, porque auxilia os desenvolvedores a estruturar o sistema, identificar requisitos e remover os que não forem realmente necessários e ajudando na comunicação entre a equipe.
 
-Para detalhar melhor cada uma das classes apresentadas, no diagrama \ref{fig:diagrama-de-classes-uml} foi elaborada o diagrama de classes UML afim de representar modelos de dados para sistemas de devido software e assim compreender de forma mais ampla a visão geral do trabalho. O resultado pode ser visualizado a seguir na figura \ref{fig:diagrama-de-classes-uml}
-seguir. 
+A Figura \ref{fig:diagrama-de-classes-uml} apresenta o diagrama de classes UML elaborado para representar os elementos utilizados na implementação do jogo. 
+
+% escreva aqui um texto inicial explicando o diagrama, para o leitor conseguir começar a "leitura" do seu diagrama pelo lugar certo. POr exemplo: as classes centrais do diagrama são Game e Battle, que representam isso e aquilo. Um Game pode conter 0 ou mais batalhas; já uma batalha sempre pertence a um determinado jogo. Já uma Entidade representa <alguma coisa>, que pode ser isso ou aquilo... 
+
+A classe central do jogo é \textit{Game}, é nela que está presente o \textit{game loop} e a instanciação para todas as demais classes. \textit{Battle} é a classe inclui a principal mecânica do jogo, as batalhas, podendo um jogo conter 0 ou n batalhas, o mesmo vale para as classes \textit{Character}, \textit{Sprite}, \textit{ChooseDialog} e \textit{DialogSprite} que também são possíveis várias instancias no mesmo jogo. As classes \textit{Computer}, \textit{Inventory}, \textit{AllSprites}, \textit{Timer}, \textit{Dialog} e \textit{Player} são apenas permitidas existirem uma por jogo. As demais classes serão um pouco mais detalhadas a seguir.
+
+
 \begin{landscape}
 \begin{figure}[h!]
     \centering
@@ -123,7 +130,7 @@ seguir.
 \end{figure}
 \end{landscape}
 
-Para especificar o diagrama anterior, foi criada uma tabela descrevendo as classes e sua função principal que podem ser vistas nas tabelas \ref{tbl-especificacao-classes-1}, \ref{tbl-especificacao-classes-2} e \ref{tbl-especificacao-classes-3}.
+As tabelas \ref{tbl-especificacao-classes-1} e \ref{tbl-especificacao-classes-2}  apresentam mais informações sobre as classes propostas no diagrama.
 
 \begin{table}[h!]
 	\caption{Tabela especificando as classes do Super Labes World.}
@@ -134,15 +141,15 @@ Para especificar o diagrama anterior, foi criada uma tabela descrevendo as class
 		\begin{tabular}{ | p{35mm} | p{100mm} |}\hline \rowcolor{MidnightBlue}
 			\centering{\textbf{Classe}} & \textbf{Descrição}  \\\hline		
 			\centering{\textit{AllSprites}} & Classe que representa a câmera do jogo. \\\hline
-			\centering{\textit{Entity}} & Classe Pai que contém informações comuns a todas as entidades do jogo como frames, \textit{hitbox} e métodos relacionados a animação.   \\\hline
-			\centering{\textit{Player}} & Classe filha de \textit{Entity}, configura atributos inerentes ao jogador como movimentação, colisão, e modificações de seus atributos.  \\\hline
-			\centering{\textit{Character}} & Classe filha de \textit{Entity} sua principal característica é a obtenção de diálogo relativo ao personagem.\\\hline
-			\centering{\textit{Battle}} & Classe que contém todas as informações que fazem parte da batalha do jogo, destacando \textit{questions} um dicionário com as questões relativas ao personagem e \textit{test} uma lista que mantém um vetor de 0 para respostas erradas e 1 para respostas corretas.\\\hline
-			\centering{\textit{Computer}} & Classe responsável pela tela de visualização do computador, sua maior peculiaridade é o atributo \textit{computer\_links} que mantém um \textit{array} de \textit{Items} que serão mostrados ao entrar nessa tela. \\\hline
-			\centering{\textit{Link}} & Mantém informações que são utilizadas na interface \textit{Computer}. Sendo elas título, descrição, url, cor e icon que deve ser uma imagem 108 x 108 \\\hline
-			\centering{\textit{Game}} & Classe principal do jogo, contém o main loop. Também é responsável por carregar e armazenar todos os \textit{assets} e capturar o \textit{input} do jogador. \\\hline
-			\centering{\textit{Inventory}} & Classe utilizada para representação da interface de inventário do jogador. \\\hline
-			\centering{Item} & Classe que mantém informações dos items, nome, descrição e ícone, o tamanho ícone deve ser 93 x 93 \\\hline
+			\centering{\textit{Entity}} & Classe Pai usada para representar os personagens do jogo. Contém informações comuns a todas as entidades do jogo como frames, \textit{hitbox} e métodos relacionados a animação.   \\\hline
+			\centering{\textit{Player}} & Classe filha de \textit{Entity}, representa o personagem que o jogador controla. Nele configuram-se atributos inerentes ao jogador, como a movimentação, colisão.  \\\hline
+			\centering{\textit{Character}} & Classe filha de \textit{Entity} usada para representar os NPC's (Non Playable Character) ''personagens não jogáveis'' do jogo. Sua principal característica é o método para obtenção de diálogo relativo ao personagem.\\\hline
+			\centering{\textit{Battle}} & Classe que representa a batalha do jogo. Contém todas as informações que fazem parte da batalha do jogo, destacando \textit{questions}, um dicionário com as questões relativas ao personagem e \textit{test}, uma lista que mantém um vetor de 0 para respostas erradas e 1 para respostas corretas.\\\hline
+			\centering{\textit{Computer}} & Classe que representa a tela de visualização do computador do jogo. Contém o atributo \textit{computer\_links} que mantém um \textit{array} de \textit{Items} que serão mostrados ao entrar nessa tela. \\\hline
+			\centering{\textit{Link}} & Representa um \textit{Link} do \textit{Computer}. Mantém informações que são utilizadas na interface \textit{Computer}. Sendo elas título, descrição, url, cor e icon que deve ser uma imagem 108 x 108 \\\hline
+			\centering{\textit{Game}} & Classe que representa o jogo. Essa classe  mantém o \textit{main loop} e é responsável por carregar e armazenar todos os \textit{assets} e capturar o \textit{input} do jogador. \\\hline
+			\centering{\textit{Inventory}} & Classe para representação da interface de inventário do jogador. \\\hline
+			\centering{Item} & Classe que representa um Item do \textit{Inventory}. Mantém as informações dos items como nome, descrição e ícone, o tamanho ícone, que deve ser 93 x 93 \\\hline
 		\end{tabular}
 	\end{small}
 \end{table}
@@ -155,18 +162,18 @@ Para especificar o diagrama anterior, foi criada uma tabela descrevendo as class
 	\begin{small}
 		\begin{tabular}{ | p{35mm} | p{100mm} |}\hline \rowcolor{MidnightBlue}
 			  \centering{\textbf{Classe}} & \textbf{Descrição}  \\\hline
-			\centering{\textit{DialogSprite}} & Classe que realiza a renderização do diálogo na tela. \\\hline
-			\centering{\textit{CollisionSprite}} & Classe filha de \textit{Sprite}, sua singularidade é ter uma \textit{hitbox}\\\hline
-			\centering{\textit{CollidableSprite}} & Classe filha de \textit{Sprite}, similar a \textit{CollisionSprite} porém a colisão dos \textit{sprites} nessa classe é menor.  \\\hline
-			\centering{\textit{InteractiveSprite}} & Classe filha de \textit{Sprite}, contém uma variável \textit{item\_id} que pode ser programada para diversos propósitos a partir de uma interação do jogador. \\\hline
-			\centering{\textit{CollidableDialogSprite}} & Classe que herda \textit{Sprite}, nessa não tem uma imagem associada e mantém uma mensagem  que é disparada em colisões. \\\hline
-			\centering{\textit{AnimatedSprite}} & Classe filha de \textit{Sprite} mantém todos os \textit{sprites} que são animados automaticamente  \\\hline
-			\centering{\textit{TransitionSprite}} & Classe que herda \textit{Sprite}, essa guarda informações de origem e destino para poder realizar as transições entre mapas. \\\hline
+			\centering{\textit{DialogSprite}} & Classe que representa o dialogo do jogo. Ela realiza a renderização do diálogo na tela. \\\hline
+			\centering{\textit{CollisionSprite}} & Classe filha de \textit{Sprite}, representa um sprite que pode ser colidido. Sua singularidade é ter uma \textit{hitbox}\\\hline
+			\centering{\textit{CollidableSprite}} & Classe filha de \textit{Sprite}, representa um sprite que pode ser colidido, similarmente a \textit{CollisionSprite} porém a área de colisão dos \textit{sprites} nessa classe é menor.  \\\hline
+			\centering{\textit{InteractiveSprite}} & Classe filha de \textit{Sprite}, representa um sprite interativo. Contém uma variável \textit{item\_id} que pode ser programada para diversos propósitos a partir de uma interação do jogador. \\\hline
+			\centering{\textit{CollidableDialogSprite}} & Classe que herda \textit{Sprite}, usada para representar um diálogo caso jogador colide com determinadas posições do mapa. Essa classe não tem uma imagem associada e mantém uma mensagem que é disparada em colisões. \\\hline
+			\centering{\textit{AnimatedSprite}} & Classe filha de \textit{Sprite}. Representa os \textit{Sprites} que animados do jogo. mantém um \textit{array} de \textit{frames} \\\hline
+			\centering{\textit{TransitionSprite}} & Classe que herda \textit{Sprite}, representam os \textit{sprites} que levam para outros mapas. Guardam informações de origem e destino para poder realizar as transições entre mapas. \\\hline
 			\centering{\textit{ChooseDialog}} & Classe que representa a interface de escolha do jogador antes de entrar em uma batalha. \\\hline
-			\centering{\textit{Dialog}} & Classe responsável por criar os diálogos de todos os personagens do jogo. \\\hline
-			\centering{\textit{Sprite}} & Classe Pai de todos os sprites do jogo, suas informações são imagem, posição e camada. \\\hline
-			\centering{\textit{Timer}} & Classe que é responsável por realizar os controles de tempo do jogo. \\\hline
-			  \centering{\textbf{Classe}} & \textbf{Descrição}  \\\hline
+			\centering{\textit{Dialog}} & Classe pai que representa todos os diálogos do jogo. \\\hline
+			\centering{\textit{Sprite}} & Classe Pai usada para representar todos os sprites do jogo. Suas informações são imagem, posição e camada. \\\hline
+			\centering{\textit{Timer}} & Classe que representa o tempo no jogo. Responsável por realizar os controles de tempo do jogo. \\\hline
+			  % \centering{\textbf{Classe}} & \textbf{Descrição}  \\\hline
 			\centering{\textit{Home}} & Classe que representa a interface do menu inicial. \\\hline
 			\centering{\textit{GameControls}} & Classe que representa a interface de controles do jogo, que pode ser acessada a partir da tela inicial. \\\hline
 			\centering{\textit{Credits}} & Classe que representa a interface da tela de créditos que apenas pode ser acessada a partir da tela inicial.\\\hline
@@ -177,7 +184,7 @@ Para especificar o diagrama anterior, foi criada uma tabela descrevendo as class
 \clearpage
 \section{Conclusões do Capítulo}
 \label{sec:conclusoes-do-capitulo-3}
-Este capítulo apresentou diversos aspectos essenciais para o desenvolvimento do sistema. Inicialmente, foi estabelecido o minimundo que foi o motivador para criação desse trabalho, nele é fornecido uma descrição clara e objetiva do contexto em que o sistema está inserido. Essa definição facilita a compreensão dos desafios e metas a serem atingidos. Com isso foi possível definir o escopo que esse trabalho se propõe a atingir, bem como a história do jogo e as suas principais mecânicas.  
+Este capítulo apresentou diversos aspectos essenciais para o desenvolvimento do jogo proposto. Inicialmente, foi estabelecido um cenário que foi o motivador para criação desse trabalho, nele é fornecido uma descrição objetiva do contexto em que o jogo está inserido. Essa definição facilita a compreensão dos desafios e metas a serem atingidos. Com isso foi possível definir o escopo que esse trabalho se propõe a atingir, bem como a história do jogo, e as suas principais mecânicas, e com isso foi feito o levantamento de requisitos.  
 
-Por fim foi apresentado o diagrama de classes, que desempenha um papel essencial na definição da estrutura do sistema. Com esse diagrama, foram identificadas as classes que representam os elementos do sistema e as relações entre elas. Esse diagrama junto a tabela de especificação de classes ajudaram na representação visual e facilitaram a compreensão das entidades do sistema e suas interações, auxiliando no planejamento para a implementação do sistema.
+Por fim, foi apresentado o diagrama de classes, que desempenha um papel essencial na definição da estrutura do sistema. Com esse diagrama, foram identificadas as classes que representam os elementos do sistema e as relações entre elas. Esse diagrama junto a tabela de especificação de classes ajudaram na representação visual e facilitaram a compreensão das entidades do sistema e suas interações, auxiliando no planejamento para a implementação do sistema.
 
