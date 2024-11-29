@@ -1,0 +1,11 @@
+    def update(self, dt):
+        self.battle_timer.update()
+        self.check_end_battle()
+        self.input()
+        self.display_surface.blit(self.battle_bg)
+        self.draw_rectangles()
+        self.draw_questions()
+        self.draw_answers()
+        self.draw_character_info()
+        self.draw_characters(dt)
+        self.draw_dialog(dt)
