@@ -4,21 +4,22 @@
 Projeto de conclusão de curso de Israel dos Santos Candeias 
 <img src="/gifs/player1.gif" width="50">
 
-# Rodando o programa (Método 1) <img src="/gifs/angry_vitor.gif" width="50">
-## Instalando Dependências 
+# 1 - Rodando o programa (Método 1) <img src="/gifs/angry_vitor.gif" width="50">
+## 1.1 - Instalando Dependências 
 ```pip install pygame-ce```
 ```pip install pytmx```
 
 
 
-## Rodando localmente <img src="/gifs/angry_patricia.gif" width="50">
+## 1.2 - Rodando localmente <img src="/gifs/angry_patricia.gif" width="50">
 ```python main.py```
 
-# Rodando o programa (Método 2)  <img src="/gifs/angry_monalessa.gif" width="50">
-Execute o arquivo [Super Labes World](<Super Labes World.lnk>)
+# 2 - Rodando o programa (Método 2)  <img src="/gifs/angry_monalessa.gif" width="50">
+## 2.1 Executando o arquivo .exe
+<img src="\data\tilesets\israel-collection/icon.ico" width="50"> [Super Labes World](<Super Labes World.lnk>)
 
-# Creditos Adicionais  <img src="/gifs/happy_vitor.gif" width="50"> <img src="/gifs/happy_patricia.gif" width="50"> <img src="/gifs/happy_monalessa.gif" width="50">
-## Sounds
+# 3 - Creditos Adicionais  <img src="/gifs/happy_vitor.gif" width="50"> <img src="/gifs/happy_patricia.gif" width="50"> <img src="/gifs/happy_monalessa.gif" width="50">
+## 3.1 Sounds
 01 - Battle          -> Forgotten Temple B2F (Dungeon Theme) - CABAL Online OST \
 02 - CT7             -> Stardew Valley OST - Luau Festival \
 03 - CT9             -> Stardew Valley OST - Stardew Valley Overture \
@@ -32,7 +33,7 @@ Execute o arquivo [Super Labes World](<Super Labes World.lnk>)
 11 - Sala Vitor      -> Stardew Valley OST - A Glimpse Of The Other World (Wizard's Theme) \
 12 - Ufes            -> Stardew Valley OST - Dance Of The Moonlight Jellies \
 
-## Sprites/Tiles
+## 3.2 Sprites/Tilesets
 * https://penzilla.itch.io/top-down-retro-interior
 * https://scarloxy.itch.io/mpwsp01
 * https://livingtheindie.itch.io/pixel-cyberpunk-interior
