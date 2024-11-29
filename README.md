@@ -1,12 +1,16 @@
 # Super Labes World
 Projeto de conclusão de curso de Israel dos Santos Candeias
 
+# Rodando o programa (Método 1)
 ## Instalando Dependências
 ```pip install pygame-ce```
 ```pip install pytmx```
 
 ## Para Rodar Localmente
 ```python main.py```
+
+# Rodando o programa (Método 2)
+Execute o arquivo [Super Labes World](<Super Labes World.lnk>)
 
 # Creditos Adicionais
 ## Sounds
