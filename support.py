@@ -90,7 +90,6 @@ def check_interaction(radius, entity, target, tolerance = 30):
 	relation = vector(target.rect.center) - vector(entity.rect.center)
 	return True if relation.length() < radius else False
 
-
 def check_battle(character):
 	return character.questions
 

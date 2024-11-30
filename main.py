@@ -29,7 +29,7 @@ class Game:
         self.collision_sprites   = pygame.sprite.Group()
         self.character_sprites   = pygame.sprite.Group()
         self.transition_sprites  = pygame.sprite.Group()
-        self.dialogs_sprites     = pygame.sprite.Group()
+        self.collidable_dialogs_sprites = pygame.sprite.Group()
         self.interaction_sprites = pygame.sprite.Group()
 
         # transition
@@ -140,7 +140,7 @@ class Game:
     def setup(self,tmx_map, dest_map, src_map):
         self.current_map = dest_map
         # clean all sprite groups
-        for group in (self.all_sprites, self.collision_sprites, self.character_sprites, self.transition_sprites, self.dialogs_sprites, self.interaction_sprites):
+        for group in (self.all_sprites, self.collision_sprites, self.character_sprites, self.transition_sprites, self.collidable_dialogs_sprites, self.interaction_sprites):
             group.empty()
         # map theme
         self.audios[src_map].stop()
@@ -212,7 +212,7 @@ class Game:
             # dialogos de colisão
             try:
                 for obj in tmx_map.get_layer_by_name('Dialogs'):
-                    CollidableDialogSprite((obj.x, obj.y), pygame.Surface((obj.width, obj.height)), (self.dialogs_sprites), obj.properties['message'])
+                    CollidableDialogSprite((obj.x, obj.y), pygame.Surface((obj.width, obj.height)), (self.collidable_dialogs_sprites), obj.properties['message'])
             except ValueError as ve:
                pass
 
@@ -259,82 +259,82 @@ class Game:
             if keys[pygame.K_i]:
                 self.inventory_open = not self.inventory_open
                 self.player.blocked = not self.player.blocked
-                # emitir som
+                self.sounds['index_less'].play()
             # fechar sobreposições
             if keys[pygame.K_ESCAPE]:
                 self.inventory_open = False
                 self.computer_open = False
                 self.player.blocked = False
+                self.sounds['index_plus'].play()
             if keys[pygame.K_SPACE] and not self.dialog_open:
-                # interações com personagens
-                for character in self.character_sprites:
-                    if check_connections(100, self.player, character):
-                        character.change_facing_direction(self.player.rect.center)
-                        self.create_dialog(character)
-
+                self.check_dialog()
                 # interações com objetos
                 for sprite in self.interaction_sprites:
                     if check_interaction(150, self.player, sprite):
-                        if sprite.item_id == 'computer':
-                            self.computer_open = not self.computer_open
-                            self.player.blocked = not self.player.blocked
-                            break
-                            # emitir som
-                        if sprite.item_id == 'coffe':
-                            self.add_item(Item('4'))
-                            self.sounds['get_item'].play()
-                            sprite.kill()
-                            break
-                        if sprite.item_id == 'abajour1':
-                            sprite.item_id = 'abajour2'
-                            sprite.image = self.interface_frames['interactive_objects']['abajour2']
-                            break
-                        if sprite.item_id == 'abajour2':
-                            sprite.item_id = 'abajour1'
-                            sprite.image = self.interface_frames['interactive_objects']['abajour1']
-                            break
-                        if sprite.item_id == 'geladeira1':
-                            sprite.item_id = 'geladeira2'
-                            sprite.image = self.interface_frames['interactive_objects']['geladeira2']
-                            self.add_item(Item('4'))
-                            self.sounds['get_item'].play()
-                            break
-                        if sprite.item_id == 'geladeira2':
-                            sprite.item_id = 'geladeira1'
-                            sprite.image = self.interface_frames['interactive_objects']['geladeira1']
-                            break
-                        if sprite.item_id == 'dragon':
-                            self.create_dialog(self.player, "acho melhor eu não acorda-lo", False)
-                        if sprite.item_id == 'placa_prograd':
-                            self.create_dialog(self.player, "A placa diz: 'Prograd - Pró-Reitoria de Graduação'...\n\n o labes deve estar mais a frente", False)
-                        if sprite.item_id == 'placa_ic1':
-                            self.create_dialog(self.player, "A placa diz: 'IC1 - Centro de Ciências Exatas'...\n\no labes deve estar mais a frente", False)
-                        if sprite.item_id == 'placa_ic2':
-                            self.create_dialog(self.player, "A placa diz: 'IC2 - CCHN | Centro de Ciências Humanas e Naturais'...\n\no labes deve estar mais a frente", False)
-                        if sprite.item_id == 'placa_ic3':
-                            self.create_dialog(self.player, "A placa diz: 'IC3 - CCHN | Centro de Ciências Humanas e Naturais'...\n\no labes deve estar mais a frente", False)
-                        if sprite.item_id == 'placa_ic4':
-                            self.create_dialog(self.player, "A placa diz: 'IC4 - CE | Centro de Educação'...\n\nsinto que estou próximo", False)
-                        if sprite.item_id == 'placa_ct3':
-                            self.create_dialog(self.player, "A placa diz: 'CT3 - Centro Tecnológico'...\n\nessas numerações de ct não fazem sentido algum!! ", False)
-                        if sprite.item_id == 'placa_ct7':
-                            self.create_dialog(self.player, "A placa diz: 'CT7 - Centro Tecnológico'...\n\nFinalmente cheguei! ", False)
-                        if sprite.item_id == 'placa_ct9':
-                            self.create_dialog(self.player, "A placa diz: 'CT9 - Centro Tecnológico'...\n\ntalvez eu deva estudar aqui antes do meu teste", False)
-                        if sprite.item_id == 'placa_ct10':
-                            self.create_dialog(self.player, "A placa diz: 'CT10 - Centro Tecnológico'...\n\nopa o ct9 é bem aqui", False)
-                        if sprite.item_id == 'placa_ct12':
-                            self.create_dialog(self.player, "A placa diz: 'CT12 - Centro Tecnológico'...\n\no ct7 deve ser logo acima ", False)
-                        if sprite.item_id == 'placa_vire_esquerda':
-                            self.create_dialog(self.player, "A placa diz: CT7 e CT9 a esquerda'...\n\n...que coisa! parece que essas placas sabem pra onde eu quero ir ", False)
-                        if sprite.item_id == 'placa_cantina':
-                            self.create_dialog(self.player, "A placa diz: 'Cantina'...\n\n...hummm cheirinho de gordura ", False)
-                        if sprite.item_id == 'placa_ru':
-                            self.create_dialog(self.player, "A placa diz: Restaurante Universitário'...\n\n...poh bateu a fome... mas está fechado ", False)
-                        if sprite.item_id == 'placa_bc':
-                            self.create_dialog(self.player, "A placa diz: Biblioteca Central'...\n\n...eu até que estudaria... mas está fechado ", False)
-                        if sprite.item_id == 'placa_lake':
-                            self.create_dialog(self.player, "A placa diz: Lagoa da Ufes Reza a lenda que sua água é radioativa'...\n\n...'-' ", False)
+                        self.handle_interaction(sprite)
+
+    # verifica se o player está interagindo com algum personagem
+    def check_dialog(self):
+        for character in self.character_sprites:
+            if check_connections(100, self.player, character):
+                character.change_facing_direction(self.player.rect.center)
+                self.create_dialog(character)
+
+    def handle_interaction(self, sprite):
+        if sprite.item_id == 'computer':
+            self.computer_open = not self.computer_open
+            self.player.blocked = not self.player.blocked
+            self.sounds['select'].play()
+        if sprite.item_id == 'coffe':
+            self.add_item(Item('4'))
+            self.sounds['get_item'].play()
+            sprite.kill()
+        if sprite.item_id == 'abajour1':
+            sprite.item_id = 'abajour2'
+            sprite.image = self.interface_frames['interactive_objects']['abajour2']
+        if sprite.item_id == 'abajour2':
+            sprite.item_id = 'abajour1'
+            sprite.image = self.interface_frames['interactive_objects']['abajour1']
+        if sprite.item_id == 'geladeira1':
+            sprite.item_id = 'geladeira2'
+            sprite.image = self.interface_frames['interactive_objects']['geladeira2']
+            self.add_item(Item('4'))
+            self.sounds['get_item'].play()
+        if sprite.item_id == 'geladeira2':
+            sprite.item_id = 'geladeira1'
+            sprite.image = self.interface_frames['interactive_objects']['geladeira1']
+        if sprite.item_id == 'dragon':
+            self.create_dialog(self.player, "acho melhor eu não acorda-lo", False)
+        if sprite.item_id == 'placa_prograd':
+            self.create_dialog(self.player, "A placa diz: 'Prograd - Pró-Reitoria de Graduação'...\n\n o labes deve estar mais a frente", False)
+        if sprite.item_id == 'placa_ic1':
+            self.create_dialog(self.player, "A placa diz: 'IC1 - Centro de Ciências Exatas'...\n\no labes deve estar mais a frente", False)
+        if sprite.item_id == 'placa_ic2':
+            self.create_dialog(self.player, "A placa diz: 'IC2 - CCHN | Centro de Ciências Humanas e Naturais'...\n\no labes deve estar mais a frente", False)
+        if sprite.item_id == 'placa_ic3':
+            self.create_dialog(self.player, "A placa diz: 'IC3 - CCHN | Centro de Ciências Humanas e Naturais'...\n\no labes deve estar mais a frente", False)
+        if sprite.item_id == 'placa_ic4':
+            self.create_dialog(self.player, "A placa diz: 'IC4 - CE | Centro de Educação'...\n\nsinto que estou próximo", False)
+        if sprite.item_id == 'placa_ct3':
+            self.create_dialog(self.player, "A placa diz: 'CT3 - Centro Tecnológico'...\n\nessas numerações de ct não fazem sentido algum!! ", False)
+        if sprite.item_id == 'placa_ct7':
+            self.create_dialog(self.player, "A placa diz: 'CT7 - Centro Tecnológico'...\n\nFinalmente cheguei! ", False)
+        if sprite.item_id == 'placa_ct9':
+            self.create_dialog(self.player, "A placa diz: 'CT9 - Centro Tecnológico'...\n\ntalvez eu deva estudar aqui antes do meu teste", False)
+        if sprite.item_id == 'placa_ct10':
+            self.create_dialog(self.player, "A placa diz: 'CT10 - Centro Tecnológico'...\n\nopa o ct9 é bem aqui", False)
+        if sprite.item_id == 'placa_ct12':
+            self.create_dialog(self.player, "A placa diz: 'CT12 - Centro Tecnológico'...\n\no ct7 deve ser logo acima ", False)
+        if sprite.item_id == 'placa_vire_esquerda':
+            self.create_dialog(self.player, "A placa diz: CT7 e CT9 a esquerda'...\n\n...que coisa! parece que essas placas sabem pra onde eu quero ir ", False)
+        if sprite.item_id == 'placa_cantina':
+            self.create_dialog(self.player, "A placa diz: 'Cantina'...\n\n...hummm cheirinho de gordura ", False)
+        if sprite.item_id == 'placa_ru':
+            self.create_dialog(self.player, "A placa diz: Restaurante Universitário'...\n\n...poh bateu a fome... mas está fechado ", False)
+        if sprite.item_id == 'placa_bc':
+            self.create_dialog(self.player, "A placa diz: Biblioteca Central'...\n\n...eu até que estudaria... mas está fechado ", False)
+        if sprite.item_id == 'placa_lake':
+            self.create_dialog(self.player, "A placa diz: Lagoa da Ufes Reza a lenda que sua água é radioativa'...\n\n...'-' ", False)
 
     def item_used(self):
         self.player.speed_boost(1.5)
@@ -435,8 +435,8 @@ class Game:
                 self.tint_mode = 'tint'
 
     # verifica se o player colidiu com uma caixa de dialogo
-    def check_dialog(self):
-        for sprite in self.dialogs_sprites:
+    def check_collidable_dialog(self):
+        for sprite in self.collidable_dialogs_sprites:
             if sprite.hitbox.colliderect(self.player.hitbox):
                 self.create_dialog(self.player, sprite.message)
                 sprite.kill()
@@ -477,7 +477,7 @@ class Game:
             # game logic
             self.input()
             self.check_transitions()
-            self.check_dialog()
+            self.check_collidable_dialog()
             self.all_sprites.update(dt)
 
             # drawing

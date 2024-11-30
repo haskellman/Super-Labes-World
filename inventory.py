@@ -89,11 +89,11 @@ class Inventory:
         if keys[pygame.K_LEFT] or keys[pygame.K_a]:
             self.index -= 1
             self.play_sound()
-        self.index = self.index % self.inventory_size # [LEN] voltar para o inicio
+        self.index = self.index % self.inventory_size
         if keys[pygame.K_SPACE]:
             if self.player_items[self.index] and self.player_items[self.index].name == 'cafe': # verificar se o item é utilizavel emitir um som
                 self.sounds['select'].play()
-                self.player_items[self.index] = {} # remove item
+                self.player_items[self.index] = {}
                 self.item_used()
 
     def play_sound(self):
