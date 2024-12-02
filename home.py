@@ -8,6 +8,7 @@ ITEMS_FRAMES = ("down", "left", "right", "up")
 class Home:
     def __init__(self, run_game, run_credits, run_game_controls):    
         self.initial_screen = pygame.display.set_mode((WINDOW_WIDTH, WINDOW_HEIGHT))
+        pygame.display.set_icon(pygame.image.load('icon.ico'))
         self.menu_frames = {'interface': import_folder_dict('.', 'graphics', 'interface') }
         self.fall_items = import_character(4, 4, '.', 'graphics', 'fall_objects', 'fall_objects')
         self.audios = audio_importer('.', 'audios')
