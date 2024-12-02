@@ -13,7 +13,7 @@ def run(self):
             # game logic
             self.input()
             self.check_transitions()
-            self.check_dialog()
+            self.check_collidable_dialog()
             self.all_sprites.update(dt)
 
             # drawing

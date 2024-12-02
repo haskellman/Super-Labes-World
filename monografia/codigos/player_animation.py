@@ -1,15 +1,8 @@
-def animate(self, dt):
-    self.frame_index += ANIMATION_SPEED * dt
-    self.image = self.frames[self.get_state()][int(self.frame_index % len(self.frames[self.get_state()]))]
-    
-def get_state(self):
-    moving = bool(self.direction)
-    if moving:
-        if self.direction.x != 0:
-            self.facing_direction = 'right' if self.direction.x > 0 else 'left'
-        if self.direction.y != 0:
-            self.facing_direction = 'down' if self.direction.y > 0 else 'up'
-    return f"{self.facing_direction}{'' if moving else '_idle'}" 
+def update(self,dt):
+    if not self.blocked:
+        self.input()
+        self.move(dt)
+    self.animate(dt)
 
 def input(self):
     keys = pygame.key.get_pressed()
@@ -32,10 +25,3 @@ def move(self, dt):
     self.rect.centery += self.direction.y * self.speed *dt
     self.hitbox.centery = self.rect.centery
     self.collisions('vertical')
-
-def update(self,dt):
-    self.y_sort = self.rect.centery
-    if not self.blocked:
-        self.input()
-        self.move(dt)
-    self.animate(dt)

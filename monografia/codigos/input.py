@@ -6,23 +6,16 @@ def input(self):
         if keys[pygame.K_i]:
             self.inventory_open = not self.inventory_open
             self.player.blocked = not self.player.blocked
-            # emitir som
+            self.sounds['index_less'].play()
         # fechar sobreposições
         if keys[pygame.K_ESCAPE]:
             self.inventory_open = False
             self.computer_open = False
             self.player.blocked = False
+            self.sounds['index_plus'].play()
         if keys[pygame.K_SPACE] and not self.dialog_open:
-            # interações com personagens
-            for character in self.character_sprites:
-                if check_connections(100, self.player, character):
-                    character.change_facing_direction(self.player.rect.center)
-                    self.create_dialog(character)
-
+            self.check_dialog()
             # interações com objetos
             for sprite in self.interaction_sprites:
                 if check_interaction(150, self.player, sprite):
-                    if sprite.item_id == 'computer':
-                        self.computer_open = not self.computer_open
-                        self.player.blocked = not self.player.blocked
-                        break
+                    self.handle_interaction(sprite)
